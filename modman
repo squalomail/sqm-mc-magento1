@@ -1,0 +1,17 @@
+app/code/community/Ebizmarts/MailChimp                               app/code/community/Ebizmarts/MailChimp
+app/design/adminhtml/default/default/layout/ebizmarts/mailchimp.xml  app/design/adminhtml/default/default/layout/ebizmarts/mailchimp.xml
+app/design/adminhtml/default/default/template/ebizmarts/mandrill     app/design/adminhtml/default/default/template/ebizmarts/mandrill
+app/design/adminhtml/default/default/template/ebizmarts/mailchimp    app/design/adminhtml/default/default/template/ebizmarts/mailchimp
+app/design/frontend/base/default/layout/ebizmarts/mailchimp.xml      app/design/frontend/base/default/layout/ebizmarts/mailchimp.xml
+app/design/frontend/base/default/template/ebizmarts/mailchimp        app/design/frontend/base/default/template/ebizmarts/mailchimp
+app/etc/modules/Ebizmarts_MailChimp.xml                              app/etc/modules/Ebizmarts_MailChimp.xml
+app/locale/en_US/Ebizmarts_MailChimp.csv                             app/locale/en_US/Ebizmarts_MailChimp.csv
+dev/tests/mailchimp/                                                 dev/tests/mailchimp/
+js/ebizmarts/mailchimp                                               js/ebizmarts/mailchimp
+lib/Ebizmarts/MailChimp.php                                          lib/Ebizmarts/MailChimp.php
+lib/Ebizmarts/MailChimp                                              lib/Ebizmarts/MailChimp
+lib/Mandrill                                                         lib/Mandrill
+skin/adminhtml/default/default/ebizmarts/mailchimp                   skin/adminhtml/default/default/ebizmarts/mailchimp
+skin/adminhtml/default/default/ebizmarts/mandrill                    skin/adminhtml/default/default/ebizmarts/mandrill
+shell/m4mlogs.sh                                                     shell/m4mlogs.sh
+shell/getMailchimpResponse.php                                       shell/getMailchimpResponse.php
