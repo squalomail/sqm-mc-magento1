@@ -1576,8 +1576,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     public function testGetMCJs()
     {
         $storeId = 1;
-        $jsUrl = 'https://chimpstatic.com/mcjs-connected/js/users/1647ea7abc3f2f3259e2613f9'
-            . '/dffd1d29fea0323354a9caa32.js';
+        $jsUrl = 'https://api.squalomail.com/mc/v3/ecommerce/stores/sitejs';
         $mailchimpStoreId = 'a1s2d3f4g5h6j7k8l9p0';
 
         $expectedResult = '<script type="text/javascript" src="' . $jsUrl . '" defer></script>';
