@@ -1,5 +1,5 @@
 {
-  "name": "mc-magento",
+  "name": "#REPO_NAME#",
   "devDependencies": {
     "editorconfig-tools": "^0.1.1"
   }

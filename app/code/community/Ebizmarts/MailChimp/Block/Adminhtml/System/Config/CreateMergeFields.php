@@ -1,6 +1,6 @@
 <?php
 /**
- * mc-magento Magento Component
+ * #REPO_NAME# Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC1#
