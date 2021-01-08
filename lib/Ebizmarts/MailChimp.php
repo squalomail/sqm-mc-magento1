@@ -204,7 +204,7 @@ class Ebizmarts_MailChimp
 
     protected $_apiKey;
     protected $_ch;
-    protected $_root = 'https://api.mailchimp.com/3.0';
+    protected $_root = 'https://api.squalomail.com/mc/v3';
     protected $_debug = false;
 
     const POST = 'POST';
@@ -220,15 +220,6 @@ class Ebizmarts_MailChimp
         }
 
         $this->_apiKey = $apiKey;
-        $dc = 'us1';
-        if (strstr($this->_apiKey, "-")) {
-            list($key, $dc) = explode("-", $this->_apiKey, 2);
-            if (!$dc) {
-                $dc = "us1";
-            }
-        }
-
-        $this->_root = str_replace('https://api', 'https://' . $dc . '.api', $this->_root);
         $this->_root = rtrim($this->_root, '/') . '/';
 
         if (!isset($opts['timeout']) || !is_int($opts['timeout'])) {

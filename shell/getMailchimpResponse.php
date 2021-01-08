@@ -7,23 +7,13 @@ if ($argc != 3) {
 
 $apiKey = $argv[1];
 $batchId = $argv[2];
-$dc = 'us1';
-
-if (strstr($apiKey, "-")) {
-    list($key, $dc) = explode("-", $apiKey, 2);
-
-    if (!$dc) {
-        $dc = "us1";
-    }
-}
-
 
 $curl = curl_init();
 
 curl_setopt_array(
     $curl,
     array(
-        CURLOPT_URL => "https://$dc.api.mailchimp.com/3.0/batches/$batchId",
+        CURLOPT_URL => "https://api.squalomail.com/mc/v3/batches/$batchId",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,

@@ -59,10 +59,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_List
                     }
 
                     if (isset($this->_lists['lists']) && count($this->_lists['lists']) == 0) {
-                        $apiKeyArray = explode('-', $apiKey);
-                        $anchorUrl = 'https://' . $apiKeyArray[1] . '.admin.mailchimp.com/lists/new-list/';
-                        $htmlAnchor = '<a target="_blank" href="' . $anchorUrl . '">' . $anchorUrl . '</a>';
-                        $message = 'Please create an audience at ' . $htmlAnchor;
+                        $message = 'Please create an audience in your SqualoMail application.';
                         Mage::getSingleton('adminhtml/session')->addWarning($message);
                     }
                 } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {

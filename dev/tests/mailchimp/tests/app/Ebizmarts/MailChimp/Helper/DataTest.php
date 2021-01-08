@@ -1885,38 +1885,38 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
                         0 => array
                         (
                             "rel" => "self",
-                            "href" => "https://us20.api.mailchimp.com/3.0/lists/b514eebd1a/merge-fields/3",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields/3",
                             "method" => "GET",
-                            "targetSchema" => "https://us20.api.mailchimp.com"
+                            "targetSchema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/Response.json",
                         ),
 
                         1 => array
                         (
                             "rel" => "parent",
-                            "href" => "https://us20.api.mailchimp.com/3.0/lists/b514eebd1a/merge-fields",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields",
                             "method" => "GET",
-                            "targetSchema" => "https://us20.api.mailchimp.com"
+                            "targetSchema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/CollectionResponse.json",
-                            "schema" => "https://us20.api.mailchimp.com"
+                            "schema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/CollectionLinks/Lists/MergeFields.json",
                         ),
 
                         2 => array
                         (
                             "rel" => "update",
-                            "href" => "https://us20.api.mailchimp.com/3.0/lists/b514eebd1a/merge-fields/3",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields/3",
                             "method" => "PATCH",
-                            "targetSchema" => "https://us20.api.mailchimp.com"
+                            "targetSchema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/Response.json",
-                            "schema" => "https://us20.api.mailchimp.com"
+                            "schema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/PATCH.json",
                         ),
 
                         3 => array
                         (
                             "rel" => "delete",
-                            "href" => "https://us20.api.mailchimp.com/3.0/lists/b514eebd1a/merge-fields/3",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields/3",
                             "method" => "DELETE",
                         )
 

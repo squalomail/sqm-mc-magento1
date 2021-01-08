@@ -1524,7 +1524,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCreditmemoUbsubscribe()
     {
-        $customerEmail = 'customer@mailchimp.com';
+        $customerEmail = 'customer@squalomail.com';
         $mailchimpUnsubscribe = 'on';
 
         $mailchimpObserverMock = $this->getMailchimpObserverMock();

@@ -35,21 +35,21 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             '_links' => array(
                 array(
                     'rel' => 'parent',
-                    'href' => 'https://us13.api.mailchimp.com/3.0/batches',
+                    'href' => 'https://api.squalomail.com/mc/v3/batches',
                     'method' => 'GET',
                     'targetSchema' =>
-                        'https://us13.api.mailchimp.com/schema/3.0/Definitions/Batches/CollectionResponse.json',
-                    'schema' => 'https://us13.api.mailchimp.com/schema/3.0/CollectionLinks/Batches.json'
+                        'https://api.squalomail.com/mc/v3/schema/3.0/Definitions/Batches/CollectionResponse.json',
+                    'schema' => 'https://api.squalomail.com/mc/v3/schema/3.0/CollectionLinks/Batches.json'
                 ),
                 array(
                     'rel' => 'self',
-                    'href' => 'https://us13.api.mailchimp.com/3.0/batches/cfb450eb11',
+                    'href' => 'https://api.squalomail.com/mc/v3/batches/cfb450eb11',
                     'method' => 'GET',
-                    'targetSchema' => 'https://us13.api.mailchimp.com/schema/3.0/Definitions/Batches/Response.json'
+                    'targetSchema' => 'https://api.squalomail.com/mc/v3/schema/3.0/Definitions/Batches/Response.json'
                 ),
                 array(
                     'rel' => 'delete',
-                    'href' => 'https://us13.api.mailchimp.com/3.0/batches/cfb450eb11',
+                    'href' => 'https://api.squalomail.com/mc/v3/batches/cfb450eb11',
                     'method' => 'DELETE'
                 )
             )
