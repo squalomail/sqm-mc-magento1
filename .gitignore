@@ -1,4 +1,4 @@
 .idea
-app/code/community/Ebizmarts/MailChimp/controllers/TestController.php
+app/code/community/Ebizmarts/SqualoMail/controllers/TestController.php
 /vendor/
 /node_modules/

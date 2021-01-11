@@ -61,7 +61,7 @@ script:
     fi
   - |
     if [ "$TEST_SUITE" = "phpunit" ]; then
-      cd magento/dev/tests/mailchimp && phpunit && cd $TRAVIS_BUILD_DIR
+      cd magento/dev/tests/squalomail && phpunit && cd $TRAVIS_BUILD_DIR
     fi
   - |
     if [ "$TEST_SUITE" = "editorconfig" ]; then

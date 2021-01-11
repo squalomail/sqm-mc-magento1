@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_squalomailerrors_grid>
+        <update handle="formkey"/>
+        <block type="squalomail/adminhtml_squalomailerrors_grid"
+               name="squalomail_squalomailerrors.grid" output="toHtml"/>
+    </adminhtml_squalomailerrors_grid>
+    <adminhtml_squalomailerrors_index>
+        <reference name="content">
+            <block type="squalomail/adminhtml_squalomailerrors" name="squalomail_squalomailerrors.grid.container"/>
+        </reference>
+    </adminhtml_squalomailerrors_index>
+    <adminhtml_squalomailstores_grid>
+        <update handle="formkey"/>
+        <block type="squalomail/adminhtml_squalomailstores_grid" name="squalomail_squalomailstores.grid" output="toHtml"/>
+    </adminhtml_squalomailstores_grid>
+    <adminhtml_squalomailstores_index>
+        <reference name="content">
+            <block type="squalomail/adminhtml_squalomailstores" name="squalomail_squalomailstores.grid.container"/>
+        </reference>
+    </adminhtml_squalomailstores_index>
+    <adminhtml_mergevars_addmergevar>
+        <reference name="content">
+            <update handle="default"/>
+            <remove name="header"/>
+            <remove name="menu"/>
+            <remove name="footer"/>
+            <remove name="notifications"/>
+            <remove name="global_notices"/>
+            <block type="squalomail/adminhtml_mergevars_add" name="adminhtml.squalomail.add"/>
+        </reference>
+    </adminhtml_mergevars_addmergevar>
+    <adminhtml_ecommerce_renderresendecom>
+        <reference name="content">
+            <update handle="default"/>
+            <remove name="header"/>
+            <remove name="menu"/>
+            <remove name="footer"/>
+            <remove name="notifications"/>
+            <remove name="global_notices"/>
+            <block type="squalomail/adminhtml_ecommerce_resendecommercedata" name="adminhtml.squalomail.resend"></block>
+        </reference>
+    </adminhtml_ecommerce_renderresendecom>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>ebizmarts/squalomail/css/squalomail.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>ebizmarts/mandrill/css/mandrill.css</stylesheet>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+    <adminhtml_sales_order_view>
+        <reference name="order_info">
+            <block type="squalomail/adminhtml_sales_order_view_info_monkey" name="squalomail.order.info.monkey.block" template="ebizmarts/squalomail/sales/order/view/monkey.phtml" before="order_history" />
+        </reference>
+    </adminhtml_sales_order_view>
+	<adminhtml_sales_order_creditmemo_new>
+		<reference name="submit_before">
+			<block type="squalomail/adminhtml_sales_order_creditmemo_unsubscribe" name="squalomail.creditmemo.unsubscribe" template="ebizmarts/squalomail/sales/order/creditmemo/create/unsubscribe.phtml" />
+		</reference>
+	</adminhtml_sales_order_creditmemo_new>
+    <default>
+        <reference name="notifications">
+            <block type="squalomail/adminhtml_notifications" name="squalomail_notifications" template="ebizmarts/squalomail/notifications.phtml"/>
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addCss">
+                <name>lib/prototype/windows/themes/magento.css</name>
+            </action>
+        </reference>
+    </default>
+</layout>

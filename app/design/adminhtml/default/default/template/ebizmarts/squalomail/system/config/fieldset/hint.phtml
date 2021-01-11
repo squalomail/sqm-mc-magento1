@@ -1,0 +1,27 @@
+<?php
+/**
+ * @see Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_Fieldset_Hint
+ */
+?>
+<script>
+    var MGETSTORESURL = '<?php echo $this->escapeUrl($this->getStoresUrl());?>';
+    var MGETLISTURL = '<?php echo $this->escapeUrl($this->getListUrl());?>';
+    var MGETINFOURL = '<?php echo $this->escapeUrl($this->getInfoUrl());?>';
+    var MGETINTERESTURL = '<?php echo $this->escapeUrl($this->getInterestUrl());?>';
+</script>
+<div class="squalomail-notice">
+    <img width="244px" height="60px" src="https://ebizmarts-website.s3.amazonaws.com/Logo_Ebizmarts.png"/>
+    <h4>
+        <strong style="color:#EA7601;">
+        <?php echo $this->escapeHtml(
+            Mage::helper('squalomail')->__(
+                'Squalomail For Magento v%s by',
+                $this->getSqualoMailVersion()
+            )
+        ) ?>
+        </strong>
+        <a target="_blank" href="http://ebizmarts.com">
+            <strong>ebizmarts</strong>
+        </a>
+    </h4>
+</div>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <newsletter>
+            <children>
+                <squalomail translate="title" module="squalomail">
+                    <title>Squalomail</title>
+                    <children>
+                        <squalomailerrors translate="title" module="squalomail">
+                            <title>Squalomail Errors</title>
+                            <sort_order>810</sort_order>
+                            <action>adminhtml/squalomailerrors/index</action>
+                        </squalomailerrors>
+                        <squalomailstores translate="title" module="squalomail">
+                            <title>Squalomail Stores</title>
+                            <sort_order>820</sort_order>
+                            <action>adminhtml/squalomailstores/index</action>
+                        </squalomailstores>
+                        <squalomailconfiguration translate="title" module="squalomail">
+                            <title>Squalomail Configuration</title>
+                            <sort_order>830</sort_order>
+                            <action>adminhtml/system_config/edit/section/squalomail</action>
+                        </squalomailconfiguration>
+                    </children>
+                </squalomail>
+            </children>
+        </newsletter>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <newsletter>
+                        <children>
+                            <squalomail translate="title" module="squalomail">
+                                <title>Squalomail</title>
+                                <children>
+                                    <squalomailerrors translate="title" module="squalomail">
+                                        <title>Squalomail Errors</title>
+                                    </squalomailerrors>
+                                    <squalomailstores translate="title" module="squalomail">
+                                        <title>Squalomail Stores</title>
+                                    </squalomailstores>
+                                    <squalomailconfiguration translate="title" module="squalomail">
+                                        <title>Squalomail Configuration</title>
+                                    </squalomailconfiguration>
+                                </children>
+                            </squalomail>
+                        </children>
+                    </newsletter>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <squalomail translate="title" module="squalomail">
+                                        <title>Squalomail Configuration</title>
+                                    </squalomail>
+                                    <mandrill transtale="title" module="squalomail">
+                                        <title>Mandrill Configuration</title>
+                                    </mandrill>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
