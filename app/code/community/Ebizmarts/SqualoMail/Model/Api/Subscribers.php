@@ -192,10 +192,10 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
         $data = array();
         $data["email_address"] = $subscriber->getSubscriberEmail();
 
-        $mailChimpTags = $this->_buildSqualomailTags($subscriber, $storeId);
+        $squaloMailTags = $this->_buildSqualomailTags($subscriber, $storeId);
 
-        if ($mailChimpTags->getSqualomailTags()) {
-            $data["merge_fields"] = $mailChimpTags->getSqualomailTags();
+        if ($squaloMailTags->getSqualomailTags()) {
+            $data["merge_fields"] = $squaloMailTags->getSqualomailTags();
         }
 
         $status = $this->translateMagentoStatusToSqualomailStatus($subscriber->getStatus());
@@ -262,7 +262,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
                 return;
             }
 
-            $mailChimpTags = $this->_buildSqualomailTags($subscriber, $storeId);
+            $squaloMailTags = $this->_buildSqualomailTags($subscriber, $storeId);
             $language = $helper->getStoreLanguageCode($storeId);
             $interest = $this->_getInterest($subscriber);
             $emailHash = hash('md5', strtolower($subscriber->getSubscriberEmail()));
@@ -275,7 +275,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
                     $newStatus,
                     null,
                     $forceStatus,
-                    $mailChimpTags->getSqualomailTags(),
+                    $squaloMailTags->getSqualomailTags(),
                     $interest,
                     $language,
                     null,
@@ -292,7 +292,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
                     if (strstr($e->getSqualomailDetails(), 'is in a compliance state')) {
                         try {
                             $this->_catchSqualomailNewstellerConfirm(
-                                $api, $listId, $emailHash, $mailChimpTags, $subscriber, $interest
+                                $api, $listId, $emailHash, $squaloMailTags, $subscriber, $interest
                             );
                             $saveSubscriber = true;
                         } catch (MailChimp_Error $e) {
@@ -365,7 +365,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
      * @param $api
      * @param $listId
      * @param $emailHash
-     * @param $mailChimpTags
+     * @param $squaloMailTags
      * @param $subscriber
      * @param $interest
      */
@@ -373,13 +373,13 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
         $api,
         $listId,
         $emailHash,
-        $mailChimpTags,
+        $squaloMailTags,
         $subscriber,
         $interest
     ) {
         $helper = $this->getSqualomailHelper();
         $api->getLists()->getMembers()->update(
-            $listId, $emailHash, null, 'pending', $mailChimpTags->getSqualomailTags(), $interest
+            $listId, $emailHash, null, 'pending', $squaloMailTags->getSqualomailTags(), $interest
         );
         $subscriber->setSubscriberStatus(Mage_Newsletter_Model_Subscriber::STATUS_NOT_ACTIVE);
         $message = $helper->__(
@@ -610,16 +610,16 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
      */
     protected function _buildSqualomailTags($subscriber, $storeId)
     {
-        $mailChimpTags = Mage::getModel('squalomail/api_subscribers_SqualomailTags');
-        $mailChimpTags->setStoreId($storeId);
-        $mailChimpTags->setSubscriber($subscriber);
-        $mailChimpTags->setCustomer(
+        $squaloMailTags = Mage::getModel('squalomail/api_subscribers_SqualomailTags');
+        $squaloMailTags->setStoreId($storeId);
+        $squaloMailTags->setSubscriber($subscriber);
+        $squaloMailTags->setCustomer(
             $this->getCustomerByWebsiteAndId()
                 ->setWebsiteId($this->getWebsiteByStoreId($storeId))->load($subscriber->getCustomerId())
         );
-        $mailChimpTags->buildMailChimpTags();
+        $squaloMailTags->buildMailChimpTags();
 
-        return $mailChimpTags;
+        return $squaloMailTags;
     }
 
 

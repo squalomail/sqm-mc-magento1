@@ -137,7 +137,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
     public function testDeleteMailChimpStore()
     {
         $apiKey = 'z1x2c3v4b5n6m7k8l9p0-us1';
-        $mailChimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
+        $squaloMailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $successMessage = "The Squalomail store was successfully deleted.";
 
         $apiStoresMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Stores::class)
@@ -177,19 +177,19 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
         $helperMock
             ->expects($this->once())
             ->method('cancelAllPendingBatches')
-            ->with($mailChimpStoreId)
+            ->with($squaloMailStoreId)
             ->willReturnSelf();
 
         $apiMock->expects($this->once())->method('getEcommerce')->willReturn($ecommerceMock);
 
         $ecommerceMock->expects($this->once())->method('getStores')->willReturn($ecommerceStoresMock);
 
-        $ecommerceStoresMock->expects($this->once())->method('delete')->with($mailChimpStoreId);
+        $ecommerceStoresMock->expects($this->once())->method('delete')->with($squaloMailStoreId);
 
         $apiStoresMock->expects($this->once())->method('getAdminSession')->willReturn($adminSessionMock);
 
         $adminSessionMock->expects($this->once())->method('addSuccess')->with($successMessage);
 
-        $apiStoresMock->deleteMailChimpStore($mailChimpStoreId, $apiKey);
+        $apiStoresMock->deleteMailChimpStore($squaloMailStoreId, $apiKey);
     }
 }

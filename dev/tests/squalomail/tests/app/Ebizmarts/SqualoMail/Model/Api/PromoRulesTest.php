@@ -47,7 +47,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             ->disableOriginalConstructor()
             ->setMethods(array('setSqualomailStoreId', 'setStoreId'))->getMock();
 
-        $mailChimpDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getDateMicrotime'))->disableOriginalConstructor()->getMock();
 
@@ -59,8 +59,8 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
         $promoCollectionResourceMock->expects($this->once())->method('setSqualomailStoreId')->with($squalomailStoreId);
         $promoCollectionResourceMock->expects($this->once())->method('setStoreId')->with($magentoStoreId);
 
-        $promoRulesApiMock->expects($this->once())->method('getDateHelper')->willReturn($mailChimpDateHelperMock);
-        $mailChimpDateHelperMock->expects($this->once())->method('getDateMicrotime')
+        $promoRulesApiMock->expects($this->once())->method('getDateHelper')->willReturn($squaloMailDateHelperMock);
+        $squaloMailDateHelperMock->expects($this->once())->method('getDateMicrotime')
             ->willReturn('2017-10-23-19-34-31-92333600');
 
         $promoRulesApiMock->expects($this->once())->method('_getModifiedAndDeletedPromoRules')
@@ -103,12 +103,12 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             )
             ->getMock();
 
-        $mailChimpDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
             ->setMethods(array('getDateMicrotime'))
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mailChimpDateHelperMock
+        $squaloMailDateHelperMock
             ->expects($this->once())
             ->method('getDateMicrotime')
             ->willReturn('2017-05-18-14-45-54-38849500');
@@ -116,7 +116,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
         $promoRulesApiMock
             ->expects($this->once())
             ->method('getDateHelper')
-            ->willReturn($mailChimpDateHelperMock);
+            ->willReturn($squaloMailDateHelperMock);
         $promoRulesApiMock
             ->expects($this->once())
             ->method('getPromoRule')
@@ -253,11 +253,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             )
             ->getMock();
 
-        $mailChimpHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mailChimpDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
             ->setMethods(array('getDateMicrotime', 'formatDate'))
             ->disableOriginalConstructor()
             ->getMock();
@@ -265,12 +265,12 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
         $promoRulesApiMock
             ->expects($this->once())
             ->method('getHelper')
-            ->willReturn($mailChimpHelperMock);
+            ->willReturn($squaloMailHelperMock);
 
         $promoRulesApiMock
             ->expects($this->once())
             ->method('getDateHelper')
-            ->willReturn($mailChimpDateHelperMock);
+            ->willReturn($squaloMailDateHelperMock);
 
         $promoRulesApiMock
             ->expects($this->once())
@@ -309,7 +309,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
         $promoRuleMock->expects($this->once())->method('setSqualomailSyncError')->with($error);
         $promoRuleMock->expects($this->once())->method('getSqualomailSyncError')->willReturn($error);
 
-        $mailChimpDateHelperMock->expects($this->once())
+        $squaloMailDateHelperMock->expects($this->once())
             ->method('formatDate')
             ->with(null, "Y-m-d H:i:s")
             ->willReturn($date);

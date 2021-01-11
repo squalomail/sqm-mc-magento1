@@ -627,7 +627,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
     protected function _getMailChimpStatus($order)
     {
         $totalItemsOrdered = $order->getData('total_qty_ordered');
-        $mailChimpStatus = array();
+        $squaloMailStatus = array();
 
         $financialFulfillment = $this->_getFinancialFulfillmentStatus(
             $order->getAllVisibleItems(), $totalItemsOrdered
@@ -642,14 +642,14 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         }
 
         if ($financialFulfillment['financialStatus']) {
-            $mailChimpStatus['financial_status'] = $financialFulfillment['financialStatus'];
+            $squaloMailStatus['financial_status'] = $financialFulfillment['financialStatus'];
         }
 
         if ($financialFulfillment['fulfillmentStatus']) {
-            $mailChimpStatus['fulfillment_status'] = $financialFulfillment['fulfillmentStatus'];
+            $squaloMailStatus['fulfillment_status'] = $financialFulfillment['fulfillmentStatus'];
         }
 
-        return $mailChimpStatus;
+        return $squaloMailStatus;
     }
 
     /**

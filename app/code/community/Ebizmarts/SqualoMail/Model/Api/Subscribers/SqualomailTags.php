@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     /**
      * @var array
      */
-    protected $_mailChimpTags;
+    protected $_squaloMailTags;
     /**
      * @var Mage_Newsletter_Model_Subscriber
      */
@@ -128,7 +128,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      */
     public function getMailChimpTags()
     {
-        return $this->_mailChimpTags;
+        return $this->_squaloMailTags;
     }
 
     /**
@@ -137,7 +137,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      */
     public function addMailChimpTag($key, $value)
     {
-        $this->_mailChimpTags[$key] = $value;
+        $this->_squaloMailTags[$key] = $value;
     }
 
     /**
@@ -148,8 +148,8 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     {
         $squalomailTagValue = null;
 
-        if (isset($this->_mailChimpTags[$key])) {
-            $squalomailTagValue = $this->_mailChimpTags[$key];
+        if (isset($this->_squaloMailTags[$key])) {
+            $squalomailTagValue = $this->_squaloMailTags[$key];
         }
 
         return $squalomailTagValue;
@@ -220,8 +220,8 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         $listId = $data['list_id'];
         $storeId = $helper->getMagentoStoreIdsByListId($listId)[0];
 
-        $this->_mailChimpTags = $helper->getMapFields($storeId);
-        $this->_mailChimpTags = $this->unserializeMapFields($this->_mailChimpTags);
+        $this->_squaloMailTags = $helper->getMapFields($storeId);
+        $this->_squaloMailTags = $this->unserializeMapFields($this->_squaloMailTags);
 
         $customer = $helper->loadListCustomer($listId, $email);
 
@@ -432,7 +432,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      */
     protected function toArray()
     {
-        return $this->_mailChimpTags;
+        return $this->_squaloMailTags;
     }
 
     /**
@@ -442,7 +442,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     protected function mergeSqualomailTags($squalomailTags)
     {
         if (is_array($squalomailTags)) {
-            $this->_mailChimpTags = array_merge($this->_mailChimpTags, $squalomailTags);
+            $this->_squaloMailTags = array_merge($this->_squaloMailTags, $squalomailTags);
             return true;
         } else {
             return false;
@@ -810,9 +810,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      * @param $key
      * @return bool
      */
-    protected function mailChimpTagIsSet($key)
+    protected function squaloMailTagIsSet($key)
     {
-        return isset($this->_mailChimpTags[$key]);
+        return isset($this->_squaloMailTags[$key]);
     }
 
     /**
@@ -879,7 +879,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     {
         if ($this->getCustomerGroupLabel($attributeCode, $customer)) {
             $genderValue = $this->getCustomerGroupLabel($attributeCode, $customer);
-            $this->addMailChimpTag($key, $this->getGenderLabel($this->_mailChimpTags, $key, $genderValue));
+            $this->addMailChimpTag($key, $this->getGenderLabel($this->_squaloMailTags, $key, $genderValue));
         }
     }
 
@@ -1070,9 +1070,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
 
         foreach($data['merges'] as $key => $value) {
             if (!empty($value)) {
-                if (is_array($this->_mailChimpTags)) {
+                if (is_array($this->_squaloMailTags)) {
                     if ($key !== 'GROUPINGS') {
-                        $this->_setSqualomailTagToCustomer($key, $value, $this->_mailChimpTags, $customer);
+                        $this->_setSqualomailTagToCustomer($key, $value, $this->_squaloMailTags, $customer);
                     }
                 }
             }
@@ -1162,7 +1162,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         $attrId = $this->_getAttrbuteId('firstname');
         $magentoTag = '';
 
-        foreach ($this->_mailChimpTags as $tag) {
+        foreach ($this->_squaloMailTags as $tag) {
             if ($tag['magento'] == $attrId) {
                 $magentoTag = $tag['squalomail'];
                 break;
@@ -1181,7 +1181,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         $attrId = $this->_getAttrbuteId('lastname');
         $magentoTag = '';
 
-        foreach ($this->_mailChimpTags as $tag) {
+        foreach ($this->_squaloMailTags as $tag) {
             if ($tag['magento'] == $attrId) {
                 $magentoTag = $tag['squalomail'];
                 break;

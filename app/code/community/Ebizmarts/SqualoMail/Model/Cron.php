@@ -15,16 +15,16 @@ class Ebizmarts_MailChimp_Model_Cron
     /**
      * @var Ebizmarts_MailChimp_Helper_Data
      */
-    protected $_mailChimpHelper;
+    protected $_squaloMailHelper;
     /**
      * @var Ebizmarts_MailChimp_Helper_Migration
      */
-    protected $_mailChimpMigrationHelper;
+    protected $_squaloMailMigrationHelper;
 
     public function __construct()
     {
-        $this->_mailChimpHelper = Mage::helper('squalomail');
-        $this->_mailChimpMigrationHelper = Mage::helper('squalomail/migration');
+        $this->_squaloMailHelper = Mage::helper('squalomail');
+        $this->_squaloMailMigrationHelper = Mage::helper('squalomail/migration');
     }
 
     public function syncEcommerceBatchData()
@@ -58,11 +58,11 @@ class Ebizmarts_MailChimp_Model_Cron
 
     protected function getHelper()
     {
-        return $this->_mailChimpHelper;
+        return $this->_squaloMailHelper;
     }
 
     protected function getMigrationHelper()
     {
-        return $this->_mailChimpMigrationHelper;
+        return $this->_squaloMailMigrationHelper;
     }
 }

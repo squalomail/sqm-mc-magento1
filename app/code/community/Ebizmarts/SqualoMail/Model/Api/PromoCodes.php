@@ -403,10 +403,10 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
 
             if ($api !== null) {
                 try {
-                    $mailChimpPromoCodes = $api->ecommerce->promoRules->promoCodes
+                    $squaloMailPromoCodes = $api->ecommerce->promoRules->promoCodes
                         ->getAll($squalomailStoreId, $promoRuleId);
 
-                    foreach ($mailChimpPromoCodes['promo_codes'] as $promoCode) {
+                    foreach ($squaloMailPromoCodes['promo_codes'] as $promoCode) {
                         $this->deletePromoCodeSyncData($promoCode['id']);
                     }
                 } catch (MailChimp_Error $e) {

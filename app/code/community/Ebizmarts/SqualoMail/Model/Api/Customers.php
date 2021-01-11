@@ -174,16 +174,16 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      */
     protected function _buildSqualomailTags($subscriber, $storeId)
     {
-        $mailChimpTags = Mage::getModel('squalomail/api_subscribers_SqualomailTags');
-        $mailChimpTags->setStoreId($storeId);
-        $mailChimpTags->setSubscriber($subscriber);
-        $mailChimpTags->setCustomer(
+        $squaloMailTags = Mage::getModel('squalomail/api_subscribers_SqualomailTags');
+        $squaloMailTags->setStoreId($storeId);
+        $squaloMailTags->setSubscriber($subscriber);
+        $squaloMailTags->setCustomer(
             $this->getCustomerByWebsiteAndId()
                 ->setWebsiteId($this->getWebsiteByStoreId($storeId))->load($subscriber->getCustomerId())
         );
-        $mailChimpTags->buildMailChimpTags();
+        $squaloMailTags->buildMailChimpTags();
 
-        return $mailChimpTags;
+        return $squaloMailTags;
     }
 
     /**
@@ -590,8 +590,8 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     {
         $subscriber->setSubscriberEmail($customer->getEmail());
         $subscriber->setCustomerId($customer->getId());
-        $mailChimpTags = $this->_buildSqualomailTags($subscriber, $magentoStoreId);
-        $mergeFields["merge_fields"] = $mailChimpTags->getSqualomailTags();
+        $squaloMailTags = $this->_buildSqualomailTags($subscriber, $magentoStoreId);
+        $mergeFields["merge_fields"] = $squaloMailTags->getSqualomailTags();
         $batchData = $this->getCustomerPatchBatch($mergeFields, $customer, $listId);
         return $batchData;
     }

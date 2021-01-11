@@ -342,10 +342,10 @@ class Ebizmarts_MailChimp_Helper_Data extends Mage_Core_Helper_Abstract
     public function isSubscriptionEnabled($scopeId, $scope = null)
     {
         $apiKeyValid = $this->validateApiKey($scopeId, $scope);
-        $mailChimpEnabled = $this->isMailChimpEnabled($scopeId, $scope);
+        $squaloMailEnabled = $this->isMailChimpEnabled($scopeId, $scope);
         $generalList = $this->getGeneralList($scopeId, $scope);
 
-        return $apiKeyValid && $mailChimpEnabled && $generalList;
+        return $apiKeyValid && $squaloMailEnabled && $generalList;
     }
 
     /**
@@ -1555,10 +1555,10 @@ class Ebizmarts_MailChimp_Helper_Data extends Mage_Core_Helper_Abstract
     public function getMailChimpScopeByStoreId($storeId)
     {
         $squalomailScope = null;
-        $mailChimpStoreId = $this->getMCStoreId($storeId);
+        $squaloMailStoreId = $this->getMCStoreId($storeId);
         $squalomailScope = $this->getFirstScopeFromConfig(
             Ebizmarts_MailChimp_Model_Config::GENERAL_MCSTOREID,
-            $mailChimpStoreId
+            $squaloMailStoreId
         );
 
         return $squalomailScope;
@@ -2188,15 +2188,15 @@ class Ebizmarts_MailChimp_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      *  Will return the first scope it finds, intended for Api calls usage.
      *
-     * @param  $mailChimpStoreId
+     * @param  $squaloMailStoreId
      * @return array
      */
-    public function getScopeByMailChimpStoreId($mailChimpStoreId)
+    public function getScopeByMailChimpStoreId($squaloMailStoreId)
     {
         $squalomailScope = null;
         $collection = Mage::getResourceModel('core/config_data_collection')
             ->addFieldToFilter('path', array('eq' => Ebizmarts_MailChimp_Model_Config::GENERAL_MCSTOREID))
-            ->addFieldToFilter('value', array('eq' => $mailChimpStoreId))
+            ->addFieldToFilter('value', array('eq' => $squaloMailStoreId))
             ->setPageSize(1);
 
         if ($collection->getSize()) {

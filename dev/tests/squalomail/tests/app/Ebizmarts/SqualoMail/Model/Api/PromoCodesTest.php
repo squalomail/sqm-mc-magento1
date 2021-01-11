@@ -81,7 +81,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mailChimpHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('addResendFilter'))
             ->getMock();
@@ -92,10 +92,10 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
             ->setMethods(array('addWebsiteColumn', 'joinPromoRuleData'))
             ->getMock();
 
-        $promoCodesApiMock->expects($this->once())->method('getHelper')->willReturn($mailChimpHelperMock);
+        $promoCodesApiMock->expects($this->once())->method('getHelper')->willReturn($squaloMailHelperMock);
         $promoCodesApiMock->expects($this->once())->method('getPromoCodeResourceCollection')
             ->willReturn($promoCodesCollectionMock);
-        $mailChimpHelperMock->expects($this->once())->method('addResendFilter')
+        $squaloMailHelperMock->expects($this->once())->method('addResendFilter')
             ->with($promoCodesCollectionMock, $magentoStoreId, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE);
         $promoCodesApiMock->expects($this->once())->method('getEcommercePromoCodesCollection')
             ->willReturn($promoCollectionResourceMock);

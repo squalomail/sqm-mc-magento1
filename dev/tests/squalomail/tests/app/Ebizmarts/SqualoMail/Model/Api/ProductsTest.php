@@ -237,7 +237,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->setMethods(array('getHelper', 'getParentId', 'getProductWithAttributesById', 'getUrlByPath'))
             ->getMock();
 
-        $mailChimpHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getProductResourceModel'))
             ->getMock();
@@ -251,7 +251,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->disableOriginalConstructor()
             ->getMock();
 
-        $productsApiMock->expects($this->once())->method('getHelper')->willReturn($mailChimpHelperMock);
+        $productsApiMock->expects($this->once())->method('getHelper')->willReturn($squaloMailHelperMock);
         $productsApiMock->expects($this->once())->method('getParentId')->with($childId)->willReturn($parentId);
         $productsApiMock
             ->expects($this->once())
@@ -269,7 +269,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->method("getIterator")
             ->willReturn(new ArrayIterator(array()));
 
-        $mailChimpHelperMock
+        $squaloMailHelperMock
             ->expects($this->once())
             ->method('getProductResourceModel')
             ->willReturn($productResourceMock);
@@ -297,15 +297,15 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->setMethods(array('getParentId', 'getHelper'))
             ->getMock();
 
-        $mailChimpHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getImageUrlById'))
             ->getMock();
 
         $productsApiMock->expects($this->once())->method('getParentId')->with($childId)->willReturn($parentId);
-        $productsApiMock->expects($this->once())->method('getHelper')->willReturn($mailChimpHelperMock);
+        $productsApiMock->expects($this->once())->method('getHelper')->willReturn($squaloMailHelperMock);
 
-        $mailChimpHelperMock
+        $squaloMailHelperMock
             ->expects($this->once())
             ->method('getImageUrlById')
             ->with($parentId, $magentoStoreId)

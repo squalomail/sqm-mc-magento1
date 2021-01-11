@@ -289,18 +289,18 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function getMailChimpType($promoAction)
     {
-        $mailChimpType = null;
+        $squaloMailType = null;
         switch ($promoAction) {
         case Mage_SalesRule_Model_Rule::BY_PERCENT_ACTION:
-            $mailChimpType = self::TYPE_PERCENTAGE;
+            $squaloMailType = self::TYPE_PERCENTAGE;
             break;
         case Mage_SalesRule_Model_Rule::BY_FIXED_ACTION:
         case Mage_SalesRule_Model_Rule::CART_FIXED_ACTION:
-            $mailChimpType = self::TYPE_FIXED;
+            $squaloMailType = self::TYPE_FIXED;
             break;
         }
 
-        return $mailChimpType;
+        return $squaloMailType;
     }
 
     /**
@@ -309,19 +309,19 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function getMailChimpTarget($promoAction)
     {
-        $mailChimpTarget = null;
+        $squaloMailTarget = null;
 
         switch ($promoAction) {
         case Mage_SalesRule_Model_Rule::CART_FIXED_ACTION:
         case Mage_SalesRule_Model_Rule::BY_PERCENT_ACTION:
-            $mailChimpTarget = self::TARGET_TOTAL;
+            $squaloMailTarget = self::TARGET_TOTAL;
             break;
         case Mage_SalesRule_Model_Rule::BY_FIXED_ACTION:
-            $mailChimpTarget = self::TARGET_PER_ITEM;
+            $squaloMailTarget = self::TARGET_PER_ITEM;
             break;
         }
 
-        return $mailChimpTarget;
+        return $squaloMailTarget;
     }
 
     /**
@@ -380,12 +380,12 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
         $action = $promoRule->getSimpleAction();
 
         if ($action == Mage_SalesRule_Model_Rule::BY_PERCENT_ACTION) {
-            $mailChimpDiscount = ($promoRule->getDiscountAmount() / 100);
+            $squaloMailDiscount = ($promoRule->getDiscountAmount() / 100);
         } else {
-            $mailChimpDiscount = $promoRule->getDiscountAmount();
+            $squaloMailDiscount = $promoRule->getDiscountAmount();
         }
 
-        return $mailChimpDiscount;
+        return $squaloMailDiscount;
     }
 
     /**
