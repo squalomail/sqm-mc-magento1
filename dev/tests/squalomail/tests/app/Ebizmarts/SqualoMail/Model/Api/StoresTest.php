@@ -57,7 +57,7 @@ class Ebizmarts_SqualoMail_Model_Api_StoresTest extends PHPUnit_Framework_TestCa
         );
         $configValues = array(
             array(
-                Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
+                Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SQM_JS_URL . "_$squalomailStoreId",
                 $response['connected_site']['site_script']['url']
             )
         );

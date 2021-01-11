@@ -19,8 +19,8 @@ class Ebizmarts_SqualoMail_Model_Config
     const GENERAL_OLD_LIST                      = 'squalomail/general/old_list';
     const GENERAL_LIST_CHANGED_SCOPES           = 'squalomail/general/list_changed_scopes';
     const GENERAL_CHECKOUT_SUBSCRIBE            = 'squalomail/general/checkout_subscribe';
-    const GENERAL_MCSTOREID                     = 'squalomail/general/storeid';
-    const GENERAL_MCISSYNCING                   = 'squalomail/general/is_syicing';
+    const GENERAL_SQMSTOREID                     = 'squalomail/general/storeid';
+    const GENERAL_SQMISSYNCING                   = 'squalomail/general/is_syicing';
     const GENERAL_SUBMINSYNCDATEFLAG            = 'squalomail/general/subminsyncdateflag';
     const GENERAL_TWO_WAY_SYNC                  = 'squalomail/general/webhook_active';
     const GENERAL_UNSUBSCRIBE                   = 'squalomail/general/webhook_delete';
@@ -45,7 +45,7 @@ class Ebizmarts_SqualoMail_Model_Config
     const ECOMMERCE_ACTIVE              = 'squalomail/ecommerce/active';
     const ECOMMERCE_CUSTOMERS_OPTIN     = 'squalomail/ecommerce/customers_optin';
     const ECOMMERCE_FIRSTDATE           = 'squalomail/ecommerce/firstdate';
-    const ECOMMERCE_MC_JS_URL           = 'squalomail/ecommerce/sqm_js_url';
+    const ECOMMERCE_SQM_JS_URL           = 'squalomail/ecommerce/sqm_js_url';
     const ECOMMERCE_CUSTOMER_LAST_ID    = 'squalomail/ecommerce/customer_last_id';
     const ECOMMERCE_PRODUCT_LAST_ID     = 'squalomail/ecommerce/product_last_id';
     const ECOMMERCE_ORDER_LAST_ID       = 'squalomail/ecommerce/order_last_id';

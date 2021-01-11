@@ -27,10 +27,10 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
 
     public function __construct()
     {
-        $mageMCHelper = Mage::helper('squalomail');
-        $this->setSqualomailHelper($mageMCHelper);
-        $mageMCDateHelper = Mage::helper('squalomail/date');
-        $this->setSqualomailDateHelper($mageMCDateHelper);
+        $mageSQMHelper = Mage::helper('squalomail');
+        $this->setSqualomailHelper($mageSQMHelper);
+        $mageSQMDateHelper = Mage::helper('squalomail/date');
+        $this->setSqualomailDateHelper($mageSQMDateHelper);
     }
 
     /**
@@ -525,11 +525,11 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
     }
 
     /**
-     * @param $mageMCHelper
+     * @param $mageSQMHelper
      */
-    public function setSqualomailHelper($mageMCHelper)
+    public function setSqualomailHelper($mageSQMHelper)
     {
-        $this->_sqmHelper = $mageMCHelper;
+        $this->_sqmHelper = $mageSQMHelper;
     }
 
     /**
@@ -541,11 +541,11 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
     }
 
     /**
-     * @param $mageMCDateHelper
+     * @param $mageSQMDateHelper
      */
-    public function setSqualomailDateHelper($mageMCDateHelper)
+    public function setSqualomailDateHelper($mageSQMDateHelper)
     {
-        $this->_sqmDateHelper = $mageMCDateHelper;
+        $this->_sqmDateHelper = $mageSQMDateHelper;
     }
 
     /**

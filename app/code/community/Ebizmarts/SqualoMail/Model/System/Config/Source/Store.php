@@ -52,7 +52,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Store
     public function toOptionArray()
     {
         $helper = $this->getHelper();
-        $sqmStores = $this->getMCStores();
+        $sqmStores = $this->getSQMStores();
 
         if (isset($sqmStores['stores'])) {
             $stores[] = array('value' => '', 'label' => $helper->__('--- Select a Squalomail Store ---'));
@@ -98,7 +98,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Store
     /**
      * @return null
      */
-    protected function getMCStores()
+    protected function getSQMStores()
     {
         return $this->_stores;
     }

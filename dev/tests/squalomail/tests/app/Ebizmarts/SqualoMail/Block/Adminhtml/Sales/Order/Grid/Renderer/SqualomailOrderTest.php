@@ -67,7 +67,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailO
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMCStoreId', 'isEcomSyncDataEnabled', 'getEcommerceFirstDate'))
+            ->setMethods(array('getSQMStoreId', 'isEcomSyncDataEnabled', 'getEcommerceFirstDate'))
             ->getMock();
 
         $modelMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Orders::class)
@@ -82,7 +82,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailO
         $orderMock->expects($this->once())->method('getEntityId')->willReturn($orderId);
         $orderMock->expects($this->once())->method('getCreatedAt')->willReturn($orderDate);
 
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
+        $helperMock->expects($this->once())->method('getSQMStoreId')->with($storeId)->willReturn($squalomailStoreId);
         $helperMock->expects($this->once())->method('isEcomSyncDataEnabled')->with($storeId)->willReturn(true);
         $helperMock->expects($this->any())->method('getEcommerceFirstDate')->with($storeId)->willReturn($firstDate);
 

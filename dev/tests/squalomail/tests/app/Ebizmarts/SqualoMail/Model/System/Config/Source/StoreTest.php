@@ -49,14 +49,14 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_StoreTest extends PHPUnit_
 
         $listMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_System_Config_Source_Store::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getHelper', 'getMCStores'))
+            ->setMethods(array('getHelper', 'getSQMStores'))
             ->getMock();
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->getMock();
 
         $listMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $listMock->expects($this->once())->method('getMCStores')->willReturn($sqmStores);
+        $listMock->expects($this->once())->method('getSQMStores')->willReturn($sqmStores);
 
         $helperMock->expects($this->once())->method('__')->with($selectMsg)->willReturn($selectMsg);
 

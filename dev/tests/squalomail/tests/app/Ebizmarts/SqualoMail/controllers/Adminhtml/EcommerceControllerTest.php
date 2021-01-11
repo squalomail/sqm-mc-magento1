@@ -115,7 +115,7 @@ class Ebizmarts_SqualoMail_Adminhtml_EcommerceControllerTest extends PHPUnit_Fra
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMageApp', 'resendMCEcommerceData', 'getCurrentScope'))
+            ->setMethods(array('getMageApp', 'resendSQMEcommerceData', 'getCurrentScope'))
             ->getMock();
 
         $mageAppMock = $this->getMockBuilder(Mage_Core_Model_App::class)
@@ -139,7 +139,7 @@ class Ebizmarts_SqualoMail_Adminhtml_EcommerceControllerTest extends PHPUnit_Fra
 
         $helperMock
             ->expects($this->once())
-            ->method('resendMCEcommerceData')
+            ->method('resendSQMEcommerceData')
             ->with($scopeId, $scope, $filter)
             ->willReturnSelf();
 

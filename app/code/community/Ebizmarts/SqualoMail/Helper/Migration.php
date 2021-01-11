@@ -88,7 +88,7 @@ class Ebizmarts_SqualoMail_Helper_Migration extends Mage_Core_Helper_Abstract
         $arrayMigrationConfigData = array('115' => true, '116' => false, '1164' => false);
         //migrate data from older version to the new schemma
         if ($helper->isEcommerceEnabled(0)) {
-            $squalomailStoreId = $this->getMCStoreId(0);
+            $squalomailStoreId = $this->getSQMStoreId(0);
 
             //migrate customers
             $this->_migrateCustomersFrom115($squalomailStoreId, $initialTime);

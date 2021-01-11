@@ -24,18 +24,18 @@ class Ebizmarts_SqualoMail_Model_System_Config_Backend_Store extends Mage_Core_M
             ? $groups['general']['fields']['storeid']['value']
             : null;
 
-        $oldSqualomailStoreId = $helper->getMCStoreId($scopeId, $scope);
-        $isSyncing = $helper->getMCIsSyncing($newSqualomailStoreId, $scopeId, $scope);
+        $oldSqualomailStoreId = $helper->getSQMStoreId($scopeId, $scope);
+        $isSyncing = $helper->getSQMIsSyncing($newSqualomailStoreId, $scopeId, $scope);
         $helper->cancelAllPendingBatches($oldSqualomailStoreId);
         $helper->restoreAllCanceledBatches($newSqualomailStoreId);
 
         if ($this->isValueChanged() && $this->getValue()) {
-            $helper->deletePreviousConfiguredMCStoreLocalData($oldSqualomailStoreId, $scopeId, $scope);
+            $helper->deletePreviousConfiguredSQMStoreLocalData($oldSqualomailStoreId, $scopeId, $scope);
 
             if ($isSyncing === null) {
                 $configValues = array(
                     array(
-                        Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$newSqualomailStoreId",
+                        Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING . "_$newSqualomailStoreId",
                         true
                     )
                 );

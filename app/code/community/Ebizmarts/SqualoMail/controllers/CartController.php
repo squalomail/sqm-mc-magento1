@@ -23,7 +23,7 @@ class Ebizmarts_SqualoMail_CartController extends Mage_Checkout_CartController
             //restore the quote
             $quote = Mage::getModel('sales/quote')->load($params['id']);
             $storeId = $quote->getStoreId();
-            $squalomailStoreId = Mage::helper('squalomail')->getMCStoreId($storeId);
+            $squalomailStoreId = Mage::helper('squalomail')->getSQMStoreId($storeId);
             $quoteSyncData = $this->getSqualomailEcommerceSyncDataModel()
                 ->getEcommerceSyncDataItem(
                     $params['id'],
@@ -86,7 +86,7 @@ class Ebizmarts_SqualoMail_CartController extends Mage_Checkout_CartController
             $id = $params['coupon_id'];
             $token = $params['coupon_token'];
             $storeId = Mage::app()->getStore()->getId();
-            $squalomailStoreId = $helper->getMCStoreId($storeId);
+            $squalomailStoreId = $helper->getSQMStoreId($storeId);
             $url = Mage::getUrl('checkout/cart');
 
             $promoCodeSyncData = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(

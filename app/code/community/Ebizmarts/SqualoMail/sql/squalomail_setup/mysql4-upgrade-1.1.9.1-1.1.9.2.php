@@ -2,6 +2,6 @@
 
 $installer = $this;
 
-$installer->deleteConfigData(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL);
+$installer->deleteConfigData(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SQM_JS_URL);
 
 $installer->endSetup();

@@ -27,7 +27,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_ListTest extends PHPUnit_F
 
         $listMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_System_Config_Source_List::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getHelper', 'getMCLists'))
+            ->setMethods(array('getHelper', 'getSQMLists'))
             ->getMock();
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
@@ -36,7 +36,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_ListTest extends PHPUnit_F
             ->getMock();
 
         $listMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $listMock->expects($this->once())->method('getMCLists')->willReturn($sqmLists);
+        $listMock->expects($this->once())->method('getSQMLists')->willReturn($sqmLists);
 
         $expectedResult = array(array(
             'value' => $listId,

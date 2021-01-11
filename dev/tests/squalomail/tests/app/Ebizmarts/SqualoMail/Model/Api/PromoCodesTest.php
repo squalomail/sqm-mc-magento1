@@ -8,7 +8,7 @@ class Ebizmarts_SqualoMail_Model_Api_PromoCodesTest extends PHPUnit_Framework_Te
 
     const PROMOCODE_ID = 603;
 
-    const MC_STORE_ID = 'a1s2d3f4g5h6j7k8l9n0';
+    const SQM_STORE_ID = 'a1s2d3f4g5h6j7k8l9n0';
     const STORE_ID = '1';
 
     public function setUp()
@@ -44,12 +44,12 @@ class Ebizmarts_SqualoMail_Model_Api_PromoCodesTest extends PHPUnit_Framework_Te
             ->disableOriginalConstructor()
             ->setMethods(array('getDateMicrotime'))->getMock();
 
-        $promoCodesApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MC_STORE_ID);
+        $promoCodesApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::SQM_STORE_ID);
         $promoCodesApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::STORE_ID);
         $promoCodesApiMock->expects($this->once())->method('createEcommercePromoCodesCollection')
             ->willReturn($promoCollectionResourceMock);
 
-        $promoCollectionResourceMock->expects($this->once())->method('setSqualomailStoreId')->with(self::MC_STORE_ID);
+        $promoCollectionResourceMock->expects($this->once())->method('setSqualomailStoreId')->with(self::SQM_STORE_ID);
         $promoCollectionResourceMock->expects($this->once())->method('setStoreId')->with(self::STORE_ID);
 
         $promoCodesApiMock->expects($this->once())->method('getDateHelper')->willReturn($squalomailDateHelperMock);

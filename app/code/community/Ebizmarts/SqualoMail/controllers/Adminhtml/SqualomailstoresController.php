@@ -266,7 +266,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailstoresController extends Mage_Adm
             try {
                 $apiStore = $helper->getApiStores();
                 $apiStore->deleteSqualoMailStore($squalomailStoreId, $apiKey);
-                $helper->deleteAllMCStoreData($squalomailStoreId);
+                $helper->deleteAllSQMStoreData($squalomailStoreId);
             } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                 $helper->logError($e->getMessage());
             } catch (SqualoMail_Error $e) {

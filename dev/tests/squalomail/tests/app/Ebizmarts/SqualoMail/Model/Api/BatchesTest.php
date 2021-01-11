@@ -384,7 +384,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getMCStoreId', 'isEcomSyncDataEnabled', 'getMCIsSyncing', 'getPromoConfig')
+                array('getSQMStoreId', 'isEcomSyncDataEnabled', 'getSQMIsSyncing', 'getPromoConfig')
             )
             ->getMock();
 
@@ -423,7 +423,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
         $apiBatchesMock->expects($this->exactly(1))->method('getHelper')->willReturn($helperMock);
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($magentoStoreId)
             ->willReturn($squalomailStoreId);
 
@@ -488,7 +488,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
 
         $helperMock
             ->expects($this->exactly(1))
-            ->method('getMCIsSyncing')
+            ->method('getSQMIsSyncing')
             ->with($squalomailStoreId)
             ->willReturn($syncingFlag);
 
@@ -576,7 +576,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMCStoreId', 'isEcomSyncDataEnabled', 'isSubscriptionEnabled'))
+            ->setMethods(array('getSQMStoreId', 'isEcomSyncDataEnabled', 'isSubscriptionEnabled'))
             ->getMock();
 
         $syncBatchesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Synchbatches::class)
@@ -605,7 +605,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
 
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($magentoStoreId)
             ->willReturn($squalomailStoreId);
 

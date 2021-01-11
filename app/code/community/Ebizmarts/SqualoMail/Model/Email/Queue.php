@@ -81,9 +81,9 @@ class Ebizmarts_SqualoMail_Model_Email_Queue extends Mage_Core_Model_Email_Queue
      */
     protected function _saveMessage($message)
     {
-        $mageMCDateHelper = Mage::helper('squalomail/date');
+        $mageSQMDateHelper = Mage::helper('squalomail/date');
 
-        $message->setProcessedAt($mageMCDateHelper->formatDate(null, 'Y-m-d H:i:s'));
+        $message->setProcessedAt($mageSQMDateHelper->formatDate(null, 'Y-m-d H:i:s'));
         $message->save();
     }
 

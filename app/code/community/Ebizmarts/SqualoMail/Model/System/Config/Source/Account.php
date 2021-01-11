@@ -73,7 +73,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Account
                     $this->_accountDetails = $api->getRoot()->info('account_name,total_subscribers');
 
                     $sqmStoreId = (empty($params))
-                        ? $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope'])
+                        ? $helper->getSQMStoreId($scopeArray['scope_id'], $scopeArray['scope'])
                         : $params['squalomail_store_id'];
                     try {
                         $sqmStore = (!empty($sqmStoreId))

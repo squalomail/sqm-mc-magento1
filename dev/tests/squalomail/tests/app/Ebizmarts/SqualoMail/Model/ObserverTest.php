@@ -232,7 +232,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
 
         $squalomailStoreId = 1;
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
+        $helperMock->expects($this->once())->method('getSQMStoreId')->with($storeId)->willReturn($squalomailStoreId);
 
         $apiCustomerMock->expects($this->once())->method('setSqualomailStoreId')->with($squalomailStoreId);
         $apiCustomerMock->expects($this->once())->method('setMagentoStoreId')->with($storeId);
@@ -381,7 +381,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $itemMock->expects($this->once())->method('getProductId')->willReturn($productId);
 
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
+        $helperMock->expects($this->once())->method('getSQMStoreId')->with($storeId)->willReturn($squalomailStoreId);
 
         $observerMock->expects($this->once())->method('makeApiProduct')->willReturn($apiProductsMock);
 
@@ -477,7 +477,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $itemMock->expects($this->once())->method('getProductId')->willReturn($productId);
 
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
+        $helperMock->expects($this->once())->method('getSQMStoreId')->with($storeId)->willReturn($squalomailStoreId);
 
         $dataProductMock->expects($this->once())
             ->method('getSqualomailSyncDeleted')
@@ -953,7 +953,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $itemMock->expects($this->once())->method('getProductId')->willReturn($productId);
 
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
+        $helperMock->expects($this->once())->method('getSQMStoreId')->with($storeId)->willReturn($squalomailStoreId);
 
         $apiProductsMock->expects($this->once())->method('update')->with($productId);
 
@@ -1207,7 +1207,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('getCurrentScope')->willReturn($scopeArray);
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeArray['scope_id'], $scopeArray['scope'])
             ->willReturn($oldSqualomailStoreId);
 
@@ -1219,7 +1219,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $helperMock
             ->expects($this->once())
-            ->method('getListIdByApiKeyAndMCStoreId')
+            ->method('getListIdByApiKeyAndSQMStoreId')
             ->with($apiKey, $squalomailStoreId)
             ->willReturn($storeListId);
         $helperMock
@@ -1283,7 +1283,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('getCurrentScope')->willReturn($scopeArray);
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeArray['scope_id'], $scopeArray['scope'])
             ->willReturn($oldSqualomailStoreId);
 
@@ -1380,7 +1380,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->willReturn($dataProductMock);
 
         $helperMock->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($storeId)
             ->willReturn($squalomailStoreId);
 
@@ -1490,7 +1490,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->with($storeId)
             ->willReturn($ecomEnabled);
         $helperMock->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($storeId)
             ->willReturn($squalomailStoreId);
 
@@ -1712,7 +1712,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->with($storeId)
             ->willReturn($ecomEnabled);
         $helperMock->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($storeId)
             ->willReturn($squalomailStoreId);
 
@@ -1842,12 +1842,12 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->setMethods(
                 array(
                     'unsubscribeMember', 'getMageApp', 'isEcomSyncDataEnabled', 'isSubscriptionEnabled',
-                    'loadListSubscriber', 'saveEcommerceSyncData', 'getMCStoreId', 'getMonkeyInGrid',
+                    'loadListSubscriber', 'saveEcommerceSyncData', 'getSQMStoreId', 'getMonkeyInGrid',
                     'isEcomSyncDataEnabledInAnyScope','getAllSqualoMailStoreIds', 'isEcommerceEnabled',
                     'isSubscriptionConfirmationEnabled', 'getStoreId', 'isUseMagentoEmailsEnabled',
                     'saveInterestGroupData', 'isAbandonedCartEnabled', 'getInterestGroupsIfAvailable',
                     'saveSqualomailConfig', 'addAdminWarning', 'getCurrentScope', 'getIfConfigExistsForScope',
-                    'getGeneralList', 'getListIdByApiKeyAndMCStoreId'
+                    'getGeneralList', 'getListIdByApiKeyAndSQMStoreId'
                 )
             )
             ->getMock();

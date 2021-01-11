@@ -23,7 +23,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailO
         $orderDate = $row->getCreatedAt();
         $helper = $this->makeHelper();
         if ($helper->isEcomSyncDataEnabled($storeId)) {
-            $squalomailStoreId = $helper->getMCStoreId($storeId);
+            $squalomailStoreId = $helper->getSQMStoreId($storeId);
             $resultArray = $this->makeApiOrders()->getSyncedOrder($orderId, $squalomailStoreId);
             $id = $resultArray['order_id'];
             $status = $resultArray['synced_status'];

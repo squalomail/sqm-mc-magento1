@@ -66,7 +66,7 @@ class Ebizmarts_SqualoMail_Model_Api_Stores
             );
             $configValues = array(
                 array(
-                    Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
+                    Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SQM_JS_URL . "_$squalomailStoreId",
                     $response['connected_site']['site_script']['url']
                 )
             );
@@ -253,10 +253,10 @@ class Ebizmarts_SqualoMail_Model_Api_Stores
      *
      * @param $squalomailStoreId
      */
-    protected function deleteLocalMCStoreData($squalomailStoreId)
+    protected function deleteLocalSQMStoreData($squalomailStoreId)
     {
         $helper = $this->makeHelper();
-        $helper->deleteAllMCStoreData($squalomailStoreId);
+        $helper->deleteAllSQMStoreData($squalomailStoreId);
     }
 
     /**

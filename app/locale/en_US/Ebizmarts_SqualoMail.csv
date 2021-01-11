@@ -53,7 +53,7 @@
 "Click this button to create the webhook manually, it will only work if the webhook doesn't already exist.","Click this button to create the webhook manually, it will only work if the webhook doesn't already exist."
 "Use Magento emails","Use Magento emails"
 "If you enable this Magento confirmation email will be sent for subscribers instead of Squalomail email.","If you enable this Magento confirmation email will be sent for subscribers instead of Squalomail email."
-"MC Account name","MC Account name"
+"SQM Account name","SQM Account name"
 "Audience Name","Audience Name"
 "The customer must be subscribed for this change to apply.","The customer must be subscribed for this change to apply."
 "Please note the extension has been disabled due to the lack of an api key or audience configured.","Please note the extension has been disabled due to the lack of an api key or audience configured."

@@ -21,9 +21,9 @@
                 <type>js_css</type>
                 <script>ebizmarts/squalomail/popup.css</script>
             </action>
-            <block type="core/text" name="addMCJs">
+            <block type="core/text" name="addSQMJs">
                 <action method="setText">
-                    <text helper="squalomail/getMCJs"></text>
+                    <text helper="squalomail/getSQMJs"></text>
                 </action>
             </block>
         </reference>

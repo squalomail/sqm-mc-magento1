@@ -767,7 +767,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
     }
 
     /**
-     * @param $mageMCHelper
+     * @param $mageSQMHelper
      */
     protected function setSqualoMailHelper()
     {
@@ -783,7 +783,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
     }
 
     /**
-     * @param $mageMCDateHelper
+     * @param $mageSQMDateHelper
      */
     protected function setSqualoMailDateHelper()
     {
@@ -799,7 +799,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
     }
 
     /**
-     * @param $mageMCWebhookHelper
+     * @param $mageSQMWebhookHelper
      */
     protected function setSqualoMailWebhookHelper()
     {

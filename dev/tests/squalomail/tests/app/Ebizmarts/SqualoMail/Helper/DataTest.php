@@ -97,7 +97,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->handleResendFinish($scopeId, $scope);
     }
 
-    public function testDeleteAllConfiguredMCStoreLocalData()
+    public function testDeleteAllConfiguredSQMStoreLocalData()
     {
         $scope = 'stores';
         $scopeId = 1;
@@ -140,15 +140,15 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->willReturn($storeIdsArray);
 
         $params = array();
-        $params ['param2'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
+        $params ['param2'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING
             . "_$squalomailStoreId", 'stores', $storeIdOne);
-        $params ['param3'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
+        $params ['param3'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING
             . "_$squalomailStoreId", 'stores', $storeIdTwo);
-        $params ['param4'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
+        $params ['param4'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING
             . "_$squalomailStoreId", 'stores', $storeIdThree);
-        $params ['param5'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
+        $params ['param5'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING
             . "_$squalomailStoreId", $scope, $scopeId);
-        $params ['param1'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID, $scope, $scopeId);
+        $params ['param1'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID, $scope, $scopeId);
         $params ['param6'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_CUSTOMER_LAST_ID, $scope, $scopeId);
         $params ['param7'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_PRODUCT_LAST_ID, $scope, $scopeId);
         $params ['param8'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_ORDER_LAST_ID, $scope, $scopeId);
@@ -188,7 +188,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->method('update')
             ->with($tableName, array('status' => 'canceled'), $where);
 
-        $helperMock->deleteAllConfiguredMCStoreLocalData($squalomailStoreId, $scopeId, $scope);
+        $helperMock->deleteAllConfiguredSQMStoreLocalData($squalomailStoreId, $scopeId, $scope);
     }
 
     public function testGetDateSyncFinishByStoreId()
@@ -199,12 +199,12 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMCStoreId', 'getConfigValueForScope'))
+            ->setMethods(array('getSQMStoreId', 'getConfigValueForScope'))
             ->getMock();
 
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->willReturn($squalomailStoreId);
         $helperMock
@@ -575,7 +575,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMCStoreId', 'getCoreResource'))
+            ->setMethods(array('getSQMStoreId', 'getCoreResource'))
             ->getMock();
 
         $coreResourceMock = $this->getMockBuilder(Mage_Core_Model_Resource::class)
@@ -588,7 +588,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('getCoreResource')->WillReturn($coreResourceMock);
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->WillReturn($squalomailStoreId);
 
@@ -638,18 +638,18 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMCStoreId', 'removeEcommerceSyncDataByMCStore'))
+            ->setMethods(array('getSQMStoreId', 'removeEcommerceSyncDataBySQMStore'))
             ->getMock();
 
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->WillReturn($squalomailStoreId);
 
         $helperMock
             ->expects($this->once())
-            ->method('removeEcommerceSyncDataByMCStore')
+            ->method('removeEcommerceSyncDataBySQMStore')
             ->with($squalomailStoreId, $deleteErrorsOnly);
 
         $helperMock->removeEcommerceSyncData($scopeId, $scope, $deleteErrorsOnly);
@@ -667,7 +667,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getCoreResource', 'removeEcommerceSyncDataByMCStore'))
+            ->setMethods(array('getCoreResource', 'removeEcommerceSyncDataBySQMStore'))
             ->getMock();
 
         $coreResourceMock = $this->getMockBuilder(Mage_Core_Model_Resource::class)
@@ -703,7 +703,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->removeAllEcommerceSyncDataErrors($squalomailFilters);
     }
 
-    public function testRemoveEcommerceSyncDataByMCStore()
+    public function testRemoveEcommerceSyncDataBySQMStore()
     {
         $deleteErrorsOnly = true;
         $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9p0';
@@ -751,7 +751,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->method('delete')
             ->with($tableName, array($storeReturnWhere, $filterReturnWhere));
 
-        $helperMock->removeEcommerceSyncDataByMCStore($squalomailStoreId, $deleteErrorsOnly, $squalomailFilters);
+        $helperMock->removeEcommerceSyncDataBySQMStore($squalomailStoreId, $deleteErrorsOnly, $squalomailFilters);
     }
 
     public function testClearErrorGridExcludeSubscribers()
@@ -773,7 +773,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('handleOldErrors', 'getMCStoreId', 'getCoreResource'))
+            ->setMethods(array('handleOldErrors', 'getSQMStoreId', 'getCoreResource'))
             ->getMock();
 
         $coreResourceMock = $this->getMockBuilder(Mage_Core_Model_Resource::class)
@@ -786,7 +786,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('handleOldErrors');
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->WillReturn($squalomailStoreId);
         $helperMock->expects($this->once())->method('getCoreResource')->WillReturn($coreResourceMock);
@@ -827,7 +827,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('handleOldErrors', 'getMCStoreId', 'getCoreResource'))
+            ->setMethods(array('handleOldErrors', 'getSQMStoreId', 'getCoreResource'))
             ->getMock();
 
         $coreResourceMock = $this->getMockBuilder(Mage_Core_Model_Resource::class)
@@ -840,7 +840,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('handleOldErrors');
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->WillReturn($squalomailStoreId);
         $helperMock->expects($this->once())->method('getCoreResource')->WillReturn($coreResourceMock);
@@ -881,7 +881,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('handleOldErrors', 'getMCStoreId', 'getCoreResource'))
+            ->setMethods(array('handleOldErrors', 'getSQMStoreId', 'getCoreResource'))
             ->getMock();
 
         $coreResourceMock = $this->getMockBuilder(Mage_Core_Model_Resource::class)
@@ -894,7 +894,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('handleOldErrors');
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->WillReturn($squalomailStoreId);
         $helperMock->expects($this->once())->method('getCoreResource')->WillReturn($coreResourceMock);
@@ -1041,7 +1041,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
-                    'getMCStoreId', 'getMCIsSyncing', 'getLastCustomerSent', 'getLastProductSent',
+                    'getSQMStoreId', 'getSQMIsSyncing', 'getLastCustomerSent', 'getLastProductSent',
                     'getLastOrderSent', 'getLastCartSent', 'getLastPromoCodeSent', 'saveSqualomailConfig',
                     'getCustomerResendLastId', 'getProductResendLastId', 'getOrderResendLastId',
                     'getCartResendLastId', 'getPromoCodeResendLastId'
@@ -1051,12 +1051,12 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->willReturn($squalomailStoreId);
         $helperMock
             ->expects($this->once())
-            ->method('getMCIsSyncing')
+            ->method('getSQMIsSyncing')
             ->with($squalomailStoreId, $scopeId, $scope)
             ->willReturn(false);
 
@@ -1108,12 +1108,12 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('isSubscriptionEnabled', 'isEcommerceEnabled', 'getMCStoreId'))
+            ->setMethods(array('isSubscriptionEnabled', 'isEcommerceEnabled', 'getSQMStoreId'))
             ->getMock();
 
         $helperMock->expects($this->once())->method('isSubscriptionEnabled')->with($scopeId, $scope)->willReturn(true);
         $helperMock->expects($this->once())->method('isEcommerceEnabled')->with($scopeId, $scope)->willReturn(true);
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($scopeId, $scope)->willReturn($sqmStoreId);
+        $helperMock->expects($this->once())->method('getSQMStoreId')->with($scopeId, $scope)->willReturn($sqmStoreId);
 
         $result = $helperMock->isEcomSyncDataEnabled($scopeId, $scope, $isStoreCreation);
 
@@ -1573,7 +1573,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->saveInterestGroupData($params, $storeId, null, $subscriberMock);
     }
 
-    public function testGetMCJs()
+    public function testGetSQMJs()
     {
         $storeId = 1;
         $jsUrl = 'https://api.squalomail.com/#API_ENDPOINT_PATH#/ecommerce/stores/sitejs';
@@ -1585,7 +1585,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getMageApp', 'isEcomSyncDataEnabled', 'getConfigValueForScope',
-                    'retrieveAndSaveMCJsUrlInConfig', 'getMCStoreId')
+                    'retrieveAndSaveSQMJsUrlInConfig', 'getSQMStoreId')
             )
             ->getMock();
 
@@ -1607,7 +1607,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($storeId)
             ->willReturn($squalomailStoreId);
         $helperMock
@@ -1618,15 +1618,15 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock
             ->expects($this->once())
             ->method('getConfigValueForScope')
-            ->with(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId", 0, 'default')
+            ->with(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SQM_JS_URL . "_$squalomailStoreId", 0, 'default')
             ->willReturn(null);
         $helperMock
             ->expects($this->once())
-            ->method('retrieveAndSaveMCJsUrlInConfig')
+            ->method('retrieveAndSaveSQMJsUrlInConfig')
             ->with($storeId)
             ->willReturn($jsUrl);
 
-        $result = $helperMock->getMCJs();
+        $result = $helperMock->getSQMJs();
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -1814,7 +1814,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperDataMock->resetErrors($scopeId, $scope);
     }
 
-    public function testGetMagentoStoresForMCStoreIdByScope()
+    public function testGetMagentoStoresForSQMStoreIdByScope()
     {
         $scopeId = 0;
         $scope = 'stores';
@@ -1825,7 +1825,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getStoreRelation', 'getMCStoreId'))
+            ->setMethods(array('getStoreRelation', 'getSQMStoreId'))
             ->getMock();
 
         $helperDataMock
@@ -1835,11 +1835,11 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperDataMock
             ->expects($this->once())
-            ->method('getMCStoreId')
+            ->method('getSQMStoreId')
             ->with($scopeId, $scope)
             ->willReturn('a1s2d3f4g5h6j7k8l9p0');
 
-        $helperDataMock->getMagentoStoresForMCStoreIdByScope($scopeId, $scope);
+        $helperDataMock->getMagentoStoresForSQMStoreIdByScope($scopeId, $scope);
     }
 
     public function testCreateMergeFields()

@@ -267,7 +267,7 @@ class Ebizmarts_SqualoMail_Model_Api_Batches
     public function _getResults($magentoStoreId, $isEcommerceData = true, $status = Ebizmarts_SqualoMail_Helper_Data::BATCH_PENDING)
     {
         $helper = $this->getHelper();
-        $squalomailStoreId = $helper->getMCStoreId($magentoStoreId);
+        $squalomailStoreId = $helper->getSQMStoreId($magentoStoreId);
         $collection = $this->getSyncBatchesModel()->getCollection()->addFieldToFilter('status', array('eq' => $status));
 
         if ($isEcommerceData) {
@@ -333,7 +333,7 @@ class Ebizmarts_SqualoMail_Model_Api_Batches
     public function _sendEcommerceBatch($magentoStoreId)
     {
         $helper = $this->getHelper();
-        $squalomailStoreId = $helper->getMCStoreId($magentoStoreId);
+        $squalomailStoreId = $helper->getSQMStoreId($magentoStoreId);
 
         try {
             $this->deleteUnsentItems();
@@ -362,7 +362,7 @@ class Ebizmarts_SqualoMail_Model_Api_Batches
                 $productAmount = count($productsArray);
                 $batchArray['operations'] = array_merge($batchArray['operations'], $productsArray);
 
-                if ($helper->getMCIsSyncing($squalomailStoreId, $magentoStoreId) === 1) {
+                if ($helper->getSQMIsSyncing($squalomailStoreId, $magentoStoreId) === 1) {
                     $helper->logBatchStatus('No Carts will be synced until the store is completely synced');
                 } else {
                     //cart operations
@@ -493,12 +493,12 @@ class Ebizmarts_SqualoMail_Model_Api_Batches
         $helper = $this->getHelper();
         $dateHelper = $this->getDateHelper();
         $itemAmount = ($customerAmount + $productAmount + $orderAmount);
-        $syncingFlag = $helper->getMCIsSyncing($squalomailStoreId, $magentoStoreId);
+        $syncingFlag = $helper->getSQMIsSyncing($squalomailStoreId, $magentoStoreId);
 
         if ($this->shouldFlagAsSyncing($syncingFlag, $itemAmount, $helper)) {
             //Set is syncing per scope in 1 until sync finishes.
             $configValue = array(
-                array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId", 1)
+                array(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING . "_$squalomailStoreId", 1)
             );
             $helper->saveSqualomailConfig($configValue, $magentoStoreId, 'stores');
         } else {
@@ -506,7 +506,7 @@ class Ebizmarts_SqualoMail_Model_Api_Batches
                 //Set is syncing per scope to a date because it is not sending any more items.
                 $configValue = array(
                     array(
-                        Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId",
+                        Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING . "_$squalomailStoreId",
                         $dateHelper->formatDate(null, 'Y-m-d H:i:s')
                     )
                 );
@@ -944,7 +944,7 @@ class Ebizmarts_SqualoMail_Model_Api_Batches
             $this->_getResults($magentoStoreId);
 
             //handle order replacement
-            $squalomailStoreId = $helper->getMCStoreId($magentoStoreId);
+            $squalomailStoreId = $helper->getSQMStoreId($magentoStoreId);
 
             $batchArray['operations'] = Mage::getModel('squalomail/api_orders')->replaceAllOrdersBatch(
                 $initialTime,
@@ -1057,8 +1057,8 @@ class Ebizmarts_SqualoMail_Model_Api_Batches
         $ecomEnabled = $helper->isEcomSyncDataEnabled($storeId);
 
         if ($ecomEnabled) {
-            $squalomailStoreId = $helper->getMCStoreId($storeId);
-            $syncedDate = $helper->getMCIsSyncing($squalomailStoreId, $storeId);
+            $squalomailStoreId = $helper->getSQMStoreId($storeId);
+            $syncedDate = $helper->getSQMIsSyncing($squalomailStoreId, $storeId);
 
             // Check if $syncedDate is in date format to support previous versions.
             if (isset($syncedDateArray[$squalomailStoreId]) && $syncedDateArray[$squalomailStoreId]) {

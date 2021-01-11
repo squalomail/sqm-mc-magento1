@@ -24,7 +24,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Edit extends Mage_Ad
             'delete', null, array(
             'label'     => Mage::helper('adminhtml')->__('Delete Store'),
             'class'     => 'delete',
-            'onclick'   => 'deleteMCStoreConfirm(\''
+            'onclick'   => 'deleteSQMStoreConfirm(\''
                 . Mage::helper('core')->jsQuoteEscape(
                     Mage::helper('adminhtml')->__('Are you sure you want to delete this Squalomail store?')
                 )
@@ -43,8 +43,8 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Edit extends Mage_Ad
             $jsCondition = 'false';
         }
 
-        $sqmInUseMessage = $this->getMCInUseMessage($scopeArray);
-        $this->_formScripts[] = "function deleteMCStoreConfirm(message, url) {
+        $sqmInUseMessage = $this->getSQMInUseMessage($scopeArray);
+        $this->_formScripts[] = "function deleteSQMStoreConfirm(message, url) {
             if ($jsCondition) {
                 if (confirm(message)) {
                     deleteConfirm('$sqmInUseMessage', url);
@@ -82,7 +82,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Edit extends Mage_Ad
      * @throws Mage_Core_Exception
      * @throws Mage_Core_Model_Store_Exception
      */
-    protected function getMCInUseMessage($scope)
+    protected function getSQMInUseMessage($scope)
     {
         $helper = $this->makeHelper();
         if ($scope !== false) {
@@ -106,8 +106,8 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Edit extends Mage_Ad
     protected function getScopeArrayIfValueExists()
     {
         $helper = $this->makeHelper();
-        $currentMCStoreId = Mage::registry('current_squalomailstore')->getStoreid();
-        $keyIfExist = $helper->getScopeBySqualoMailStoreId($currentMCStoreId);
+        $currentSQMStoreId = Mage::registry('current_squalomailstore')->getStoreid();
+        $keyIfExist = $helper->getScopeBySqualoMailStoreId($currentSQMStoreId);
 
         if ($keyIfExist === null) {
             $keyIfExist = false;

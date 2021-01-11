@@ -246,7 +246,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Get local store_id value of the MC store.
+     * Get local store_id value of the SQM store.
      *
      * @return array
      * @throws Mage_Core_Exception
@@ -258,7 +258,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
 
         foreach ($stores as $storeId => $store) {
             if ($this->isEcomSyncDataEnabled($storeId)) {
-                $sqmStoreId = $this->getMCStoreId($storeId);
+                $sqmStoreId = $this->getSQMStoreId($storeId);
 
                 if ($sqmStoreId) {
                     if (!array_key_exists($sqmStoreId, $storeRelation)) {
@@ -282,11 +282,11 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @return array|mixed
      * @throws Mage_Core_Exception
      */
-    public function getMagentoStoresForMCStoreIdByScope($scopeId, $scope)
+    public function getMagentoStoresForSQMStoreIdByScope($scopeId, $scope)
     {
         $ret = array();
         $storeRelation = $this->getStoreRelation();
-        $squalomailStoreIdForScope = $this->getMCStoreId($scopeId, $scope);
+        $squalomailStoreIdForScope = $this->getSQMStoreId($scopeId, $scope);
         $isThereAnyStore = array_key_exists($squalomailStoreIdForScope, $storeRelation);
 
         if ($squalomailStoreIdForScope && $isThereAnyStore) {
@@ -390,17 +390,17 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Get local store_id value of the MC store for given scope.
+     * Get local store_id value of the SQM store for given scope.
      *
      * @param       $scopeId
      * @param null  $scope
      * @return mixed
      * @throws Mage_Core_Exception
      */
-    public function getMCStoreId($scopeId, $scope = null)
+    public function getSQMStoreId($scopeId, $scope = null)
     {
         return $this->getConfigValueForScope(
-            Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID,
             $scopeId,
             $scope
         );
@@ -412,21 +412,21 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @param           $scopeId
      * @param string    $scope
      */
-    public function deletePreviousConfiguredMCStoreLocalData($squalomailStoreId, $scopeId, $scope = 'stores')
+    public function deletePreviousConfiguredSQMStoreLocalData($squalomailStoreId, $scopeId, $scope = 'stores')
     {
         $config = $this->getConfig();
 
         if ($squalomailStoreId !== null && $squalomailStoreId !== '') {
             foreach ($this->getAllStoresForScope($scopeId, $scope) as $storeId) {
                 $config->deleteConfig(
-                    Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId",
+                    Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING . "_$squalomailStoreId",
                     'stores',
                     $storeId
                 );
             }
 
             $config->deleteConfig(
-                Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId",
+                Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING . "_$squalomailStoreId",
                 $scope,
                 $scopeId
             );
@@ -454,13 +454,13 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @param           $scopeId
      * @param string    $scope
      */
-    public function deleteAllConfiguredMCStoreLocalData($squalomailStoreId, $scopeId, $scope = 'stores')
+    public function deleteAllConfiguredSQMStoreLocalData($squalomailStoreId, $scopeId, $scope = 'stores')
     {
         $configValues = array(array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_ACTIVE, 0));
         $this->saveSqualomailConfig($configValues, $scopeId, $scope, false);
         $config = $this->getConfig();
-        $config->deleteConfig(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID, $scope, $scopeId);
-        $this->deletePreviousConfiguredMCStoreLocalData($squalomailStoreId, $scopeId, $scope = 'stores');
+        $config->deleteConfig(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID, $scope, $scopeId);
+        $this->deletePreviousConfiguredSQMStoreLocalData($squalomailStoreId, $scopeId, $scope = 'stores');
     }
 
     /**
@@ -471,7 +471,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getResourceModel('squalomail/synchbatches');
     }
 
-    public function deleteAllMCStoreData($squalomailStoreId)
+    public function deleteAllSQMStoreData($squalomailStoreId)
     {
         //Delete default configurations for this store.
         $config = $this->getConfig();
@@ -479,18 +479,18 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
             Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId", 'default', 0
         );
         $config->deleteConfig(
-            Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId", 'default', 0
+            Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SQM_JS_URL . "_$squalomailStoreId", 'default', 0
         );
 
         //Delete local ecommerce data and errors for this store.
-        $this->removeEcommerceSyncDataByMCStore($squalomailStoreId);
-        $this->clearErrorGridByMCStore($squalomailStoreId);
+        $this->removeEcommerceSyncDataBySQMStore($squalomailStoreId);
+        $this->clearErrorGridBySQMStore($squalomailStoreId);
 
         //Delete particular scopes configuraion flags for this store
         $scopeArrayIfExist = $this->getScopeBySqualoMailStoreId($squalomailStoreId);
 
         if ($scopeArrayIfExist !== false) {
-            $this->deleteAllConfiguredMCStoreLocalData(
+            $this->deleteAllConfiguredSQMStoreLocalData(
                 $squalomailStoreId,
                 $scopeArrayIfExist['scope_id'],
                 $scopeArrayIfExist['scope']
@@ -616,7 +616,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Get local is_syncing value of the MC store.
+     * Get local is_syncing value of the SQM store.
      * If data was saved in the old way get it from the scope and update it to the new way.
      *
      * @param           $squalomailStoreId
@@ -625,35 +625,35 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @return mixed|null
      * @throws Mage_Core_Exception
      */
-    public function getMCIsSyncing($squalomailStoreId, $scopeId = 0, $scope = 'stores')
+    public function getSQMIsSyncing($squalomailStoreId, $scopeId = 0, $scope = 'stores')
     {
         $oldSyncingFlag = $this->getConfigValueForScope(
-            Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING,
             $scopeId,
             $scope
         );
         $syncingFlag = $this->getConfigValueForScope(
-            Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId",
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING . "_$squalomailStoreId",
             $scopeId, $scope
         );
 
         //Save old value in new place.
         if ($syncingFlag === null && $oldSyncingFlag !== null) {
             $configValue = array(
-                array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId", $oldSyncingFlag)
+                array(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING . "_$squalomailStoreId", $oldSyncingFlag)
             );
             $this->saveSqualomailConfig($configValue, $scopeId, $scope);
         }
 
         //Delete old entry if exists particularly in this scope.
         if ($oldSyncingFlag !== null && $this->getIfConfigExistsForScope(
-            Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING,
             $scopeId,
             $scope
         )
         ) {
             $config = $this->getConfig();
-            $config->deleteConfig(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING, $scope, $scopeId);
+            $config->deleteConfig(Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMISSYNCING, $scope, $scopeId);
             $config->cleanCache();
         }
 
@@ -727,7 +727,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getDateSyncFinishByStoreId($scopeId = 0, $scope = null)
     {
-        $squalomailStoreId = $this->getMCStoreId($scopeId, $scope);
+        $squalomailStoreId = $this->getSQMStoreId($scopeId, $scope);
         return $this->getConfigValueForScope(
             Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
             0,
@@ -757,9 +757,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @param null $filters
      * @throws Mage_Core_Exception
      */
-    public function resendMCEcommerceData($scopeId, $scope, $filters = null)
+    public function resendSQMEcommerceData($scopeId, $scope, $filters = null)
     {
-        if ($this->getMCStoreId($scopeId, $scope) && $this->getMCStoreId($scopeId, $scope) != "") {
+        if ($this->getSQMStoreId($scopeId, $scope) && $this->getSQMStoreId($scopeId, $scope) != "") {
             if (!$this->getResendEnabled($scopeId, $scope)) {
                 $this->saveLastItemsSent($scopeId, $scope, $filters);
             }
@@ -788,8 +788,8 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
         if ($scopeId == 0 && $deleteErrorsOnly) {
             $this->removeAllEcommerceSyncDataErrors($filters);
         } else {
-            $squalomailStoreId = $this->getMCStoreId($scopeId, $scope);
-            $this->removeEcommerceSyncDataByMCStore($squalomailStoreId, $deleteErrorsOnly, $filters);
+            $squalomailStoreId = $this->getSQMStoreId($scopeId, $scope);
+            $this->removeEcommerceSyncDataBySQMStore($squalomailStoreId, $deleteErrorsOnly, $filters);
         }
     }
 
@@ -821,7 +821,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @param bool  $deleteErrorsOnly
      * @param null  $filters
      */
-    public function removeEcommerceSyncDataByMCStore($squalomailStoreId, $deleteErrorsOnly = false, $filters = null)
+    public function removeEcommerceSyncDataBySQMStore($squalomailStoreId, $deleteErrorsOnly = false, $filters = null)
     {
         $resource = $this->getCoreResource();
         $connection = $resource->getConnection('core_write');
@@ -865,7 +865,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
         } else {
             $subscriptionEnabled = $this->isSubscriptionEnabled($scopeId, $scope);
             $ecommerceEnabled = $this->isEcommerceEnabled($scopeId, $scope);
-            $squalomailStoreId = $this->getMCStoreId($scopeId, $scope);
+            $squalomailStoreId = $this->getSQMStoreId($scopeId, $scope);
 
             $ret = ($squalomailStoreId !== null || $isStoreCreation)
                 && $subscriptionEnabled && $ecommerceEnabled;
@@ -1038,10 +1038,10 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
         //Make sure there are no errors without no SqualoMail store id due to older versions.
         $this->handleOldErrors();
 
-        $squalomailStoreId = $this->getMCStoreId($scopeId, $scope);
+        $squalomailStoreId = $this->getSQMStoreId($scopeId, $scope);
 
         if ($excludeSubscribers) {
-            $this->clearErrorGridByMCStore($squalomailStoreId, $filters);
+            $this->clearErrorGridBySQMStore($squalomailStoreId, $filters);
         } else {
             $this->clearErrorGridByStoreId($scopeId, $filters);
         }
@@ -1051,7 +1051,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @param $squalomailStoreId
      * @param null $filters
      */
-    public function clearErrorGridByMCStore($squalomailStoreId, $filters = null)
+    public function clearErrorGridBySQMStore($squalomailStoreId, $filters = null)
     {
         $resource = $this->getCoreResource();
         $connection = $resource->getConnection('core_write');
@@ -1099,7 +1099,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
 
         foreach ($errorCollection as $error) {
             $storeId = $error->getStoreId();
-            $squalomailStoreId = $this->getMCStoreId($storeId);
+            $squalomailStoreId = $this->getSQMStoreId($storeId);
 
             if ($squalomailStoreId) {
                 $this->_saveErrorItem($error, $squalomailStoreId);
@@ -1124,8 +1124,8 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function saveLastItemsSent($scopeId, $scope, $filters = null)
     {
-        $squalomailStoreId = $this->getMCStoreId($scopeId, $scope);
-        $isSyncing = $this->getMCIsSyncing($squalomailStoreId, $scopeId, $scope);
+        $squalomailStoreId = $this->getSQMStoreId($scopeId, $scope);
+        $isSyncing = $this->getSQMIsSyncing($squalomailStoreId, $scopeId, $scope);
 
         if ($isSyncing != 1 && $filters !== null) {
             $configValues = array();
@@ -1191,7 +1191,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastCustomerSent($scopeId, $scope)
     {
         $lastCustomerSent = null;
-        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getSQMStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
             ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER))
@@ -1214,7 +1214,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastProductSent($scopeId, $scope)
     {
         $lastProductSent = null;
-        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getSQMStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
             ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT))
@@ -1237,7 +1237,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastOrderSent($scopeId, $scope)
     {
         $lastOrderSent = null;
-        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getSQMStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
             ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_ORDER))
@@ -1260,7 +1260,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastCartSent($scopeId, $scope)
     {
         $lastCartSent = null;
-        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getSQMStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
             ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_QUOTE))
@@ -1283,7 +1283,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastPromoCodeSent($scopeId, $scope)
     {
         $lastPromoCodeSent = null;
-        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getSQMStoreId($scopeId, $scope);
         $syncDataCollection = Mage::getResourceModel('squalomail/ecommercesyncdata_collection')
             ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE))
@@ -1527,7 +1527,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     public function addStoresToFilter($collection, $scopeId, $scope)
     {
         $filterArray = array();
-        $storesForScope = $this->getMagentoStoresForMCStoreIdByScope($scopeId, $scope);
+        $storesForScope = $this->getMagentoStoresForSQMStoreIdByScope($scopeId, $scope);
 
         if ($storesForScope) {
             if ($scopeId === 0) {
@@ -1555,9 +1555,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     public function getSqualoMailScopeByStoreId($storeId)
     {
         $squalomailScope = null;
-        $squaloMailStoreId = $this->getMCStoreId($storeId);
+        $squaloMailStoreId = $this->getSQMStoreId($storeId);
         $squalomailScope = $this->getFirstScopeFromConfig(
-            Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID,
             $squaloMailStoreId
         );
 
@@ -1907,16 +1907,16 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @throws Mage_Core_Exception
      * @throws Mage_Core_Model_Store_Exception
      */
-    public function getMCJs()
+    public function getSQMJs()
     {
         $script = '';
         $url = null;
         $storeId = $this->getMageApp()->getStore()->getId();
-        $squalomailStoreId = $this->getMCStoreId($storeId);
+        $squalomailStoreId = $this->getSQMStoreId($storeId);
 
         if ($this->isEcomSyncDataEnabled($storeId)) {
             $currentUrl = $this->getConfigValueForScope(
-                Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
+                Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SQM_JS_URL . "_$squalomailStoreId",
                 0,
                 'default'
             );
@@ -1924,7 +1924,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
             if (!empty($currentUrl)) {
                 $url = $currentUrl;
             } else {
-                $url = $this->retrieveAndSaveMCJsUrlInConfig($storeId);
+                $url = $this->retrieveAndSaveSQMJsUrlInConfig($storeId);
             }
 
             $script = '<script type="text/javascript" src="' . $url . '" defer></script>';
@@ -1934,27 +1934,27 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Retrieve store data and save the MCJs URL for the current store in config table.
+     * Retrieve store data and save the SQMJs URL for the current store in config table.
      *
      * @param           $scopeId
      * @param string    $scope
      * @return bool
      * @throws Mage_Core_Exception
      */
-    public function retrieveAndSaveMCJsUrlInConfig($scopeId, $scope = 'stores')
+    public function retrieveAndSaveSQMJsUrlInConfig($scopeId, $scope = 'stores')
     {
         $sqmJsUrlSaved = false;
 
         try {
             $api = $this->getApi($scopeId, $scope);
-            $squalomailStoreId = $this->getMCStoreId($scopeId, $scope);
+            $squalomailStoreId = $this->getSQMStoreId($scopeId, $scope);
             $response = $api->getEcommerce()->getStores()->get($squalomailStoreId, 'connected_site');
 
             if (isset($response['connected_site']['site_script']['url'])) {
                 $url = $response['connected_site']['site_script']['url'];
                 $configValues = array(
                     array(
-                        Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
+                        Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SQM_JS_URL . "_$squalomailStoreId",
                         $url
                     )
                 );
@@ -2195,7 +2195,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $squalomailScope = null;
         $collection = Mage::getResourceModel('core/config_data_collection')
-            ->addFieldToFilter('path', array('eq' => Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID))
+            ->addFieldToFilter('path', array('eq' => Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID))
             ->addFieldToFilter('value', array('eq' => $squaloMailStoreId))
             ->setPageSize(1);
 
@@ -2361,8 +2361,8 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     {
         try {
             $squalomailApi = $this->getApi($scopeId, $scope);
-            $squalomailStoreId = $this->getMCStoreId($scopeId, $scope);
-            $isSyncing = $this->getMCIsSyncing($squalomailStoreId, $scopeId, $scope);
+            $squalomailStoreId = $this->getSQMStoreId($scopeId, $scope);
+            $isSyncing = $this->getSQMIsSyncing($squalomailStoreId, $scopeId, $scope);
 
             if ($squalomailStoreId && $isSyncing != 1) {
                 $this->getApiStores()->editIsSyncing($squalomailApi, $syncValue, $squalomailStoreId);
@@ -2765,7 +2765,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function isMissingCustomerLowerThanId($itemId, $storeId)
     {
-        $squalomailStoreId = $this->getMCStoreId($storeId);
+        $squalomailStoreId = $this->getSQMStoreId($storeId);
         $customerCollection = Mage::getResourceModel('customer/customer_collection')
             ->addFieldToFilter('store_id', array('eq' => $storeId))
             ->addFieldToFilter('entity_id', array('lteq' => $itemId));
@@ -2790,7 +2790,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function isMissingProductLowerThanId($itemId, $storeId)
     {
         $apiProducts = Mage::getModel('squalomail/api_products');
-        $squalomailStoreId = $this->getMCStoreId($storeId);
+        $squalomailStoreId = $this->getSQMStoreId($storeId);
         $productCollection = Mage::getResourceModel('catalog/product_collection')
             ->addStoreFilter($storeId)
             ->addFieldToFilter('entity_id', array('lteq' => $itemId));
@@ -2815,7 +2815,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function isMissingOrderLowerThanId($itemId, $storeId)
     {
-        $squalomailStoreId = $this->getMCStoreId($storeId);
+        $squalomailStoreId = $this->getSQMStoreId($storeId);
         $orderCollection = Mage::getResourceModel('sales/order_collection')
             ->addFieldToFilter('store_id', array('eq' => $storeId))
             ->addFieldToFilter('entity_id', array('lteq' => $itemId));
@@ -2845,7 +2845,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function isMissingQuoteLowerThanId($itemId, $storeId)
     {
-        $squalomailStoreId = $this->getMCStoreId($storeId);
+        $squalomailStoreId = $this->getSQMStoreId($storeId);
         $quoteCollection = Mage::getResourceModel('sales/quote_collection')
             ->addFieldToFilter('store_id', array('eq' => $storeId))
             ->addFieldToFilter('entity_id', array('lteq' => $itemId))
@@ -2994,14 +2994,14 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
         $isAdmin = $this->isAdmin();
         $userLangCode = Mage::app()->getLocale()->getLocaleCode();
 
-        if ($isAdmin || '' == $lang = $this->_langToMCLanguage($userLangCode)) {
+        if ($isAdmin || '' == $lang = $this->_langToSQMLanguage($userLangCode)) {
             // IS Admin OR if users lang is not supported, try store views default locale
             $userLangCode = $this->getConfigValueForScope(
                 Mage_Core_Model_Locale::XML_PATH_DEFAULT_LOCALE,
                 $scopeId,
                 $scope
             );
-            $lang = $this->_langToMCLanguage($userLangCode);
+            $lang = $this->_langToSQMLanguage($userLangCode);
         }
 
         return $lang;
@@ -3035,7 +3035,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     public function getAllSqualoMailStoreIds()
     {
         $collection = Mage::getResourceModel('core/config_data_collection')
-            ->addFieldToFilter('path', array('eq' => Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID));
+            ->addFieldToFilter('path', array('eq' => Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID));
         $squalomailStoreIdsArray = array();
 
         foreach ($collection as $row) {
@@ -3179,7 +3179,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     public function getApiBySqualoMailStoreId($squalomailStoreId)
     {
         $scopeArray = $this->getFirstScopeFromConfig(
-            Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID,
             $squalomailStoreId
         );
         try {
@@ -3283,7 +3283,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      */
     protected function makeWhereString($connection, $scopeId, $scope)
     {
-        $storesForScope = $this->getMagentoStoresForMCStoreIdByScope($scopeId, $scope);
+        $storesForScope = $this->getMagentoStoresForSQMStoreIdByScope($scopeId, $scope);
         $whereString = "squalomail_campaign_id IS NOT NULL";
 
         if (!empty($storesForScope)) {
@@ -3312,9 +3312,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * Convert language into Squalomail compatible language code.
      *
      * @param string $languageCode
-     * @return string   Returns empty string if not MC Language match found
+     * @return string   Returns empty string if not SQM Language match found
      */
-    protected function _langToMCLanguage($languageCode = '')
+    protected function _langToSQMLanguage($languageCode = '')
     {
         $squalomailLanguage = '';
 
@@ -3437,7 +3437,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @param $squalomailStoreId
      * @return bool
      */
-    public function getListIdByApiKeyAndMCStoreId($apiKey, $squalomailStoreId)
+    public function getListIdByApiKeyAndSQMStoreId($apiKey, $squalomailStoreId)
     {
         $listId = false;
 
@@ -4130,7 +4130,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
         $storeIdsAsString = null;
 
         if ($scopeId != 0) {
-            $storeIds = $this->getMagentoStoresForMCStoreIdByScope($scopeId, $scope);
+            $storeIds = $this->getMagentoStoresForSQMStoreIdByScope($scopeId, $scope);
 
             if (!empty($storeIds)) {
                 $storeIdsAsString = implode(',', $storeIds);

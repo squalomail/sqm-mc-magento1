@@ -129,7 +129,7 @@ class Ebizmarts_SqualoMail_Block_Checkout_Subscribe extends Mage_Core_Block_Temp
     }
 
     /**
-     * Get list data from MC
+     * Get list data from SQM
      *
      * @return array
      */

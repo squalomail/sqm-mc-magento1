@@ -62,7 +62,7 @@ class Ebizmarts_SqualoMail_Adminhtml_EcommerceController extends Mage_Adminhtml_
                 . '<script type="text/javascript">window.top.location.reload();</script>';
         } else {
             try {
-                $helper->resendMCEcommerceData($scopeId, $scope, $filters);
+                $helper->resendSQMEcommerceData($scopeId, $scope, $filters);
 
                 $this->addSuccess($helper->__('Ecommerce data resent succesfully'));
                 $success = $helper->__('Redirecting... ')

@@ -29,7 +29,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_ResendEcommerceData
         $helper = $this->makeHelper();
         $scopeArray = $helper->getCurrentScope();
         if ($helper->getIfConfigExistsForScope(
-            Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SQMSTOREID,
             $scopeArray['scope_id'],
             $scopeArray['scope']
         )

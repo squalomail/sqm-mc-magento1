@@ -262,7 +262,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailstoresControllerTest extends PHPU
 
         $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getApiStores', 'deleteAllMCStoreData', 'decryptData'))
+            ->setMethods(array('getApiStores', 'deleteAllSQMStoreData', 'decryptData'))
             ->getMock();
 
         $apiStoresMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Stores::class)
@@ -292,7 +292,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailstoresControllerTest extends PHPU
 
         $apiStoresMock->expects($this->once())->method('deleteSqualoMailStore')->with($squalomailStoreId, $apiKey);
 
-        $helperMock->expects($this->once())->method('deleteAllMCStoreData')->with($squalomailStoreId);
+        $helperMock->expects($this->once())->method('deleteAllSQMStoreData')->with($squalomailStoreId);
 
         $squalomailstoresControllerMock->expects($this->once())->method('_redirect')->with('*/*/index');
 

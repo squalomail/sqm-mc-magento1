@@ -35,7 +35,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Grid extends Mage_Ad
         $this->addColumn(
             'sqm_account_name',
             array(
-                'header' => Mage::helper('squalomail')->__('MC Account name'),
+                'header' => Mage::helper('squalomail')->__('SQM Account name'),
                 'index' => 'sqm_account_name',
                 'width' => '100px',
                 'sortable' => true

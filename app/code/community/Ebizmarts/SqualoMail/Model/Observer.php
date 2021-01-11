@@ -122,7 +122,7 @@ class Ebizmarts_SqualoMail_Model_Observer
             $squalomailStoreId = (isset($configData['groups']['general']['fields']['storeid']['value']))
                 ? $configData['groups']['general']['fields']['storeid']['value']
                 : null;
-            $oldSqualomailStoreId = $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope']);
+            $oldSqualomailStoreId = $helper->getSQMStoreId($scopeArray['scope_id'], $scopeArray['scope']);
 
             if (isset($configData['groups']['general']['fields']['apikey']['value'])
                 && !$helper->isApiKeyObscure($configData['groups']['general']['fields']['apikey']['value'])
@@ -133,12 +133,12 @@ class Ebizmarts_SqualoMail_Model_Observer
             }
 
             // If ecommerce data section is enabled only allow inheriting both entries
-            // (list and MC Store) at the same time.
+            // (list and SQM Store) at the same time.
 
             if ($this->isListXorStoreInherited($configData)) {
                 if (isset($configData['groups']['general']['fields']['list']['inherit'])) {
                     unset($configData['groups']['general']['fields']['list']['inherit']);
-                    $sqmStoreListId = $helper->getListIdByApiKeyAndMCStoreId($apiKey, $squalomailStoreId);
+                    $sqmStoreListId = $helper->getListIdByApiKeyAndSQMStoreId($apiKey, $squalomailStoreId);
                     $previouslyConfiguredListId = $helper->getGeneralList(
                         $scopeArray['scope_id'],
                         $scopeArray['scope']
@@ -372,7 +372,7 @@ class Ebizmarts_SqualoMail_Model_Observer
             if ($helper->isEcomSyncDataEnabled($storeId)) {
                 //update squalomail ecommerce data for that customer
                 $apiCustomer = $this->makeApiCustomer();
-                $apiCustomer->setSqualomailStoreId($helper->getMCStoreId($storeId));
+                $apiCustomer->setSqualomailStoreId($helper->getSQMStoreId($storeId));
                 $apiCustomer->setMagentoStoreId($storeId);
                 $apiCustomer->update($customerId);
             }
@@ -396,7 +396,7 @@ class Ebizmarts_SqualoMail_Model_Observer
         if ($helper->isEcomSyncDataEnabled($storeId)) {
             //update squalomail ecommerce data for that customer
             $apiCustomer = $this->makeApiCustomer();
-            $apiCustomer->setSqualomailStoreId($helper->getMCStoreId($storeId));
+            $apiCustomer->setSqualomailStoreId($helper->getSQMStoreId($storeId));
             $apiCustomer->setMagentoStoreId($storeId);
             $apiCustomer->update($customerId);
         }
@@ -446,7 +446,7 @@ class Ebizmarts_SqualoMail_Model_Observer
                         continue;
                     }
 
-                    $squalomailStoreId = $helper->getMCStoreId($storeId);
+                    $squalomailStoreId = $helper->getSQMStoreId($storeId);
                     $productId = $item->getProductId();
                     $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
@@ -752,7 +752,7 @@ class Ebizmarts_SqualoMail_Model_Observer
         $apiOrder = $this->makeApiOrder();
 
         if ($ecomEnabled) {
-            $squalomailStoreId = $helper->getMCStoreId($storeId);
+            $squalomailStoreId = $helper->getSQMStoreId($storeId);
             $apiProduct->setSqualomailStoreId($squalomailStoreId);
             $apiProduct->setMagentoStoreId($storeId);
             $items = $creditMemo->getAllItems();
@@ -822,7 +822,7 @@ class Ebizmarts_SqualoMail_Model_Observer
         $apiOrder = $this->makeApiOrder();
 
         if ($ecomEnabled) {
-            $squalomailStoreId = $helper->getMCStoreId($storeId);
+            $squalomailStoreId = $helper->getSQMStoreId($storeId);
             $apiProduct->setMagentoStoreId($storeId);
             $apiProduct->setSqualomailStoreId($squalomailStoreId);
             $items = $creditMemo->getAllItems();
@@ -868,7 +868,7 @@ class Ebizmarts_SqualoMail_Model_Observer
         $apiProduct = $this->makeApiProduct();
 
         if ($ecomEnabled) {
-            $squalomailStoreId = $helper->getMCStoreId($storeId);
+            $squalomailStoreId = $helper->getSQMStoreId($storeId);
             $apiProduct->setSqualomailStoreId($squalomailStoreId);
             $apiProduct->setMagentoStoreId($storeId);
 
@@ -906,7 +906,7 @@ class Ebizmarts_SqualoMail_Model_Observer
             $ecommEnabled = $helper->isEcommerceEnabled($storeId);
 
             if ($ecommEnabled) {
-                $squalomailStoreId = $helper->getMCStoreId($storeId);
+                $squalomailStoreId = $helper->getSQMStoreId($storeId);
                 $apiProduct->setSqualomailStoreId($squalomailStoreId);
                 $apiProduct->setMagentoStoreId($storeId);
                 $status = $this->getCatalogProductStatusModel()->getProductStatus($product->getId(), $storeId);
@@ -999,7 +999,7 @@ class Ebizmarts_SqualoMail_Model_Observer
             $helper = $this->makeHelper();
             $apiOrder =  $this->makeApiOrder();
             $apiOrder->setMagentoStoreId($storeId);
-            $apiOrder->setSqualomailStoreId($helper->getMCStoreId($storeId));
+            $apiOrder->setSqualomailStoreId($helper->getSQMStoreId($storeId));
             $apiOrder->update($order->getId(), $storeId);
         }
     }
