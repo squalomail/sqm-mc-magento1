@@ -38,7 +38,7 @@ class Ebizmarts_SqualoMail_Model_Api_StoresTest extends PHPUnit_Framework_TestCa
                 'site_foreign_id' => 'a1s2d3f4g5h6j7k8l9p0',
                 'site_script' => array(
                     'url' => 'https://api.squalomail.com/#API_ENDPOINT_PATH#/ecommerce/stores/sitejs',
-                    'fragment' => '<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),'
+                    'fragment' => '<script id="sqmjs">!function(c,h,i,m,p){m=c.createElement(h),'
                         . 'p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}'
                         . '(document,"script","https://api.squalomail.com/#API_ENDPOINT_PATH#/ecommerce/stores/sitejs");</script>'
                 ),

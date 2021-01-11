@@ -33,10 +33,10 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Grid extends Mage_Ad
     protected function _prepareColumns()
     {
         $this->addColumn(
-            'mc_account_name',
+            'sqm_account_name',
             array(
                 'header' => Mage::helper('squalomail')->__('MC Account name'),
-                'index' => 'mc_account_name',
+                'index' => 'sqm_account_name',
                 'width' => '100px',
                 'sortable' => true
             )

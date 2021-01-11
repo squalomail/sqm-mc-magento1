@@ -345,15 +345,15 @@ class SqualoMail_ListsMembers extends SqualoMail_Abstract
 
     /**
      * @param $listId               The unique id for the list.
-     * @param $mcEidCookie          The email id that comes with the link in the campaign email
+     * @param $sqmEidCookie          The email id that comes with the link in the campaign email
      * @return mixed
      * @throws SqualoMail_Error
      * @throws SqualoMail_HttpError
      */
-    public function getEmailByMcEid($listId, $mcEidCookie)
+    public function getEmailByMcEid($listId, $sqmEidCookie)
     {
         return $this->_master->call(
-            'lists/' . $listId . '/members?unique_email_id=' . $mcEidCookie, null, Ebizmarts_SqualoMail::GET
+            'lists/' . $listId . '/members?unique_email_id=' . $sqmEidCookie, null, Ebizmarts_SqualoMail::GET
         );
     }
 }

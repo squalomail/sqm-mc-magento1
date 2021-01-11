@@ -123,9 +123,9 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_InterestGroupHandle
         $groups = array();
         $groupsSave = array();
 
-        foreach ($interests['interests'] as $mcGroup) {
-            if (strpos($grouping['groups'], $mcGroup['name']) !== false) {
-                $groupsSave [$mcGroup['id']] = $mcGroup['id'];
+        foreach ($interests['interests'] as $sqmGroup) {
+            if (strpos($grouping['groups'], $sqmGroup['name']) !== false) {
+                $groupsSave [$sqmGroup['id']] = $sqmGroup['id'];
             }
         }
 

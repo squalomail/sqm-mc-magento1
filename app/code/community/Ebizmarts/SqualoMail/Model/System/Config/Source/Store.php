@@ -52,12 +52,12 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Store
     public function toOptionArray()
     {
         $helper = $this->getHelper();
-        $mcStores = $this->getMCStores();
+        $sqmStores = $this->getMCStores();
 
-        if (isset($mcStores['stores'])) {
+        if (isset($sqmStores['stores'])) {
             $stores[] = array('value' => '', 'label' => $helper->__('--- Select a Squalomail Store ---'));
 
-            foreach ($mcStores['stores'] as $store) {
+            foreach ($sqmStores['stores'] as $store) {
                 if ($store['platform'] == 'Magento') {
                     if ($store['list_id'] == '') {
                         continue;

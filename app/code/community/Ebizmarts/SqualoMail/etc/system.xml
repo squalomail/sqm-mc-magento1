@@ -203,7 +203,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment><![CDATA[This is required in order to tell the extensions what customer attributes should be sent to your selected Squalomail list. <a class="mc-link" target="_blank" href="http://wiki.ebizmarts.com/m4m-merge-fields">See recommended configuration here.</a>]]></comment>
+                            <comment><![CDATA[This is required in order to tell the extensions what customer attributes should be sent to your selected Squalomail list. <a class="sqm-link" target="_blank" href="http://wiki.ebizmarts.com/m4m-merge-fields">See recommended configuration here.</a>]]></comment>
                         </map_fields>
                         <create_fields translate="label comment">
                             <label>Create Merge Fields on Squalomail</label>

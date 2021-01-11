@@ -32,7 +32,7 @@ class Ebizmarts_SqualoMail_Block_Group_Type extends Mage_Core_Block_Template
      */
     public function escapeQuote($data)
     {
-        return $this->getHelper()->mcEscapeQuote($data);
+        return $this->getHelper()->sqmEscapeQuote($data);
     }
 
     /**

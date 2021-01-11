@@ -95,14 +95,14 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailController extends Mage_Adminhtml
     {
         $helper = $this->getHelper();
         $request = $this->getRequest();
-        $mcStoreId = $request->getParam('squalomail_store_id');
+        $sqmStoreId = $request->getParam('squalomail_store_id');
         $apiKey = $request->getParam('api_key');
 
         if ($helper->isApiKeyObscure($apiKey)) {
             $apiKey = $this->getApiKeyValue();
         }
 
-        $data = $this->getSourceAccountInfoOptions($apiKey, $mcStoreId);
+        $data = $this->getSourceAccountInfoOptions($apiKey, $sqmStoreId);
 
         foreach ($data as $key => $element) {
             $liElement = '';
@@ -125,13 +125,13 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailController extends Mage_Adminhtml
         $helper = $this->getHelper();
         $request = $this->getRequest();
         $apiKey = $request->getParam('api_key');
-        $mcStoreId = $request->getParam('squalomail_store_id');
+        $sqmStoreId = $request->getParam('squalomail_store_id');
 
         if ($helper->isApiKeyObscure($apiKey)) {
             $apiKey = $this->getApiKeyValue();
         }
 
-        $data = $this->getSourceListOptions($apiKey, $mcStoreId);
+        $data = $this->getSourceListOptions($apiKey, $sqmStoreId);
         $jsonData = json_encode($data);
 
         $response = $this->getResponse();
@@ -233,27 +233,27 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailController extends Mage_Adminhtml
 
     /**
      * @param $apiKey
-     * @param $mcStoreId
+     * @param $sqmStoreId
      * @return Ebizmarts_SqualoMail_Model_System_Config_Source_Account
      */
-    protected function getSourceAccountInfoOptions($apiKey, $mcStoreId)
+    protected function getSourceAccountInfoOptions($apiKey, $sqmStoreId)
     {
         return Mage::getModel(
             'Ebizmarts_SqualoMail_Model_System_Config_Source_Account',
-            array('api_key' => $apiKey, 'squalomail_store_id' => $mcStoreId)
+            array('api_key' => $apiKey, 'squalomail_store_id' => $sqmStoreId)
         )->toOptionArray();
     }
 
     /**
      * @param $apiKey
-     * @param $mcStoreId
+     * @param $sqmStoreId
      * @return Ebizmarts_SqualoMail_Model_System_Config_Source_List
      */
-    protected function getSourceListOptions($apiKey, $mcStoreId)
+    protected function getSourceListOptions($apiKey, $sqmStoreId)
     {
         return Mage::getModel(
             'Ebizmarts_SqualoMail_Model_System_Config_Source_List',
-            array('api_key' => $apiKey, 'squalomail_store_id' => $mcStoreId)
+            array('api_key' => $apiKey, 'squalomail_store_id' => $sqmStoreId)
         )->toOptionArray();
     }
 

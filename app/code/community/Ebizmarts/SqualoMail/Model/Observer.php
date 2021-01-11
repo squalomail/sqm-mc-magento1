@@ -138,12 +138,12 @@ class Ebizmarts_SqualoMail_Model_Observer
             if ($this->isListXorStoreInherited($configData)) {
                 if (isset($configData['groups']['general']['fields']['list']['inherit'])) {
                     unset($configData['groups']['general']['fields']['list']['inherit']);
-                    $mcStoreListId = $helper->getListIdByApiKeyAndMCStoreId($apiKey, $squalomailStoreId);
+                    $sqmStoreListId = $helper->getListIdByApiKeyAndMCStoreId($apiKey, $squalomailStoreId);
                     $previouslyConfiguredListId = $helper->getGeneralList(
                         $scopeArray['scope_id'],
                         $scopeArray['scope']
                     );
-                    $listId = (!empty($previouslyConfiguredListId)) ? $previouslyConfiguredListId : $mcStoreListId;
+                    $listId = (!empty($previouslyConfiguredListId)) ? $previouslyConfiguredListId : $sqmStoreListId;
                     $configData['groups']['general']['fields']['list']['value'] = $listId;
                     $configDataChanged = true;
                     $message = $helper->__(
@@ -665,25 +665,25 @@ class Ebizmarts_SqualoMail_Model_Observer
             $collection = $observer->getOrderGridCollection();
             $select = $collection->getSelect();
             $fromClause = $select->getPart(Zend_Db_Select::FROM);
-            //check if mc alias is already defined, avoids possible conflicts
-            if (array_key_exists('mc', $fromClause)) {
+            //check if sqm alias is already defined, avoids possible conflicts
+            if (array_key_exists('sqm', $fromClause)) {
                 return;
             }
 
             $adapter = $this->getCoreResource()->getConnection('core_write');
             $select->joinLeft(
-                array('mc' => $collection->getTable('squalomail/ecommercesyncdata')),
+                array('sqm' => $collection->getTable('squalomail/ecommercesyncdata')),
                 $adapter->quoteInto(
-                    'mc.related_id=main_table.entity_id AND type = ?',
+                    'sqm.related_id=main_table.entity_id AND type = ?',
                     Ebizmarts_SqualoMail_Model_Config::IS_ORDER
                 ),
-                array('mc.squalomail_synced_flag', 'mc.id')
+                array('sqm.squalomail_synced_flag', 'sqm.id')
             );
             $select->group("main_table.entity_id");
             $direction = $this->getRegistry();
 
             if ($direction) {
-                $collection->addOrder('mc.id', $direction);
+                $collection->addOrder('sqm.id', $direction);
                 $this->removeRegistry();
             }
         }

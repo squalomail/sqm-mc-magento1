@@ -32,8 +32,8 @@ class Ebizmarts_SqualoMail_CartController extends Mage_Checkout_CartController
                 );
             $url = Mage::getUrl(Mage::getStoreConfig(Ebizmarts_SqualoMail_Model_Config::ABANDONEDCART_PAGE, $storeId));
 
-            if (isset($params['mc_cid'])) {
-                $url .= '?mc_cid=' . $params['mc_cid'];
+            if (isset($params['sqm_cid'])) {
+                $url .= '?sqm_cid=' . $params['sqm_cid'];
             }
 
             if (!isset($params['token']) || $params['token'] != $quoteSyncData->getSqualomailToken()) {
@@ -66,8 +66,8 @@ class Ebizmarts_SqualoMail_CartController extends Mage_Checkout_CartController
                         Mage::getSingleton('customer/session')->setAfterAuthUrl($url, $storeId);
                         $url = Mage::getUrl('customer/account/login');
 
-                        if (isset($params['mc_cid'])) {
-                            $url .= '?mc_cid=' . $params['mc_cid'];
+                        if (isset($params['sqm_cid'])) {
+                            $url .= '?sqm_cid=' . $params['sqm_cid'];
                         }
 
                         $this->getResponse()->setRedirect($url, 301);

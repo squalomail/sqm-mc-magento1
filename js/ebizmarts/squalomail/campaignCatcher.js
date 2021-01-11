@@ -1,7 +1,7 @@
 function getCampaign() {
     let urlparams = null;
     let isGet = location.search.search('\\?');
-    let mc_cid = null;
+    let sqm_cid = null;
     let isSqualomail = false;
 
     if (isGet !== -1) {
@@ -15,8 +15,8 @@ function getCampaign() {
                         isSqualomail = true;
                     }
                 } else {
-                    if (item.key === 'mc_cid') {
-                        mc_cid = item.value;
+                    if (item.key === 'sqm_cid') {
+                        sqm_cid = item.value;
                     }
                 }
             }
@@ -24,7 +24,7 @@ function getCampaign() {
     } else {
         urlparams = location.href.split('/');
         let utmIndex = jQuery.inArray('utm_source', urlparams);
-        let mccidIndex = jQuery.inArray('mc_cid', urlparams);
+        let sqmcidIndex = jQuery.inArray('sqm_cid', urlparams);
 
         if (utmIndex !== -1) {
             let value = urlparams[utmIndex + 1];
@@ -34,15 +34,15 @@ function getCampaign() {
                 isSqualomail = true;
             }
         } else {
-            if (mccidIndex !== -1) {
-                mc_cid = urlparams[mccidIndex + 1];
+            if (sqmcidIndex !== -1) {
+                sqm_cid = urlparams[sqmcidIndex + 1];
             }
         }
     }
 
-    if (mc_cid && !isSqualomail) {
+    if (sqm_cid && !isSqualomail) {
         Mage.Cookies.clear('squalomail_campaign_id');
-        Mage.Cookies.set('squalomail_campaign_id', mc_cid);
+        Mage.Cookies.set('squalomail_campaign_id', sqm_cid);
     }
 
     let landingPage = Mage.Cookies.get('squalomail_landing_page');

@@ -45,7 +45,7 @@ class Ebizmarts_SqualoMail_Model_Config
     const ECOMMERCE_ACTIVE              = 'squalomail/ecommerce/active';
     const ECOMMERCE_CUSTOMERS_OPTIN     = 'squalomail/ecommerce/customers_optin';
     const ECOMMERCE_FIRSTDATE           = 'squalomail/ecommerce/firstdate';
-    const ECOMMERCE_MC_JS_URL           = 'squalomail/ecommerce/mc_js_url';
+    const ECOMMERCE_MC_JS_URL           = 'squalomail/ecommerce/sqm_js_url';
     const ECOMMERCE_CUSTOMER_LAST_ID    = 'squalomail/ecommerce/customer_last_id';
     const ECOMMERCE_PRODUCT_LAST_ID     = 'squalomail/ecommerce/product_last_id';
     const ECOMMERCE_ORDER_LAST_ID       = 'squalomail/ecommerce/order_last_id';

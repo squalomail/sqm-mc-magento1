@@ -33,15 +33,15 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
     /**
      * @var Ebizmarts_SqualoMail_Helper_Data
      */
-    protected $_mcHelper;
+    protected $_sqmHelper;
     /**
      * @var Ebizmarts_SqualoMail_Helper_Date
      */
-    protected $_mcDateHelper;
+    protected $_sqmDateHelper;
     /**
      * @var Ebizmarts_SqualoMail_Helper_Webhook
      */
-    protected $_mcWebhookHelper;
+    protected $_sqmWebhookHelper;
     /**
      * @var Mage_Sales_Model_Order
      */
@@ -380,7 +380,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     protected function unserializeMapFields($mapFields)
     {
-        return $this->_mcHelper->unserialize($mapFields);
+        return $this->_sqmHelper->unserialize($mapFields);
     }
 
     /**
@@ -763,7 +763,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     public function getSqualomailHelper()
     {
-        return $this->_mcHelper;
+        return $this->_sqmHelper;
     }
 
     /**
@@ -771,7 +771,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     protected function setSqualoMailHelper()
     {
-        $this->_mcHelper = Mage::helper('squalomail');
+        $this->_sqmHelper = Mage::helper('squalomail');
     }
 
     /**
@@ -779,7 +779,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     public function getSqualomailDateHelper()
     {
-        return $this->_mcDateHelper;
+        return $this->_sqmDateHelper;
     }
 
     /**
@@ -787,7 +787,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     protected function setSqualoMailDateHelper()
     {
-        $this->_mcDateHelper = Mage::helper('squalomail/date');
+        $this->_sqmDateHelper = Mage::helper('squalomail/date');
     }
 
     /**
@@ -795,7 +795,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     public function getSqualomailWebhookHelper()
     {
-        return $this->_mcWebhookHelper;
+        return $this->_sqmWebhookHelper;
     }
 
     /**
@@ -803,7 +803,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     protected function setSqualoMailWebhookHelper()
     {
-        $this->_mcWebhookHelper = Mage::helper('squalomail/webhook');
+        $this->_sqmWebhookHelper = Mage::helper('squalomail/webhook');
     }
 
     /**

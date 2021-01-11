@@ -87,7 +87,7 @@ class Ebizmarts_SqualoMail_Block_Checkout_Success_Groups extends Mage_Core_Block
      */
     public function escapeQuote($data)
     {
-        return $this->getSqualoMailHelper()->mcEscapeQuote($data);
+        return $this->getSqualoMailHelper()->sqmEscapeQuote($data);
     }
 
     /**

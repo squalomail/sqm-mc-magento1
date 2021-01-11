@@ -511,8 +511,8 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
                 'joinCondition' => ''
             )
         );
-        $mcTableName = 'squalomail_ecommerce_sync_data';
-        $condition = 'mc.related_id=main_table.entity_id AND type = ' . Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
+        $sqmTableName = 'squalomail_ecommerce_sync_data';
+        $condition = 'sqm.related_id=main_table.entity_id AND type = ' . Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
         $direction = 'ASC';
 
         $eventObserverMock = $this->getObserverMock();
@@ -559,12 +559,12 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getTable')
             ->with('squalomail/ecommercesyncdata')
-            ->willReturn($mcTableName);
+            ->willReturn($sqmTableName);
 
         $selectMock
             ->expects($this->once())
             ->method('joinLeft')
-            ->with(array('mc' => $mcTableName), $condition, array('mc.squalomail_synced_flag', 'mc.id'));
+            ->with(array('sqm' => $sqmTableName), $condition, array('sqm.squalomail_synced_flag', 'sqm.id'));
 
         $observerMock->expects($this->once())->method('getCoreResource')->willReturn($coreResourceMock);
 
@@ -577,14 +577,14 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $writeAdapterMock
             ->expects($this->once())
             ->method('quoteInto')
-            ->with('mc.related_id=main_table.entity_id AND type = ?', Ebizmarts_SqualoMail_Model_Config::IS_ORDER)
+            ->with('sqm.related_id=main_table.entity_id AND type = ?', Ebizmarts_SqualoMail_Model_Config::IS_ORDER)
             ->willReturn($condition);
 
         $selectMock->expects($this->once())->method('group');
 
         $observerMock->expects($this->once())->method('getRegistry')->willReturn($direction);
 
-        $orderGridCollectionMock->expects($this->once())->method('addOrder')->with('mc.id', $direction);
+        $orderGridCollectionMock->expects($this->once())->method('addOrder')->with('sqm.id', $direction);
 
         $observerMock->expects($this->once())->method('removeRegistry');
 
@@ -784,7 +784,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $customerEmail = 'customer@ebizmarts.com';
         $email = 'keller@ebizmarts.com';
         $campaignId = 'gf45f4gg';
-        $landingCookie = 'http%3A//127.0.0.1/MASTER1939m4m/%3Fmc_cid%3Dgf45f4gg%26mc_eid%3D7dgasydg';
+        $landingCookie = 'http%3A//127.0.0.1/MASTER1939m4m/%3Fsqm_cid%3Dgf45f4gg%26sqm_eid%3D7dgasydg';
 
         $eventObserverMock = $this->getObserverMock();
 
@@ -845,7 +845,7 @@ class Ebizmarts_SqualoMail_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $customerEmail = 'customer@ebizmarts.com';
         $email = 'keller@ebizmarts.com';
         $campaignId = 'gf45f4gg';
-        $landingCookie = 'http%3A//127.0.0.1/MASTER1939m4m/%3Fmc_cid%3Dgf45f4gg%26mc_eid%3D7dgasydg';
+        $landingCookie = 'http%3A//127.0.0.1/MASTER1939m4m/%3Fsqm_cid%3Dgf45f4gg%26sqm_eid%3D7dgasydg';
 
         $eventObserverMock = $this->getObserverMock();
 

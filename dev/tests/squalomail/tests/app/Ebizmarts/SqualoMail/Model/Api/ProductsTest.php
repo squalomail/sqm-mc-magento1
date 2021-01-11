@@ -35,10 +35,10 @@ class Ebizmarts_SqualoMail_Model_Api_ProductsTest extends PHPUnit_Framework_Test
             'method' => 'POST',
             'path' => "/ecommerce/stores/$squalomailStoreId/products",
             'operation_id' => self::BATCH_ID,
-            'body' => '{"id":"906","title":"test Prod","url":"http:\/\/127.0.0.1\/mcmagento-1937'
+            'body' => '{"id":"906","title":"test Prod","url":"http:\/\/127.0.0.1\/sqmmagento-1937'
                 . '\/test-prod.html","published_at_foreign":"","description":"Test",'
                 . '"type":"Default Category","vendor":"Default Category","handle":"","variants":['
-                . '{"id":"906","title":"test Prod","url":"http:\/\/127.0.0.1\/mcmagento-1937'
+                . '{"id":"906","title":"test Prod","url":"http:\/\/127.0.0.1\/sqmmagento-1937'
                 . '\/test-prod.html","published_at_foreign":"","sku":"testprod","price":10,'
                 . '"inventory_quantity":1000,"backorders":"0","visibility":"Catalog, Search"}]}'
         );

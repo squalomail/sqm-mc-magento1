@@ -15,7 +15,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_ListTest extends PHPUnit_F
         $scope = 'stores';
         $scopeArray = array('scope_id' => $scopeId, 'scope' => $scope);
         $listId = 'a1s2d3f4g5';
-        $mcLists = array(
+        $sqmLists = array(
             'lists' => array(array(
                 'id' => $listId,
                 'name' => 'Newsletter',
@@ -36,7 +36,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_ListTest extends PHPUnit_F
             ->getMock();
 
         $listMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $listMock->expects($this->once())->method('getMCLists')->willReturn($mcLists);
+        $listMock->expects($this->once())->method('getMCLists')->willReturn($sqmLists);
 
         $expectedResult = array(array(
             'value' => $listId,

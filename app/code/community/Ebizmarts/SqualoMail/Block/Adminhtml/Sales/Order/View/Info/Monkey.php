@@ -72,7 +72,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_View_Info_Monkey extends 
      */
     public function escapeQuote($data)
     {
-        return $this->getSqualoMailHelper()->mcEscapeQuote($data);
+        return $this->getSqualoMailHelper()->sqmEscapeQuote($data);
     }
 
     /**

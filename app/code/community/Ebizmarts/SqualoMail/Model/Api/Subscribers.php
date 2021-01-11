@@ -16,8 +16,8 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
     /**
      * Ebizmarts_SqualoMail_Helper_Data
      */
-    protected $_mcHelper;
-    protected $_mcDateHelper;
+    protected $_sqmHelper;
+    protected $_sqmDateHelper;
     protected $_storeId;
 
     /**
@@ -86,7 +86,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
             $configValues = array(
                 array(
                     Ebizmarts_SqualoMail_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
-                    $this->_mcDateHelper->formatDate(null, 'Y-m-d H:i:s')
+                    $this->_sqmDateHelper->formatDate(null, 'Y-m-d H:i:s')
                 )
             );
             $helper->saveSqualomailConfig($configValues, $realScope['scope_id'], $realScope['scope']);
@@ -141,7 +141,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
                     $this->_saveSubscriber(
                         $subscriber,
                         '',
-                        $this->_mcDateHelper->formatDate(null, 'Y-m-d H:i:s'),
+                        $this->_sqmDateHelper->formatDate(null, 'Y-m-d H:i:s'),
                         true
                     );
                 }
@@ -281,7 +281,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
                     null,
                     null
                 );
-                $subscriber->setData("squalomail_sync_delta", $this->_mcDateHelper->formatDate(null, 'Y-m-d H:i:s'));
+                $subscriber->setData("squalomail_sync_delta", $this->_sqmDateHelper->formatDate(null, 'Y-m-d H:i:s'));
                 $subscriber->setData("squalomail_sync_error", "");
                 $subscriber->setData("squalomail_sync_modified", 0);
                 $saveSubscriber = true;
@@ -529,7 +529,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     public function setSqualomailHelper($mageMCHelper)
     {
-        $this->_mcHelper = $mageMCHelper;
+        $this->_sqmHelper = $mageMCHelper;
     }
 
     /**
@@ -537,7 +537,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     protected function getSqualomailHelper()
     {
-        return $this->_mcHelper;
+        return $this->_sqmHelper;
     }
 
     /**
@@ -545,7 +545,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     public function setSqualomailDateHelper($mageMCDateHelper)
     {
-        $this->_mcDateHelper = $mageMCDateHelper;
+        $this->_sqmDateHelper = $mageMCDateHelper;
     }
 
     /**
@@ -553,7 +553,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     protected function getSqualomailDateHelper()
     {
-        return $this->_mcDateHelper;
+        return $this->_sqmDateHelper;
     }
 
     /**

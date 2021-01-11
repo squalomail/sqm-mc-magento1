@@ -59,7 +59,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Account
      */
     public function __construct($params)
     {
-        $mcStore = null;
+        $sqmStore = null;
         $helper = $this->_helper = $this->makeHelper();
         $migrationHelper = $this->_migrationHelper = $this->makeMigrationHelper();
         $scopeArray = $helper->getCurrentScope();
@@ -72,15 +72,15 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Account
                 try {
                     $this->_accountDetails = $api->getRoot()->info('account_name,total_subscribers');
 
-                    $mcStoreId = (empty($params))
+                    $sqmStoreId = (empty($params))
                         ? $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope'])
                         : $params['squalomail_store_id'];
                     try {
-                        $mcStore = (!empty($mcStoreId))
-                            ? $api->getEcommerce()->getStores()->get($mcStoreId, 'list_id,name,is_syncing')
+                        $sqmStore = (!empty($sqmStoreId))
+                            ? $api->getEcommerce()->getStores()->get($sqmStoreId, 'list_id,name,is_syncing')
                             : array();
 
-                        if (empty($mcStore)) {
+                        if (empty($sqmStore)) {
                             $this->_accountDetails['store_exists'] = false;
                         }
                     } catch (SqualoMail_Error $e) {
@@ -96,7 +96,7 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Account
                     }
 
                     try {
-                        $listId = (isset($mcStore['list_id']) && $mcStore['list_id']) ? $mcStore['list_id'] : null;
+                        $listId = (isset($sqmStore['list_id']) && $sqmStore['list_id']) ? $sqmStore['list_id'] : null;
 
 
                         if ($listId) {
@@ -107,17 +107,17 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_Account
                         if (!isset($this->_accountDetails['store_exists'])) {
                             $ecommerceApi = $api->getEcommerce();
                             $this->_accountDetails['store_exists'] = true;
-                            $this->_accountDetails['store_name'] = $mcStore['name'];
+                            $this->_accountDetails['store_name'] = $sqmStore['name'];
                             //Keep both values for backward compatibility
-                            $this->_accountDetails['store_sync_flag'] = $mcStore['is_syncing'];
-                            $this->_accountDetails['store_sync_date'] = $this->getDateSync($mcStoreId);
-                            $totalCustomers = $ecommerceApi->getCustomers()->getAll($mcStoreId, 'total_items');
+                            $this->_accountDetails['store_sync_flag'] = $sqmStore['is_syncing'];
+                            $this->_accountDetails['store_sync_date'] = $this->getDateSync($sqmStoreId);
+                            $totalCustomers = $ecommerceApi->getCustomers()->getAll($sqmStoreId, 'total_items');
                             $this->_accountDetails['total_customers'] = $totalCustomers['total_items'];
-                            $totalProducts = $ecommerceApi->getProducts()->getAll($mcStoreId, 'total_items');
+                            $totalProducts = $ecommerceApi->getProducts()->getAll($sqmStoreId, 'total_items');
                             $this->_accountDetails['total_products'] = $totalProducts['total_items'];
-                            $totalOrders = $ecommerceApi->getOrders()->getAll($mcStoreId, 'total_items');
+                            $totalOrders = $ecommerceApi->getOrders()->getAll($sqmStoreId, 'total_items');
                             $this->_accountDetails['total_orders'] = $totalOrders['total_items'];
-                            $totalCarts = $ecommerceApi->getCarts()->getAll($mcStoreId, 'total_items');
+                            $totalCarts = $ecommerceApi->getCarts()->getAll($sqmStoreId, 'total_items');
                             $this->_accountDetails['total_carts'] = $totalCarts['total_items'];
                         }
                     } catch (SqualoMail_Error $e) {

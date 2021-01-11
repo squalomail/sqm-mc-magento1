@@ -14,7 +14,7 @@ class Mandrill_Templates
      * @param  string  $from_email a default sending address for emails sent using this template
      * @param  string  $from_name  a default from name to be used
      * @param  string  $subject    a default subject line to be used
-     * @param  string  $code       the HTML code for the template with mc:edit attributes for the editable elements
+     * @param  string  $code       the HTML code for the template with sqm:edit attributes for the editable elements
      * @param  string  $text       a default text part to be used when sending with this template
      * @param  boolean $publish    set to false to add a draft template without publishing
      * @param  array   $labels     an optional array of up to 10 labels to use for filtering templates
@@ -24,13 +24,13 @@ class Mandrill_Templates
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
      *         - labels[] string a single label
-     *     - code string the full HTML code of the template, with mc:edit attributes marking the editable elements - draft version
+     *     - code string the full HTML code of the template, with sqm:edit attributes marking the editable elements - draft version
      *     - subject string the subject line of the template, if provided - draft version
      *     - from_email string the default sender address for the template, if provided - draft version
      *     - from_name string the default sender from name for the template, if provided - draft version
      *     - text string the default text part of messages sent with the template, if provided - draft version
      *     - publish_name string the same as the template name - kept as a separate field for backwards compatibility
-     *     - publish_code string the full HTML code of the template, with mc:edit attributes marking the editable elements that are available as published, if it has been published
+     *     - publish_code string the full HTML code of the template, with sqm:edit attributes marking the editable elements that are available as published, if it has been published
      *     - publish_subject string the subject line of the template, if provided
      *     - publish_from_email string the default sender address for the template, if provided
      *     - publish_from_name string the default sender from name for the template, if provided
@@ -54,13 +54,13 @@ class Mandrill_Templates
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
      *         - labels[] string a single label
-     *     - code string the full HTML code of the template, with mc:edit attributes marking the editable elements - draft version
+     *     - code string the full HTML code of the template, with sqm:edit attributes marking the editable elements - draft version
      *     - subject string the subject line of the template, if provided - draft version
      *     - from_email string the default sender address for the template, if provided - draft version
      *     - from_name string the default sender from name for the template, if provided - draft version
      *     - text string the default text part of messages sent with the template, if provided - draft version
      *     - publish_name string the same as the template name - kept as a separate field for backwards compatibility
-     *     - publish_code string the full HTML code of the template, with mc:edit attributes marking the editable elements that are available as published, if it has been published
+     *     - publish_code string the full HTML code of the template, with sqm:edit attributes marking the editable elements that are available as published, if it has been published
      *     - publish_subject string the subject line of the template, if provided
      *     - publish_from_email string the default sender address for the template, if provided
      *     - publish_from_name string the default sender from name for the template, if provided
@@ -92,13 +92,13 @@ class Mandrill_Templates
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
      *         - labels[] string a single label
-     *     - code string the full HTML code of the template, with mc:edit attributes marking the editable elements - draft version
+     *     - code string the full HTML code of the template, with sqm:edit attributes marking the editable elements - draft version
      *     - subject string the subject line of the template, if provided - draft version
      *     - from_email string the default sender address for the template, if provided - draft version
      *     - from_name string the default sender from name for the template, if provided - draft version
      *     - text string the default text part of messages sent with the template, if provided - draft version
      *     - publish_name string the same as the template name - kept as a separate field for backwards compatibility
-     *     - publish_code string the full HTML code of the template, with mc:edit attributes marking the editable elements that are available as published, if it has been published
+     *     - publish_code string the full HTML code of the template, with sqm:edit attributes marking the editable elements that are available as published, if it has been published
      *     - publish_subject string the subject line of the template, if provided
      *     - publish_from_email string the default sender address for the template, if provided
      *     - publish_from_name string the default sender from name for the template, if provided
@@ -122,13 +122,13 @@ class Mandrill_Templates
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
      *         - labels[] string a single label
-     *     - code string the full HTML code of the template, with mc:edit attributes marking the editable elements - draft version
+     *     - code string the full HTML code of the template, with sqm:edit attributes marking the editable elements - draft version
      *     - subject string the subject line of the template, if provided - draft version
      *     - from_email string the default sender address for the template, if provided - draft version
      *     - from_name string the default sender from name for the template, if provided - draft version
      *     - text string the default text part of messages sent with the template, if provided - draft version
      *     - publish_name string the same as the template name - kept as a separate field for backwards compatibility
-     *     - publish_code string the full HTML code of the template, with mc:edit attributes marking the editable elements that are available as published, if it has been published
+     *     - publish_code string the full HTML code of the template, with sqm:edit attributes marking the editable elements that are available as published, if it has been published
      *     - publish_subject string the subject line of the template, if provided
      *     - publish_from_email string the default sender address for the template, if provided
      *     - publish_from_name string the default sender from name for the template, if provided
@@ -152,13 +152,13 @@ class Mandrill_Templates
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
      *         - labels[] string a single label
-     *     - code string the full HTML code of the template, with mc:edit attributes marking the editable elements - draft version
+     *     - code string the full HTML code of the template, with sqm:edit attributes marking the editable elements - draft version
      *     - subject string the subject line of the template, if provided - draft version
      *     - from_email string the default sender address for the template, if provided - draft version
      *     - from_name string the default sender from name for the template, if provided - draft version
      *     - text string the default text part of messages sent with the template, if provided - draft version
      *     - publish_name string the same as the template name - kept as a separate field for backwards compatibility
-     *     - publish_code string the full HTML code of the template, with mc:edit attributes marking the editable elements that are available as published, if it has been published
+     *     - publish_code string the full HTML code of the template, with sqm:edit attributes marking the editable elements that are available as published, if it has been published
      *     - publish_subject string the subject line of the template, if provided
      *     - publish_from_email string the default sender address for the template, if provided
      *     - publish_from_name string the default sender from name for the template, if provided
@@ -183,13 +183,13 @@ class Mandrill_Templates
      *         - name string the name of the template
      *         - labels array the list of labels applied to the template
      *             - labels[] string a single label
-     *         - code string the full HTML code of the template, with mc:edit attributes marking the editable elements - draft version
+     *         - code string the full HTML code of the template, with sqm:edit attributes marking the editable elements - draft version
      *         - subject string the subject line of the template, if provided - draft version
      *         - from_email string the default sender address for the template, if provided - draft version
      *         - from_name string the default sender from name for the template, if provided - draft version
      *         - text string the default text part of messages sent with the template, if provided - draft version
      *         - publish_name string the same as the template name - kept as a separate field for backwards compatibility
-     *         - publish_code string the full HTML code of the template, with mc:edit attributes marking the editable elements that are available as published, if it has been published
+     *         - publish_code string the full HTML code of the template, with sqm:edit attributes marking the editable elements that are available as published, if it has been published
      *         - publish_subject string the subject line of the template, if provided
      *         - publish_from_email string the default sender address for the template, if provided
      *         - publish_from_name string the default sender from name for the template, if provided
@@ -232,7 +232,7 @@ class Mandrill_Templates
      *
      * @param  string $template_name    the immutable name of a template that exists in the user's account
      * @param  array  $template_content an array of template content to render.  Each item in the array should be a struct with two keys - name: the name of the content block to set the content for, and content: the actual content to put into the block
-     *                                  - template_content[] struct the injection of a single piece of content into a single editable region - name string the name of the mc:edit editable region to inject into - content string the content to inject
+     *                                  - template_content[] struct the injection of a single piece of content into a single editable region - name string the name of the sqm:edit editable region to inject into - content string the content to inject
      * @param  array  $merge_vars       optional merge variables to use for injecting merge field content.  If this is not provided, no merge fields will be replaced.
      *                                  - merge_vars[] struct a single merge variable - name string the merge variable's name. Merge variable names are
      *                                  case-insensitive and may not start with _ - content string the merge variable's content

@@ -46,11 +46,11 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_List
                     $api = $helper->getApiByKey($apiKey);
 
                     //Add filter to only show the lists for the selected store when MC store selected.
-                    $mcStoreId = (!empty($params))
+                    $sqmStoreId = (!empty($params))
                         ? $params['squalomail_store_id']
                         : $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope']);
-                    if ($mcStoreId !== '' && $mcStoreId !== null) {
-                        $listId = $helper->getListIdByApiKeyAndMCStoreId($apiKey, $mcStoreId);
+                    if ($sqmStoreId !== '' && $sqmStoreId !== null) {
+                        $listId = $helper->getListIdByApiKeyAndMCStoreId($apiKey, $sqmStoreId);
                         if ($listId !== false) {
                             $this->_lists['lists'][0] = $api->getLists()->getLists($listId);
                         }
@@ -80,13 +80,13 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_List
     {
         $helper = $this->getHelper();
         $lists = array();
-        $mcLists = $this->getMCLists();
-        if (isset($mcLists['lists'])) {
-            if (count($mcLists['lists']) > 1) {
+        $sqmLists = $this->getMCLists();
+        if (isset($sqmLists['lists'])) {
+            if (count($sqmLists['lists']) > 1) {
                 $lists[] = array('value' => '', 'label' => $helper->__('--- Select a Squalomail Audience ---'));
             }
 
-            foreach ($mcLists['lists'] as $list) {
+            foreach ($sqmLists['lists'] as $list) {
                 $memberCount = $list['stats']['member_count'];
                 $memberText = $helper->__('members');
                 $label = $list['name'] . ' (' . $memberCount . ' ' . $memberText . ')';

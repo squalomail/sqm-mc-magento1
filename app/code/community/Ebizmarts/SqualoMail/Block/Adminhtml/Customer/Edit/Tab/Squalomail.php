@@ -57,7 +57,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends 
      */
     public function escapeQuote($data)
     {
-        return $this->getHelper()->mcEscapeQuote($data);
+        return $this->getHelper()->sqmEscapeQuote($data);
     }
 
     /**

@@ -258,14 +258,14 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
 
         foreach ($stores as $storeId => $store) {
             if ($this->isEcomSyncDataEnabled($storeId)) {
-                $mcStoreId = $this->getMCStoreId($storeId);
+                $sqmStoreId = $this->getMCStoreId($storeId);
 
-                if ($mcStoreId) {
-                    if (!array_key_exists($mcStoreId, $storeRelation)) {
-                        $storeRelation[$mcStoreId] = array();
+                if ($sqmStoreId) {
+                    if (!array_key_exists($sqmStoreId, $storeRelation)) {
+                        $storeRelation[$sqmStoreId] = array();
                     }
 
-                    $storeRelation[$mcStoreId][] = $storeId;
+                    $storeRelation[$sqmStoreId][] = $storeId;
                 }
             }
         }
@@ -1178,7 +1178,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      * @param $data
      * @return string
      */
-    public function mcEscapeQuote($data)
+    public function sqmEscapeQuote($data)
     {
         return htmlspecialchars($data, ENT_QUOTES, null, false);
     }
@@ -1191,9 +1191,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastCustomerSent($scopeId, $scope)
     {
         $lastCustomerSent = null;
-        $mcStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
-            ->addFieldToFilter('squalomail_store_id', array('eq' => $mcStoreId))
+            ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER))
             ->setOrder('related_id', 'DESC')
             ->setPageSize(1);
@@ -1214,9 +1214,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastProductSent($scopeId, $scope)
     {
         $lastProductSent = null;
-        $mcStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
-            ->addFieldToFilter('squalomail_store_id', array('eq' => $mcStoreId))
+            ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT))
             ->setOrder('related_id', 'DESC')
             ->setPageSize(1);
@@ -1237,9 +1237,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastOrderSent($scopeId, $scope)
     {
         $lastOrderSent = null;
-        $mcStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
-            ->addFieldToFilter('squalomail_store_id', array('eq' => $mcStoreId))
+            ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_ORDER))
             ->setOrder('related_id', 'DESC')
             ->setPageSize(1);
@@ -1260,9 +1260,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastCartSent($scopeId, $scope)
     {
         $lastCartSent = null;
-        $mcStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
         $syncDataCollection = $this->getSqualomailEcommerceSyncDataModel()->getCollection()
-            ->addFieldToFilter('squalomail_store_id', array('eq' => $mcStoreId))
+            ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_QUOTE))
             ->setOrder('related_id', 'DESC')
             ->setPageSize(1);
@@ -1283,9 +1283,9 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function getLastPromoCodeSent($scopeId, $scope)
     {
         $lastPromoCodeSent = null;
-        $mcStoreId = $this->getMCStoreId($scopeId, $scope);
+        $sqmStoreId = $this->getMCStoreId($scopeId, $scope);
         $syncDataCollection = Mage::getResourceModel('squalomail/ecommercesyncdata_collection')
-            ->addFieldToFilter('squalomail_store_id', array('eq' => $mcStoreId))
+            ->addFieldToFilter('squalomail_store_id', array('eq' => $sqmStoreId))
             ->addFieldToFilter('type', array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE))
             ->setOrder('related_id', 'DESC')
             ->setPageSize(1);
@@ -1943,7 +1943,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function retrieveAndSaveMCJsUrlInConfig($scopeId, $scope = 'stores')
     {
-        $mcJsUrlSaved = false;
+        $sqmJsUrlSaved = false;
 
         try {
             $api = $this->getApi($scopeId, $scope);
@@ -1959,7 +1959,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
                     )
                 );
                 $this->saveSqualomailConfig($configValues, 0, 'default');
-                $mcJsUrlSaved = true;
+                $sqmJsUrlSaved = true;
             }
         } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $this->logError($e->getMessage());
@@ -1969,7 +1969,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
             $this->logError($e->getMessage());
         }
 
-        return $mcJsUrlSaved;
+        return $sqmJsUrlSaved;
     }
 
     /**
@@ -3443,10 +3443,10 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
 
         try {
             $api = $this->getApiByKey($apiKey);
-            $mcStore = $api->getEcommerce()->getStores()->get($squalomailStoreId, 'list_id');
+            $sqmStore = $api->getEcommerce()->getStores()->get($squalomailStoreId, 'list_id');
 
-            if (isset($mcStore['list_id'])) {
-                $listId = $mcStore['list_id'];
+            if (isset($sqmStore['list_id'])) {
+                $listId = $sqmStore['list_id'];
             }
         } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $this->logError($e->getMessage());

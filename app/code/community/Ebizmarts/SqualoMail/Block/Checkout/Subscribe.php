@@ -36,7 +36,7 @@ class Ebizmarts_SqualoMail_Block_Checkout_Subscribe extends Mage_Core_Block_Temp
      */
     public function escapeQuote($data)
     {
-        return $this->getHelper()->mcEscapeQuote($data);
+        return $this->getHelper()->sqmEscapeQuote($data);
     }
 
     /**

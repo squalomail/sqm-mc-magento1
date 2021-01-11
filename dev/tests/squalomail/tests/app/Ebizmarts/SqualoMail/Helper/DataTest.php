@@ -1102,7 +1102,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
         $scopeId = $data['scopeId'];
         $scope = $data['scope'];
         $isStoreCreation = $data['isStoreCreation'];
-        $mcStoreId = 'a1s2d3f4g5h6j7k8l9p0';
+        $sqmStoreId = 'a1s2d3f4g5h6j7k8l9p0';
 
         $expectedResult = true;
 
@@ -1113,7 +1113,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $helperMock->expects($this->once())->method('isSubscriptionEnabled')->with($scopeId, $scope)->willReturn(true);
         $helperMock->expects($this->once())->method('isEcommerceEnabled')->with($scopeId, $scope)->willReturn(true);
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($scopeId, $scope)->willReturn($mcStoreId);
+        $helperMock->expects($this->once())->method('getMCStoreId')->with($scopeId, $scope)->willReturn($sqmStoreId);
 
         $result = $helperMock->isEcomSyncDataEnabled($scopeId, $scope, $isStoreCreation);
 

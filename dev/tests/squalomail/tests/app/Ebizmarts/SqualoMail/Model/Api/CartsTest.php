@@ -426,7 +426,7 @@ class Ebizmarts_SqualoMail_Model_Api_CartsTest extends PHPUnit_Framework_TestCas
 
     public function testGetModifiedQuotesGuestCustomer()
     {
-        $mcTableName = 'squalomail_ecommerce_sync_data';
+        $sqmTableName = 'squalomail_ecommerce_sync_data';
         $customerId = '';
         $customerEmailAddress = 'test@ebizmarts.com';
         $stringStoreId = 'store_id';
@@ -434,7 +434,7 @@ class Ebizmarts_SqualoMail_Model_Api_CartsTest extends PHPUnit_Framework_TestCas
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
         $where = "m4m.squalomail_sync_deleted = 0
         AND m4m.squalomail_sync_delta < updated_at";
-        $arrayTableName = array('m4m' => $mcTableName);
+        $arrayTableName = array('m4m' => $sqmTableName);
         $conditionSelect = "m4m.related_id = main_table.entity_id AND m4m.type = '"
             . Ebizmarts_SqualoMail_Model_Config::IS_QUOTE
             . "' AND m4m.squalomail_store_id = '" . self::SQUALOMAIL_STORE_ID . "'";

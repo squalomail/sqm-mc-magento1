@@ -254,7 +254,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailControllerTest extends PHPUnit_Fr
         $apiKeyParam = 'api_key';
         $apiKey = 'a1s2d3f4g5h6j7k8l9z1x2c3v4v4-us1';
         $storeIdParam = 'squalomail_store_id';
-        $mcStoreId = 'q1w2e3r4t5y6u7i8o9p0';
+        $sqmStoreId = 'q1w2e3r4t5y6u7i8o9p0';
         $syncDate = "2019-02-01 20:00:05";
         $optionSyncFlag = array(
             'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::SYNC_LABEL_KEY,
@@ -338,14 +338,14 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailControllerTest extends PHPUnit_Fr
             array($storeIdParam),
             array($apiKeyParam)
         )->willReturnOnConsecutiveCalls(
-            $mcStoreId,
+            $sqmStoreId,
             $apiKey
         );
 
         $squalomailControllerMock
             ->expects($this->once())
             ->method('getSourceAccountInfoOptions')
-            ->with($apiKey, $mcStoreId)
+            ->with($apiKey, $sqmStoreId)
             ->willReturn($data);
 
         $helperMock
@@ -367,7 +367,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailControllerTest extends PHPUnit_Fr
         $apiKeyParam = 'api_key';
         $apiKey = 'a1s2d3f4g5h6j7k8l9z1x2c3v4v4-us1';
         $storeIdParam = 'squalomail_store_id';
-        $mcStoreId = 'q1w2e3r4t5y6u7i8o9p0';
+        $sqmStoreId = 'q1w2e3r4t5y6u7i8o9p0';
         $listId = 'a1s2d3f4g5';
 
         $data = array(array('id' => $listId, 'name' => 'Newsletter'));
@@ -401,7 +401,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailControllerTest extends PHPUnit_Fr
             array($storeIdParam)
         )->willReturnOnConsecutiveCalls(
             $apiKey,
-            $mcStoreId
+            $sqmStoreId
         );
 
         $helperMock->expects($this->once())->method('isApiKeyObscure')->with($apiKey)->willReturn(false);
@@ -409,7 +409,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailControllerTest extends PHPUnit_Fr
         $squalomailControllerMock
             ->expects($this->once())
             ->method('getSourceListOptions')
-            ->with($apiKey, $mcStoreId)
+            ->with($apiKey, $sqmStoreId)
             ->willReturn($data);
         $squalomailControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
 

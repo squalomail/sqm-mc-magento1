@@ -62,7 +62,7 @@ class Ebizmarts_SqualoMail_Block_Customer_Newsletter_Index extends Mage_Customer
      */
     public function escapeQuote($data)
     {
-        return $this->getSqualoMailHelper()->mcEscapeQuote($data);
+        return $this->getSqualoMailHelper()->sqmEscapeQuote($data);
     }
 
     /**

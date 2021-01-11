@@ -18,7 +18,7 @@ class Ebizmarts_SqualoMail_Block_Popup_Emailcatcher extends Mage_Core_Block_Temp
      */
     public function escapeQuote($data)
     {
-        return $this->getHelper()->mcEscapeQuote($data);
+        return $this->getHelper()->sqmEscapeQuote($data);
     }
 
     /**

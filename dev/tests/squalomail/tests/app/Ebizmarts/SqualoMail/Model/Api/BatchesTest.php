@@ -73,7 +73,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
                 'method' => 'POST',
                 'path' => '/ecommerce/stores/ef3bf57fb9bd695a02b7f7c7fb0d2db5/promo-rules/44/promo-codes',
                 'operation_id' => 'storeid-1_PCD_2018-01-16-14-28-03-31075100_49',
-                'body' => '{"id":"49","code":"testcoupon","redemption_url":"http:\/\/127.0.0.1\/mcmagento-1937'
+                'body' => '{"id":"49","code":"testcoupon","redemption_url":"http:\/\/127.0.0.1\/sqmmagento-1937'
                     . '\/squalomail\/cart\/loadcoupon?coupon_id=49&coupon_token=9e0c002f6d4b39039bff794a6f294341"}'
             )
         );
@@ -104,7 +104,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
                 'method' => 'POST',
                 'path' => '/ecommerce/stores/ef3bf57fb9bd695a02b7f7c7fb0d2db5/orders',
                 'operation_id' => 'storeid-1_ORD_2018-01-16-14-28-02-50334200_195',
-                'body' => '{"id":"145000006","landing_site":"http:\/\/127.0.0.1\/mcmagento-1937\/",'
+                'body' => '{"id":"145000006","landing_site":"http:\/\/127.0.0.1\/sqmmagento-1937\/",'
                     . '"currency_code":"USD","order_total":"300.0000","tax_total":"0.0000","discount_total":0,'
                     . '"shipping_total":"5.0000","promos":[{"code":null,"amount_discounted":"0.0000","type":"fixed"}],'
                     . '"financial_status":"pending","processed_at_foreign":"2018-01-16 14:26:55",'
@@ -114,7 +114,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
                     . '"first_name":"Santiago","last_name":"Paragarino","address":{"address1":"address","city":"city",'
                     . '"province":"Alabama","province_code":"AL","postal_code":"123456","country":"United States",'
                     . '"country_code":"US"}},"order_url":"http:\/\/127.0.0.1'
-                    . '\/mcmagento-1937\/sales\/order\/view\/order_id\/195\/?___store=default","billing_address":'
+                    . '\/sqmmagento-1937\/sales\/order\/view\/order_id\/195\/?___store=default","billing_address":'
                     . '{"address1":"address","city":"city","province":"Alabama","province_code":"AL",'
                     . '"postal_code":"123456","country":"United States","country_code":"US",'
                     . '"name":"Santiago Paragarino"},"shipping_address":{"name":"Santiago Paragarino",'
@@ -136,7 +136,7 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
                 'operation_id' => 'storeid-1_QUO_2018-01-16-14-28-01-40953100_681',
                 'body' => '{"id":"681","customer":{"id":"137","email_address":"santiago+testtest@ebizmarts.com",'
                     . '"opt_in_status":false,"first_name":"Santiago","last_name":"Paragarino"},'
-                    . '"checkout_url":"http:\/\/127.0.0.1\/mcmagento-1937\/squalomail\/cart\/loadquote?'
+                    . '"checkout_url":"http:\/\/127.0.0.1\/sqmmagento-1937\/squalomail\/cart\/loadquote?'
                     . 'id=681&token=0eaf8c240502056a62b9194dd2ed0859","currency_code":"USD","order_total":"10.0000",'
                     . '"tax_total":0,"lines":[{"id":"1","product_id":"906","product_variant_id":"906","quantity":1,'
                     . '"price":"10.0000"}]}'
@@ -154,13 +154,13 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
                 'method' => 'PATCH',
                 'path' => '/ecommerce/stores/ef3bf57fb9bd695a02b7f7c7fb0d2db5/products/337',
                 'operation_id' => 'storeid-1_PRO_2018-01-16-14-28-01-24778200_337',
-                'body' => '{"id":"337","title":"Aviator Sunglasses","url":"http:\/\/127.0.0.1\/mcmagento-1937'
-                    . '\/aviator-sunglasses.html","image_url":"http:\/\/127.0.0.1\/mcmagento-1937\/media\/catalog'
+                'body' => '{"id":"337","title":"Aviator Sunglasses","url":"http:\/\/127.0.0.1\/sqmmagento-1937'
+                    . '\/aviator-sunglasses.html","image_url":"http:\/\/127.0.0.1\/sqmmagento-1937\/media\/catalog'
                     . '\/product\/cache\/1\/image\/265x\/9df78eab33525d08d6e5fb8d27136e95\/a\/c\/ace000a_1.jpg",'
                     . '"published_at_foreign":"","description":"Gunmetal frame with crystal gradient polycarbonate '
                     . 'lenses in grey. ","type":"Eyewear","vendor":"Eyewear","handle":"",'
-                    . '"variants":[{"id":"337","title":"Aviator Sunglasses","url":"http:\/\/127.0.0.1\/mcmagento-1937'
-                    . '\/aviator-sunglasses.html","image_url":"http:\/\/127.0.0.1\/mcmagento-1937\/media\/catalog'
+                    . '"variants":[{"id":"337","title":"Aviator Sunglasses","url":"http:\/\/127.0.0.1\/sqmmagento-1937'
+                    . '\/aviator-sunglasses.html","image_url":"http:\/\/127.0.0.1\/sqmmagento-1937\/media\/catalog'
                     . '\/product\/cache\/1\/image\/265x\/9df78eab33525d08d6e5fb8d27136e95\/a\/c\/ace000a_1.jpg",'
                     . '"published_at_foreign":"","sku":"ace000","price":295,"inventory_quantity":6,"backorders":"0",'
                     . '"visibility":"Catalog, Search"}]}'
@@ -169,10 +169,10 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
                 'method' => 'POST',
                 'path' => '/ecommerce/stores/ef3bf57fb9bd695a02b7f7c7fb0d2db5/products',
                 'operation_id' => 'storeid-1_PRO_2018-01-16-14-28-01-24778200_906',
-                'body' => '{"id":"906","title":"test Prod","url":"http:\/\/127.0.0.1\/mcmagento-1937'
+                'body' => '{"id":"906","title":"test Prod","url":"http:\/\/127.0.0.1\/sqmmagento-1937'
                     . '\/test-prod.html","published_at_foreign":"","description":"Test","type":"Default Category",'
                     . '"vendor":"Default Category","handle":"","variants":[{"id":"906","title":"test Prod",'
-                    . '"url":"http:\/\/127.0.0.1\/mcmagento-1937\/test-prod.html","published_at_foreign":"",'
+                    . '"url":"http:\/\/127.0.0.1\/sqmmagento-1937\/test-prod.html","published_at_foreign":"",'
                     . '"sku":"testprod","price":10,"inventory_quantity":1000,"backorders":"0",'
                     . '"visibility":"Catalog, Search"}]}'
             )

@@ -75,7 +75,7 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_Form_Field_Mapfields
      */
     public function escapeQuote($data)
     {
-        return $this->getHelper()->mcEscapeQuote($data);
+        return $this->getHelper()->sqmEscapeQuote($data);
     }
 
     /**

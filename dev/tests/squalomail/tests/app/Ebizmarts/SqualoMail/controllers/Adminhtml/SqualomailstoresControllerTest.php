@@ -175,7 +175,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailstoresControllerTest extends PHPU
         $apiKeyParam = 'api_key';
         $apiKey = 'a1s2d3f4g5h6j7k8l9z1x2c3v4b5-us1';
         $apiKeyEncrypted = '4rGjyBo/uKChzvu0bF3hjaMwfM503N3/+2fdRjdlAGo=';
-        $mcLists = array(
+        $sqmLists = array(
             'lists' => array(array(
                 'id' => 'a1s2d3f4g5',
                 'name' => 'Newsletter',
@@ -227,7 +227,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailstoresControllerTest extends PHPU
 
         $apiMock->expects($this->once())->method('getLists')->willReturn($listsMock);
 
-        $listsMock->expects($this->once())->method('getLists')->willReturn($mcLists);
+        $listsMock->expects($this->once())->method('getLists')->willReturn($sqmLists);
 
         $squalomailstoresControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
 

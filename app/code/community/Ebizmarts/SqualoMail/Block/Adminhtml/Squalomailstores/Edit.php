@@ -43,11 +43,11 @@ class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Edit extends Mage_Ad
             $jsCondition = 'false';
         }
 
-        $mcInUseMessage = $this->getMCInUseMessage($scopeArray);
+        $sqmInUseMessage = $this->getMCInUseMessage($scopeArray);
         $this->_formScripts[] = "function deleteMCStoreConfirm(message, url) {
             if ($jsCondition) {
                 if (confirm(message)) {
-                    deleteConfirm('$mcInUseMessage', url);
+                    deleteConfirm('$sqmInUseMessage', url);
                 }
             } else {
                 deleteConfirm(message, url);

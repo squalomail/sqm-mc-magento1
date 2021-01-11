@@ -5,7 +5,7 @@ class Ebizmarts_SqualoMail_Model_Adminhtml_Resendecommercedata_Comment
     /**
      * @var Ebizmarts_SqualoMail_Helper_Data
      */
-    protected $_mcHelper;
+    protected $_sqmHelper;
 
     public function __construct()
     {
@@ -17,15 +17,15 @@ class Ebizmarts_SqualoMail_Model_Adminhtml_Resendecommercedata_Comment
      */
     public function getMcHelper()
     {
-        return $this->_mcHelper;
+        return $this->_sqmHelper;
     }
 
     /**
-     * @param Ebizmarts_SqualoMail_Helper_Data $mcHelper
+     * @param Ebizmarts_SqualoMail_Helper_Data $sqmHelper
      */
     public function setMcHelper()
     {
-        $this->_mcHelper = Mage::helper('squalomail');
+        $this->_sqmHelper = Mage::helper('squalomail');
     }
 
     /**

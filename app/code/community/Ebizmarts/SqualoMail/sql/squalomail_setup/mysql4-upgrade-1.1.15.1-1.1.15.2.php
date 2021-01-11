@@ -27,7 +27,7 @@ $installer->run(
 	  `address_country`   VARCHAR(50) NOT NULL,
 	  `address_country_code` CHAR(2) NOT NULL,
 	  `domain` VARCHAR(512) NOT NULL,
-	  `mc_account_name` VARCHAR(512) NOT NULL,
+	  `sqm_account_name` VARCHAR(512) NOT NULL,
 	  `list_name` VARCHAR(512) NOT NULL,
 	  PRIMARY KEY  (`id`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;

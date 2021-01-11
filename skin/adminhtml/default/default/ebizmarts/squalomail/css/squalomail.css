@@ -39,7 +39,7 @@ h3.squalomail-header {
     background-size: contain;
 }
 
-fieldset#squalomail_general p.note a.mc-link {
+fieldset#squalomail_general p.note a.sqm-link {
     background: url(../images/squalomail-ico.png) no-repeat left top;
     padding-left: 18px;
     padding-bottom: 4px;
