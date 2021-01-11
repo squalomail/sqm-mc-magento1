@@ -15,9 +15,9 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
     protected function _afterSave()
     {
         $groups = $this->getData('groups');
-        $helper = $this->getMailchimpHelper();
-        $dateHelper = $this->getMailchimpDateHelper();
-        $webhookHelper = $this->getMailchimpWebhookHelper();
+        $helper = $this->getSqualomailHelper();
+        $dateHelper = $this->getSqualomailDateHelper();
+        $webhookHelper = $this->getSqualomailWebhookHelper();
         $scopeId = $this->getScopeId();
         $scope = $this->getScope();
         $valueChanged = $this->isValueChanged();
@@ -36,7 +36,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
 
         if ($valueChanged && !$this->getValue()) {
             $configValue = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_ACTIVE, false));
-            $helper->saveMailchimpConfig($configValue, $scopeId, $scope);
+            $helper->saveSqualomailConfig($configValue, $scopeId, $scope);
             $message = $helper->__(
                 'Please note the extension has been disabled due to the lack of an api key or audience configured.'
             );
@@ -50,7 +50,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
                     $dateHelper->formatDate(null, "Y-m-d H:i:s")
                 )
             );
-            $helper->saveMailchimpConfig($configValues, $scopeId, $scope);
+            $helper->saveSqualomailConfig($configValues, $scopeId, $scope);
         }
 
         if ($apiKey && $moduleIsActive && $valueChanged) {
@@ -61,7 +61,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
     /**
      * @return Ebizmarts_MailChimp_Helper_Data
      */
-    protected function getMailchimpHelper()
+    protected function getSqualomailHelper()
     {
         return Mage::helper('squalomail');
     }
@@ -69,7 +69,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
     /**
      * @return Ebizmarts_MailChimp_Helper_Date
      */
-    protected function getMailchimpDateHelper()
+    protected function getSqualomailDateHelper()
     {
         return Mage::helper('squalomail/date');
     }
@@ -77,7 +77,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
     /**
      * @return Ebizmarts_MailChimp_Helper_Webhook
      */
-    protected function getMailchimpWebhookHelper()
+    protected function getSqualomailWebhookHelper()
     {
         return Mage::helper('squalomail/webhook');
     }

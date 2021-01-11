@@ -9,9 +9,9 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     6/10/16 12:35 PM
- * @file:     MailchimperrorsController.php
+ * @file:     SqualomailerrorsController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController extends Mage_Adminhtml_Controller_Action
 {
     const MAX_RETRIES = 5;
 
@@ -35,11 +35,11 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
     {
         $helper = $this->makeHelper();
         $errorId = $this->getRequest()->getParam('id');
-        $error = $this->getMailchimperrorsModel()->load($errorId);
+        $error = $this->getSqualomailerrorsModel()->load($errorId);
         $apiBatches = $this->getApiBatches();
         $batchId = $error->getBatchId();
         $storeId = $error->getStoreId();
-        $squalomailStoreId = $error->getMailchimpStoreId();
+        $squalomailStoreId = $error->getSqualomailStoreId();
 
         if ($squalomailStoreId) {
             $enabled = $helper->isEcomSyncDataEnabled($storeId);
@@ -111,9 +111,9 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Mailchimperrors
+     * @return Ebizmarts_MailChimp_Model_Squalomailerrors
      */
-    protected function getMailchimperrorsModel()
+    protected function getSqualomailerrorsModel()
     {
         return Mage::getModel('squalomail/squalomailerrors');
     }

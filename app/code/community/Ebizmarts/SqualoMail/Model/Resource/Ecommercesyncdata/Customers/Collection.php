@@ -29,11 +29,11 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection 
      */
     public function joinLeftEcommerceSyncData($preFilteredCustomersCollection)
     {
-        $squalomailTableName = $this->getMailchimpEcommerceDataTableName();
+        $squalomailTableName = $this->getSqualomailEcommerceDataTableName();
         $joinCondition      = "m4m.related_id = e.entity_id AND m4m.type = '%s' AND m4m.squalomail_store_id = '%s'";
         $preFilteredCustomersCollection->getSelect()->joinLeft(
             array("m4m" => $squalomailTableName),
-            sprintf($joinCondition, Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER, $this->getMailchimpStoreId())
+            sprintf($joinCondition, Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER, $this->getSqualomailStoreId())
         );
 
         $preFilteredCustomersCollection->getSelect()->where("m4m.squalomail_sync_delta IS null OR m4m.squalomail_sync_modified = 1");

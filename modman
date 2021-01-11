@@ -14,4 +14,4 @@ lib/Mandrill                                                         lib/Mandril
 skin/adminhtml/default/default/ebizmarts/squalomail                   skin/adminhtml/default/default/ebizmarts/squalomail
 skin/adminhtml/default/default/ebizmarts/mandrill                    skin/adminhtml/default/default/ebizmarts/mandrill
 shell/m4mlogs.sh                                                     shell/m4mlogs.sh
-shell/getMailchimpResponse.php                                       shell/getMailchimpResponse.php
+shell/getSqualomailResponse.php                                       shell/getSqualomailResponse.php

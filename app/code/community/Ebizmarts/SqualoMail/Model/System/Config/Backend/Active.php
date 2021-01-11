@@ -36,7 +36,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Active extends Mage_Core_M
                 $webhookHelper->createNewWebhook($scopeId, $scope, $listId);
             } else {
                 $configValue = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_ACTIVE, false));
-                $helper->saveMailchimpConfig($configValue, $scopeId, $scope);
+                $helper->saveSqualomailConfig($configValue, $scopeId, $scope);
                 $message = $helper->__('Please add an api key and select an audience before enabling the extension.');
                 $this->getAdminSession()->addError($message);
             }

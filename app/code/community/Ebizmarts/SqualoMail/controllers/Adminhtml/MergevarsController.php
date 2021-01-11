@@ -61,7 +61,7 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
                     Ebizmarts_MailChimp_Model_Config::GENERAL_CUSTOM_MAP_FIELDS, $helper->serialize($customMergeFields)
                 )
             );
-            $helper->saveMailchimpConfig($configValues, $scopeArray['scope_id'], $scopeArray['scope']);
+            $helper->saveSqualomailConfig($configValues, $scopeArray['scope_id'], $scopeArray['scope']);
             Mage::getSingleton('core/session')->setMailChimpValue($value);
             Mage::getSingleton('core/session')->setMailChimpLabel($label);
             Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The custom value was added successfully.'));

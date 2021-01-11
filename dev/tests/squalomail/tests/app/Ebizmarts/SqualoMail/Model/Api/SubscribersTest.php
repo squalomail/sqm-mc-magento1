@@ -14,7 +14,7 @@ class Ebizmarts_MailChimp_Model_Api_SubscribersTest extends PHPUnit_Framework_Te
      * @param $expected
      * @dataProvider magentoSubscriberStatus
      */
-    public function testMailchimpStatus($magentoStatus, $expected)
+    public function testSqualomailStatus($magentoStatus, $expected)
     {
         $subscribersApiMock =
             $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers::class)
@@ -22,7 +22,7 @@ class Ebizmarts_MailChimp_Model_Api_SubscribersTest extends PHPUnit_Framework_Te
                 ->setMethods(array('magentoConfigNeedsConfirmation'))
                 ->getMock();
 
-        $return = $subscribersApiMock->translateMagentoStatusToMailchimpStatus($magentoStatus);
+        $return = $subscribersApiMock->translateMagentoStatusToSqualomailStatus($magentoStatus);
 
         $this->assertEquals($expected, $return);
     }

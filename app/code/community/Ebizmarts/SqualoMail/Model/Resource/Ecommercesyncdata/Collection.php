@@ -34,7 +34,7 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection extends
         $this->_init('squalomail/ecommercesyncdata');
     }
 
-    public function getMailchimpEcommerceDataTableName()
+    public function getSqualomailEcommerceDataTableName()
     {
         return $this->getCoreResource()
             ->getTableName('squalomail/ecommercesyncdata');
@@ -67,7 +67,7 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection extends
     /**
      * @return string
      */
-    public function getMailchimpStoreId()
+    public function getSqualomailStoreId()
     {
         return $this->_squalomailStoreId;
     }
@@ -75,7 +75,7 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection extends
     /**
      * @param string $squalomailStoreId
      */
-    public function setMailchimpStoreId($squalomailStoreId)
+    public function setSqualomailStoreId($squalomailStoreId)
     {
         $this->_squalomailStoreId = $squalomailStoreId;
     }

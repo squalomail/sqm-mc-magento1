@@ -20,26 +20,26 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Store extends Mage_Core_Mo
         $scope = $this->getScope();
         $groups = $this->getData('groups');
 
-        $newMailchimpStoreId = (isset($groups['general']['fields']['storeid']['value']))
+        $newSqualomailStoreId = (isset($groups['general']['fields']['storeid']['value']))
             ? $groups['general']['fields']['storeid']['value']
             : null;
 
-        $oldMailchimpStoreId = $helper->getMCStoreId($scopeId, $scope);
-        $isSyncing = $helper->getMCIsSyncing($newMailchimpStoreId, $scopeId, $scope);
-        $helper->cancelAllPendingBatches($oldMailchimpStoreId);
-        $helper->restoreAllCanceledBatches($newMailchimpStoreId);
+        $oldSqualomailStoreId = $helper->getMCStoreId($scopeId, $scope);
+        $isSyncing = $helper->getMCIsSyncing($newSqualomailStoreId, $scopeId, $scope);
+        $helper->cancelAllPendingBatches($oldSqualomailStoreId);
+        $helper->restoreAllCanceledBatches($newSqualomailStoreId);
 
         if ($this->isValueChanged() && $this->getValue()) {
-            $helper->deletePreviousConfiguredMCStoreLocalData($oldMailchimpStoreId, $scopeId, $scope);
+            $helper->deletePreviousConfiguredMCStoreLocalData($oldSqualomailStoreId, $scopeId, $scope);
 
             if ($isSyncing === null) {
                 $configValues = array(
                     array(
-                        Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING . "_$newMailchimpStoreId",
+                        Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING . "_$newSqualomailStoreId",
                         true
                     )
                 );
-                $helper->saveMailchimpConfig($configValues, $scopeId, $scope);
+                $helper->saveSqualomailConfig($configValues, $scopeId, $scope);
             }
         }
     }

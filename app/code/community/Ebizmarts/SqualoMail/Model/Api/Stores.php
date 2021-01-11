@@ -13,7 +13,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
 {
 
     /**
-     * Create Mailchimp store.
+     * Create Squalomail store.
      *
      * @param  $apiKey
      * @param  $listId
@@ -70,8 +70,8 @@ class Ebizmarts_MailChimp_Model_Api_Stores
                     $response['connected_site']['site_script']['url']
                 )
             );
-            $helper->saveMailchimpConfig($configValues, 0, 'default');
-            $successMessage = $helper->__("The Mailchimp store was successfully created.");
+            $helper->saveSqualomailConfig($configValues, 0, 'default');
+            $successMessage = $helper->__("The Squalomail store was successfully created.");
             $adminSession = $this->getAdminSession();
             $adminSession->addSuccess($successMessage);
         } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
@@ -96,7 +96,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     }
 
     /**
-     * Edit Mailchimp store.
+     * Edit Squalomail store.
      *
      * @param  $squalomailStoreId
      * @param  $apiKey
@@ -142,7 +142,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
                 $storePhone,
                 $address
             );
-            $successMessage = $helper->__("The Mailchimp store was successfully edited.");
+            $successMessage = $helper->__("The Squalomail store was successfully edited.");
             $adminSession = $this->getAdminSession();
             $adminSession->addSuccess($successMessage);
         } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
@@ -177,7 +177,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
 
         if (strstr($errorMessage, 'A store with the domain')) {
             $errorMessage = $helper->__(
-                'A Mailchimp store with the same domain already exists in this account. '
+                'A Squalomail store with the same domain already exists in this account. '
                     . 'You need to have a different URLs for each scope you set up the ecommerce data. '
                     . 'Possible solutions '
             )
@@ -186,10 +186,10 @@ class Ebizmarts_MailChimp_Model_Api_Stores
                 . "<a href='https://docs.magento.com/m1/ce/user_guide/configuration/url-secure-unsecure.html'>"
                 . "HERE</a>";
         } else {
-            if (is_array($e->getMailchimpErrors())) {
+            if (is_array($e->getSqualomailErrors())) {
                 $errorDetail = "";
 
-                foreach ($e->getMailchimpErrors() as $error) {
+                foreach ($e->getSqualomailErrors() as $error) {
                     if (isset($error['field'])) {
                         $errorDetail .= "<br />    Field: " . $error['field'];
                     }
@@ -225,7 +225,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             $api = $helper->getApiByKey($apiKey);
             $response = $api->getEcommerce()->getStores()->delete($squalomailStoreId);
             $helper->cancelAllPendingBatches($squalomailStoreId);
-            $successMessage = $helper->__("The Mailchimp store was successfully deleted.");
+            $successMessage = $helper->__("The Squalomail store was successfully deleted.");
             $adminSession = $this->getAdminSession();
             $adminSession->addSuccess($successMessage);
         } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
@@ -249,7 +249,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     }
 
     /**
-     * Remove all data associated to the given Mailchimp store id.
+     * Remove all data associated to the given Squalomail store id.
      *
      * @param $squalomailStoreId
      */

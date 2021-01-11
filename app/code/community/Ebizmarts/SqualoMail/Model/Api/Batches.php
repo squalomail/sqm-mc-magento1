@@ -89,7 +89,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     /**
      * @return Ebizmarts_MailChimp_Helper_Curl
      */
-    protected function getMailchimpCurlHelper()
+    protected function getSqualomailCurlHelper()
     {
         return $this->_squalomailCurlHelper;
     }
@@ -197,7 +197,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
      */
     public function batchDirExists($baseDir, $batchId)
     {
-        return $this->getMailchimpFileHelper()
+        return $this->getSqualomailFileHelper()
             ->fileExists($baseDir . DS . 'var' . DS . 'squalomail' . DS . $batchId, false);
     }
 
@@ -208,7 +208,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
      */
     public function removeBatchDir($baseDir, $batchId)
     {
-        return $this->getMailchimpFileHelper()
+        return $this->getSqualomailFileHelper()
             ->rmDir($baseDir . DS . 'var' . DS . 'squalomail' . DS . $batchId);
     }
 
@@ -279,7 +279,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
         }
 
         if ($enabled) {
-            $helper->logBatchStatus('Get results from Mailchimp for Magento store ' . $magentoStoreId);
+            $helper->logBatchStatus('Get results from Squalomail for Magento store ' . $magentoStoreId);
 
             foreach ($collection as $item) {
                 try {
@@ -344,7 +344,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                 //customer operations
                 $helper->logBatchStatus('Generate Customers Payload');
                 $apiCustomers = $this->getApiCustomers();
-                $apiCustomers->setMailchimpStoreId($squalomailStoreId);
+                $apiCustomers->setSqualomailStoreId($squalomailStoreId);
                 $apiCustomers->setMagentoStoreId($magentoStoreId);
 
                 $customersArray = $apiCustomers->createBatchJson();
@@ -355,7 +355,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                 $helper->logBatchStatus('Generate Products Payload');
 
                 $apiProducts = $this->getApiProducts();
-                $apiProducts->setMailchimpStoreId($squalomailStoreId);
+                $apiProducts->setSqualomailStoreId($squalomailStoreId);
                 $apiProducts->setMagentoStoreId($magentoStoreId);
 
                 $productsArray = $apiProducts->createBatchJson();
@@ -368,7 +368,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                     //cart operations
                     $helper->logBatchStatus('Generate Carts Payload');
                     $apiCarts = $this->getApiCarts();
-                    $apiCarts->setMailchimpStoreId($squalomailStoreId);
+                    $apiCarts->setSqualomailStoreId($squalomailStoreId);
                     $apiCarts->setMagentoStoreId($magentoStoreId);
 
                     $cartsArray = $apiCarts->createBatchJson();
@@ -378,7 +378,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                 //order operations
                 $helper->logBatchStatus('Generate Orders Payload');
                 $apiOrders = $this->getApiOrders();
-                $apiOrders->setMailchimpStoreId($squalomailStoreId);
+                $apiOrders->setSqualomailStoreId($squalomailStoreId);
                 $apiOrders->setMagentoStoreId($magentoStoreId);
 
                 $ordersArray = $apiOrders->createBatchJson();
@@ -389,7 +389,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                     //promo rule operations
                     $helper->logBatchStatus('Generate Promo Rules Payload');
                     $apiPromoRules = $this->getApiPromoRules();
-                    $apiPromoRules->setMailchimpStoreId($squalomailStoreId);
+                    $apiPromoRules->setSqualomailStoreId($squalomailStoreId);
                     $apiPromoRules->setMagentoStoreId($magentoStoreId);
 
                     $promoRulesArray = $apiPromoRules->createBatchJson();
@@ -398,7 +398,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                     //promo code operations
                     $helper->logBatchStatus('Generate Promo Codes Payload');
                     $apiPromoCodes = $this->getApiPromoCodes();
-                    $apiPromoCodes->setMailchimpStoreId($squalomailStoreId);
+                    $apiPromoCodes->setSqualomailStoreId($squalomailStoreId);
                     $apiPromoCodes->setMagentoStoreId($magentoStoreId);
 
                     $promoCodesArray = $apiPromoCodes->createBatchJson();
@@ -500,7 +500,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
             $configValue = array(
                 array(Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId", 1)
             );
-            $helper->saveMailchimpConfig($configValue, $magentoStoreId, 'stores');
+            $helper->saveSqualomailConfig($configValue, $magentoStoreId, 'stores');
         } else {
             if ($this->shouldFlagAsSynced($syncingFlag, $itemAmount)) {
                 //Set is syncing per scope to a date because it is not sending any more items.
@@ -510,7 +510,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                         $dateHelper->formatDate(null, 'Y-m-d H:i:s')
                     )
                 );
-                $helper->saveMailchimpConfig($configValue, $magentoStoreId, 'stores');
+                $helper->saveSqualomailConfig($configValue, $magentoStoreId, 'stores');
             }
         }
     }
@@ -573,12 +573,12 @@ class Ebizmarts_MailChimp_Model_Api_Batches
             'id' => $ecommerceData->getId(),
             'related_id' => $ecommerceData->getRelatedId(),
             'type' => $ecommerceData->getType(),
-            'squalomail_store_id' => $ecommerceData->getMailchimpStoreId(),
-            'squalomail_sync_error' => $ecommerceData->getMailchimpSyncError(),
-            'squalomail_sync_delta' => $ecommerceData->getMailchimpSyncDelta(),
-            'squalomail_sync_modified' => $ecommerceData->getMailchimpSyncModified(),
-            'squalomail_sync_deleted' => $ecommerceData->getMailchimpSyncDeleted(),
-            'squalomail_token' => $ecommerceData->getMailchimpToken(),
+            'squalomail_store_id' => $ecommerceData->getSqualomailStoreId(),
+            'squalomail_sync_error' => $ecommerceData->getSqualomailSyncError(),
+            'squalomail_sync_delta' => $ecommerceData->getSqualomailSyncDelta(),
+            'squalomail_sync_modified' => $ecommerceData->getSqualomailSyncModified(),
+            'squalomail_sync_deleted' => $ecommerceData->getSqualomailSyncDeleted(),
+            'squalomail_token' => $ecommerceData->getSqualomailToken(),
             'batch_id' => $ecommerceData->getBatchId()
         );
         $resource = Mage::getResourceModel('squalomail/ecommercesyncdata');
@@ -709,7 +709,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     public function getBatchResponse($batchId, $magentoStoreId)
     {
         $helper = $this->getHelper();
-        $fileHelper = $this->getMailchimpFileHelper();
+        $fileHelper = $this->getSqualomailFileHelper();
         $files = array();
 
         try {
@@ -732,7 +732,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                         CURLOPT_FOLLOWLOCATION => true, // this will follow redirects
                     );
 
-                    $curlHelper = $this->getMailchimpCurlHelper();
+                    $curlHelper = $this->getSqualomailCurlHelper();
                     $curlResult = $curlHelper->curlExec($fileUrl, Zend_Http_Client::GET, $curlOptions);
 
                     fclose($fd);
@@ -772,7 +772,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
         $path = $baseDir . DS . 'var' . DS . 'squalomail' . DS . $batchId;
         $archive->unpack($fileName, $path);
         $archive->unpack($path . DS . $batchId . '.tar', $path);
-        $fileHelper = $this->getMailchimpFileHelper();
+        $fileHelper = $this->getSqualomailFileHelper();
         $dirItems = new DirectoryIterator($path);
 
         foreach ($dirItems as $index => $dirItem) {
@@ -797,8 +797,8 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     protected function processEachResponseFile($files, $batchId, $squalomailStoreId, $magentoStoreId)
     {
         $helper = $this->getHelper();
-        $helper->resetCountersDataSentToMailchimp();
-        $fileHelper = $this->getMailchimpFileHelper();
+        $helper->resetCountersDataSentToSqualomail();
+        $fileHelper = $this->getSqualomailFileHelper();
 
         foreach ($files as $file) {
             $fileContent = $fileHelper->read($file);
@@ -819,7 +819,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
 
                         if (strstr($errorDetails, 'already exists')) {
                             $this->setItemAsModified($squalomailStoreId, $id, $type);
-                            $helper->modifyCounterDataSentToMailchimp($type);
+                            $helper->modifyCounterDataSentToSqualomail($type);
                             continue;
                         }
 
@@ -847,16 +847,16 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                         $squalomailErrors->setStoreId($store[1]);
 
                         if ($type != Ebizmarts_MailChimp_Model_Config::IS_SUBSCRIBER) {
-                            $squalomailErrors->setMailchimpStoreId($squalomailStoreId);
+                            $squalomailErrors->setSqualomailStoreId($squalomailStoreId);
                         }
 
                         $squalomailErrors->save();
-                        $helper->modifyCounterDataSentToMailchimp($type, true);
+                        $helper->modifyCounterDataSentToSqualomail($type, true);
                         $helper->logError($error);
                     } else {
                         $syncDataItem = $this->getDataProduct($squalomailStoreId, $id, $type);
 
-                        if (!$syncDataItem->getMailchimpSyncModified()) {
+                        if (!$syncDataItem->getSqualomailSyncModified()) {
                             $syncModified = $this->enableMergeFieldsSending($type, $syncDataItem);
 
                             $this->saveSyncData(
@@ -871,7 +871,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                                 1,
                                 true
                             );
-                            $helper->modifyCounterDataSentToMailchimp($type);
+                            $helper->modifyCounterDataSentToSqualomail($type);
                         }
                     }
                 }
@@ -879,7 +879,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
 
             $fileHelper->rm($file);
         }
-        $this->_showResumeDataSentToMailchimp($magentoStoreId);
+        $this->_showResumeDataSentToSqualomail($magentoStoreId);
     }
 
     /**
@@ -897,8 +897,8 @@ class Ebizmarts_MailChimp_Model_Api_Batches
             $dataProduct = $this->getDataProduct($squalomailStoreId, $id, $type);
             $isProductDisabledInMagento = Ebizmarts_MailChimp_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO;
 
-            if ($dataProduct->getMailchimpSyncDeleted()
-                || $dataProduct->getMailchimpSyncError() == $isProductDisabledInMagento
+            if ($dataProduct->getSqualomailSyncDeleted()
+                || $dataProduct->getSqualomailSyncError() == $isProductDisabledInMagento
             ) {
                 $error = $isProductDisabledInMagento;
             }
@@ -1020,7 +1020,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
         if ($itemType == Ebizmarts_MailChimp_Model_Config::IS_SUBSCRIBER) {
             $helper->updateSubscriberSyndData($itemId, $syncDelta, $syncError, 0, null);
         } else {
-            $ecommerceSyncData = $this->getMailchimpEcommerceSyncDataModel();
+            $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
             $ecommerceSyncData->saveEcommerceSyncData(
                 $itemId,
                 $itemType,
@@ -1041,7 +1041,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     /**
      * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
      */
-    protected function getMailchimpEcommerceSyncDataModel()
+    protected function getSqualomailEcommerceSyncDataModel()
     {
         return Mage::getModel('squalomail/ecommercesyncdata');
     }
@@ -1108,7 +1108,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                                 $date
                             )
                         );
-                        $helper->saveMailchimpConfig($config, 0, 'default');
+                        $helper->saveSqualomailConfig($config, 0, 'default');
                     }
                 } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
                     $helper->logError($e->getMessage());
@@ -1132,10 +1132,10 @@ class Ebizmarts_MailChimp_Model_Api_Batches
 
         if ($type == Ebizmarts_MailChimp_Model_Config::IS_PRODUCT) {
             $dataProduct = $this->getDataProduct($squalomailStoreId, $id, $type);
-            $isMarkedAsDeleted = $dataProduct->getMailchimpSyncDeleted();
+            $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
             $isProductDisabledInMagento = Ebizmarts_MailChimp_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO;
 
-            if (!$isMarkedAsDeleted || $dataProduct->getMailchimpSyncError() != $isProductDisabledInMagento) {
+            if (!$isMarkedAsDeleted || $dataProduct->getSqualomailSyncError() != $isProductDisabledInMagento) {
                 $this->saveSyncData(
                     $id,
                     $type,
@@ -1207,7 +1207,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
      */
     protected function getDataProduct($squalomailStoreId, $id, $type)
     {
-        return $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem($id, $type, $squalomailStoreId);
+        return $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem($id, $type, $squalomailStoreId);
     }
 
     /**
@@ -1250,23 +1250,23 @@ class Ebizmarts_MailChimp_Model_Api_Batches
      * @param $storeId
      * @throws Mage_Core_Exception
      */
-    protected function _showResumeDataSentToMailchimp($storeId)
+    protected function _showResumeDataSentToSqualomail($storeId)
     {
         $helper = $this->getHelper();
-        $countersDataSentToMailchimp = $helper->getCountersDataSentToMailchimp();
+        $countersDataSentToSqualomail = $helper->getCountersDataSentToSqualomail();
 
-        if (!empty($countersDataSentToMailchimp) || $helper->getCountersDataSentToMailchimp() != null) {
-            $helper->logBatchStatus("Processed data sent to Mailchimp for store $storeId");
-            $counter = $helper->getCountersDataSentToMailchimp();
+        if (!empty($countersDataSentToSqualomail) || $helper->getCountersDataSentToSqualomail() != null) {
+            $helper->logBatchStatus("Processed data sent to Squalomail for store $storeId");
+            $counter = $helper->getCountersDataSentToSqualomail();
             $helper->logBatchQuantity($counter);
             if ($this->isSetAnyCounterSubscriberOrEcommerceNotSent($counter)) {
                 if ($helper->isErrorLogEnabled()) {
                     $helper->logBatchStatus(
-                        'Please check Mailchimp Errors grid or MailChimp_Errors.log for more details.'
+                        'Please check Squalomail Errors grid or MailChimp_Errors.log for more details.'
                     );
                 } else {
                     $helper->logBatchStatus(
-                        'Please check Mailchimp Errors grid and enable MailChimp_Errors.log for more details.'
+                        'Please check Squalomail Errors grid and enable MailChimp_Errors.log for more details.'
                     );
                 }
             }
@@ -1294,7 +1294,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
      */
     protected function isFirstArrival(Varien_Object $syncDataItem)
     {
-        return (int)$syncDataItem->getMailchimpSyncedFlag() !== 1;
+        return (int)$syncDataItem->getSqualomailSyncedFlag() !== 1;
     }
 
     /**
@@ -1316,7 +1316,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     /**
      * @return Ebizmarts_MailChimp_Helper_File
      */
-    protected function getMailchimpFileHelper()
+    protected function getSqualomailFileHelper()
     {
         return Mage::helper('squalomail/file');
     }

@@ -29,11 +29,11 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection ex
      */
     public function joinLeftEcommerceSyncData($preFilteredProductsCollection)
     {
-        $squalomailTableName = $this->getMailchimpEcommerceDataTableName();
+        $squalomailTableName = $this->getSqualomailEcommerceDataTableName();
         $preFilteredProductsCollection->getSelect()->joinLeft(
             array('m4m' => $squalomailTableName),
             "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT
-            . "' AND m4m.squalomail_store_id = '" . $this->getMailchimpStoreId() . "'",
+            . "' AND m4m.squalomail_store_id = '" . $this->getSqualomailStoreId() . "'",
             array('m4m.*')
         );
     }
@@ -42,12 +42,12 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection ex
      * @param $collection Mage_Catalog_Model_Resource_Product_Collection
      * @param $joinCondition
      */
-    public function executeMailchimpDataJoin($collection, $joinCondition)
+    public function executeSqualomailDataJoin($collection, $joinCondition)
     {
-        $squalomailTableName = $this->getMailchimpEcommerceDataTableName();
+        $squalomailTableName = $this->getSqualomailEcommerceDataTableName();
         $collection->getSelect()->joinLeft(
             array("m4m" => $squalomailTableName),
-            sprintf($joinCondition, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $this->getMailchimpStoreId()),
+            sprintf($joinCondition, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $this->getSqualomailStoreId()),
             array(
                 "m4m.related_id",
                 "m4m.type",
@@ -62,7 +62,7 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection ex
     /**
      * @param $deletedProducts
      */
-    public function joinMailchimpSyncDataDeleted($deletedProducts, $limit = null)
+    public function joinSqualomailSyncDataDeleted($deletedProducts, $limit = null)
     {
         $this->joinLeftEcommerceSyncData($deletedProducts);
         $deletedProducts->getSelect()->where("m4m.squalomail_sync_deleted = 1 AND m4m.squalomail_sync_error = ''");

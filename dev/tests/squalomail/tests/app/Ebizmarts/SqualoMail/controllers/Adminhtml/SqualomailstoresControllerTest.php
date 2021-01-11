@@ -1,11 +1,11 @@
 <?php
 
-require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/MailchimpstoresController.php';
+require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/SqualomailstoresController.php';
 
-class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController $squalomailstoresController
+     * @var Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController $squalomailstoresController
      */
     protected $_squalomailstoresController;
 
@@ -13,7 +13,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
     {
         Mage::app('default');
         $this->_squalomailstoresController = $this->getMockBuilder(
-            Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController::class
+            Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController::class
         );
     }
 
@@ -60,7 +60,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
         $squalomailstoresControllerMock = $this->_squalomailstoresController
             ->disableOriginalConstructor()
             ->setMethods(
-                array('_title', 'getRequest', 'loadMailchimpStore', 'sessionregisterStore', '_initAction',
+                array('_title', 'getRequest', 'loadSqualomailStore', 'sessionregisterStore', '_initAction',
                     '_addBreadcrumb', 'getLayout', 'getUrl', '_addContent', 'renderLayout')
             )
             ->getMock();
@@ -85,8 +85,8 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
             ->getMock();
 
         $squalomailstoresControllerMock->expects($this->exactly(2))->method('_title')->withConsecutive(
-            array('Mailchimp'),
-            array('Mailchimp Store')
+            array('Squalomail'),
+            array('Squalomail Store')
         )->willReturnOnConsecutiveCalls(
             $squalomailstoresControllerMock,
             $squalomailstoresControllerMock
@@ -97,7 +97,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
 
         $squalomailstoresControllerMock
             ->expects($this->once())
-            ->method('loadMailchimpStore')
+            ->method('loadSqualomailStore')
             ->with($id)
             ->willReturn($squalomailStoreModelMock);
         $squalomailstoresControllerMock
@@ -152,7 +152,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
 
         $squalomailstoresControllerMock = $this->_squalomailstoresController
             ->disableOriginalConstructor()
-            ->setMethods(array('getRequest', '_updateMailchimp', '_redirect', 'getHelper'))
+            ->setMethods(array('getRequest', '_updateSqualomail', '_redirect', 'getHelper'))
             ->getMock();
 
         $requestMock = $this->getMockBuilder(Mage_Core_Controller_Response_Http::class)
@@ -164,7 +164,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
 
         $requestMock->expects($this->once())->method('getPost')->willReturn($postData);
 
-        $squalomailstoresControllerMock->expects($this->once())->method('_updateMailchimp')->with($postData);
+        $squalomailstoresControllerMock->expects($this->once())->method('_updateSqualomail')->with($postData);
         $squalomailstoresControllerMock->expects($this->once())->method('_redirect')->with('*/*/index');
 
         $squalomailstoresControllerMock->saveAction();
@@ -188,7 +188,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
 
         $squalomailstoresControllerMock = $this->_squalomailstoresController
             ->disableOriginalConstructor()
-            ->setMethods(array('getRequest', 'getMailchimpHelper', 'getResponse'))
+            ->setMethods(array('getRequest', 'getSqualomailHelper', 'getResponse'))
             ->getMock();
 
         $requestMock = $this->getMockBuilder(Mage_Core_Controller_Request_Http::class)
@@ -220,7 +220,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
 
         $requestMock->expects($this->once())->method('getParam')->with($apiKeyParam)->willReturn($apiKeyEncrypted);
 
-        $squalomailstoresControllerMock->expects($this->once())->method('getMailchimpHelper')->willReturn($helperMock);
+        $squalomailstoresControllerMock->expects($this->once())->method('getSqualomailHelper')->willReturn($helperMock);
 
         $helperMock->expects($this->once())->method('decryptData')->with($apiKeyEncrypted)->willReturn($apiKey);
         $helperMock->expects($this->once())->method('getApiByKey')->with($apiKey)->willReturn($apiMock);
@@ -247,7 +247,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
 
         $squalomailstoresControllerMock = $this->_squalomailstoresController
             ->disableOriginalConstructor()
-            ->setMethods(array('getRequest', 'loadMailchimpStore', 'getMailchimpHelper', '_redirect'))
+            ->setMethods(array('getRequest', 'loadSqualomailStore', 'getSqualomailHelper', '_redirect'))
             ->getMock();
 
         $requestMock = $this->getMockBuilder(Mage_Core_Controller_Request_Http::class)
@@ -276,14 +276,14 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresControllerTest extends PHPUni
 
         $squalomailstoresControllerMock
             ->expects($this->once())
-            ->method('loadMailchimpStore')
+            ->method('loadSqualomailStore')
             ->with($tableId)
             ->willReturn($squalomailStoreModelMock);
 
         $squalomailStoreModelMock->expects($this->once())->method('getStoreid')->willReturn($squalomailStoreId);
         $squalomailStoreModelMock->expects($this->once())->method('getApikey')->willReturn($apiKeyEncrypted);
 
-        $squalomailstoresControllerMock->expects($this->once())->method('getMailchimpHelper')->willReturn($helperMock);
+        $squalomailstoresControllerMock->expects($this->once())->method('getSqualomailHelper')->willReturn($helperMock);
 
         $squalomailStoreModelMock->expects($this->once())->method('getId')->willReturn($tableId);
 

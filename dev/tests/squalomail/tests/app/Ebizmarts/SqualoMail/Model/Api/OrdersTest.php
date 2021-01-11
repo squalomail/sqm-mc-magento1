@@ -28,7 +28,7 @@ class Ebizmarts_MailChimp_Model_Api_OrdersTest extends PHPUnit_Framework_TestCas
         $ordersApiMock = $this->_ordersApiMock
             ->setMethods(
                 array(
-                        'getMailchimpStoreId', 'getMagentoStoreId', 'createEcommerceOrdersCollection',
+                        'getSqualomailStoreId', 'getMagentoStoreId', 'createEcommerceOrdersCollection',
                         'getHelper', '_getModifiedOrders', '_getNewOrders', 'getDateHelper'
                     )
             )->getMock();
@@ -36,7 +36,7 @@ class Ebizmarts_MailChimp_Model_Api_OrdersTest extends PHPUnit_Framework_TestCas
         $ordersCollectionResourceMock =
             $this->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Orders_Collection::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setMailchimpStoreId', 'setStoreId'))
+            ->setMethods(array('setSqualomailStoreId', 'setStoreId'))
             ->getMock();
 
         $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
@@ -49,13 +49,13 @@ class Ebizmarts_MailChimp_Model_Api_OrdersTest extends PHPUnit_Framework_TestCas
             ->setMethods(array('getDateMicrotime'))
             ->getMock();
 
-        $ordersApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($squalomailStoreId);
+        $ordersApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn($squalomailStoreId);
         $ordersApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn($magentoStoreId);
 
         $ordersApiMock->expects($this->once())->method('createEcommerceOrdersCollection')
             ->willReturn($ordersCollectionResourceMock);
 
-        $ordersCollectionResourceMock->expects($this->once())->method('setMailchimpStoreId')->with($squalomailStoreId);
+        $ordersCollectionResourceMock->expects($this->once())->method('setSqualomailStoreId')->with($squalomailStoreId);
         $ordersCollectionResourceMock->expects($this->once())->method('setStoreId')->with($magentoStoreId);
 
         $ordersApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
@@ -148,16 +148,16 @@ class Ebizmarts_MailChimp_Model_Api_OrdersTest extends PHPUnit_Framework_TestCas
 
         $modelMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Orders::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMailchimpEcommerceSyncDataModel'))
+            ->setMethods(array('getSqualomailEcommerceSyncDataModel'))
             ->getMock();
 
         $ecommerceMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMailchimpSyncedFlag', 'getId', 'getEcommerceSyncDataItem'))
+            ->setMethods(array('getSqualomailSyncedFlag', 'getId', 'getEcommerceSyncDataItem'))
             ->getMock();
 
         $modelMock->expects($this->once())
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($ecommerceMock);
 
         $ecommerceMock->expects($this->once())
@@ -165,7 +165,7 @@ class Ebizmarts_MailChimp_Model_Api_OrdersTest extends PHPUnit_Framework_TestCas
             ->with($orderId, 'ORD', $squalomailStoreId)
             ->willReturn($ecommerceMock);
 
-        $ecommerceMock->expects($this->once())->method('getMailchimpSyncedFlag')->willReturn(1);
+        $ecommerceMock->expects($this->once())->method('getSqualomailSyncedFlag')->willReturn(1);
         $ecommerceMock->expects($this->once())->method('getId')->willReturn(1);
 
         $result = $modelMock->getSyncedOrder($orderId, $squalomailStoreId);

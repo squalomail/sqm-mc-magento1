@@ -10,7 +10,7 @@
  * @date:     7/7/16 1:31 PM
  * @file:     Abandoned.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_Mailchimp
+class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_Squalomail
     extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
 {
     /**
@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_Mailchimp
             $order = Mage::getModel('sales/order')
                 ->load($row->getData('entity_id'));
 
-            if ($order->getMailchimpAbandonedcartFlag() || $order->getMailchimpCampaignId()) {
+            if ($order->getSqualomailAbandonedcartFlag() || $order->getSqualomailCampaignId()) {
                 $result = '<img src="'
                     . $this->getSkinUrl("ebizmarts/squalomail/images/logo-freddie-monocolor-200.png")
                     . '" width="40" title="hep hep thanks MailChimp" />';

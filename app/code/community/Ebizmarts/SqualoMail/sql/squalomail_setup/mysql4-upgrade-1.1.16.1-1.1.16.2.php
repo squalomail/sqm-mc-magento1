@@ -3,7 +3,7 @@
 $installer = $this;
 
 try {
-    /* Mailchimp field change and migration */
+    /* Squalomail field change and migration */
     $installer->run(
         "ALTER TABLE `{$this->getTable('squalomail_stores')}`
         CHANGE COLUMN `apikey` `apikey` VARCHAR(128) NOT NULL;"

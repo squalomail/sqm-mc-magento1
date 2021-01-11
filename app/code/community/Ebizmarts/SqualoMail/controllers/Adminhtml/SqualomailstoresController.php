@@ -8,9 +8,9 @@
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @file:     MailchimpstoresController.php
+ * @file:     SqualomailstoresController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Adminhtml_Controller_Action
 {
 
     /**
@@ -22,7 +22,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
     {
         $this->loadLayout()
             ->_setActiveMenu('newsletter')
-            ->_addBreadcrumb($this->__('Newsletter'), $this->__('Mailchimp Store'));
+            ->_addBreadcrumb($this->__('Newsletter'), $this->__('Squalomail Store'));
 
         return $this;
     }
@@ -31,7 +31,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
     {
         $this->_loadStores();
         $this->_title($this->__('Newsletter'))
-            ->_title($this->__('Mailchimp'));
+            ->_title($this->__('Squalomail'));
 
         $this->loadLayout();
         $this->_setActiveMenu('newsletter/squalomail');
@@ -46,11 +46,11 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
 
     protected function _initStore($idFieldName = 'id')
     {
-        $this->_title($this->__('Mailchimp Stores'))->_title($this->__('Manage Mailchimp Stores'));
+        $this->_title($this->__('Squalomail Stores'))->_title($this->__('Manage Squalomail Stores'));
         $storeId = (int)$this->getRequest()->getParam($idFieldName);
 
         if ($storeId) {
-            $store = $this->loadMailchimpStore($storeId);
+            $store = $this->loadSqualomailStore($storeId);
             $this->sessionregisterStore($store);
         }
 
@@ -59,9 +59,9 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
 
     public function editAction()
     {
-        $this->_title($this->__('Mailchimp'))->_title($this->__('Mailchimp Store'));
+        $this->_title($this->__('Squalomail'))->_title($this->__('Squalomail Store'));
         $id = $this->getRequest()->getParam('id');
-        $squalomailStore = $this->loadMailchimpStore($id);
+        $squalomailStore = $this->loadSqualomailStore($id);
         $this->sessionregisterStore($squalomailStore);
         $title = $id ? $this->__('Edit Store') : $this->__('New Store');
         $this->_initAction();
@@ -85,16 +85,16 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
         $isPost = $this->getRequest()->getPost();
 
         if ($isPost) {
-            $isPost['apikey'] = $this->getMailchimpHelper()->decryptData($isPost['apikey']);
-            $this->_updateMailchimp($isPost);
+            $isPost['apikey'] = $this->getSqualomailHelper()->decryptData($isPost['apikey']);
+            $this->_updateSqualomail($isPost);
         }
 
         $this->_redirect('*/*/index');
     }
 
-    protected function _updateMailchimp($formData)
+    protected function _updateSqualomail($formData)
     {
-        $helper = $this->getMailchimpHelper();
+        $helper = $this->getSqualomailHelper();
         $address = $this->createAddressArray($formData);
         $emailAddress = $formData['email_address'];
         $currencyCode = $formData['currency_code'];
@@ -143,7 +143,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
 
     protected function _loadStores()
     {
-        $helper = $this->getMailchimpHelper();
+        $helper = $this->getSqualomailHelper();
         $allApiKeys = $helper->getAllApiKeys();
         $resource = Mage::getSingleton('core/resource');
         $connection = $resource->getConnection('core_write');
@@ -226,7 +226,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
 
     public function getstoresAction()
     {
-        $helper = $this->getMailchimpHelper();
+        $helper = $this->getSqualomailHelper();
         $apiKey = $helper->decryptData($this->getRequest()->getParam('api_key'));
 
         try {
@@ -256,9 +256,9 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
 
     public function deleteAction()
     {
-        $helper = $this->getMailchimpHelper();
+        $helper = $this->getSqualomailHelper();
         $id = $this->getRequest()->getParam('id');
-        $store = $this->loadMailchimpStore($id);
+        $store = $this->loadSqualomailStore($id);
         $squalomailStoreId = $store->getStoreid();
         $apiKey = $helper->decryptData($store->getApikey());
 
@@ -310,7 +310,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
      * @param $id
      * @return Ebizmarts_MailChimp_Model_Stores
      */
-    protected function loadMailchimpStore($id)
+    protected function loadSqualomailStore($id)
     {
         return Mage::getModel('squalomail/stores')->load($id);
     }
@@ -318,7 +318,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpstoresController extends Mage_Admin
     /**
      * @return Ebizmarts_MailChimp_Helper_Data
      */
-    protected function getMailchimpHelper()
+    protected function getSqualomailHelper()
     {
         if ($this->_helper === null) {
             $this->_helper = Mage::helper('squalomail');

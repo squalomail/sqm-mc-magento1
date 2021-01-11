@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTagsTest extends PHPUnit_Framework_TestCase
 {
     const DEFAULT_STORE_ID = 1;
 
@@ -49,17 +49,17 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
         $mapFields = $this->_mapFieldsSerialized;
         $maps = $this->_mapsFields;
 
-        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getMailchimpHelper',
+                array('getSqualomailHelper',
                     'getStoreId',
                     'unserializeMapFields',
                     'getEntityAttributeCollection',
                     'buildCustomerAttributes',
                     'buildCustomizedAttributes',
                     'dispatchEventMergeVarAfter',
-                    'mergeMailchimpTags',
+                    'mergeSqualomailTags',
                     'getNewVarienObject'
                 )
             )
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
          * squalomailTags
          */
         $squalomailTagsApiMock->expects($this->once())
-            ->method('getMailchimpHelper')
+            ->method('getSqualomailHelper')
             ->willReturn($helperMock);
 
         $squalomailTagsApiMock->expects($this->once())
@@ -177,7 +177,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->willReturnSelf($varienObjectMock);
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('mergeMailchimpTags')
+            ->method('mergeSqualomailTags')
             ->willReturnSelf();
 
         $squalomailTagsApiMock->buildMailChimpTags();
@@ -189,11 +189,11 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
         $maps = $this->_mapsFields;
         $data = $this->_mergeFields;
 
-        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getMailchimpHelper', 'unserializeMapFields',
-                    'getInterestGroupHandleModel', 'setCustomer', '_setMailchimpTagsToCustomer'
+                array('getSqualomailHelper', 'unserializeMapFields',
+                    'getInterestGroupHandleModel', 'setCustomer', '_setSqualomailTagsToCustomer'
                 )
             )
             ->getMock();
@@ -214,7 +214,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->getMock();
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('getMailchimpHelper')
+            ->method('getSqualomailHelper')
             ->willReturn($helperMock);
 
         $helperMock->expects($this->once())
@@ -243,7 +243,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->willReturnSelf();
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('_setMailchimpTagsToCustomer')
+            ->method('_setSqualomailTagsToCustomer')
             ->with($data)
             ->willReturnSelf();
 
@@ -262,10 +262,10 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
         $fname = 'Name';
         $lname = 'Lastname';
 
-        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getMailchimpHelper', 'unserializeMapFields', '_getFName', '_getLName',
+                array('getSqualomailHelper', 'unserializeMapFields', '_getFName', '_getLName',
                     'getInterestGroupHandleModel', 'setSubscriber', '_processMerges'
                 )
             )
@@ -287,7 +287,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->getMock();
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('getMailchimpHelper')
+            ->method('getSqualomailHelper')
             ->willReturn($helperMock);
 
         $helperMock->expects($this->once())
@@ -347,10 +347,10 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
         $fname = 'Name';
         $lname = 'Lastname';
 
-        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getMailchimpHelper', 'unserializeMapFields', '_getFName', '_getLName',
+                array('getSqualomailHelper', 'unserializeMapFields', '_getFName', '_getLName',
                     'getInterestGroupHandleModel', 'setSubscriber', '_processMerges',
                     '_addSubscriberData'
                 )
@@ -373,7 +373,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->getMock();
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('getMailchimpHelper')
+            ->method('getSqualomailHelper')
             ->willReturn($helperMock);
 
         $helperMock->expects($this->once())
@@ -433,11 +433,11 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
                 )
             );
 
-        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getMailchimpHelper', 'unserializeMapFields',
-                    '_getInterestGroupHandleModel', 'setCustomer', '_setMailchimpTagsToCustomer',
+                array('getSqualomailHelper', 'unserializeMapFields',
+                    '_getInterestGroupHandleModel', 'setCustomer', '_setSqualomailTagsToCustomer',
                     'getSubscriber', 'getCustomer'
                 )
             )
@@ -465,7 +465,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->getMock();
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('getMailchimpHelper')
+            ->method('getSqualomailHelper')
             ->willReturn($helperMock);
 
         $helperMock->expects($this->once())
@@ -494,7 +494,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->willReturnSelf();
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('_setMailchimpTagsToCustomer')
+            ->method('_setSqualomailTagsToCustomer')
             ->with($data)
             ->willReturnSelf();
 
@@ -543,10 +543,10 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
         $fname = 'Name';
         $lname = 'Lastname';
 
-        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getMailchimpHelper', 'unserializeMapFields', '_getFName', '_getLName',
+                array('getSqualomailHelper', 'unserializeMapFields', '_getFName', '_getLName',
                     'getInterestGroupHandleModel', 'setSubscriber', '_processMerges',
                     '_addSubscriberData'
                 )
@@ -569,7 +569,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTagsTest extends PHPUni
             ->getMock();
 
         $squalomailTagsApiMock->expects($this->once())
-            ->method('getMailchimpHelper')
+            ->method('getSqualomailHelper')
             ->willReturn($helperMock);
 
         $helperMock->expects($this->once())

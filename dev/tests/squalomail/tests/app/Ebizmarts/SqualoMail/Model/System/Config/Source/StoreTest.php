@@ -11,7 +11,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_StoreTest extends PHPUnit_F
 
     public function testToOptionArray()
     {
-        $selectMsg = '--- Select a Mailchimp Store ---';
+        $selectMsg = '--- Select a Squalomail Store ---';
         $mcStores = array(
             'stores' => array(
                 array(

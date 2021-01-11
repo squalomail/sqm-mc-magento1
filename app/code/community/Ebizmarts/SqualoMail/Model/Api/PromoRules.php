@@ -40,11 +40,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     public function createBatchJson()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommercePromoRulesCollection = $this->createEcommercePromoRulesCollection();
-        $this->_ecommercePromoRulesCollection->setMailchimpStoreId($squalomailStoreId);
+        $this->_ecommercePromoRulesCollection->setSqualomailStoreId($squalomailStoreId);
         $this->_ecommercePromoRulesCollection->setStoreId($magentoStoreId);
 
         $batchArray = array();
@@ -62,7 +62,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function _getModifiedAndDeletedPromoRules()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $batchArray = array();
         $deletedPromoRules = $this->makeModifiedAndDeletedPromoRulesCollection();
         $counter = 0;
@@ -110,7 +110,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
                     //update promo rule delta
                     $this->addSyncData($ruleId);
                 } else {
-                    $error = $promoRule->getMailchimpSyncError();
+                    $error = $promoRule->getSqualomailSyncError();
 
                     if (!$error) {
                         $error = $helper->__('Something went wrong when retrieving the information.');
@@ -209,11 +209,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function makeModifiedAndDeletedPromoRulesCollection()
     {
-        $deletedPromoRules = $this->getMailchimpEcommerceSyncDataModel()->getCollection();
+        $deletedPromoRules = $this->getSqualomailEcommerceSyncDataModel()->getCollection();
 
         $this->_ecommercePromoRulesCollection->addWhere(
             $deletedPromoRules,
-            "squalomail_store_id = '" . $this->getMailchimpStoreId()
+            "squalomail_store_id = '" . $this->getSqualomailStoreId()
             . "' AND type = '" . Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE
             . "' AND (squalomail_sync_modified = 1 OR squalomail_sync_deleted = 1)",
             $this->getBatchLimitFromConfig()
@@ -227,10 +227,10 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function deletePromoRuleSyncData($ruleId)
     {
-        $ruleSyncDataItem = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+        $ruleSyncDataItem = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
             $ruleId,
             Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE,
-            $this->getMailchimpStoreId()
+            $this->getSqualomailStoreId()
         );
 
         $ruleSyncDataItem->delete();
@@ -277,7 +277,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
 
         if ($error) {
             $data = array();
-            $promoRule->setMailchimpSyncError($error);
+            $promoRule->setSqualomailSyncError($error);
         }
 
         return $data;
@@ -337,14 +337,14 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function _setModified($ruleId)
     {
-        $promoRules = $this->getMailchimpEcommerceSyncDataModel()->getAllEcommerceSyncDataItemsPerId(
+        $promoRules = $this->getSqualomailEcommerceSyncDataModel()->getAllEcommerceSyncDataItemsPerId(
             $ruleId,
             Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE
         );
 
         foreach ($promoRules as $promoRule) {
-            $squalomailStoreId = $promoRule->getMailchimpStoreId();
-            $this->setMailchimpStoreId($squalomailStoreId);
+            $squalomailStoreId = $promoRule->getSqualomailStoreId();
+            $this->setSqualomailStoreId($squalomailStoreId);
             $this->markSyncDataAsModified($ruleId);
         }
     }
@@ -362,11 +362,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function _setDeleted($ruleId)
     {
-        $promoRules = $this->getMailchimpEcommerceSyncDataModel()
+        $promoRules = $this->getSqualomailEcommerceSyncDataModel()
             ->getAllEcommerceSyncDataItemsPerId($ruleId, Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE);
 
         foreach ($promoRules as $promoRule) {
-            $this->setMailchimpStoreId($promoRule->getMailchimpStoreId());
+            $this->setSqualomailStoreId($promoRule->getSqualomailStoreId());
             $this->markSyncDataAsDeleted($ruleId);
         }
     }

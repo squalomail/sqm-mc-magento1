@@ -9,7 +9,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
+class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
 {
     const GENDER_VALUE_MALE = 1;
     const GENDER_VALUE_FEMALE = 2;
@@ -176,7 +176,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     public function buildMailChimpTags()
     {
-        $helper = $this->getMailchimpHelper();
+        $helper = $this->getSqualomailHelper();
         $storeId = $this->getStoreId();
         $mapFields = $helper->getMapFields($storeId);
         $maps = $this->unserializeMapFields($mapFields);
@@ -204,7 +204,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
         $this->dispatchEventMergeVarAfter($newVars);
 
         if ($newVars->hasData()) {
-            $this->mergeMailchimpTags($newVars->getData());
+            $this->mergeSqualomailTags($newVars->getData());
         }
     }
 
@@ -215,7 +215,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     public function processMergeFields($data, $subscribe = false)
     {
-        $helper = $this->getMailchimpHelper();
+        $helper = $this->getSqualomailHelper();
         $email = $data['email'];
         $listId = $data['list_id'];
         $storeId = $helper->getMagentoStoreIdsByListId($listId)[0];
@@ -227,7 +227,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
 
         if ($customer) {
             $this->setCustomer($customer);
-            $this->_setMailchimpTagsToCustomer($data);
+            $this->_setSqualomailTagsToCustomer($data);
         } else {
             $subscriber = $helper->loadListSubscriber($listId, $email);
             $fname = $this->_getFName($data);
@@ -238,7 +238,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
                 $subscriber->setSubscriberLastname($lname);
             } else {
                 /**
-                 * Mailchimp subscriber not currently in magento newsletter subscribers.
+                 * Squalomail subscriber not currently in magento newsletter subscribers.
                  * Get squalomail subscriber status and add missing newsletter subscriber.
                  */
                 $this->_addSubscriberData($subscriber, $fname, $lname, $email, $listId);
@@ -277,8 +277,8 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     protected function _addSubscriberData($subscriber, $fname, $lname, $email, $listId)
     {
-        $helper = $this->getMailchimpHelper();
-        $webhookHelper = $this->getMailchimpWebhookHelper();
+        $helper = $this->getSqualomailHelper();
+        $webhookHelper = $this->getSqualomailWebhookHelper();
         $scopeArray = $helper->getFirstScopeFromConfig(
             Ebizmarts_MailChimp_Model_Config::GENERAL_LIST,
             $listId
@@ -439,7 +439,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      * @param $squalomailTags
      * @return bool
      */
-    protected function mergeMailchimpTags($squalomailTags)
+    protected function mergeSqualomailTags($squalomailTags)
     {
         if (is_array($squalomailTags)) {
             $this->_mailChimpTags = array_merge($this->_mailChimpTags, $squalomailTags);
@@ -683,7 +683,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     protected function getDateOfBirth($attributeCode, $customer)
     {
-        return $this->getMailchimpDateHelper()->formatDate(
+        return $this->getSqualomailDateHelper()->formatDate(
             $this->getCustomerGroupLabel($attributeCode, $customer),
             'm/d', 1
         );
@@ -735,7 +735,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
         $lastOrder = $this->getLastOrder();
 
         if ($lastOrder === null) {
-            $helper = $this->getMailchimpHelper();
+            $helper = $this->getSqualomailHelper();
             $orderCollection = $helper->getOrderCollectionByCustomerEmail($this->getSubscriber()->getSubscriberEmail())
                 ->setOrder('created_at', 'DESC')
                 ->setPageSize(1);
@@ -761,7 +761,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     /**
      * @return Ebizmarts_MailChimp_Helper_Data
      */
-    public function getMailchimpHelper()
+    public function getSqualomailHelper()
     {
         return $this->_mcHelper;
     }
@@ -777,7 +777,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     /**
      * @return Ebizmarts_MailChimp_Helper_Date
      */
-    public function getMailchimpDateHelper()
+    public function getSqualomailDateHelper()
     {
         return $this->_mcDateHelper;
     }
@@ -793,7 +793,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     /**
      * @return Ebizmarts_MailChimp_Helper_Webhook
      */
-    public function getMailchimpWebhookHelper()
+    public function getSqualomailWebhookHelper()
     {
         return $this->_mcWebhookHelper;
     }
@@ -1064,7 +1064,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      * @param $listId
      * @throws Mage_Core_Exception
      */
-    protected function _setMailchimpTagsToCustomer($data)
+    protected function _setSqualomailTagsToCustomer($data)
     {
         $customer = $this->getCustomer();
 
@@ -1072,7 +1072,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
             if (!empty($value)) {
                 if (is_array($this->_mailChimpTags)) {
                     if ($key !== 'GROUPINGS') {
-                        $this->_setMailchimpTagToCustomer($key, $value, $this->_mailChimpTags, $customer);
+                        $this->_setSqualomailTagToCustomer($key, $value, $this->_mailChimpTags, $customer);
                     }
                 }
             }
@@ -1089,7 +1089,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      * @param $mapFields
      * @param $customer
      */
-    protected function _setMailchimpTagToCustomer($key, $value, $mapFields, $customer)
+    protected function _setSqualomailTagToCustomer($key, $value, $mapFields, $customer)
     {
         $ignore = array(
             'billing_company', 'billing_country', 'billing_zipcode', 'billing_state', 'billing_telephone',

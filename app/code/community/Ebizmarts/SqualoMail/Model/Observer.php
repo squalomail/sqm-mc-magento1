@@ -122,7 +122,7 @@ class Ebizmarts_MailChimp_Model_Observer
             $squalomailStoreId = (isset($configData['groups']['general']['fields']['storeid']['value']))
                 ? $configData['groups']['general']['fields']['storeid']['value']
                 : null;
-            $oldMailchimpStoreId = $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope']);
+            $oldSqualomailStoreId = $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope']);
 
             if (isset($configData['groups']['general']['fields']['apikey']['value'])
                 && !$helper->isApiKeyObscure($configData['groups']['general']['fields']['apikey']['value'])
@@ -148,15 +148,15 @@ class Ebizmarts_MailChimp_Model_Observer
                     $configDataChanged = true;
                     $message = $helper->__(
                         'The audience configuration was automatically modified to show the audience '
-                        . 'associated to the selected Mailchimp store.'
+                        . 'associated to the selected Squalomail store.'
                     );
                     $this->getAdminSession()->addError($message);
                 } elseif (isset($configData['groups']['general']['fields']['storeid']['inherit'])) {
                     unset($configData['groups']['general']['fields']['storeid']['inherit']);
-                    $configData['groups']['general']['fields']['storeid']['value'] = $oldMailchimpStoreId;
+                    $configData['groups']['general']['fields']['storeid']['value'] = $oldSqualomailStoreId;
                     $configDataChanged = true;
                     $message = $helper->__(
-                        'The Mailchimp store configuration was not modified. There is a Mailchimp audience configured '
+                        'The Squalomail store configuration was not modified. There is a Squalomail audience configured '
                         . 'for this scope. Both must be set to inherit at the same time.'
                     );
                     $this->getAdminSession()->addError($message);
@@ -187,7 +187,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * Handle confirmation emails and subscription to Mailchimp
+     * Handle confirmation emails and subscription to Squalomail
      *
      * @param   Varien_Event_Observer $observer
      * @return  Varien_Event_Observer
@@ -201,7 +201,7 @@ class Ebizmarts_MailChimp_Model_Observer
         $helper = $this->makeHelper();
         $isEnabled = $helper->isSubscriptionEnabled($storeId);
 
-        if ($isEnabled && !$this->isMailchimpSave($subscriberSource)) {
+        if ($isEnabled && !$this->isSqualomailSave($subscriberSource)) {
             $statusChanged = $subscriber->getIsStatusChanged();
 
             //Override Magento status to always send double opt-in confirmation.
@@ -232,7 +232,7 @@ class Ebizmarts_MailChimp_Model_Observer
         $isEnabled = $helper->isSubscriptionEnabled($storeViewId);
         $subscriberSource = $subscriber->getSubscriberSource();
 
-        if ($isEnabled && !$this->isMailchimpSave($subscriberSource)) {
+        if ($isEnabled && !$this->isSqualomailSave($subscriberSource)) {
             $params = $this->getRequest()->getParams();
             $helper->saveInterestGroupData($params, $storeViewId, null, $subscriber);
 
@@ -322,7 +322,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * When Customer object is saved set it to be updated on MailChimp if getMailchimpUpdateObserverRan() is false.
+     * When Customer object is saved set it to be updated on MailChimp if getSqualomailUpdateObserverRan() is false.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -333,9 +333,9 @@ class Ebizmarts_MailChimp_Model_Observer
         $origEmail = $customer->getOrigData('email');
         $customerEmail = $customer->getEmail();
         $storeId = $customer->getStoreId();
-        // if customer was created in admin, use store id selected for Mailchimp.
+        // if customer was created in admin, use store id selected for Squalomail.
         if (!$storeId) {
-            $storeId = $customer->getMailchimpStoreView();
+            $storeId = $customer->getSqualomailStoreView();
         }
 
         $helper = $this->makeHelper();
@@ -372,7 +372,7 @@ class Ebizmarts_MailChimp_Model_Observer
             if ($helper->isEcomSyncDataEnabled($storeId)) {
                 //update squalomail ecommerce data for that customer
                 $apiCustomer = $this->makeApiCustomer();
-                $apiCustomer->setMailchimpStoreId($helper->getMCStoreId($storeId));
+                $apiCustomer->setSqualomailStoreId($helper->getMCStoreId($storeId));
                 $apiCustomer->setMagentoStoreId($storeId);
                 $apiCustomer->update($customerId);
             }
@@ -396,7 +396,7 @@ class Ebizmarts_MailChimp_Model_Observer
         if ($helper->isEcomSyncDataEnabled($storeId)) {
             //update squalomail ecommerce data for that customer
             $apiCustomer = $this->makeApiCustomer();
-            $apiCustomer->setMailchimpStoreId($helper->getMCStoreId($storeId));
+            $apiCustomer->setSqualomailStoreId($helper->getMCStoreId($storeId));
             $apiCustomer->setMagentoStoreId($storeId);
             $apiCustomer->update($customerId);
         }
@@ -448,18 +448,18 @@ class Ebizmarts_MailChimp_Model_Observer
 
                     $squalomailStoreId = $helper->getMCStoreId($storeId);
                     $productId = $item->getProductId();
-                    $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                    $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
                         Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
                     );
 
-                    $isMarkedAsDeleted = $dataProduct->getMailchimpSyncDeleted();
-                    $isMarkedAsModified = $dataProduct->getMailchimpSyncModified();
+                    $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
+                    $isMarkedAsModified = $dataProduct->getSqualomailSyncModified();
 
                     if (!$isMarkedAsDeleted && !$isMarkedAsModified) {
                         $apiProducts = $this->makeApiProduct();
-                        $apiProducts->setMailchimpStoreId($squalomailStoreId);
+                        $apiProducts->setSqualomailStoreId($squalomailStoreId);
                         $apiProducts->setMagentoStoreId($storeId);
                         $apiProducts->update($productId);
                     }
@@ -475,7 +475,7 @@ class Ebizmarts_MailChimp_Model_Observer
     /**
      * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata
      */
-    public function getMailchimpEcommerceSyncDataModel()
+    public function getSqualomailEcommerceSyncDataModel()
     {
         return Mage::getModel('squalomail/ecommercesyncdata');
     }
@@ -513,13 +513,13 @@ class Ebizmarts_MailChimp_Model_Observer
         $campaignCookie = $this->_getCampaignCookie();
 
         if ($campaignCookie) {
-            $order->setMailchimpCampaignId($campaignCookie);
+            $order->setSqualomailCampaignId($campaignCookie);
         }
 
         $landingCookie = $this->_getLandingCookie();
 
-        if ($landingCookie && !$order->getMailchimpLandingPage()) {
-            $order->setMailchimpLandingPage($landingCookie);
+        if ($landingCookie && !$order->getSqualomailLandingPage()) {
+            $order->setSqualomailLandingPage($landingCookie);
         }
 
         return $observer;
@@ -724,12 +724,12 @@ class Ebizmarts_MailChimp_Model_Observer
 
         $campaignId = $this->_getCampaignCookie();
         if ($campaignId) {
-            $quote->setMailchimpCampaignId($campaignId);
+            $quote->setSqualomailCampaignId($campaignId);
         }
 
         $landingCookie = $this->_getLandingCookie();
         if ($landingCookie) {
-            $quote->setMailchimpLandingPage($landingCookie);
+            $quote->setSqualomailLandingPage($landingCookie);
         }
 
         return $observer;
@@ -753,7 +753,7 @@ class Ebizmarts_MailChimp_Model_Observer
 
         if ($ecomEnabled) {
             $squalomailStoreId = $helper->getMCStoreId($storeId);
-            $apiProduct->setMailchimpStoreId($squalomailStoreId);
+            $apiProduct->setSqualomailStoreId($squalomailStoreId);
             $apiProduct->setMagentoStoreId($storeId);
             $items = $creditMemo->getAllItems();
 
@@ -763,13 +763,13 @@ class Ebizmarts_MailChimp_Model_Observer
                 }
 
                 $productId = $item->getProductId();
-                $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $productId,
                     Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                     $squalomailStoreId
                 );
 
-                $isMarkedAsDeleted = $dataProduct->getMailchimpSyncDeleted();
+                $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
 
                 if (!$isMarkedAsDeleted) {
                     $apiProduct->update($productId);
@@ -824,7 +824,7 @@ class Ebizmarts_MailChimp_Model_Observer
         if ($ecomEnabled) {
             $squalomailStoreId = $helper->getMCStoreId($storeId);
             $apiProduct->setMagentoStoreId($storeId);
-            $apiProduct->setMailchimpStoreId($squalomailStoreId);
+            $apiProduct->setSqualomailStoreId($squalomailStoreId);
             $items = $creditMemo->getAllItems();
 
             foreach ($items as $item) {
@@ -833,13 +833,13 @@ class Ebizmarts_MailChimp_Model_Observer
                 }
 
                 $productId = $item->getProductId();
-                $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $productId,
                     Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                     $squalomailStoreId
                 );
 
-                $isMarkedAsDeleted = $dataProduct->getMailchimpSyncDeleted();
+                $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
 
                 if (!$isMarkedAsDeleted) {
                     $apiProduct->update($productId);
@@ -869,17 +869,17 @@ class Ebizmarts_MailChimp_Model_Observer
 
         if ($ecomEnabled) {
             $squalomailStoreId = $helper->getMCStoreId($storeId);
-            $apiProduct->setMailchimpStoreId($squalomailStoreId);
+            $apiProduct->setSqualomailStoreId($squalomailStoreId);
             $apiProduct->setMagentoStoreId($storeId);
 
             $productId = $item->getProductId();
-            $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+            $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $productId,
                 Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                 $squalomailStoreId
             );
 
-            $isMarkedAsDeleted = $dataProduct->getMailchimpSyncDeleted();
+            $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
 
             if (!$this->isBundleItem($item) && !$this->isConfigurableItem($item) && !$isMarkedAsDeleted) {
                 $apiProduct->update($productId);
@@ -890,7 +890,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * When Product object is saved set it to be updated on MailChimp if getMailchimpUpdateObserverRan() is false.
+     * When Product object is saved set it to be updated on MailChimp if getSqualomailUpdateObserverRan() is false.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -907,19 +907,19 @@ class Ebizmarts_MailChimp_Model_Observer
 
             if ($ecommEnabled) {
                 $squalomailStoreId = $helper->getMCStoreId($storeId);
-                $apiProduct->setMailchimpStoreId($squalomailStoreId);
+                $apiProduct->setSqualomailStoreId($squalomailStoreId);
                 $apiProduct->setMagentoStoreId($storeId);
                 $status = $this->getCatalogProductStatusModel()->getProductStatus($product->getId(), $storeId);
 
                 if ($status[$product->getId()] == self::PRODUCT_IS_ENABLED) {
-                    $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                    $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $product->getId(),
                         Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
                     );
 
-                    $isMarkedAsDeleted = $dataProduct->getMailchimpSyncDeleted();
-                    $errorMessage = $dataProduct->getMailchimpSyncError();
+                    $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
+                    $errorMessage = $dataProduct->getSqualomailSyncError();
 
                     if ($isMarkedAsDeleted
                         || $errorMessage == Ebizmarts_MailChimp_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO
@@ -951,17 +951,17 @@ class Ebizmarts_MailChimp_Model_Observer
         foreach ($squalomailStoreIdsArray as $scopeData => $squalomailStoreId) {
             $scopeArray = $this->getScopeArrayFromString($scopeData);
             $ecommEnabled = $helper->isEcommerceEnabled($scopeArray['scope_id'], $scopeArray['scope']);
-            $apiProduct->setMailchimpStoreId($squalomailStoreId);
+            $apiProduct->setSqualomailStoreId($squalomailStoreId);
 
             if ($ecommEnabled) {
                 foreach ($productIds as $productId) {
-                    $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                    $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
                         Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
                     );
 
-                    $isMarkedAsDeleted = $dataProduct->getMailchimpSyncDeleted();
+                    $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
 
                     if (!$isMarkedAsDeleted) {
                         $apiProduct->update($productId);
@@ -999,7 +999,7 @@ class Ebizmarts_MailChimp_Model_Observer
             $helper = $this->makeHelper();
             $apiOrder =  $this->makeApiOrder();
             $apiOrder->setMagentoStoreId($storeId);
-            $apiOrder->setMailchimpStoreId($helper->getMCStoreId($storeId));
+            $apiOrder->setSqualomailStoreId($helper->getMCStoreId($storeId));
             $apiOrder->update($order->getId(), $storeId);
         }
     }
@@ -1046,7 +1046,7 @@ class Ebizmarts_MailChimp_Model_Observer
         $message = 'Image cache has been flushed please resend the products in order to update image URL.';
         $helper = $this->makeHelper();
         $configValues = array(array(Ebizmarts_MailChimp_Model_Config::PRODUCT_IMAGE_CACHE_FLUSH, 1));
-        $helper->saveMailchimpConfig($configValues, 0, 'default');
+        $helper->saveSqualomailConfig($configValues, 0, 'default');
         $helper->addAdminWarning($message);
 
         return $observer;
@@ -1156,7 +1156,7 @@ class Ebizmarts_MailChimp_Model_Observer
             $storeId = $customer->getStoreId();
             //If the customer was created in the admin panel use the store view selected for MailChimp.
             if (!$storeId) {
-                $storeId = $customer->getMailchimpStoreView();
+                $storeId = $customer->getSqualomailStoreView();
             }
 
             if ($helper->getLocalInterestCategories($storeId)
@@ -1281,7 +1281,7 @@ class Ebizmarts_MailChimp_Model_Observer
         $customer = Mage::getModel("customer/customer")->load($customerId);
 
         if ($customer->getId() !== null) {
-            $storeViewId = $customer->getMailchimpStoreView();
+            $storeViewId = $customer->getSqualomailStoreView();
         }
 
         return $storeViewId;
@@ -1328,7 +1328,7 @@ class Ebizmarts_MailChimp_Model_Observer
      * @param string $subscriberSource
      * @return bool
      */
-    protected function isMailchimpSave($subscriberSource)
+    protected function isSqualomailSave($subscriberSource)
     {
         return $subscriberSource === Ebizmarts_MailChimp_Model_Subscriber::MAILCHIMP_SUBSCRIBE;
     }

@@ -66,7 +66,7 @@ class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_A
             }
         } else {
             //Checking if "wkey" para is present on request, we cannot check for !isPost()
-            //because Mailchimp pings the URL (GET request) to validate webhook
+            //because Squalomail pings the URL (GET request) to validate webhook
             if (!$requestKey) {
                 $this->getResponse()
                     ->setHeader('HTTP/1.1', '403 Forbidden')

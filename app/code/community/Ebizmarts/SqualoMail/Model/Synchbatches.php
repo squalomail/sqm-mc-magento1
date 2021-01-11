@@ -8,7 +8,7 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     5/16/16 6:23 PM
- * @file:     MailchimpSychBatches.php
+ * @file:     SqualomailSychBatches.php
  */
 
 class Ebizmarts_MailChimp_Model_Synchbatches extends Mage_Core_Model_Abstract

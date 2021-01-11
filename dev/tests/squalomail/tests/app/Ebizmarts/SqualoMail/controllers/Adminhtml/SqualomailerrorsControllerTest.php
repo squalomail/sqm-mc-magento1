@@ -1,11 +1,11 @@
 <?php
 
-require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/MailchimperrorsController.php';
+require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/SqualomailerrorsController.php';
 
-class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController $squalomailerrorsController
+     * @var Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController $squalomailerrorsController
      */
     protected $_squalomailerrorsController;
 
@@ -13,7 +13,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
     {
         Mage::app('default');
         $this->_squalomailerrorsController = $this->getMockBuilder(
-            Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController::class
+            Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController::class
         );
     }
 
@@ -45,7 +45,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
         $squalomailerrorsControllerMock = $this->_squalomailerrorsController
             ->disableOriginalConstructor()
             ->setMethods(
-                array('makeHelper', 'getRequest', 'getResponse', 'getMailchimperrorsModel', 'getApiBatches',
+                array('makeHelper', 'getRequest', 'getResponse', 'getSqualomailerrorsModel', 'getApiBatches',
                     'getFileContent', 'unlink')
             )
             ->getMock();
@@ -70,9 +70,9 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
             ->setMethods(array('getBatchResponse', 'getMagentoBaseDir', 'batchDirExists', 'removeBatchDir'))
             ->getMock();
 
-        $squalomailerrorsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Mailchimperrors::class)
+        $squalomailerrorsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Squalomailerrors::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('load', 'getBatchId', 'getStoreId', 'getMailchimpStoreId'))
+            ->setMethods(array('load', 'getBatchId', 'getStoreId', 'getSqualomailStoreId'))
             ->getMock();
 
         $squalomailerrorsControllerMock->expects($this->once())->method('makeHelper')->willReturn($helperMock);
@@ -83,7 +83,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
 
         $squalomailerrorsControllerMock
             ->expects($this->once())
-            ->method('getMailchimperrorsModel')
+            ->method('getSqualomailerrorsModel')
             ->willReturn($squalomailerrorsMock);
 
         $squalomailerrorsControllerMock->expects($this->once())->method('getApiBatches')->willReturn($apiBatchesMock);
@@ -91,7 +91,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
         $squalomailerrorsMock->expects($this->once())->method('load')->with($errorId)->willReturnSelf();
         $squalomailerrorsMock->expects($this->once())->method('getBatchId')->willReturn($batchId);
         $squalomailerrorsMock->expects($this->once())->method('getStoreId')->willReturn($storeId);
-        $squalomailerrorsMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($squalomailStoreId);
+        $squalomailerrorsMock->expects($this->once())->method('getSqualomailStoreId')->willReturn($squalomailStoreId);
 
         $helperMock->expects($this->once())->method('isEcomSyncDataEnabled')->with($storeId)->willReturn(true);
 

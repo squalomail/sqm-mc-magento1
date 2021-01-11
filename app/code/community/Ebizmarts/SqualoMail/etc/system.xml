@@ -3,14 +3,14 @@
 <config>
     <tabs>
         <squalomail translate="label" module="squalomail">
-            <label><![CDATA[Mailchimp]]></label>
+            <label><![CDATA[Squalomail]]></label>
             <sort_order>400</sort_order>
         </squalomail>
     </tabs>
     <sections>
         <squalomail translate="label" module="squalomail">
             <class>squalomail-section</class>
-            <label>Mailchimp Configuration</label>
+            <label>Squalomail Configuration</label>
             <header_css>squalomail-header</header_css>
             <tab>squalomail</tab>
             <sort_order>100</sort_order>
@@ -26,7 +26,7 @@
                     <show_in_store>1</show_in_store>
                 </hint>
                 <general translate="label comment">
-                    <label>Mailchimp integration by ebizmarts</label>
+                    <label>Squalomail integration by ebizmarts</label>
                     <frontend_type>text</frontend_type>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
@@ -64,7 +64,7 @@
                             <show_in_store>1</show_in_store>
                         </oauth_wizard>
                         <storeid translate="label comment">
-                            <label>Mailchimp Store</label>
+                            <label>Squalomail Store</label>
                             <frontend_type>select</frontend_type>
                             <source_model>Ebizmarts_MailChimp_Model_System_Config_Source_Store</source_model>
                             <backend_model>squalomail/system_config_backend_store</backend_model>
@@ -118,7 +118,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <can_be_empty>1</can_be_empty>
-                            <comment><![CDATA[Synchronize Magento's General Subscription Audience with this Mailchimp audience.]]></comment>
+                            <comment><![CDATA[Synchronize Magento's General Subscription Audience with this Squalomail audience.]]></comment>
                         </list>
                         <interest_categories translate="label comment">
                             <label>Interest Categories</label>
@@ -203,17 +203,17 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment><![CDATA[This is required in order to tell the extensions what customer attributes should be sent to your selected Mailchimp list. <a class="mc-link" target="_blank" href="http://wiki.ebizmarts.com/m4m-merge-fields">See recommended configuration here.</a>]]></comment>
+                            <comment><![CDATA[This is required in order to tell the extensions what customer attributes should be sent to your selected Squalomail list. <a class="mc-link" target="_blank" href="http://wiki.ebizmarts.com/m4m-merge-fields">See recommended configuration here.</a>]]></comment>
                         </map_fields>
                         <create_fields translate="label comment">
-                            <label>Create Merge Fields on Mailchimp</label>
+                            <label>Create Merge Fields on Squalomail</label>
                             <frontend_type>button</frontend_type>
                             <frontend_model>squalomail/adminhtml_system_config_createMergeFields</frontend_model>
                             <sort_order>57</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment><![CDATA[Click this button to create the above fields on the selected Mailchimp audience.]]></comment>
+                            <comment><![CDATA[Click this button to create the above fields on the selected Squalomail audience.]]></comment>
                         </create_fields>
                         <create_webhook>
                             <label translate="comment">Create Webhook</label>
@@ -244,7 +244,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <can_be_empty>1</can_be_empty>
-                            <comment><![CDATA[If this is set to "No", the synchronization will be from Magento's newsletter to Mailchimp only.]]></comment>
+                            <comment><![CDATA[If this is set to "No", the synchronization will be from Magento's newsletter to Squalomail only.]]></comment>
                         </webhook_active>
                         <magento_mail translate="label comment">
                             <label>Use Magento emails</label>
@@ -255,7 +255,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <can_be_empty>1</can_be_empty>
-                            <comment><![CDATA[If you enable this Magento confirmation email will be sent for subscribers instead of Mailchimp email.]]></comment>
+                            <comment><![CDATA[If you enable this Magento confirmation email will be sent for subscribers instead of Squalomail email.]]></comment>
                         </magento_mail>
                         <enable_log translate="label comment">
                             <label>Enable Log</label>

@@ -24,7 +24,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     /**
      * @return mixed
      */
-    public function getMailchimpStoreId()
+    public function getSqualomailStoreId()
     {
         return $this->_squalomailStoreId;
     }
@@ -32,7 +32,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     /**
      * @param mixed $squalomailStoreId
      */
-    public function setMailchimpStoreId($squalomailStoreId)
+    public function setSqualomailStoreId($squalomailStoreId)
     {
         $this->_squalomailStoreId = $squalomailStoreId;
     }
@@ -90,11 +90,11 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
         $type = $this->getItemType();
 
         if (!empty($type)) {
-            $ecommerceSyncData = $this->getMailchimpEcommerceSyncDataModel();
+            $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
             $ecommerceSyncData->saveEcommerceSyncData(
                 $id,
                 $type,
-                $this->getMailchimpStoreId(),
+                $this->getSqualomailStoreId(),
                 $syncDelta,
                 $syncError,
                 $syncModified,
@@ -215,7 +215,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
         $this->getHelper()->logError($error);
 
         try {
-            $this->_logMailchimpError(
+            $this->_logSqualomailError(
                 $error, $type, $title,
                 $status, $originalId, $batchId, $storeId, $regType
             );
@@ -236,7 +236,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
      *
      * @throws Exception
      */
-    protected function _logMailchimpError(
+    protected function _logSqualomailError(
         $error,
         $type,
         $title,
@@ -256,7 +256,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
         $squalomailErrors->setOriginalId($originalId);
         $squalomailErrors->setBatchId($batchId);
         $squalomailErrors->setStoreId($storeId);
-        $squalomailErrors->setMailchimpStoreId($this->getMailchimpStoreId());
+        $squalomailErrors->setSqualomailStoreId($this->getSqualomailStoreId());
 
         $squalomailErrors->save();
     }
@@ -280,7 +280,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     /**
      * @return mixed
      */
-    public function getMailchimpEcommerceDataTableName()
+    public function getSqualomailEcommerceDataTableName()
     {
         return $this->getCoreResource()
             ->getTableName('squalomail/ecommercesyncdata');
@@ -289,7 +289,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     /**
      * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
      */
-    public function getMailchimpEcommerceSyncDataModel()
+    public function getSqualomailEcommerceSyncDataModel()
     {
         return new Ebizmarts_MailChimp_Model_Ecommercesyncdata();
     }

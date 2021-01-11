@@ -54,7 +54,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
             null,
             'left'
         );
-        $this->joinMailchimpSyncData($collection);
+        $this->joinSqualomailSyncData($collection);
 
         return $collection->getAllIds($this->getBatchLimitFromConfig());
     }
@@ -84,14 +84,14 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      */
     public function createBatchJson()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommerceCustomersCollection = $this->createEcommerceCustomersCollection();
-        $this->_ecommerceCustomersCollection->setMailchimpStoreId($squalomailStoreId);
+        $this->_ecommerceCustomersCollection->setSqualomailStoreId($squalomailStoreId);
         $this->_ecommerceCustomersCollection->setStoreId($magentoStoreId);
 
-        $this->setMailchimpStoreId($squalomailStoreId);
+        $this->setSqualomailStoreId($squalomailStoreId);
         $this->setMagentoStoreId($magentoStoreId);
         $helper = $this->getHelper();
 
@@ -116,7 +116,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
             if (false !== $customerJson) {
                 if (!empty($customerJson)) {
                     $isSubscribed = $this->isSubscribed($subscriber, $customer);
-                    $dataCustomer = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                    $dataCustomer = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $customer->getId(),
                         Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
                         $squalomailStoreId
@@ -137,7 +137,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
                             /**
                              * send merge fields for customers currently not subscribed (transactional)
                              */
-                            list($customerArray, $counter) = $this->sendMailchimpTags(
+                            list($customerArray, $counter) = $this->sendSqualomailTags(
                                 $magentoStoreId, $dataCustomer,
                                 $subscriber, $customer, $listId, $counter, $customerArray
                             );
@@ -170,11 +170,11 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     /**
      * @param $subscriber
      * @param $storeId
-     * @return false|Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
+     * @return false|Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      */
-    protected function _buildMailchimpTags($subscriber, $storeId)
+    protected function _buildSqualomailTags($subscriber, $storeId)
     {
-        $mailChimpTags = Mage::getModel('squalomail/api_subscribers_MailchimpTags');
+        $mailChimpTags = Mage::getModel('squalomail/api_subscribers_SqualomailTags');
         $mailChimpTags->setStoreId($storeId);
         $mailChimpTags->setSubscriber($subscriber);
         $mailChimpTags->setCustomer(
@@ -366,7 +366,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     /**
      * @param $collection Mage_Customer_Model_Resource_Customer_Collection
      */
-    protected function joinMailchimpSyncData($collection)
+    protected function joinSqualomailSyncData($collection)
     {
         $this->_ecommerceCustomersCollection->joinLeftEcommerceSyncData($collection);
     }
@@ -444,7 +444,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
         $this->logSyncError(
             $jsonErrorMessage,
             Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
-            ($customer->getStoreId() === 0) ? $customer->getMailchimpStoreView() : $customer->getStoreId(),
+            ($customer->getStoreId() === 0) ? $customer->getSqualomailStoreView() : $customer->getStoreId(),
             'magento_side_error',
             'Json Encode Failure',
             0,
@@ -458,14 +458,14 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      * @param $customer
      * @param $squalomailTags
      */
-    protected function logCouldNotEncodeMailchimpTags($customer, $squalomailTags)
+    protected function logCouldNotEncodeSqualomailTags($customer, $squalomailTags)
     {
         $jsonErrorMessage = json_last_error_msg();
 
         $this->logSyncError(
             $jsonErrorMessage,
             Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
-            ($customer->getStoreId() === 0) ? $customer->getMailchimpStoreView() : $customer->getStoreId(),
+            ($customer->getStoreId() === 0) ? $customer->getSqualomailStoreView() : $customer->getStoreId(),
             'magento_side_error',
             'Json Encode Failure',
             0,
@@ -517,7 +517,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
         $customerId = $customer->getId();
 
         if ($mergeFieldJSON === false) {
-            $this->logCouldNotEncodeMailchimpTags($customer, $mergeFields);
+            $this->logCouldNotEncodeSqualomailTags($customer, $mergeFields);
         } else {
             $hashedEmail = hash('md5', strtolower($customer->getEmail()));
             $batchData = array();
@@ -586,12 +586,12 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      * @param $counter
      * @return array|null
      */
-    protected function makeMailchimpTagsBatchStructure($magentoStoreId, $subscriber, $customer, $listId)
+    protected function makeSqualomailTagsBatchStructure($magentoStoreId, $subscriber, $customer, $listId)
     {
         $subscriber->setSubscriberEmail($customer->getEmail());
         $subscriber->setCustomerId($customer->getId());
-        $mailChimpTags = $this->_buildMailchimpTags($subscriber, $magentoStoreId);
-        $mergeFields["merge_fields"] = $mailChimpTags->getMailchimpTags();
+        $mailChimpTags = $this->_buildSqualomailTags($subscriber, $magentoStoreId);
+        $mergeFields["merge_fields"] = $mailChimpTags->getSqualomailTags();
         $batchData = $this->getCustomerPatchBatch($mergeFields, $customer, $listId);
         return $batchData;
     }
@@ -623,7 +623,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      * @param array         $customerArray
      * @return array
      */
-    protected function sendMailchimpTags(
+    protected function sendSqualomailTags(
         $magentoStoreId,
         Varien_Object $dataCustomer,
         $subscriber,
@@ -632,8 +632,8 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
         $counter,
         array $customerArray
     ) {
-        if ($dataCustomer->getMailchimpSyncedFlag()) {
-            $batchData = $this->makeMailchimpTagsBatchStructure(
+        if ($dataCustomer->getSqualomailSyncedFlag()) {
+            $batchData = $this->makeSqualomailTagsBatchStructure(
                 $magentoStoreId,
                 $subscriber,
                 $customer,

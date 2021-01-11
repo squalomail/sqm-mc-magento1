@@ -26,7 +26,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
     protected $_interestGroupHandle;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
+     * @var Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      */
     protected $_tags;
 
@@ -43,7 +43,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
         $this->_helper = Mage::helper('squalomail');
         $this->_dateHelper = Mage::helper('squalomail/date');
 
-        $this->_tags = Mage::getModel('squalomail/api_subscribers_MailchimpTags');
+        $this->_tags = Mage::getModel('squalomail/api_subscribers_SqualomailTags');
         $this->_interestGroupHandle = Mage::getModel('squalomail/api_subscribers_InterestGroupHandle');
     }
 
@@ -161,7 +161,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
     {
         try {
             $subscribe = true;
-            $this->getMailchimpTagsModel()->processMergeFields($data, $subscribe);
+            $this->getSqualomailTagsModel()->processMergeFields($data, $subscribe);
         } catch (Exception $e) {
             Mage::logException($e);
         }
@@ -214,7 +214,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
      */
     public function _profile(array $data)
     {
-        $this->getMailchimpTagsModel()->processMergeFields($data);
+        $this->getSqualomailTagsModel()->processMergeFields($data);
     }
 
     public function deleteProcessed()
@@ -241,9 +241,9 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
+     * @return Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      */
-    protected function getMailchimpTagsModel()
+    protected function getSqualomailTagsModel()
     {
         return $this->_tags;
     }

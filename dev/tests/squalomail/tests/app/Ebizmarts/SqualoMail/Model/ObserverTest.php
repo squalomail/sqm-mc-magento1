@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         /**
          * @var \Ebizmarts_MailChimp_Model_Observer $modelMock
          */
-        $modelMock = $this->getMailchimpObserverMock();
+        $modelMock = $this->getSqualomailObserverMock();
 
         $apiProductsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Products::class)
             ->disableOriginalConstructor()
@@ -43,7 +43,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('isEcommerceEnabled')->with($scopeId, $scope)->willReturn(true);
 
         $modelMock->expects($this->exactly(2))
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($dataProductMock);
 
         $dataProductMock->expects($this->exactly(2))->method('getEcommerceSyncDataItem')
@@ -60,7 +60,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             array($productIds[2])
         );
 
-        $dataProductMock->expects($this->exactly(2))->method('getMailchimpSyncDeleted')->willReturnOnConsecutiveCalls(
+        $dataProductMock->expects($this->exactly(2))->method('getSqualomailSyncDeleted')->willReturnOnConsecutiveCalls(
             $isMarkedAsDeleted,
             $isMarkedAsDeleted
         );
@@ -74,15 +74,15 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         /**
          * @var \Ebizmarts_MailChimp_Model_Observer $modelMock
          */
-        $modelMock = $this->getMailchimpObserverMock();
+        $modelMock = $this->getSqualomailObserverMock();
 
         $modelMock->expects($this->once())->method("_getCampaignCookie")->willReturn("abcd123");
         $modelMock->expects($this->once())->method("_getLandingCookie")->willReturn("abcd");
 
         $orderMock = $this->getOrderMock();
-        $orderMock->expects($this->once())->method("setMailchimpCampaignId")->with("abcd123");
-        $orderMock->expects($this->once())->method("getMailchimpLandingPage")->willReturn(null);
-        $orderMock->expects($this->once())->method("setMailchimpLandingPage")->with("abcd");
+        $orderMock->expects($this->once())->method("setSqualomailCampaignId")->with("abcd123");
+        $orderMock->expects($this->once())->method("getSqualomailLandingPage")->willReturn(null);
+        $orderMock->expects($this->once())->method("setSqualomailLandingPage")->with("abcd");
 
         $eventMock = $this->getEventObserverMock();
         $eventMock->expects($this->once())->method("getOrder")->willReturn($orderMock);
@@ -114,7 +114,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $eventMock = $this->getEventObserverMock();
 
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -155,7 +155,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $customerMock = $this->getMockBuilder(Mage_Customer_Model_Customer::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getId', 'getOrigData', 'getEmail', 'getStoreId', 'getMailchimpStoreView'))
+            ->setMethods(array('getId', 'getOrigData', 'getEmail', 'getStoreId', 'getSqualomailStoreView'))
             ->getMock();
 
         $eventObserverMock = $this->getObserverMock();
@@ -187,7 +187,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $apiCustomerMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Customers::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('update', 'setMailchimpStoreId', 'setMagentoStoreId'))
+            ->setMethods(array('update', 'setSqualomailStoreId', 'setMagentoStoreId'))
             ->getMock();
 
         $eventObserverMock->expects($this->once())->method('getEvent')->willReturn($eventMock);
@@ -197,7 +197,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $customerMock->expects($this->once())->method('getOrigData')->with('email')->willReturn($oldEmailAddress);
         $customerMock->expects($this->once())->method('getEmail')->willReturn($newEmailAddress);
         $customerMock->expects($this->once())->method('getStoreId')->willReturn($adminStoreId);
-        $customerMock->expects($this->once())->method('getMailchimpStoreView')->willReturn($storeId);
+        $customerMock->expects($this->once())->method('getSqualomailStoreView')->willReturn($storeId);
 
         $observerMock->expects($this->once())->method('makeHelper')->willReturn($helperMock);
 
@@ -234,7 +234,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $squalomailStoreId = 1;
         $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
 
-        $apiCustomerMock->expects($this->once())->method('setMailchimpStoreId')->with($squalomailStoreId);
+        $apiCustomerMock->expects($this->once())->method('setSqualomailStoreId')->with($squalomailStoreId);
         $apiCustomerMock->expects($this->once())->method('setMagentoStoreId')->with($storeId);
         $apiCustomerMock->expects($this->once())->method('update')->with($customerId);
 
@@ -251,7 +251,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $eventMock = $this->getEventObserverMock();
 
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -322,7 +322,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $orderMock = $this->getOrderMock();
         $eventObserverMock = $this->getObserverMock();
         $eventMock = $this->getEventObserverMock();
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
         $helperMock = $this->getHelperMock();
         $mageAppMock = $this->getMageAppMock();
         $requestMock = $this->getRequestMock();
@@ -388,15 +388,15 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $apiProductsMock->expects($this->once())->method('update')->with($productId);
 
         $dataProductMock->expects($this->once())
-            ->method('getMailchimpSyncDeleted')
+            ->method('getSqualomailSyncDeleted')
             ->willReturn($isMarkedAsDeleted);
 
         $dataProductMock->expects($this->once())
-            ->method('getMailchimpSyncModified')
+            ->method('getSqualomailSyncModified')
             ->willReturn($isMarkedAsDeleted);
 
         $observerMock->expects($this->once())
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($dataProductMock);
 
         $dataProductMock->expects($this->once())
@@ -424,7 +424,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $orderMock = $this->getOrderMock();
         $eventObserverMock = $this->getObserverMock();
         $eventMock = $this->getEventObserverMock();
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
         $helperMock = $this->getHelperMock();
         $mageAppMock = $this->getMageAppMock();
         $requestMock = $this->getRequestMock();
@@ -480,15 +480,15 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
 
         $dataProductMock->expects($this->once())
-            ->method('getMailchimpSyncDeleted')
+            ->method('getSqualomailSyncDeleted')
             ->willReturn($isMarkedAsDeleted);
 
         $dataProductMock->expects($this->once())
-            ->method('getMailchimpSyncModified')
+            ->method('getSqualomailSyncModified')
             ->willReturn($isMarkedAsDeleted);
 
         $observerMock->expects($this->once())
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($dataProductMock);
 
         $dataProductMock->expects($this->once())
@@ -517,7 +517,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $eventObserverMock = $this->getObserverMock();
 
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -603,7 +603,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $subscriberSource = null;
 
         $eventObserverMock = $this->getObserverMock();
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -626,7 +626,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $subscriberMock->expects($this->once())->method('getStatus')
             ->willReturn(Mage_Newsletter_Model_Subscriber::STATUS_SUBSCRIBED);
 
-        $observerMock->expects($this->once())->method('isMailchimpSave')->with($subscriberSource)->willReturn(false);
+        $observerMock->expects($this->once())->method('isSqualomailSave')->with($subscriberSource)->willReturn(false);
 
         $subscriberMock->expects($this->once())->method('getIsStatusChanged')->willReturn(true);
 
@@ -660,7 +660,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $subscriberSource = null;
 
         $eventObserverMock = $this->getObserverMock();
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -685,7 +685,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $subscriberMock->expects($this->once())->method('getSubscriberSource')->willReturn($subscriberSource);
 
-        $observerMock->expects($this->once())->method('isMailchimpSave')->with($subscriberSource)->willReturn(false);
+        $observerMock->expects($this->once())->method('isSqualomailSave')->with($subscriberSource)->willReturn(false);
 
         $helperMock->expects($this->once())->method('isSubscriptionEnabled')->with($storeViewId)->willReturn(true);
 
@@ -716,7 +716,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $eventObserverMock = $this->getObserverMock();
 
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -742,7 +742,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $subscriberMock->expects($this->once())->method('getSubscriberSource')->willReturn($subscriberSource);
 
-        $observerMock->expects($this->once())->method('isMailchimpSave')->with($subscriberSource)->willReturn(false);
+        $observerMock->expects($this->once())->method('isSqualomailSave')->with($subscriberSource)->willReturn(false);
 
         $helperMock->expects($this->once())->method('isSubscriptionEnabled')->with($storeViewId)->willReturn(true);
 
@@ -790,7 +790,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $eventMock = $this->getEventObserverMock();
 
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -799,7 +799,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->setMethods(
                 array(
                     'getStoreId', 'getCustomerEmail', 'setCustomerEmail',
-                    'setMailchimpCampaignId', 'setMailchimpLandingPage'
+                    'setSqualomailCampaignId', 'setSqualomailLandingPage'
                 )
             )
             ->getMock();
@@ -822,9 +822,9 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $quoteMock->expects($this->once())->method('getCustomerEmail')->willReturn($customerEmail);
         $quoteMock->expects($this->once())->method('setCustomerEmail')->with($email);
         $observerMock->expects($this->once())->method('_getCampaignCookie')->willReturn($campaignId);
-        $quoteMock->expects($this->once())->method('setMailchimpCampaignId')->with($campaignId);
+        $quoteMock->expects($this->once())->method('setSqualomailCampaignId')->with($campaignId);
         $observerMock->expects($this->once())->method('_getLandingCookie')->willReturn($landingCookie);
-        $quoteMock->expects($this->once())->method('setMailchimpLandingPage')->with($landingCookie);
+        $quoteMock->expects($this->once())->method('setSqualomailLandingPage')->with($landingCookie);
 
         $observerMock->loadCustomerToQuote($eventObserverMock);
     }
@@ -851,7 +851,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $eventMock = $this->getEventObserverMock();
 
-        $observerMock = $this->getMailchimpObserverMock();
+        $observerMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -860,7 +860,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->setMethods(
                 array(
                     'getStoreId', 'getCustomerEmail', 'setCustomerEmail',
-                    'setMailchimpCampaignId', 'setMailchimpLandingPage'
+                    'setSqualomailCampaignId', 'setSqualomailLandingPage'
                 )
             )
             ->getMock();
@@ -883,9 +883,9 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $quoteMock->expects($this->once())->method('getCustomerEmail')->willReturn($customerEmail);
         $quoteMock->expects($this->never())->method('setCustomerEmail')->with($email);
         $observerMock->expects($this->once())->method('_getCampaignCookie')->willReturn($campaignId);
-        $quoteMock->expects($this->once())->method('setMailchimpCampaignId')->with($campaignId);
+        $quoteMock->expects($this->once())->method('setSqualomailCampaignId')->with($campaignId);
         $observerMock->expects($this->once())->method('_getLandingCookie')->willReturn($landingCookie);
-        $quoteMock->expects($this->once())->method('setMailchimpLandingPage')->with($landingCookie);
+        $quoteMock->expects($this->once())->method('setSqualomailLandingPage')->with($landingCookie);
 
         $observerMock->loadCustomerToQuote($eventObserverMock);
     }
@@ -916,7 +916,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $eventObserverMock = $this->getEventObserverMock();
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $itemMock = $this->getOrderItemMock();
 
@@ -958,7 +958,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $apiProductsMock->expects($this->once())->method('update')->with($productId);
 
         $squalomailObserverMock->expects($this->once())
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($dataProductMock);
 
         $dataProductMock
@@ -966,7 +966,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->method('getEcommerceSyncDataItem')
             ->with($productId, $type, $squalomailStoreId)
             ->willReturn($dataProductMock);
-        $dataProductMock->expects($this->once())->method('getMailchimpSyncDeleted')->willReturn($isMarkedAsDeleted);
+        $dataProductMock->expects($this->once())->method('getSqualomailSyncDeleted')->willReturn($isMarkedAsDeleted);
 
         $squalomailObserverMock->itemCancel($observerMock);
     }
@@ -978,7 +978,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $customerId = 15;
         $subscriberEmail = 'luciaines+testHandelCustomerGroups@ebizmarts.com';
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1025,7 +1025,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $storeId = 1;
         $groups = array('d46296f47c' => array('3dd23446e4' => '3dd23446e4', 'a6c3c332bf' => 'a6c3c332bf'));
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1062,7 +1062,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $customerId = 15;
         $subscriberEmail = 'luciaines+testHandelCustomerGroups@ebizmarts.com';
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1095,7 +1095,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $html = '';
         $storeId = 1;
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1144,7 +1144,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $configValues = array(array(Ebizmarts_MailChimp_Model_Config::PRODUCT_IMAGE_CACHE_FLUSH, 1));
         $default = 'default';
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1153,7 +1153,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
 
         $squalomailObserverMock->expects($this->once())->method('makeHelper')->willReturn($helperMock);
 
-        $helperMock->expects($this->once())->method('saveMailchimpConfig')->with($configValues, 0, $default);
+        $helperMock->expects($this->once())->method('saveSqualomailConfig')->with($configValues, 0, $default);
         $helperMock->expects($this->once())->method('addAdminWarning')->with($message);
 
         $squalomailObserverMock->cleanProductImagesCacheAfter($observerMock);
@@ -1175,12 +1175,12 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             'apikey' => array('value' => $apiKey)
         ))));
         $scopeArray = array('scope_id' => '1', 'scope' => 'stores');
-        $oldMailchimpStoreId = 'a1s2d3f4g5h6j7k8l9p0';
+        $oldSqualomailStoreId = 'a1s2d3f4g5h6j7k8l9p0';
         $storeListId = 'g5f4d3s2a1';
         $message = 'The audience configuration was automatically modified to show the audience associated '
-            . 'to the selected Mailchimp store.';
+            . 'to the selected Squalomail store.';
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1209,7 +1209,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getMCStoreId')
             ->with($scopeArray['scope_id'], $scopeArray['scope'])
-            ->willReturn($oldMailchimpStoreId);
+            ->willReturn($oldSqualomailStoreId);
 
         $squalomailObserverMock
             ->expects($this->once())
@@ -1241,7 +1241,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
     {
         $apiKey = 'q1w2e3r4t5y6u7i8o9p0-us1';
         $listId = 'a1s2d3f4g5';
-        $oldMailchimpStoreId = 'a1s2d3f4g5h6j7k8l9p0';
+        $oldSqualomailStoreId = 'a1s2d3f4g5h6j7k8l9p0';
         $dataArray = array('groups' => array('general' => array('fields' => array(
             'list' => array('value' => $listId),
             'storeid' => array('inherit' => true),
@@ -1249,14 +1249,14 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         ))));
         $dataArrayModified = array('groups' => array('general' => array('fields' => array(
             'list' => array('value' => $listId),
-            'storeid' => array('value' => $oldMailchimpStoreId),
+            'storeid' => array('value' => $oldSqualomailStoreId),
             'apikey' => array('value' => $apiKey)
         ))));
         $scopeArray = array('scope_id' => '1', 'scope' => 'stores');
-        $message = 'The Mailchimp store configuration was not modified. There is a Mailchimp audience configured '
+        $message = 'The Squalomail store configuration was not modified. There is a Squalomail audience configured '
             . 'for this scope. Both must be set to inherit at the same time.';
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1285,7 +1285,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getMCStoreId')
             ->with($scopeArray['scope_id'], $scopeArray['scope'])
-            ->willReturn($oldMailchimpStoreId);
+            ->willReturn($oldSqualomailStoreId);
 
         $squalomailObserverMock
             ->expects($this->once())
@@ -1312,7 +1312,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $isMarkedAsDeleted = 1;
         $status = array($productId => 1);
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $helperMock = $this->getHelperMock();
 
@@ -1371,7 +1371,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->willReturn($ecommEnabled);
 
         $squalomailObserverMock->expects($this->once())
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($dataProductMock);
 
         $dataProductMock->expects($this->once())
@@ -1385,7 +1385,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->willReturn($squalomailStoreId);
 
         $dataProductMock->expects($this->once())
-            ->method('getMailchimpSyncDeleted')
+            ->method('getSqualomailSyncDeleted')
             ->willReturn($isMarkedAsDeleted);
         $dataProductMock->expects($this->once())
             ->method('delete');
@@ -1418,7 +1418,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $type = Ebizmarts_MailChimp_Model_Config::IS_PRODUCT;
         $productId = 910;
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $observerMock = $this->getObserverMock();
 
@@ -1495,7 +1495,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->willReturn($squalomailStoreId);
 
         $squalomailObserverMock->expects($this->once())
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($dataProductMock);
 
         $dataProductMock->expects($this->once())
@@ -1516,7 +1516,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->willReturn($productId);
 
         $dataProductMock->expects($this->once())
-            ->method('getMailchimpSyncDeleted')
+            ->method('getSqualomailSyncDeleted')
             ->willReturn($isMarkedAsDeleted);
 
         $squalomailObserverMock->newCreditMemo($observerMock);
@@ -1527,7 +1527,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $customerEmail = 'customer@squalomail.com';
         $squalomailUnsubscribe = 'on';
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
         $observerMock = $this->getObserverMock();
         $eventObserverMock = $this->getEventObserverMock();
         $creditMemoMock = $this->getCreditMemoMock();
@@ -1586,7 +1586,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
     {
         $squalomailUnsubscribe = '';
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
         $observerMock = $this->getObserverMock();
         $eventObserverMock = $this->getEventObserverMock();
         $creditMemoMock = $this->getCreditMemoMock();
@@ -1637,7 +1637,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         $type = Ebizmarts_MailChimp_Model_Config::IS_PRODUCT;
         $productId = 910;
 
-        $squalomailObserverMock = $this->getMailchimpObserverMock();
+        $squalomailObserverMock = $this->getSqualomailObserverMock();
 
         $observerMock = $this->getObserverMock();
 
@@ -1717,7 +1717,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->willReturn($squalomailStoreId);
 
         $squalomailObserverMock->expects($this->once())
-            ->method('getMailchimpEcommerceSyncDataModel')
+            ->method('getSqualomailEcommerceSyncDataModel')
             ->willReturn($dataProductMock);
 
         $dataProductMock->expects($this->once())
@@ -1738,22 +1738,22 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
             ->willReturn($productId);
 
         $dataProductMock->expects($this->once())
-            ->method('getMailchimpSyncDeleted')
+            ->method('getSqualomailSyncDeleted')
             ->willReturn($isMarkedAsDeleted);
 
         $squalomailObserverMock->cancelCreditMemo($observerMock);
     }
 
-    protected function getMailchimpObserverMock()
+    protected function getSqualomailObserverMock()
     {
         return $this->getMockBuilder(Ebizmarts_MailChimp_Model_Observer::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
                     'getRequest', 'getSubscriberModel', 'makeHelper', 'makeApiProduct',
-                    'removeCampaignData', 'getMailchimpEcommerceSyncDataModel', 'isBundleItem',
+                    'removeCampaignData', 'getSqualomailEcommerceSyncDataModel', 'isBundleItem',
                     'isConfigurableItem', 'getRegistry', 'removeRegistry', 'getCoreResource',
-                    'addSuccessIfRequired', 'isMailchimpSave', 'createEmailCookie', 'makeApiSubscriber',
+                    'addSuccessIfRequired', 'isSqualomailSave', 'createEmailCookie', 'makeApiSubscriber',
                     'getStoreViewIdBySubscriber', 'isEmailConfirmationRequired', 'isMagentoSubscription',
                     'isCustomerLoggedIn', 'getRequestActionName', 'getEmailFromPopUp', 'getEmailCookie',
                     '_getCampaignCookie', '_getLandingCookie', 'getWarningMessageAdminHtmlSession',
@@ -1807,7 +1807,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
                 array(
                     'getCustomerEmail', 'getStoreId', 'getCustomerFirstname',
                     'getCustomerLastname', 'getAllItems', 'getEntityId', 'setStoreId',
-                    "setMailchimpCampaignId", "getMailchimpLandingPage", "setMailchimpLandingPage"
+                    "setSqualomailCampaignId", "getSqualomailLandingPage", "setSqualomailLandingPage"
                 )
             )
             ->getMock();
@@ -1846,7 +1846,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
                     'isEcomSyncDataEnabledInAnyScope','getAllMailChimpStoreIds', 'isEcommerceEnabled',
                     'isSubscriptionConfirmationEnabled', 'getStoreId', 'isUseMagentoEmailsEnabled',
                     'saveInterestGroupData', 'isAbandonedCartEnabled', 'getInterestGroupsIfAvailable',
-                    'saveMailchimpConfig', 'addAdminWarning', 'getCurrentScope', 'getIfConfigExistsForScope',
+                    'saveSqualomailConfig', 'addAdminWarning', 'getCurrentScope', 'getIfConfigExistsForScope',
                     'getGeneralList', 'getListIdByApiKeyAndMCStoreId'
                 )
             )
@@ -1874,7 +1874,7 @@ class Ebizmarts_MailChimp_Model_ObserverTest extends PHPUnit_Framework_TestCase
         return $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
             ->setMethods(
                 array(
-                    'getMailchimpSyncDeleted', 'getEcommerceSyncDataItem', 'getMailchimpSyncModified',
+                    'getSqualomailSyncDeleted', 'getEcommerceSyncDataItem', 'getSqualomailSyncModified',
                     'delete'
                 )
             )

@@ -24,7 +24,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
         $storeDomain = 'https:://localhost.com';
         $storeEmail = 'store@email.com';
         $address = 'address';
-        $successMessage = "The Mailchimp store was successfully created.";
+        $successMessage = "The Squalomail store was successfully created.";
         $response = array(
             'id' => $squalomailStoreId,
             'list_id' => $listId,
@@ -69,7 +69,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
 
         $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getApiByKey', 'getMageApp', 'saveMailchimpConfig'))
+            ->setMethods(array('getApiByKey', 'getMageApp', 'saveSqualomailConfig'))
             ->getMock();
 
         $helperDateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
@@ -121,7 +121,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
                 $currencySymbol, $primaryLocale, $timeZone, $storePhone, $address
             )->willReturn($response);
 
-        $helperMock->expects($this->once())->method('saveMailchimpConfig')->with($configValues, 0, 'default');
+        $helperMock->expects($this->once())->method('saveSqualomailConfig')->with($configValues, 0, 'default');
 
         $apiStoresMock->expects($this->once())->method('getAdminSession')->willReturn($adminSessionMock);
 
@@ -138,7 +138,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
     {
         $apiKey = 'z1x2c3v4b5n6m7k8l9p0-us1';
         $mailChimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
-        $successMessage = "The Mailchimp store was successfully deleted.";
+        $successMessage = "The Squalomail store was successfully deleted.";
 
         $apiStoresMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Stores::class)
             ->disableOriginalConstructor()

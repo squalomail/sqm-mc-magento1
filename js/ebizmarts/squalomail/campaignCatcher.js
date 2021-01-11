@@ -2,7 +2,7 @@ function getCampaign() {
     let urlparams = null;
     let isGet = location.search.search('\\?');
     let mc_cid = null;
-    let isMailchimp = false;
+    let isSqualomail = false;
 
     if (isGet !== -1) {
         urlparams = getUrlVars();
@@ -12,7 +12,7 @@ function getCampaign() {
                     let reg = /^squalomail$/;
 
                     if (reg.exec(item.value)) {
-                        isMailchimp = true;
+                        isSqualomail = true;
                     }
                 } else {
                     if (item.key === 'mc_cid') {
@@ -31,7 +31,7 @@ function getCampaign() {
             let reg = /^squalomail$/;
 
             if (reg.exec(value)) {
-                isMailchimp = true;
+                isSqualomail = true;
             }
         } else {
             if (mccidIndex !== -1) {
@@ -40,7 +40,7 @@ function getCampaign() {
         }
     }
 
-    if (mc_cid && !isMailchimp) {
+    if (mc_cid && !isSqualomail) {
         Mage.Cookies.clear('squalomail_campaign_id');
         Mage.Cookies.set('squalomail_campaign_id', mc_cid);
     }
@@ -51,7 +51,7 @@ function getCampaign() {
         Mage.Cookies.set('squalomail_landing_page', location);
     }
 
-    if (isMailchimp) {
+    if (isSqualomail) {
         Mage.Cookies.clear('squalomail_campaign_id');
         Mage.Cookies.set('squalomail_landing_page', location);
     }

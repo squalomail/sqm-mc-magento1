@@ -1,7 +1,7 @@
 <?php
 
 if ($argc != 3) {
-    printf("You must call like:\n\t getMailchimpResponse apikey batchid\n");
+    printf("You must call like:\n\t getSqualomailResponse apikey batchid\n");
     return;
 }
 

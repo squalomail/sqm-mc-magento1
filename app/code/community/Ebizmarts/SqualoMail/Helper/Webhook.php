@@ -216,7 +216,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
                     $newWebhook = $api->getLists()->getWebhooks()->add($listId, $hookUrl, $events, $sources);
                     $newWebhookId = $newWebhook['id'];
                     $configValues = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_WEBHOOK_ID, $newWebhookId));
-                    $helper->saveMailchimpConfig($configValues, $scopeId, $scope);
+                    $helper->saveSqualomailConfig($configValues, $scopeId, $scope);
 
                     return true;
                 } else {
@@ -228,7 +228,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
                 $textToCompare = 'The resource submitted could not be validated. '
                     . 'For field-specific details, see the \'errors\' array.';
 
-                if ($e->getMailchimpDetails() == $textToCompare) {
+                if ($e->getSqualomailDetails() == $textToCompare) {
                     $errorMessage = 'Your store could not be accessed by MailChimp\'s Api. '
                         . 'Please confirm the URL: ' . $hookUrl
                         . ' is accessible externally to allow the webhook creation.';

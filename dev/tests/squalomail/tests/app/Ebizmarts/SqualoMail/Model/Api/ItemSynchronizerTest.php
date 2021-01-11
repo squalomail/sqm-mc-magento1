@@ -37,6 +37,6 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizerTest extends PHPUnit_Framewo
             ->with('squalomail/ecommercesyncdata')
             ->willReturn('squalomail_ecommerce_sync_data');
 
-        $_syncItemApiMock->getMailchimpEcommerceDataTableName();
+        $_syncItemApiMock->getSqualomailEcommerceDataTableName();
     }
 }

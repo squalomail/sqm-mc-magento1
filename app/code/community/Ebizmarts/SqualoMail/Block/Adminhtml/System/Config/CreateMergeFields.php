@@ -50,7 +50,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateMergeFields
     /**
      * @return string
      */
-    public function getMessageForMailchimpErrorLog()
+    public function getMessageForSqualomailErrorLog()
     {
         $helper = $this->makeHelper();
         $message =

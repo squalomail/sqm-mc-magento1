@@ -24,7 +24,7 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
             $quote = Mage::getModel('sales/quote')->load($params['id']);
             $storeId = $quote->getStoreId();
             $squalomailStoreId = Mage::helper('squalomail')->getMCStoreId($storeId);
-            $quoteSyncData = $this->getMailchimpEcommerceSyncDataModel()
+            $quoteSyncData = $this->getSqualomailEcommerceSyncDataModel()
                 ->getEcommerceSyncDataItem(
                     $params['id'],
                     Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
@@ -36,12 +36,12 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
                 $url .= '?mc_cid=' . $params['mc_cid'];
             }
 
-            if (!isset($params['token']) || $params['token'] != $quoteSyncData->getMailchimpToken()) {
+            if (!isset($params['token']) || $params['token'] != $quoteSyncData->getSqualomailToken()) {
                 Mage::getSingleton('customer/session')->addNotice($this->_("Your token cart is incorrect"));
                 $this->getResponse()
                     ->setRedirect($url);
             } else {
-                $quote->setMailchimpAbandonedcartFlag(1);
+                $quote->setSqualomailAbandonedcartFlag(1);
                 $quote->save();
 
                 if (!$quote->getCustomerId()) {
@@ -89,14 +89,14 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
             $squalomailStoreId = $helper->getMCStoreId($storeId);
             $url = Mage::getUrl('checkout/cart');
 
-            $promoCodeSyncData = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+            $promoCodeSyncData = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $id,
                 Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE,
                 $squalomailStoreId
             );
             $couponId = $promoCodeSyncData->getRelatedId();
 
-            if ($couponId && $promoCodeSyncData->getMailchimpToken() == $token) {
+            if ($couponId && $promoCodeSyncData->getSqualomailToken() == $token) {
                 $coupon = Mage::getModel('salesrule/coupon')->load($couponId);
 
                 if ($coupon->getId()) {
@@ -142,7 +142,7 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
     /**
      * @return mixed
      */
-    public function getMailchimpEcommerceSyncDataModel()
+    public function getSqualomailEcommerceSyncDataModel()
     {
         return Mage::getModel('squalomail/ecommercesyncdata');
     }

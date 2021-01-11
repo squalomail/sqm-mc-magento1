@@ -781,7 +781,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('isEcomSyncDataEnabled', 'getApi', 'saveMailchimpConfig', 'getDateSyncFinishByMailChimpStoreId')
+                array('isEcomSyncDataEnabled', 'getApi', 'saveSqualomailConfig', 'getDateSyncFinishByMailChimpStoreId')
             )
             ->getMock();
 
@@ -807,7 +807,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
 
         $apiStoresMock->expects($this->once())->method('editIsSyncing')->with($apiMock, false, $squalomailStoreId);
 
-        $helperMock->expects($this->once())->method('saveMailchimpConfig')->with($config, 0, 'default');
+        $helperMock->expects($this->once())->method('saveSqualomailConfig')->with($config, 0, 'default');
 
         $apiBatchesMock->handleSyncingValue($syncedDateArray);
     }

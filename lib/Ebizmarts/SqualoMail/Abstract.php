@@ -13,7 +13,7 @@
 class MailChimp_Abstract
 {
     /**
-     * @var Mailchimp
+     * @var Squalomail
      */
     protected $_master;
 

@@ -55,7 +55,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Store
         $mcStores = $this->getMCStores();
 
         if (isset($mcStores['stores'])) {
-            $stores[] = array('value' => '', 'label' => $helper->__('--- Select a Mailchimp Store ---'));
+            $stores[] = array('value' => '', 'label' => $helper->__('--- Select a Squalomail Store ---'));
 
             foreach ($mcStores['stores'] as $store) {
                 if ($store['platform'] == 'Magento') {

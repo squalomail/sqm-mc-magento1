@@ -11,7 +11,7 @@
                     alert("Max. merge fields reached. \nOnly up to 30 merge fields are allowed.");
                 }
                 else {
-                    alert('<?php echo $this->escapeHtml($this->getMessageForMailchimpErrorLog()) ?>')
+                    alert('<?php echo $this->escapeHtml($this->getMessageForSqualomailErrorLog()) ?>')
                 }
             },
             onFailure: function () {

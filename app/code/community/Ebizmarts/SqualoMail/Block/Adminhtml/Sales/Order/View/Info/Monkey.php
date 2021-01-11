@@ -31,7 +31,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_View_Info_Monkey extends M
     {
         $order = $this->getCurrentOrder();
         $ret = false;
-        if ($order->getMailchimpAbandonedcartFlag() || $order->getMailchimpCampaignId()) {
+        if ($order->getSqualomailAbandonedcartFlag() || $order->getSqualomailCampaignId()) {
             $ret = true;
         }
 
@@ -44,7 +44,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_View_Info_Monkey extends M
     public function getCampaignId()
     {
         $order = $this->getCurrentOrder();
-        return $order->getMailchimpCampaignId();
+        return $order->getSqualomailCampaignId();
     }
 
     /**

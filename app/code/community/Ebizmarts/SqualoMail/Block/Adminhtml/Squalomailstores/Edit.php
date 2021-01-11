@@ -9,7 +9,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @file:     Edit.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
     {
@@ -26,7 +26,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit extends Mage_Admi
             'class'     => 'delete',
             'onclick'   => 'deleteMCStoreConfirm(\''
                 . Mage::helper('core')->jsQuoteEscape(
-                    Mage::helper('adminhtml')->__('Are you sure you want to delete this Mailchimp store?')
+                    Mage::helper('adminhtml')->__('Are you sure you want to delete this Squalomail store?')
                 )
                 .'\', \''
                 . $this->getDeleteUrl()

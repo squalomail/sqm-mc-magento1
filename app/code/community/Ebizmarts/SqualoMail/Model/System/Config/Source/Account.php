@@ -86,7 +86,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
                     } catch (MailChimp_Error $e) {
                         if ($helper->isEcomSyncDataEnabled($scopeArray['scope_id'], $scopeArray['scope'])) {
                             $message = $helper->__(
-                                'It seems your Mailchimp store was deleted. '
+                                'It seems your Squalomail store was deleted. '
                                 . 'Please create a new one and associate it in order to get your Ecommerce data synced.'
                             );
                             Mage::getSingleton('adminhtml/session')->addWarning($message);
@@ -173,7 +173,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
                 $totalOrders = $totalOrdersText . ' ' . $this->_accountDetails['total_orders'];
                 $totalCartsText = $helper->__('  Total Carts:');
                 $totalCarts = $totalCartsText . ' ' . $this->_accountDetails['total_carts'];
-                $title = $helper->__('Ecommerce Data uploaded to Mailchimp store ')
+                $title = $helper->__('Ecommerce Data uploaded to Squalomail store ')
                     . $this->_accountDetails['store_name']
                     . ':';
                 if ($this->_accountDetails['store_sync_flag']

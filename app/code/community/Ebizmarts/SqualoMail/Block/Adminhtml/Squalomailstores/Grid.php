@@ -10,7 +10,7 @@
  * @date:     3/5/18 1:41 PM
  * @file:     Grid.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     public function __construct()

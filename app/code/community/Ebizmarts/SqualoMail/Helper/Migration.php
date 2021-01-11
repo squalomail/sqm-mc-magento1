@@ -219,7 +219,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     /**
      * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
      */
-    protected function getMailchimpEcommerceSyncDataModel()
+    protected function getSqualomailEcommerceSyncDataModel()
     {
         return Mage::getModel('squalomail/ecommercesyncdata');
     }
@@ -261,17 +261,17 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $customerObject = Mage::getModel('customer/customer')->load($customerId);
                         $syncError = null;
                         $syncModified = null;
-                        $syncDelta = $customerObject->getMailchimpSyncDelta();
+                        $syncDelta = $customerObject->getSqualomailSyncDelta();
 
-                        if ($customer->getMailchimpSyncError()) {
-                            $syncError = $customer->getMailchimpSyncError();
+                        if ($customer->getSqualomailSyncError()) {
+                            $syncError = $customer->getSqualomailSyncError();
                         }
 
-                        if ($customer->getMailchimpSyncModified()) {
-                            $syncModified = $customer->getMailchimpSyncModified();
+                        if ($customer->getSqualomailSyncModified()) {
+                            $syncModified = $customer->getSqualomailSyncModified();
                         }
 
-                        $ecommerceSyncData = $this->getMailchimpEcommerceSyncDataModel();
+                        $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $customerId,
                             Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
@@ -330,15 +330,15 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $syncError = null;
                         $syncModified = null;
 
-                        if ($product->getMailchimpSyncError()) {
-                            $syncError = $product->getMailchimpSyncError();
+                        if ($product->getSqualomailSyncError()) {
+                            $syncError = $product->getSqualomailSyncError();
                         }
 
-                        if ($product->getMailchimpSyncModified()) {
-                            $syncModified = $product->getMailchimpSyncModified();
+                        if ($product->getSqualomailSyncModified()) {
+                            $syncModified = $product->getSqualomailSyncModified();
                         }
 
-                        $ecommerceSyncData = $this->getMailchimpEcommerceSyncDataModel();
+                        $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $productId,
                             Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
@@ -404,17 +404,17 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $syncError = null;
                         $syncModified = null;
                         $orderObject = $this->getSalesOrderModel()->load($orderId);
-                        $syncDelta = $orderObject->getMailchimpSyncDelta();
+                        $syncDelta = $orderObject->getSqualomailSyncDelta();
 
-                        if ($order->getMailchimpSyncError()) {
-                            $syncError = $order->getMailchimpSyncError();
+                        if ($order->getSqualomailSyncError()) {
+                            $syncError = $order->getSqualomailSyncError();
                         }
 
-                        if ($order->getMailchimpSyncModified()) {
-                            $syncModified = $order->getMailchimpSyncModified();
+                        if ($order->getSqualomailSyncModified()) {
+                            $syncModified = $order->getSqualomailSyncModified();
                         }
 
-                        $ecommerceSyncData = $this->getMailchimpEcommerceSyncDataModel();
+                        $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $orderId,
                             Ebizmarts_MailChimp_Model_Config::IS_ORDER,
@@ -474,21 +474,21 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $syncDeleted = null;
                         $token = null;
                         $quoteObject = $this->getSalesOrderModel()->load($quoteId);
-                        $syncDelta = $quoteObject->getMailchimpSyncDelta();
+                        $syncDelta = $quoteObject->getSqualomailSyncDelta();
 
-                        if ($quote->getMailchimpSyncError()) {
-                            $syncError = $quote->getMailchimpSyncError();
+                        if ($quote->getSqualomailSyncError()) {
+                            $syncError = $quote->getSqualomailSyncError();
                         }
 
-                        if ($quote->getMailchimpSyncDeleted()) {
-                            $syncDeleted = $quote->getMailchimpSyncDeleted();
+                        if ($quote->getSqualomailSyncDeleted()) {
+                            $syncDeleted = $quote->getSqualomailSyncDeleted();
                         }
 
-                        if ($quote->getMailchimpToken()) {
-                            $token = $quote->getMailchimpToken();
+                        if ($quote->getSqualomailToken()) {
+                            $token = $quote->getSqualomailToken();
                         }
 
-                        $ecommerceSyncData = $this->getMailchimpEcommerceSyncDataModel();
+                        $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $quoteId,
                             Ebizmarts_MailChimp_Model_Config::IS_QUOTE,

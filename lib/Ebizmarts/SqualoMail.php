@@ -8,7 +8,7 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/27/16 4:36 PM
- * @file:     Mailchimp.php
+ * @file:     Squalomail.php
  */
 if (defined("COMPILER_INCLUDE_PATH")) {
     include_once dirname(__FILE__) . '/Ebizmarts/MailChimp/Abstract.php';

@@ -27,7 +27,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
         $this->addColumn(
             'squalomail',
             array(
-            'label' => $this->_helper->__('Mailchimp'),
+            'label' => $this->_helper->__('Squalomail'),
             'style' => 'width:120px',
             )
         );
@@ -121,7 +121,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
      */
     protected function _getMailChimpValue()
     {
-        return Mage::getSingleton('core/session')->getMailchimpValue();
+        return Mage::getSingleton('core/session')->getSqualomailValue();
     }
 
     /**
@@ -129,7 +129,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
      */
     protected function _getMailChimpLabel()
     {
-        return Mage::getSingleton('core/session')->getMailchimpLabel();
+        return Mage::getSingleton('core/session')->getSqualomailLabel();
     }
 
     /**

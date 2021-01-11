@@ -11,7 +11,7 @@
  * @date:     5/27/16 1:50 PM
  * @file:     EcommerceController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_Controller_Action
 {
 
     protected $_helper;

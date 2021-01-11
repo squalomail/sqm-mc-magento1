@@ -1,18 +1,18 @@
 <?php
 
-require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/MailchimpController.php';
+require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/SqualomailController.php';
 
-class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_MailchimpController $squalomailController
+     * @var Ebizmarts_MailChimp_Adminhtml_SqualomailController $squalomailController
      */
     protected $_squalomailController;
 
     public function setUp()
     {
         Mage::app('default');
-        $this->_squalomailController = $this->getMockBuilder(Ebizmarts_MailChimp_Adminhtml_MailchimpController::class);
+        $this->_squalomailController = $this->getMockBuilder(Ebizmarts_MailChimp_Adminhtml_SqualomailController::class);
     }
 
     public function tearDown()
@@ -47,7 +47,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('createBlock'))
             ->getMock();
 
-        $blockMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Mailchimp::class)
+        $blockMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setCustomerId', 'setUseAjax', 'toHtml'))
             ->getMock();
@@ -204,10 +204,10 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
         $apiKey = 'a1s2d3f4g5h6j7k8l9z1x2c3v4v4-us1';
 
         $data = array(
-            array('id' => '', 'name' => '--- Select a Mailchimp Store ---'),
+            array('id' => '', 'name' => '--- Select a Squalomail Store ---'),
             array('id' => 'a1s2d3f4g5h6j7k8l9p0', 'name' => 'Madison Island - English')
         );
-        $jsonData = '[{"id":"","name":"--- Select a Mailchimp Store ---"},'
+        $jsonData = '[{"id":"","name":"--- Select a Squalomail Store ---"},'
             . '{"id":"a1s2d3f4g5h6j7k8l9p0","name":"Madison Island - English"}]';
 
         $squalomailControllerMock = $this->_squalomailController

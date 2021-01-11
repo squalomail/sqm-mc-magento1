@@ -53,11 +53,11 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     public function createBatchJson()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommerceProductsCollection = $this->createEcommerceProductsCollection();
-        $this->_ecommerceProductsCollection->setMailchimpStoreId($squalomailStoreId);
+        $this->_ecommerceProductsCollection->setSqualomailStoreId($squalomailStoreId);
         $this->_ecommerceProductsCollection->setStoreId($magentoStoreId);
 
         $helper = $this->getHelper();
@@ -79,7 +79,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
         $this->_markSpecialPrices();
         $collection = $this->makeProductsNotSentCollection();
-        $this->joinMailchimpSyncData($collection);
+        $this->joinSqualomailSyncData($collection);
         $batchArray = array();
         $batchId = $this->makeBatchId($magentoStoreId);
         $counter = 0;
@@ -106,7 +106,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                     $batchArray[$counter] = $data;
                     $counter++;
 
-                    $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                    $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
                         Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
@@ -151,12 +151,12 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     public function createDeletedProductsBatchJson()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $deletedProducts = $this->getProductResourceCollection();
         $this->getEcommerceProductsCollection()
-            ->joinMailchimpSyncDataDeleted($deletedProducts, $this->getBatchLimitFromConfig());
+            ->joinSqualomailSyncDataDeleted($deletedProducts, $this->getBatchLimitFromConfig());
 
         $batchArray = array();
         $batchId = $this->makeBatchId($magentoStoreId);
@@ -207,7 +207,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function _buildNewProductRequest($product, $batchId)
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $variantProducts = array();
@@ -268,7 +268,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function _buildUpdateProductRequest($product, $batchId)
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
         $variantProducts = array();
         $operations = array();
@@ -281,13 +281,13 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             $parentIds = $this->_productTypeConfigurableResource->getParentIdsByChild($product->getId());
 
             foreach ($parentIds as $parentId) {
-                $productSyncDataItem = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+                $productSyncDataItem = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $parentId,
                     Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                     $squalomailStoreId
                 );
 
-                if ($productSyncDataItem->getMailchimpSyncDelta()) {
+                if ($productSyncDataItem->getSqualomailSyncDelta()) {
                     $parent = $this->_getParentProduct($parentId);
                     $variantProducts = $this->makeProductChildrenArray(
                         $product,
@@ -492,7 +492,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             $this->_parentUrl = $data['url'];
         }
 
-        $price = $this->getMailchimpFinalPrice($product, $magentoStoreId);
+        $price = $this->getSqualomailFinalPrice($product, $magentoStoreId);
 
         if ($price) {
             $this->_parentPrice = $price;
@@ -544,7 +544,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     public function sendModifiedProduct($order)
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $data = array();
@@ -557,7 +557,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
             $product = $this->loadProductById($itemProductId);
             $productId = $product->getId();
-            $productSyncData = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
+            $productSyncData = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $productId,
                 Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
                 $squalomailStoreId
@@ -580,8 +580,8 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                 continue;
             }
 
-            $syncModified = $productSyncData->getMailchimpSyncModified();
-            $productSyncDelta = $productSyncData->getMailchimpSyncDelta();
+            $syncModified = $productSyncData->getSqualomailSyncModified();
+            $productSyncDelta = $productSyncData->getSqualomailSyncDelta();
             $isProductEnabled = $this->isProductEnabled($productId);
 
             if ($syncModified && $isProductEnabled) {
@@ -675,10 +675,10 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function shouldSendProductUpdate($product)
     {
-        return $product->getMailchimpSyncModified()
-            && $product->getMailchimpSyncDelta()
-            && $product->getMailchimpSyncedFlag()
-            && $product->getMailchimpSyncError() == '';
+        return $product->getSqualomailSyncModified()
+            && $product->getSqualomailSyncDelta()
+            && $product->getSqualomailSyncedFlag()
+            && $product->getSqualomailSyncError() == '';
     }
 
     /**
@@ -829,17 +829,17 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      *
      * @param $collection
      */
-    public function joinMailchimpSyncData($collection)
+    public function joinSqualomailSyncData($collection)
     {
-        $joinCondition = $this->buildMailchimpDataJoin();
-        $this->executeMailchimpDataJoin($collection, $joinCondition);
-        $this->buildMailchimpDataWhere($collection);
+        $joinCondition = $this->buildSqualomailDataJoin();
+        $this->executeSqualomailDataJoin($collection, $joinCondition);
+        $this->buildSqualomailDataWhere($collection);
     }
 
     /**
      * @return string
      */
-    protected function buildMailchimpDataJoin()
+    protected function buildSqualomailDataJoin()
     {
         $joinCondition = "m4m.related_id = e.entity_id AND m4m.type = '%s' AND m4m.squalomail_store_id = '%s'";
         return $joinCondition;
@@ -851,26 +851,26 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      *
      * @param $collection
      */
-    public function joinMailchimpSyncDataForSpecialPrices($collection)
+    public function joinSqualomailSyncDataForSpecialPrices($collection)
     {
-        $joinCondition = $this->builMailchimpDataJoinForSpecialPrices();
-        $this->executeMailchimpDataJoin($collection, $joinCondition);
-        $this->builMailchimpDataJoinForSpecialPrices();
+        $joinCondition = $this->builSqualomailDataJoinForSpecialPrices();
+        $this->executeSqualomailDataJoin($collection, $joinCondition);
+        $this->builSqualomailDataJoinForSpecialPrices();
     }
 
     /**
      * @return string
      */
-    protected function builMailchimpDataJoinForSpecialPrices()
+    protected function builSqualomailDataJoinForSpecialPrices()
     {
-        $joinCondition = $this->buildMailchimpDataJoin() . " AND m4m.squalomail_sync_modified = 0";
+        $joinCondition = $this->buildSqualomailDataJoin() . " AND m4m.squalomail_sync_modified = 0";
         return $joinCondition;
     }
 
     /**
      * @param $collection
      */
-    protected function buildMailchimpDataWhere($collection)
+    protected function buildSqualomailDataWhere($collection)
     {
         $whereCreateBatchJson = "m4m.squalomail_sync_delta IS null OR m4m.squalomail_sync_modified = 1";
         $this->_ecommerceProductsCollection->addWhere($collection, $whereCreateBatchJson);
@@ -1092,7 +1092,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
         if (!$this->currentProductIsVisible()) {
             $parentId = $this->getParentId($product->getId());
             if ($parentId) {
-                $price = $this->getMailchimpFinalPrice($product, $magentoStoreId);
+                $price = $this->getSqualomailFinalPrice($product, $magentoStoreId);
             }
         } else {
             if ($this->_parentPrice) {
@@ -1168,7 +1168,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      * @return float \ return the price of the product
      * @throws Mage_Core_Exception
      */
-    protected function getMailchimpFinalPrice($product, $magentoStoreId)
+    protected function getSqualomailFinalPrice($product, $magentoStoreId)
     {
         $helper = $this->getHelper();
         $price = Mage::helper('tax')
@@ -1197,7 +1197,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
         $collection = $this->getProductResourceCollection();
         $collection->addStoreFilter($magentoStoreId);
 
-        $this->joinMailchimpSyncDataForSpecialPrices($collection);
+        $this->joinSqualomailSyncDataForSpecialPrices($collection);
 
         $collection->addAttributeToFilter(
             'special_price',
@@ -1231,7 +1231,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
          */
         $collectionNoSpecialPrice = $this->getProductResourceCollection();
         $collectionNoSpecialPrice->addStoreFilter($magentoStoreId);
-        $this->joinMailchimpSyncDataForSpecialPrices($collectionNoSpecialPrice);
+        $this->joinSqualomailSyncDataForSpecialPrices($collectionNoSpecialPrice);
 
         $collectionNoSpecialPrice->addAttributeToFilter(
             'special_price',
@@ -1311,8 +1311,8 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      * @param $collection
      * @param $joinCondition
      */
-    protected function executeMailchimpDataJoin($collection, $joinCondition)
+    protected function executeSqualomailDataJoin($collection, $joinCondition)
     {
-        $this->_ecommerceProductsCollection->executeMailchimpDataJoin($collection, $joinCondition);
+        $this->_ecommerceProductsCollection->executeSqualomailDataJoin($collection, $joinCondition);
     }
 }

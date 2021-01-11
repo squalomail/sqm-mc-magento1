@@ -10,7 +10,7 @@
  * @file:     Form.php
  */
 
-class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
 
     protected function _prepareForm()

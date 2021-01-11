@@ -10,7 +10,7 @@
  * @date:     6/10/16 12:38 AM
  * @file:     Grid.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Mailchimp extends Mage_Adminhtml_Block_Widget_Grid
+class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     protected $_lists = array();
@@ -109,7 +109,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Mailchimp extends Ma
     {
         $storeId = $this->_storeId;
         if (!$storeId) {
-            $storeId = $this->_customer->getMailchimpStoreView();
+            $storeId = $this->_customer->getSqualomailStoreView();
         }
 
         return $storeId;

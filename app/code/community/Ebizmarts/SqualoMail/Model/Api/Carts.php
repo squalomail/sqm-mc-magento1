@@ -31,12 +31,12 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     public function createBatchJson()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommerceQuotesCollection = $this->createEcommerceQuoteCollection();
         $this->_ecommerceQuotesCollection->setStoreId($magentoStoreId);
-        $this->_ecommerceQuotesCollection->setMailchimpStoreId($squalomailStoreId);
+        $this->_ecommerceQuotesCollection->setSqualomailStoreId($squalomailStoreId);
 
         $helper = $this->getHelper();
         $oldStore = $helper->getCurrentStoreId();
@@ -81,7 +81,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     public function _getConvertedQuotes()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $batchId = $this->getBatchId();
@@ -138,7 +138,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     public function _getModifiedQuotes()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $helper = $this->getHelper();
@@ -247,7 +247,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     public function _getNewQuotes()
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $helper = $this->getHelper();
@@ -394,7 +394,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
         // be sure that the quotes are already in squalomail and not deleted
         $where = "m4m.squalomail_sync_deleted = 0 "
             . "AND m4m.squalomail_store_id = '"
-            . $this->getMailchimpStoreId() . "'";
+            . $this->getSqualomailStoreId() . "'";
         $this->getEcommerceQuoteCollection()->addWhere($allCartsForEmail, $where);
 
         return $allCartsForEmail;
@@ -412,7 +412,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
         $apiProduct = $this->getApiProducts();
         $apiProduct->setMagentoStoreId($magentoStoreId);
 
-        $campaignId = $cart->getMailchimpCampaignId();
+        $campaignId = $cart->getSqualomailCampaignId();
         $oneCart = array();
         $oneCart['id'] = $cart->getEntityId();
         $customer = $this->_getCustomer($cart, $magentoStoreId);
@@ -452,7 +452,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     protected function _processCartLines($items, $apiProduct)
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $lines = array();
@@ -461,7 +461,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
         foreach ($items as $item) {
             $productId = $item->getProductId();
             $isTypeProduct = $this->isTypeProduct();
-            $productSyncData = $this->getMailchimpEcommerceSyncDataModel()
+            $productSyncData = $this->getSqualomailEcommerceSyncDataModel()
                 ->getEcommerceSyncDataItem($productId, $isTypeProduct, $squalomailStoreId);
             $line = array();
 
@@ -486,10 +486,10 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
             }
 
             //id can not be 0 so we add 1 to $itemCount before setting the id.
-            $productSyncError = $productSyncData->getMailchimpSyncError();
+            $productSyncError = $productSyncData->getSqualomailSyncError();
             $isProductEnabled = $apiProduct->isProductEnabled($productId, $magentoStoreId);
 
-            if (!$isProductEnabled || ($productSyncData->getMailchimpSyncDelta() && $productSyncError == '')) {
+            if (!$isProductEnabled || ($productSyncData->getSqualomailSyncDelta() && $productSyncError == '')) {
                 $itemCount++;
                 $line['id'] = (string)$itemCount;
                 $line['product_id'] = $productId;
@@ -520,7 +520,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
         if (!$isModified) {
             $token = hash('md5', rand(0, 9999999));
         } else {
-            $token = $cart->getMailchimpToken();
+            $token = $cart->getSqualomailToken();
         }
 
         $url = Mage::getModel('core/url')->setStore($cart->getStoreId())->getUrl(
@@ -635,12 +635,12 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     public function addProductNotSentData($cart, $allCarts)
     {
-        $squalomailStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $helper = $this->getHelper();
         $apiProducts = $this->getApiProducts();
-        $apiProducts->setMailchimpStoreId($squalomailStoreId);
+        $apiProducts->setSqualomailStoreId($squalomailStoreId);
         $apiProducts->setMagentoStoreId($magentoStoreId);
 
         $productData = $apiProducts->sendModifiedProduct($cart);

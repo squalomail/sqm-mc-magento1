@@ -91,7 +91,7 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @return string
      */
-    public function getMailchimpTitleComplete()
+    public function getSqualomailTitleComplete()
     {
         return $this->_squalomailTitleComplete;
     }
@@ -99,7 +99,7 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @return string
      */
-    public function getMailchimpDetails()
+    public function getSqualomailDetails()
     {
         return $this->_squalomailDetails;
     }
@@ -107,7 +107,7 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @return array|null
      */
-    public function getMailchimpErrors()
+    public function getSqualomailErrors()
     {
         return $this->_squalomailErrors;
     }
@@ -115,7 +115,7 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @return string
      */
-    public function getMailchimpTitle()
+    public function getSqualomailTitle()
     {
         return $this->_squalomailTitle;
     }
@@ -123,7 +123,7 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @return string
      */
-    public function getMailchimpUrl()
+    public function getSqualomailUrl()
     {
         return $this->_squalomailUrl;
     }
@@ -131,7 +131,7 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @return string
      */
-    public function getMailchimpMethod()
+    public function getSqualomailMethod()
     {
         return $this->_squalomailMethod;
     }
@@ -139,7 +139,7 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @return string
      */
-    public function getMailchimpParams()
+    public function getSqualomailParams()
     {
         return $this->_squalomailParams;
     }

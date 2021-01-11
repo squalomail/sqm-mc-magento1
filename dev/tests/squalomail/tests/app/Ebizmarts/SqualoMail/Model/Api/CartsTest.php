@@ -37,7 +37,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'createEcommerceQuoteCollection',
                 'getHelper',
@@ -52,7 +52,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsCollectionResourceMock = $this
             ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Quote_Collection::class)
-            ->disableOriginalConstructor()->setMethods(array('setMailchimpStoreId', 'setStoreId'))
+            ->disableOriginalConstructor()->setMethods(array('setSqualomailStoreId', 'setStoreId'))
             ->getMock();
 
         $helperDateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
@@ -66,12 +66,12 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
                     'getAbandonedCartFirstDate', 'getResendTurn')
             )->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('createEcommerceQuoteCollection')
             ->willReturn($cartsCollectionResourceMock);
 
-        $cartsCollectionResourceMock->expects($this->once())->method('setMailchimpStoreId')
+        $cartsCollectionResourceMock->expects($this->once())->method('setSqualomailStoreId')
             ->with(self::MAILCHIMP_STORE_ID);
         $cartsCollectionResourceMock->expects($this->once())->method('setStoreId')->with(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
@@ -103,7 +103,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $cartsApiMock = $this->_cartsApiMock
             ->setMethods(
                 array(
-                    'getMailchimpStoreId', 'getMagentoStoreId', 'createEcommerceQuoteCollection',
+                    'getSqualomailStoreId', 'getMagentoStoreId', 'createEcommerceQuoteCollection',
                     'getHelper', 'getDateHelper', 'setBatchId',
                     '_getConvertedQuotes', '_getModifiedQuotes', '_getNewQuotes'
                 )
@@ -117,10 +117,10 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $quotesCollectionResource = $this
             ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Quote_Collection::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setStoreId', 'setMailchimpStoreId'))
+            ->setMethods(array('setStoreId', 'setSqualomailStoreId'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('createEcommerceQuoteCollection')
             ->willReturn($quotesCollectionResource);
@@ -129,7 +129,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->method('setStoreId')->willReturn(self::MAGENTO_STORE_ID);
 
         $quotesCollectionResource->expects($this->once())
-            ->method('setMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+            ->method('setSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
 
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
 
@@ -152,7 +152,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             . "' AND m4m.squalomail_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getQuoteCollection',
                 'joinLeftEcommerceSyncData',
@@ -196,7 +196,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('getIterator', 'getEntityId'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getBatchId')->willReturn(self::BATCH_ID);
         $cartsApiMock->expects($this->once())->method('getQuoteCollection')->willReturn($cartsCollectionMock);
@@ -284,7 +284,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getBatchId',
                 'getQuoteCollection',
@@ -346,7 +346,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('modifyCounterSentPerBatch', 'getEntityId'))
             ->getMock();
         //----------------------------
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($squalomailHelperMock);
         $cartsApiMock->expects($this->once())->method('getBatchId')->willReturn(self::BATCH_ID);
@@ -442,7 +442,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getBatchId',
                 'getQuoteCollection',
@@ -492,7 +492,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('modifyCounterSentPerBatch', 'getEntityId'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($squalomailHelperMock);
         $cartsApiMock->expects($this->once())->method('getBatchId')->willReturn(self::BATCH_ID);
@@ -568,7 +568,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getBatchId',
                 'getQuoteCollection',
@@ -631,7 +631,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('modifyCounterSentPerBatch', 'getEntityId'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($squalomailHelperMock);
         $cartsApiMock->expects($this->once())->method('getBatchId')->willReturn(self::BATCH_ID);
@@ -747,7 +747,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getHelper',
                 'getDateHelper',
@@ -815,7 +815,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()->setMethods(array('getSize', 'addFieldToFilter'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
         $cartsApiMock->expects($this->once())->method('getDateHelper')->willReturn($dateHelperMock);
@@ -941,7 +941,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getHelper',
                 'getDateHelper',
@@ -991,7 +991,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()->setMethods(array('getSize', 'addFieldToFilter'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
         $cartsApiMock->expects($this->once())->method('getDateHelper')->willReturn($dateHelperMock);
@@ -1068,7 +1068,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getHelper',
                 'getDateHelper',
@@ -1118,7 +1118,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()->setMethods(array('getSize', 'addFieldToFilter'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
         $cartsApiMock->expects($this->once())->method('getDateHelper')->willReturn($dateHelperMock);
@@ -1197,7 +1197,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getHelper',
                 'getDateHelper',
@@ -1255,7 +1255,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()->setMethods(array('getSize', 'addFieldToFilter'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
         $cartsApiMock->expects($this->once())->method('getDateHelper')->willReturn($dateHelperMock);
@@ -1355,7 +1355,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
-                'getMailchimpStoreId',
+                'getSqualomailStoreId',
                 'getMagentoStoreId',
                 'getHelper',
                 'getDateHelper',
@@ -1425,7 +1425,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()->setMethods(array('getSize', 'addFieldToFilter'))
             ->getMock();
 
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
         $cartsApiMock->expects($this->once())->method('getDateHelper')->willReturn($dateHelperMock);
@@ -1523,7 +1523,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $arrayAddToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
         $stringCustomerId = 'customer_email';
         $arrayAddToFilterCustomerId = array('eq' => self::CUSTOMER_EMAIL_BY_CART);
-        $arrayMailchimpTableName = array('m4m' => $squalomailTableName);
+        $arraySqualomailTableName = array('m4m' => $squalomailTableName);
         $condition = "m4m.related_id = main_table.entity_id AND m4m.type = '"
             . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
             . "' AND m4m.squalomail_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
@@ -1534,7 +1534,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(
                 array(
                         'getQuoteCollection', 'getMagentoStoreId', 'joinLeftEcommerceSyncData',
-                        'getMailchimpStoreId', 'getEcommerceQuoteCollection')
+                        'getSqualomailStoreId', 'getEcommerceQuoteCollection')
             )->getMock();
 
         $newCartsCollectionMock = $this
@@ -1563,7 +1563,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
         $cartsApiMock->expects($this->once())->method('joinLeftEcommerceSyncData')->willReturn($newCartsCollectionMock);
-        $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
+        $cartsApiMock->expects($this->once())->method('getSqualomailStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getEcommerceQuoteCollection')
             ->willReturn($cartsCollectionResourceMock);
         $cartsCollectionResourceMock->expects($this->once())->method('addWhere')
@@ -1690,7 +1690,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
-                        'getMailchimpCampaignId',
+                        'getSqualomailCampaignId',
                         'getEntityId',
                         'getQuoteCurrencyCode',
                         'getGrandTotal',
@@ -1714,7 +1714,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->with(self::MAGENTO_STORE_ID);
 
         $cartModelMock->expects($this->once())
-            ->method('getMailchimpCampaignId')
+            ->method('getSqualomailCampaignId')
             ->willReturn($squalomailCampaignId);
 
         $cartModelMock->expects($this->once())

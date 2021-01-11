@@ -27,7 +27,7 @@ class MailChimp_Error extends Exception
 
     public function getFriendlyMessage()
     {
-        $friendlyMessage = "Mailchimp error with the next message: " . $this->_squalomailMessage;
+        $friendlyMessage = "Squalomail error with the next message: " . $this->_squalomailMessage;
 
         return $friendlyMessage;
     }
