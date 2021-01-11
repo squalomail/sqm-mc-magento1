@@ -26,10 +26,10 @@ class Ebizmarts_SqualoMail_Model_System_Config_Source_StoreTest extends PHPUnit_
                     'connected_site' => array(
                         'site_foreign_id' => 'a1s2d3f4g5h6j7k8l9p0',
                         'site_script' => array(
-                            'url' => 'https://api.squalomail.com/mc/v3/ecommerce/stores/sitejs',
+                            'url' => 'https://api.staging.squalomail.com/mc/v3/ecommerce/stores/sitejs',
                             'fragment' => '<script id="sqmjs">!function(c,h,i,m,p){m=c.createElement(h),'
                                 . 'p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}'
-                                . '(document,"script","https://api.squalomail.com/mc/v3/ecommerce/stores/sitejs");</script>'
+                                . '(document,"script","https://api.staging.squalomail.com/mc/v3/ecommerce/stores/sitejs");</script>'
                         ),
                     ),
                     'automations' => array(

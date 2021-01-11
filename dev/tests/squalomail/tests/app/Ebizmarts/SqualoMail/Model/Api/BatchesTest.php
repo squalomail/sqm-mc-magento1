@@ -35,21 +35,21 @@ class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestC
             '_links' => array(
                 array(
                     'rel' => 'parent',
-                    'href' => 'https://api.squalomail.com/mc/v3/batches',
+                    'href' => 'https://api.staging.squalomail.com/mc/v3/batches',
                     'method' => 'GET',
                     'targetSchema' =>
-                        'https://api.squalomail.com/mc/v3/schema/3.0/Definitions/Batches/CollectionResponse.json',
-                    'schema' => 'https://api.squalomail.com/mc/v3/schema/3.0/CollectionLinks/Batches.json'
+                        'https://api.staging.squalomail.com/mc/v3/schema/3.0/Definitions/Batches/CollectionResponse.json',
+                    'schema' => 'https://api.staging.squalomail.com/mc/v3/schema/3.0/CollectionLinks/Batches.json'
                 ),
                 array(
                     'rel' => 'self',
-                    'href' => 'https://api.squalomail.com/mc/v3/batches/cfb450eb11',
+                    'href' => 'https://api.staging.squalomail.com/mc/v3/batches/cfb450eb11',
                     'method' => 'GET',
-                    'targetSchema' => 'https://api.squalomail.com/mc/v3/schema/3.0/Definitions/Batches/Response.json'
+                    'targetSchema' => 'https://api.staging.squalomail.com/mc/v3/schema/3.0/Definitions/Batches/Response.json'
                 ),
                 array(
                     'rel' => 'delete',
-                    'href' => 'https://api.squalomail.com/mc/v3/batches/cfb450eb11',
+                    'href' => 'https://api.staging.squalomail.com/mc/v3/batches/cfb450eb11',
                     'method' => 'DELETE'
                 )
             )
