@@ -11,47 +11,47 @@
  * @date:     4/27/16 5:00 PM
  * @file:     Lists.php
  */
-class MailChimp_Lists extends MailChimp_Abstract
+class SqualoMail_Lists extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ListsSegments
+     * @var SqualoMail_ListsSegments
      */
     public $segments;
     /**
-     * @var MailChimp_ListsAbuseReports
+     * @var SqualoMail_ListsAbuseReports
      */
     public $abuseReports;
     /**
-     * @var MailChimp_ListsActivity
+     * @var SqualoMail_ListsActivity
      */
     public $activity;
     /**
-     * @var MailChimp_ListsClients
+     * @var SqualoMail_ListsClients
      */
     public $clients;
     /**
-     * @var MailChimp_ListsGrowthHistory
+     * @var SqualoMail_ListsGrowthHistory
      */
     public $growthHistory;
     /**
-     * @var MailChimp_ListsInterestCategory
+     * @var SqualoMail_ListsInterestCategory
      */
     public $interestCategory;
     /**
-     * @var MailChimp_ListsMembers
+     * @var SqualoMail_ListsMembers
      */
     public $members;
     /**
-     * @var MailChimp_ListsMergeFields
+     * @var SqualoMail_ListsMergeFields
      */
     public $mergeFields;
     /**
-     * @var MailChimp_ListsWebhooks
+     * @var SqualoMail_ListsWebhooks
      */
     public $webhooks;
 
     /**
-     * @return MailChimp_ListsWebhooks
+     * @return SqualoMail_ListsWebhooks
      */
     public function getWebhooks()
     {
@@ -59,7 +59,7 @@ class MailChimp_Lists extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_ListsMergeFields
+     * @return SqualoMail_ListsMergeFields
      */
     public function getMergeFields()
     {
@@ -67,7 +67,7 @@ class MailChimp_Lists extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_ListsInterestCategory
+     * @return SqualoMail_ListsInterestCategory
      */
     public function getInterestCategory()
     {
@@ -75,7 +75,7 @@ class MailChimp_Lists extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_ListsMembers
+     * @return SqualoMail_ListsMembers
      */
     public function getMembers()
     {
@@ -103,8 +103,8 @@ class MailChimp_Lists extends MailChimp_Abstract
      * @param $emailTypeOption
      * @param string              $visibility
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $name,
@@ -123,7 +123,7 @@ class MailChimp_Lists extends MailChimp_Abstract
             'notify_on_subscribe' => $notifyOnSubscribe, 'notify_on_unsubscribe' => $notifyOnUnsubscribe,
             'email_type_option' => $emailTypeOption, 'visibility' => $visibility);
 
-        return $this->_master->call('lists', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('lists', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     public function getLists(
@@ -178,9 +178,9 @@ class MailChimp_Lists extends MailChimp_Abstract
         }
 
         if ($id) {
-            return $this->_master->call('lists/' . $id, $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('lists/' . $id, $_params, Ebizmarts_SqualoMail::GET);
         } else {
-            return $this->_master->call('lists', $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('lists', $_params, Ebizmarts_SqualoMail::GET);
         }
     }
 
@@ -201,8 +201,8 @@ class MailChimp_Lists extends MailChimp_Abstract
      *                                      alternative backup.
      * @param null $visibility          Whether this list is public or private. (pub/prv)
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function edit(
         $listId,
@@ -240,17 +240,17 @@ class MailChimp_Lists extends MailChimp_Abstract
             $_params['visibility'] = $visibility;
         }
 
-        return $this->_master->call('lists/' . $listId, $_params, Ebizmarts_MailChimp::PATCH);
+        return $this->_master->call('lists/' . $listId, $_params, Ebizmarts_SqualoMail::PATCH);
     }
 
     /**
      * @param $listId                   The unique id for the list.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($listId)
     {
-        return $this->_master->call('lists/' . $listId, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call('lists/' . $listId, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

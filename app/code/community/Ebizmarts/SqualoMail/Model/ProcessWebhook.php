@@ -1,32 +1,32 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     5/19/16 3:55 PM
  * @file:     ProdcessWebhook.php
  */
-class Ebizmarts_MailChimp_Model_ProcessWebhook
+class Ebizmarts_SqualoMail_Model_ProcessWebhook
 {
     const BATCH_LIMIT = 200;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
     protected $_dateHelper;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
+     * @var Ebizmarts_SqualoMail_Model_Api_Subscribers_InterestGroupHandle
      */
     protected $_interestGroupHandle;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
+     * @var Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     protected $_tags;
 
@@ -121,7 +121,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
             if (!$newSubscriber->getId()) {
                 if ($oldSubscriber->getId()) {
                     $oldSubscriber->setSubscriberEmail($new);
-                    $oldSubscriber->setSubscriberSource(Ebizmarts_MailChimp_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+                    $oldSubscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
                     $oldSubscriber->save();
                 } else {
                     $helper->subscribeMember($newSubscriber);
@@ -188,7 +188,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
                     //if config setting "Webhooks Delete action" is set as "Delete customer account"
 
                     if (Mage::getStoreConfig(
-                        Ebizmarts_MailChimp_Model_Config::GENERAL_UNSUBSCRIBE, $subscriber->getStoreId()
+                        Ebizmarts_SqualoMail_Model_Config::GENERAL_UNSUBSCRIBE, $subscriber->getStoreId()
                     )
                     ) {
                         $subscriber->delete();
@@ -241,7 +241,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
+     * @return Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     protected function getSqualomailTagsModel()
     {
@@ -249,7 +249,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -257,7 +257,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date|Mage_Core_Helper_Abstract
+     * @return Ebizmarts_SqualoMail_Helper_Date|Mage_Core_Helper_Abstract
      */
     protected function getDateHelper()
     {

@@ -9,7 +9,7 @@
          stopOnFailure="false"
          syntaxCheck="true"
          bootstrap="./autoload.php">
-    <testsuite name="MailChimp Unit Test">
+    <testsuite name="SqualoMail Unit Test">
         <directory suffix="Test.php">tests</directory>
     </testsuite>
     <filter>

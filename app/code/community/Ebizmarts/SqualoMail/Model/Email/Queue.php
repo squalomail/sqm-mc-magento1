@@ -10,7 +10,7 @@
  * @date:     8/30/16 2:46 PM
  * @file:     Queue.php
  */
-class Ebizmarts_MailChimp_Model_Email_Queue extends Mage_Core_Model_Email_Queue
+class Ebizmarts_SqualoMail_Model_Email_Queue extends Mage_Core_Model_Email_Queue
 {
 
     /**

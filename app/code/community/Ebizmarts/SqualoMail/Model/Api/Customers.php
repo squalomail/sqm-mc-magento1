@@ -10,7 +10,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
+class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Model_Api_ItemSynchronizer
 {
     const BATCH_LIMIT = 100;
 
@@ -23,7 +23,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     protected $_batchId;
 
     /**
-     * @var $_ecommerceCustomersCollection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection
+     * @var $_ecommerceCustomersCollection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
      */
     protected $_ecommerceCustomersCollection;
 
@@ -118,7 +118,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
                     $isSubscribed = $this->isSubscribed($subscriber, $customer);
                     $dataCustomer = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $customer->getId(),
-                        Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
+                        Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER,
                         $squalomailStoreId
                     );
 
@@ -170,7 +170,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     /**
      * @param $subscriber
      * @param $storeId
-     * @return false|Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
+     * @return false|Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
      */
     protected function _buildSqualomailTags($subscriber, $storeId)
     {
@@ -181,7 +181,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
             $this->getCustomerByWebsiteAndId()
                 ->setWebsiteId($this->getWebsiteByStoreId($storeId))->load($subscriber->getCustomerId())
         );
-        $squaloMailTags->buildMailChimpTags();
+        $squaloMailTags->buildSqualoMailTags();
 
         return $squaloMailTags;
     }
@@ -379,7 +379,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     protected function isEcommerceCustomerOptInConfigEnabled($magentoStoreId)
     {
         $configValue = $this->getHelper()->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::ECOMMERCE_CUSTOMERS_OPTIN,
+            Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_CUSTOMERS_OPTIN,
             $magentoStoreId
         );
         return (1 === (int)$configValue);
@@ -443,7 +443,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
 
         $this->logSyncError(
             $jsonErrorMessage,
-            Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
+            Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER,
             ($customer->getStoreId() === 0) ? $customer->getSqualomailStoreView() : $customer->getStoreId(),
             'magento_side_error',
             'Json Encode Failure',
@@ -464,7 +464,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
 
         $this->logSyncError(
             $jsonErrorMessage,
-            Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
+            Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER,
             ($customer->getStoreId() === 0) ? $customer->getSqualomailStoreView() : $customer->getStoreId(),
             'magento_side_error',
             'Json Encode Failure',
@@ -598,16 +598,16 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
 
     /**
      * @param Varien_Object $dataCustomer
-     * @param Ebizmarts_MailChimp_Helper_Data $helper
+     * @param Ebizmarts_SqualoMail_Helper_Data $helper
      */
     protected function incrementCounterSentPerBatch(
         Varien_Object $dataCustomer,
-        Ebizmarts_MailChimp_Helper_Data $helper
+        Ebizmarts_SqualoMail_Helper_Data $helper
     ) {
         if ($dataCustomer->getId()) {
-            $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::CUS_MOD);
+            $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::CUS_MOD);
         } else {
-            $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::CUS_NEW);
+            $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::CUS_NEW);
         }
     }
 
@@ -654,11 +654,11 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      */
     protected function getItemType()
     {
-        return Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER;
+        return Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER;
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
      */
     public function getEcommerceCustomersCollection()
     {
@@ -666,12 +666,12 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
      */
     public function createEcommerceCustomersCollection()
     {
         /**
-         * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection
+         * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
          */
         $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_customers_collection');
 

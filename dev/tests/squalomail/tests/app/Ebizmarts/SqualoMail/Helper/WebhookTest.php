@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Helper_WebhookTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Helper_WebhookTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -14,14 +14,14 @@ class Ebizmarts_MailChimp_Helper_WebhookTest extends PHPUnit_Framework_TestCase
         $realScopeArray = array('scope_id' => 0, 'scope' => 'default');
         $listId = 'a1s2d3f4g5';
 
-        $webhookHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Webhook::class)
+        $webhookHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Webhook::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('deleteCurrentWebhook', 'createNewWebhook', 'getHelper')
             )
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getRealScopeForConfig', 'getGeneralList', 'isSubscriptionEnabled')
@@ -32,7 +32,7 @@ class Ebizmarts_MailChimp_Helper_WebhookTest extends PHPUnit_Framework_TestCase
         $helperMock
             ->expects($this->once())
             ->method('getRealScopeForConfig')
-            ->with(Ebizmarts_MailChimp_Model_Config::GENERAL_LIST, $scopeId, $scope)
+            ->with(Ebizmarts_SqualoMail_Model_Config::GENERAL_LIST, $scopeId, $scope)
             ->willReturn($realScopeArray);
         $helperMock->expects($this->once())->method('getGeneralList')->with($scopeId, $scope)->willReturn($listId);
         $webhookHelperMock

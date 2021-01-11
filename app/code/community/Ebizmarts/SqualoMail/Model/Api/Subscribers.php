@@ -9,19 +9,19 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_Subscribers
+class Ebizmarts_SqualoMail_Model_Api_Subscribers
 {
     const BATCH_LIMIT = 100;
 
     /**
-     * Ebizmarts_MailChimp_Helper_Data
+     * Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_mcHelper;
     protected $_mcDateHelper;
     protected $_storeId;
 
     /**
-     * @var $_ecommerceSubscribersCollection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Subscribers_Collection
+     * @var $_ecommerceSubscribersCollection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Subscribers_Collection
      */
     protected $_ecommerceSubscribersCollection;
 
@@ -63,11 +63,11 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
         $helper = $this->getSqualomailHelper();
         $dateHelper = $this->getSqualomailDateHelper();
         $thisScopeHasSubMinSyncDateFlag = $helper->getIfConfigExistsForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
             $this->getStoreId()
         );
         $thisScopeHasList = $helper->getIfConfigExistsForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_LIST,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_LIST,
             $this->getStoreId()
         );
 
@@ -80,12 +80,12 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
             || !$helper->getSubMinSyncDateFlag($this->getStoreId())
         ) {
             $realScope = $helper->getRealScopeForConfig(
-                Ebizmarts_MailChimp_Model_Config::GENERAL_LIST,
+                Ebizmarts_SqualoMail_Model_Config::GENERAL_LIST,
                 $this->getStoreId()
             );
             $configValues = array(
                 array(
-                    Ebizmarts_MailChimp_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
+                    Ebizmarts_SqualoMail_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
                     $this->_mcDateHelper->formatDate(null, 'Y-m-d H:i:s')
                 )
             );
@@ -115,7 +115,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
         $this->_ecommerceSubscribersCollection->limitCollection($collection, $limit);
         $date = $dateHelper->getDateMicrotime();
         $batchId = 'storeid-' . $this->getStoreId() . '_'
-            . Ebizmarts_MailChimp_Model_Config::IS_SUBSCRIBER . '_' . $date;
+            . Ebizmarts_SqualoMail_Model_Config::IS_SUBSCRIBER . '_' . $date;
         $counter = 0;
 
         foreach ($collection as $subscriber) {
@@ -128,9 +128,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
             if ($subscriberJson !== false) {
                 if (!empty($subscriberJson)) {
                     if ($subscriber->getSqualomailSyncModified()) {
-                        $helper->modifyCounterSubscribers(Ebizmarts_MailChimp_Helper_Data::SUB_MOD);
+                        $helper->modifyCounterSubscribers(Ebizmarts_SqualoMail_Helper_Data::SUB_MOD);
                     } else {
-                        $helper->modifyCounterSubscribers(Ebizmarts_MailChimp_Helper_Data::SUB_NEW);
+                        $helper->modifyCounterSubscribers(Ebizmarts_SqualoMail_Helper_Data::SUB_NEW);
                     }
 
                     $subscriberArray[$counter]['method'] = "PUT";
@@ -170,7 +170,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
     protected function _saveSubscriber($subscriber, $error, $syncDelta = null, $setSource = false)
     {
         if ($setSource) {
-            $subscriber->setSubscriberSource(Ebizmarts_MailChimp_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+            $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
         }
 
         $subscriber->setData("squalomail_sync_delta", $syncDelta);
@@ -219,7 +219,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
      * @param $subscriber
      * @return array
      * @throws Mage_Core_Exception
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     protected function _getInterest($subscriber)
     {
@@ -257,7 +257,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
 
             try {
                 $api = $helper->getApi($storeId);
-            } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+            } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                 $helper->logError($e->getMessage());
                 return;
             }
@@ -285,7 +285,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
                 $subscriber->setData("squalomail_sync_error", "");
                 $subscriber->setData("squalomail_sync_modified", 0);
                 $saveSubscriber = true;
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 if ($this->isSubscribed($newStatus) && $subscriber->getIsStatusChanged()
                     && !$helper->isSubscriptionConfirmationEnabled($storeId)
                 ) {
@@ -295,7 +295,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
                                 $api, $listId, $emailHash, $squaloMailTags, $subscriber, $interest
                             );
                             $saveSubscriber = true;
-                        } catch (MailChimp_Error $e) {
+                        } catch (SqualoMail_Error $e) {
                             $this->_catchSqualomailException($e, $subscriber, $isAdmin);
                             $saveSubscriber = true;
                         } catch (Exception $e) {
@@ -313,7 +313,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
             }
 
             if ($saveSubscriber) {
-                $subscriber->setSubscriberSource(Ebizmarts_MailChimp_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+                $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
                 $subscriber->save();
             }
         }
@@ -476,9 +476,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
             $api = $helper->getApi($storeId);
             $emailHash = hash('md5', strtolower($subscriber->getSubscriberEmail()));
             $api->getLists()->getMembers()->update($listId, $emailHash, null, 'unsubscribed');
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $helper->logError($e->getMessage());
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $helper->logError($e->getFriendlyMessage());
             Mage::getSingleton('adminhtml/session')->addError($e->getFriendlyMessage());
         } catch (Exception $e) {
@@ -533,7 +533,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getSqualomailHelper()
     {
@@ -549,7 +549,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date
+     * @return Ebizmarts_SqualoMail_Helper_Date
      */
     protected function getSqualomailDateHelper()
     {
@@ -617,19 +617,19 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
             $this->getCustomerByWebsiteAndId()
                 ->setWebsiteId($this->getWebsiteByStoreId($storeId))->load($subscriber->getCustomerId())
         );
-        $squaloMailTags->buildMailChimpTags();
+        $squaloMailTags->buildSqualoMailTags();
 
         return $squaloMailTags;
     }
 
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Subscribers_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Subscribers_Collection
      */
     public function getEcommerceSubscribersCollection()
     {
         /**
-         * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Subscribers_Collection
+         * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Subscribers_Collection
          */
         $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_subscribers_collection');
 

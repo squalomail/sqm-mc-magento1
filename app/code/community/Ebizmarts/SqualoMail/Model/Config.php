@@ -1,15 +1,15 @@
 <?php
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/29/16 3:55 PM
  * @file:     Config.php
  */
-class Ebizmarts_MailChimp_Model_Config
+class Ebizmarts_SqualoMail_Model_Config
 {
     const GENERAL_ACTIVE                        = 'squalomail/general/active';
     const GENERAL_APIKEY                        = 'squalomail/general/apikey';

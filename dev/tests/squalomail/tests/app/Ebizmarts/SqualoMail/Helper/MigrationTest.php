@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Helper_MigrationTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Helper_MigrationTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -11,7 +11,7 @@ class Ebizmarts_MailChimp_Helper_MigrationTest extends PHPUnit_Framework_TestCas
     {
         $arrayMigrationConfigData = array('115' => true, '116' => true, '1164' => true);
 
-        $migrationHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Migration::class)
+        $migrationHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Migration::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Helper_MigrationTest extends PHPUnit_Framework_TestCas
             )
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getConfig'))
             ->getMock();

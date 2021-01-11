@@ -1,16 +1,16 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_BatchesTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Products $apiBatchesMock
+     * @var Ebizmarts_SqualoMail_Model_Api_Products $apiBatchesMock
      */
     protected $_apiBatchesMock;
 
     public function setUp()
     {
         Mage::app('default');
-        $this->_apiBatchesMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Batches::class);
+        $this->_apiBatchesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Batches::class);
     }
 
     public function tearDown()
@@ -263,7 +263,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             )
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('handleResendDataBefore', 'handleResendDataAfter', 'isEcomSyncDataEnabled', 'ping'))
             ->getMock();
@@ -372,7 +372,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
 
         $batchResponse = $this->getBatchResponse();
 
-        $apiBatchesMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Batches::class)
+        $apiBatchesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Batches::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getHelper', 'getApiCustomers', 'getApiProducts',
@@ -381,41 +381,41 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             )
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getMCStoreId', 'isEcomSyncDataEnabled', 'getMCIsSyncing', 'getPromoConfig')
             )
             ->getMock();
 
-        $apiCustomersMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Customers::class)
+        $apiCustomersMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Customers::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createBatchJson'))
             ->getMock();
 
 
-        $apiProductsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Products::class)
+        $apiProductsMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Products::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createBatchJson', 'createDeletedProductsBatchJson'))
             ->getMock();
 
 
-        $apiCartsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Carts::class)
+        $apiCartsMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Carts::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createBatchJson'))
             ->getMock();
 
-        $apiOrdersMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Orders::class)
+        $apiOrdersMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Orders::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createBatchJson'))
             ->getMock();
 
-        $apiPromoRulesMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_PromoRules::class)
+        $apiPromoRulesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_PromoRules::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createBatchJson'))
             ->getMock();
 
-        $apiPromoCodesMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_PromoCodes::class)
+        $apiPromoCodesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_PromoCodes::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createBatchJson'))
             ->getMock();
@@ -574,23 +574,23 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             )
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMCStoreId', 'isEcomSyncDataEnabled', 'isSubscriptionEnabled'))
             ->getMock();
 
-        $syncBatchesMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Synchbatches::class)
+        $syncBatchesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Synchbatches::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCollection'))
             ->getMock();
 
-        $syncBatchesTwoMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Synchbatches::class)
+        $syncBatchesTwoMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Synchbatches::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getBatchId', 'setStatus', 'save'))
             ->getMock();
 
         $syncBatchesCollectionMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Synchbatches_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Synchbatches_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('addFieldToFilter', 'getIterator'))
             ->getMock();
@@ -698,27 +698,27 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             ->setMethods(array('getHelper', 'getApiSubscribers', 'getSyncBatchesModel'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isSubscriptionEnabled', 'getGeneralList', 'getApi', 'logRequest'))
             ->getMock();
 
-        $apiSubscribersMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers::class)
+        $apiSubscribersMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Subscribers::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createBatchJson'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getBatchOperation'))
             ->getMock();
 
-        $apiBatchOperationMock = $this->getMockBuilder(MailChimp_BatchOperations::class)
+        $apiBatchOperationMock = $this->getMockBuilder(SqualoMail_BatchOperations::class)
             ->disableOriginalConstructor()
             ->setMethods(array('add'))
             ->getMock();
 
-        $syncBatchesMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Synchbatches::class)
+        $syncBatchesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Synchbatches::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setStoreId', 'setBatchId', 'setStatus', 'save'))
             ->getMock();
@@ -771,26 +771,26 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $date = '2018-02-02 00:00:00';
         $syncedDateArray = array($squalomailStoreId => array($magentoStoreId => $date));
-        $config = array(array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId", $date));
+        $config = array(array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId", $date));
 
         $apiBatchesMock = $this->_apiBatchesMock
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper', 'getApiStores'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
-                array('isEcomSyncDataEnabled', 'getApi', 'saveSqualomailConfig', 'getDateSyncFinishByMailChimpStoreId')
+                array('isEcomSyncDataEnabled', 'getApi', 'saveSqualomailConfig', 'getDateSyncFinishBySqualoMailStoreId')
             )
             ->getMock();
 
-        $apiStoresMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Stores::class)
+        $apiStoresMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Stores::class)
             ->disableOriginalConstructor()
             ->setMethods(array('editIsSyncing'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -800,7 +800,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         $helperMock->expects($this->once())->method('getApi')->with($magentoStoreId)->willReturn($apiMock);
         $helperMock
             ->expects($this->once())
-            ->method('getDateSyncFinishByMailChimpStoreId')
+            ->method('getDateSyncFinishBySqualoMailStoreId')
             ->with($squalomailStoreId)->willReturn(null);
 
         $apiBatchesMock->expects($this->once())->method('getApiStores')->willReturn($apiStoresMock);

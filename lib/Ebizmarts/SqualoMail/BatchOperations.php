@@ -10,17 +10,17 @@
  * @date:     4/29/16 3:51 PM
  * @file:     BatchOperations.php
  */
-class MailChimp_BatchOperations extends MailChimp_Abstract
+class SqualoMail_BatchOperations extends SqualoMail_Abstract
 {
     /**
      * @param $operations       An array of objects that describes operations to perform.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add($operations)
     {
-        return $this->_master->call('batches', $operations, Ebizmarts_MailChimp::POST, false);
+        return $this->_master->call('batches', $operations, Ebizmarts_SqualoMail::POST, false);
     }
 
     /**
@@ -30,8 +30,8 @@ class MailChimp_BatchOperations extends MailChimp_Abstract
      * @param $excludeFields    A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                          with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function status($id, $fields = null, $excludeFields = null)
     {
@@ -45,7 +45,7 @@ class MailChimp_BatchOperations extends MailChimp_Abstract
             $_params['exclude_fields'] = $excludeFields;
         }
 
-        return $this->_master->call('batches/' . $id, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('batches/' . $id, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -57,8 +57,8 @@ class MailChimp_BatchOperations extends MailChimp_Abstract
      * @param $offset           The number of records from a collection to skip. Iterating over large collections with
      *                          this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -80,6 +80,6 @@ class MailChimp_BatchOperations extends MailChimp_Abstract
             $_params['offset'] = $offset;
         }
 
-        return $this->_master->call('batches', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('batches', $_params, Ebizmarts_SqualoMail::GET);
     }
 }

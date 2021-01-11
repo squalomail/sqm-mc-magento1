@@ -11,7 +11,7 @@
  * @date:     5/27/16 1:50 PM
  * @file:     EcommerceController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_SqualoMail_Adminhtml_SqualomailController extends Mage_Adminhtml_Controller_Action
 {
 
     protected $_helper;
@@ -107,7 +107,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
         foreach ($data as $key => $element) {
             $liElement = '';
 
-            if ($element['value'] == Ebizmarts_MailChimp_Model_System_Config_Source_Account::SYNC_LABEL_KEY) {
+            if ($element['value'] == Ebizmarts_SqualoMail_Model_System_Config_Source_Account::SYNC_LABEL_KEY) {
                 $liElement = $helper->getSyncFlagDataHtml($element, $liElement);
                 $data[$key]['label'] = $liElement;
             }
@@ -167,7 +167,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
     {
         return $this->makeHelper()
             ->getConfigValueForScope(
-                Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
+                Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
                 0,
                 'default'
             );
@@ -195,7 +195,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -203,7 +203,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Webhook
+     * @return Ebizmarts_SqualoMail_Helper_Webhook
      */
     protected function getWebhookHelper()
     {
@@ -221,12 +221,12 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
 
     /**
      * @param $apiKey
-     * @return Ebizmarts_MailChimp_Model_System_Config_Source_Store
+     * @return Ebizmarts_SqualoMail_Model_System_Config_Source_Store
      */
     protected function getSourceStoreOptions($apiKey)
     {
         return Mage::getModel(
-            'Ebizmarts_MailChimp_Model_System_Config_Source_Store',
+            'Ebizmarts_SqualoMail_Model_System_Config_Source_Store',
             array('api_key' => $apiKey)
         )->toOptionArray();
     }
@@ -234,12 +234,12 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
     /**
      * @param $apiKey
      * @param $mcStoreId
-     * @return Ebizmarts_MailChimp_Model_System_Config_Source_Account
+     * @return Ebizmarts_SqualoMail_Model_System_Config_Source_Account
      */
     protected function getSourceAccountInfoOptions($apiKey, $mcStoreId)
     {
         return Mage::getModel(
-            'Ebizmarts_MailChimp_Model_System_Config_Source_Account',
+            'Ebizmarts_SqualoMail_Model_System_Config_Source_Account',
             array('api_key' => $apiKey, 'squalomail_store_id' => $mcStoreId)
         )->toOptionArray();
     }
@@ -247,12 +247,12 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
     /**
      * @param $apiKey
      * @param $mcStoreId
-     * @return Ebizmarts_MailChimp_Model_System_Config_Source_List
+     * @return Ebizmarts_SqualoMail_Model_System_Config_Source_List
      */
     protected function getSourceListOptions($apiKey, $mcStoreId)
     {
         return Mage::getModel(
-            'Ebizmarts_MailChimp_Model_System_Config_Source_List',
+            'Ebizmarts_SqualoMail_Model_System_Config_Source_List',
             array('api_key' => $apiKey, 'squalomail_store_id' => $mcStoreId)
         )->toOptionArray();
     }
@@ -260,12 +260,12 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailController extends Mage_Adminhtml_
     /**
      * @param $apiKey
      * @param $listId
-     * @return Ebizmarts_MailChimp_Model_System_Config_Source_CustomerGroup
+     * @return Ebizmarts_SqualoMail_Model_System_Config_Source_CustomerGroup
      */
     protected function getSourceInterestOptions($apiKey, $listId)
     {
         return Mage::getModel(
-            'Ebizmarts_MailChimp_Model_System_Config_Source_CustomerGroup',
+            'Ebizmarts_SqualoMail_Model_System_Config_Source_CustomerGroup',
             array('api_key' => $apiKey, 'list_id' => $listId)
         )->toOptionArray();
     }

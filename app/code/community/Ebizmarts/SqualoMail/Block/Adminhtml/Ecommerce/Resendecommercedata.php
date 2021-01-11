@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata
+class Ebizmarts_SqualoMail_Block_Adminhtml_Ecommerce_Resendecommercedata
     extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     protected $_mode = 'resendecommercedata';

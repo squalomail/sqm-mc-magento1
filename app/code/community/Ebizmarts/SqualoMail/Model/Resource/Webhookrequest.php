@@ -11,7 +11,7 @@
  * @date:     2019-10-02 15:56
  * @file:     Squalomailerrors.php
  */
-class Ebizmarts_MailChimp_Model_Resource_Webhookrequest extends Mage_Core_Model_Resource_Db_Abstract
+class Ebizmarts_SqualoMail_Model_Resource_Webhookrequest extends Mage_Core_Model_Resource_Db_Abstract
 {
 
     /**

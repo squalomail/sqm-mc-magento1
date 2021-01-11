@@ -8,7 +8,7 @@
  * @author   Ebizmarts Team <info@ebizmarts.com>
  * @license  http://opensource.org/licenses/osl-3.0.php
  */
-class Ebizmarts_MailChimp_Block_Group_Type extends Mage_Core_Block_Template
+class Ebizmarts_SqualoMail_Block_Group_Type extends Mage_Core_Block_Template
 {
     protected $_currentInterest;
     protected $_helper;
@@ -36,7 +36,7 @@ class Ebizmarts_MailChimp_Block_Group_Type extends Mage_Core_Block_Template
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     public function getHelper()
     {

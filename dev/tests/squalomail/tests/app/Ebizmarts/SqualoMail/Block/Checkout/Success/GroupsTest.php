@@ -5,16 +5,16 @@
  * Time: 3:49 PM
  */
 
-class Ebizmarts_MailChimp_Block_Checkout_Success_GroupsTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Block_Checkout_Success_GroupsTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \Ebizmarts_MailChimp_Block_Checkout_Success_GroupsTest $_block
+     * @var \Ebizmarts_SqualoMail_Block_Checkout_Success_GroupsTest $_block
      */
     protected $_block;
 
     /**
-     * @var \Ebizmarts_MailChimp_Block_Checkout_Success_Groups
+     * @var \Ebizmarts_SqualoMail_Block_Checkout_Success_Groups
      */
     protected $_groupsMock;
 
@@ -22,8 +22,8 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_GroupsTest extends PHPUnit_Fram
     {
         $app = Mage::app('default');
         $layout = $app->getLayout();
-        $this->_block = new Ebizmarts_MailChimp_Block_Checkout_Success_Groups;
-        $this->_groupsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Checkout_Success_Groups::class);
+        $this->_block = new Ebizmarts_SqualoMail_Block_Checkout_Success_Groups;
+        $this->_groupsMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Block_Checkout_Success_Groups::class);
 
         /* We are required to set layouts before we can do anything with blocks */
         $this->_block->setLayout($layout);
@@ -39,7 +39,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_GroupsTest extends PHPUnit_Fram
 
         $groupsMock = $this->_groupsMock
             ->disableOriginalConstructor()
-            ->setMethods(array('getSubscriberModel', 'getSessionLastRealOrder', 'getElementHtml', 'getMailChimpHelper'))
+            ->setMethods(array('getSubscriberModel', 'getSessionLastRealOrder', 'getElementHtml', 'getSqualoMailHelper'))
             ->getMock();
 
         $orderMock = $this->getMockBuilder(Mage_Sales_Model_Order::class)
@@ -52,7 +52,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_GroupsTest extends PHPUnit_Fram
             ->setMethods(array('loadByEmail', 'getSubscriberId'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterestGroups'))
             ->getMock();
@@ -69,7 +69,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_GroupsTest extends PHPUnit_Fram
         $orderMock->expects($this->once())->method('getCustomerId')->willReturn($customerId);
         $orderMock->expects($this->once())->method('getStoreId')->willReturn($storeId);
 
-        $groupsMock->expects($this->once())->method('getMailChimpHelper')->willReturn($helperMock);
+        $groupsMock->expects($this->once())->method('getSqualoMailHelper')->willReturn($helperMock);
 
         $orderMock->expects($this->once())->method('getStoreId')->willReturn($storeId);
 

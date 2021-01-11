@@ -11,7 +11,7 @@
  * @date:     8/4/16 5:56 PM
  * @file:     Apikey.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Backend_Twowaysync extends Mage_Core_Model_Config_Data
+class Ebizmarts_SqualoMail_Model_System_Config_Backend_Twowaysync extends Mage_Core_Model_Config_Data
 {
     protected function _afterSave()
     {
@@ -19,7 +19,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Twowaysync extends Mage_Co
         $groups = $this->getData('groups');
         $moduleIsActive = (isset($groups['general']['fields']['active']['value']))
             ? $groups['general']['fields']['active']['value']
-            : $helper->isMailChimpEnabled($this->getScopeId(), $this->getScope());
+            : $helper->isSqualoMailEnabled($this->getScopeId(), $this->getScope());
         $apiKey = (isset($groups['general']['fields']['apikey']['value']))
             ? $groups['general']['fields']['apikey']['value']
             : $helper->getApiKey($this->getScopeId(), $this->getScope());
@@ -30,7 +30,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Twowaysync extends Mage_Co
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

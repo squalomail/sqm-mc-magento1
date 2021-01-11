@@ -10,11 +10,11 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @file:     SqualomailstoresController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_SqualoMail_Adminhtml_SqualomailstoresController extends Mage_Adminhtml_Controller_Action
 {
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
@@ -112,7 +112,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
 
         if ($storeId) {
             $apiStore = $helper->getApiStores();
-            $apiStore->editMailChimpStore(
+            $apiStore->editSqualoMailStore(
                 $storeId,
                 $apiKey,
                 $name,
@@ -126,7 +126,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
             );
         } else {
             $apiStore = $helper->getApiStores();
-            $apiStore->createMailChimpStore(
+            $apiStore->createSqualoMailStore(
                 $apiKey,
                 $formData['listid'],
                 $name,
@@ -153,7 +153,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
         foreach ($allApiKeys as $apiKey) {
             try {
                 $api = $helper->getApiByKey($apiKey);
-            } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+            } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                 $helper->logError($e->getMessage());
                 continue;
             }
@@ -161,7 +161,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
             try {
                 $root = $api->getRoot()->info();
                 $stores = $api->getEcommerce()->getStores()->get(null, null, null, 100);
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 $helper->logError($e->getFriendlyMessage());
                 continue;
             } catch (Exception $e) {
@@ -175,7 +175,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
                 if ($store['platform'] == 'Magento') {
                     try {
                         $list = $api->getLists()->getLists($store['list_id']);
-                    } catch (MailChimp_Error $e) {
+                    } catch (SqualoMail_Error $e) {
                         $helper->logError($e->getFriendlyMessage());
                         continue;
                     } catch (Exception $e) {
@@ -237,10 +237,10 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
             foreach ($lists['lists'] as $list) {
                 $data[$list['id']] = array('id' => $list['id'], 'name' => $list['name']);
             }
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $data = array('error' => 1, 'message' => $e->getMessage());
             $helper->logError($e->getMessage());
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $data = array('error' => 1, 'message' => $e->getFriendlyMessage());
             $helper->logError($e->getFriendlyMessage());
         } catch (Exception $e) {
@@ -265,11 +265,11 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
         if ($store->getId()) {
             try {
                 $apiStore = $helper->getApiStores();
-                $apiStore->deleteMailChimpStore($squalomailStoreId, $apiKey);
+                $apiStore->deleteSqualoMailStore($squalomailStoreId, $apiKey);
                 $helper->deleteAllMCStoreData($squalomailStoreId);
-            } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+            } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                 $helper->logError($e->getMessage());
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 $helper->logError($e->getFriendlyMessage());
             } catch (Exception $e) {
                 $helper->logError($e->getMessage());
@@ -308,7 +308,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
 
     /**
      * @param $id
-     * @return Ebizmarts_MailChimp_Model_Stores
+     * @return Ebizmarts_SqualoMail_Model_Stores
      */
     protected function loadSqualomailStore($id)
     {
@@ -316,7 +316,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailstoresController extends Mage_Admi
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getSqualomailHelper()
     {

@@ -1,18 +1,18 @@
 <?php
 
-require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/GroupController.php';
+require_once BP . DS . 'app/code/community/Ebizmarts/SqualoMail/controllers/GroupController.php';
 
-class Ebizmarts_MailChimp_GroupControllerTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_GroupControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_GroupController $groupController
+     * @var Ebizmarts_SqualoMail_GroupController $groupController
      */
     protected $_groupController;
 
     public function setUp()
     {
         Mage::app('default');
-        $this->_groupController = $this->getMockBuilder(Ebizmarts_MailChimp_GroupController::class);
+        $this->_groupController = $this->getMockBuilder(Ebizmarts_SqualoMail_GroupController::class);
     }
 
     public function tearDown()
@@ -73,7 +73,7 @@ class Ebizmarts_MailChimp_GroupControllerTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('addSuccess'))
             ->getMock();
 
-        $interestGroupMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Interestgroup::class)
+        $interestGroupMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Interestgroup::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getByRelatedIdStoreId', 'setGroupdata', 'setSubscriberId', 'setCustomerId',
@@ -81,12 +81,12 @@ class Ebizmarts_MailChimp_GroupControllerTest extends PHPUnit_Framework_TestCase
             )
             ->getMock();
 
-        $apiSubscriberMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers::class)
+        $apiSubscriberMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Subscribers::class)
             ->disableOriginalConstructor()
             ->setMethods(array('update'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('arrayEncode'))
             ->getMock();

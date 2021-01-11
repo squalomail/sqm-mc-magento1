@@ -10,10 +10,10 @@
  * @date:     4/29/16 3:47 PM
  * @file:     Automation.php
  */
-class MailChimp_Automation extends MailChimp_Abstract
+class SqualoMail_Automation extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_AutomationEmails
+     * @var SqualoMail_AutomationEmails
      */
     public $emails;
 
@@ -58,9 +58,9 @@ class MailChimp_Automation extends MailChimp_Abstract
         }
 
         if ($id) {
-            return $this->_master->call('automations/' . $id, $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('automations/' . $id, $_params, Ebizmarts_SqualoMail::GET);
         } else {
-            return $this->_master->call('automations', $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('automations', $_params, Ebizmarts_SqualoMail::GET);
         }
     }
 }

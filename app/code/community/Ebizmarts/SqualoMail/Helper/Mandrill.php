@@ -11,7 +11,7 @@
  * @date:     8/30/16 3:31 PM
  * @file:     Mandrill.php
  */
-class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
+class Ebizmarts_SqualoMail_Helper_Mandrill extends Mage_Core_Helper_Abstract
 {
     /**
      * @param $message
@@ -53,7 +53,7 @@ class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
     {
         return Mage::helper('squalomail')
             ->getConfigValueForScope(
-                Ebizmarts_MailChimp_Model_Config::MANDRILL_LOG,
+                Ebizmarts_SqualoMail_Model_Config::MANDRILL_LOG,
                 $scopeId,
                 $scope
             );
@@ -70,7 +70,7 @@ class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
     {
         return Mage::helper('squalomail')
             ->getConfigValueForScope(
-                Ebizmarts_MailChimp_Model_Config::MANDRILL_ACTIVE,
+                Ebizmarts_SqualoMail_Model_Config::MANDRILL_ACTIVE,
                 $scopeId,
                 $scope
             );
@@ -89,7 +89,7 @@ class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
         return $squalomailHelper->decryptData(
             $squalomailHelper
                 ->getConfigValueForScope(
-                    Ebizmarts_MailChimp_Model_Config::MANDRILL_APIKEY,
+                    Ebizmarts_SqualoMail_Model_Config::MANDRILL_APIKEY,
                     $scopeId,
                     $scope
                 )

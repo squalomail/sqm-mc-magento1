@@ -10,10 +10,10 @@
  * @date:     5/2/16 5:17 PM
  * @file:     ReportsClickReportsMembers.php
  */
-class MailChimp_ReportsClickReportsMembers extends MailChimp_Abstract
+class SqualoMail_ReportsClickReportsMembers extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsClickReportsMembers
+     * @var SqualoMail_ReportsClickReportsMembers
      */
     public $members;
 }

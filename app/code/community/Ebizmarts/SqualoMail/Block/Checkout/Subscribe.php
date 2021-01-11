@@ -8,7 +8,7 @@
  * @author   Ebizmarts Team <info@ebizmarts.com>
  * @license  http://opensource.org/licenses/osl-3.0.php
  */
-class Ebizmarts_MailChimp_Block_Checkout_Subscribe extends Mage_Core_Block_Template
+class Ebizmarts_SqualoMail_Block_Checkout_Subscribe extends Mage_Core_Block_Template
 {
 
     protected $_lists = array();
@@ -18,7 +18,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Subscribe extends Mage_Core_Block_Templ
     protected $_form;
     protected $_api;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
     protected $_storeId;
@@ -40,7 +40,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Subscribe extends Mage_Core_Block_Templ
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     public function getHelper()
     {
@@ -90,17 +90,17 @@ class Ebizmarts_MailChimp_Block_Checkout_Subscribe extends Mage_Core_Block_Templ
             $currentValue = $this->getCurrentCheckoutSubscribeValue();
         }
 
-        return ($currentValue == Ebizmarts_MailChimp_Model_System_Config_Source_Checkoutsubscribe::FORCE_HIDDEN);
+        return ($currentValue == Ebizmarts_SqualoMail_Model_System_Config_Source_Checkoutsubscribe::FORCE_HIDDEN);
     }
 
     protected function isForceVisible($currentValue)
     {
-        return ($currentValue == Ebizmarts_MailChimp_Model_System_Config_Source_Checkoutsubscribe::FORCE_VISIBLE);
+        return ($currentValue == Ebizmarts_SqualoMail_Model_System_Config_Source_Checkoutsubscribe::FORCE_VISIBLE);
     }
 
     protected function isCheckedByDefault($currentValue)
     {
-        return ($currentValue == Ebizmarts_MailChimp_Model_System_Config_Source_Checkoutsubscribe::CHECKED_BY_DEFAULT);
+        return ($currentValue == Ebizmarts_SqualoMail_Model_System_Config_Source_Checkoutsubscribe::CHECKED_BY_DEFAULT);
     }
 
     public function isForceEnabled()

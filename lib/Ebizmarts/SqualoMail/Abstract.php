@@ -10,7 +10,7 @@
  * @date:     4/29/16 4:22 PM
  * @file:     Ecommerce.php
  */
-class MailChimp_Abstract
+class SqualoMail_Abstract
 {
     /**
      * @var Squalomail
@@ -18,11 +18,11 @@ class MailChimp_Abstract
     protected $_master;
 
     /**
-     * MailChimp_Abstract constructor.
+     * SqualoMail_Abstract constructor.
      *
-     * @param Ebizmarts_MailChimp $m
+     * @param Ebizmarts_SqualoMail $m
      */
-    public function __construct(Ebizmarts_MailChimp $m)
+    public function __construct(Ebizmarts_SqualoMail $m)
     {
         $this->_master = $m;
     }

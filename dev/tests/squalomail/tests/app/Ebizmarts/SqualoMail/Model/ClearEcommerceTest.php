@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_ClearEcommerceTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -11,7 +11,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
     {
         $ids = array(1, 3, 4);
 
-        $clearEcommerce = $this->getMockBuilder(Ebizmarts_MailChimp_Model_ClearEcommerce::class)
+        $clearEcommerce = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_ClearEcommerce::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('processData', 'getItemsToDelete')
@@ -28,11 +28,11 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
             ->expects($this->exactly(5))
             ->method('getItemsToDelete')
             ->withConsecutive(
-                array(Ebizmarts_MailChimp_Model_Config::IS_PRODUCT),
-                array(Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER),
-                array(Ebizmarts_MailChimp_Model_Config::IS_QUOTE),
-                array(Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE),
-                array(Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE)
+                array(Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT),
+                array(Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER),
+                array(Ebizmarts_SqualoMail_Model_Config::IS_QUOTE),
+                array(Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE),
+                array(Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE)
             )
             ->willReturnOnConsecutiveCalls(
                 array($itemMock),
@@ -46,11 +46,11 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
             ->expects($this->exactly(5))
             ->method('processData')
             ->withConsecutive(
-                array(array($itemMock), Ebizmarts_MailChimp_Model_Config::IS_PRODUCT),
-                array(array($itemMock), Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER),
-                array(array($itemMock), Ebizmarts_MailChimp_Model_Config::IS_QUOTE),
-                array(array($itemMock), Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE),
-                array(array($itemMock), Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE)
+                array(array($itemMock), Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT),
+                array(array($itemMock), Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER),
+                array(array($itemMock), Ebizmarts_SqualoMail_Model_Config::IS_QUOTE),
+                array(array($itemMock), Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE),
+                array(array($itemMock), Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE)
             )
             ->willReturnOnConsecutiveCalls(
                 $ids,
@@ -68,7 +68,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
         $ids = array(1, 3, 4);
         $itemsDeleted = array(3, 4);
 
-        $clearEcommerce = $this->getMockBuilder(Ebizmarts_MailChimp_Model_ClearEcommerce::class)
+        $clearEcommerce = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_ClearEcommerce::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('processDeletedData', 'deleteEcommerceRows')
@@ -86,22 +86,22 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
         $clearEcommerce
             ->expects($this->once())
             ->method('processDeletedData')
-            ->with(Ebizmarts_MailChimp_Model_Config::IS_PRODUCT)
+            ->with(Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT)
             ->willReturn($itemsDeleted);
 
         $clearEcommerce
             ->expects($this->once())
             ->method('deleteEcommerceRows')
-            ->with($ids, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT);
+            ->with($ids, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT);
 
-        $clearEcommerce->processData(array($itemMock), Ebizmarts_MailChimp_Model_Config::IS_PRODUCT);
+        $clearEcommerce->processData(array($itemMock), Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT);
     }
 
     public function testClearEcommerceProcessDataEmpty()
     {
         $itemsDeleted = array();
 
-        $clearEcommerce = $this->getMockBuilder(Ebizmarts_MailChimp_Model_ClearEcommerce::class)
+        $clearEcommerce = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_ClearEcommerce::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('processDeletedData', 'deleteEcommerceRows', 'clearEcommerceCollection')
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
         $clearEcommerce
             ->expects($this->once())
             ->method('processDeletedData')
-            ->with(Ebizmarts_MailChimp_Model_Config::IS_PRODUCT)
+            ->with(Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT)
             ->willReturn($itemsDeleted);
 
         $clearEcommerce
@@ -123,22 +123,22 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
             ->method('clearEcommerceCollection')
             ->willReturnSelf();
 
-        $clearEcommerce->processData(array(), Ebizmarts_MailChimp_Model_Config::IS_PRODUCT);
+        $clearEcommerce->processData(array(), Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT);
     }
 
     public function testClearEcommerceDeteleRows()
     {
         $idsArray = array(1, 3, 4);
         $ids = implode($idsArray, ', ');
-        $where = array("related_id IN ($ids)", "type = '" . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT . "'");
+        $where = array("related_id IN ($ids)", "type = '" . Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT . "'");
         $tableName = 'squalomail_ecommerce_sync_data';
 
-        $clearEcommerce = $this->getMockBuilder(Ebizmarts_MailChimp_Model_ClearEcommerce::class)
+        $clearEcommerce = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_ClearEcommerce::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper', 'clearEcommerceCollection'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCoreResource'))
             ->getMock();
@@ -173,6 +173,6 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
             ->method('clearEcommerceCollection')
             ->willReturnSelf();
 
-        $clearEcommerce->deleteEcommerceRows($idsArray, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT);
+        $clearEcommerce->deleteEcommerceRows($idsArray, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT);
     }
 }

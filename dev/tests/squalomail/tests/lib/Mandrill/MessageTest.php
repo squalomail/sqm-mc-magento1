@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_MessageTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_MessageTest extends PHPUnit_Framework_TestCase
 {
     const ATTACHMENT_TEST_CONTENT = 'attachment. Test.';
     const ATTACHMENT_TEST_NAME = 'test.txt';

@@ -10,10 +10,10 @@
  * @date:     5/2/16 4:18 PM
  * @file:     CampaignsFeedback.php
  */
-class MailChimp_CampaignsFeedback extends MailChimp_Abstract
+class SqualoMail_CampaignsFeedback extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_CampaignsFeedback
+     * @var SqualoMail_CampaignsFeedback
      */
     public $feedback;
 }

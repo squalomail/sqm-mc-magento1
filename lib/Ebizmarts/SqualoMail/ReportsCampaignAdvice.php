@@ -10,10 +10,10 @@
  * @date:     5/2/16 4:51 PM
  * @file:     ReportsCampaignAdvice.php
  */
-class MailChimp_ReportsCampaignAdvice extends MailChimp_Abstract
+class SqualoMail_ReportsCampaignAdvice extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsCampaignAdvice
+     * @var SqualoMail_ReportsCampaignAdvice
      */
     public $campaignAdvice;
 }

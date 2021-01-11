@@ -10,8 +10,8 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     2019-11-04 17:32
  */
-class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection extends
-    Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection
+class Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoCodes_Collection extends
+    Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Collection
 {
 
     /**
@@ -33,7 +33,7 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
         $squalomailTableName = $this->getSqualomailEcommerceDataTableName();
         $preFilteredPromoCodesCollection->getSelect()->joinLeft(
             array("m4m" => $squalomailTableName),
-            sprintf($joinCondition, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE, $this->getSqualomailStoreId()),
+            sprintf($joinCondition, Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE, $this->getSqualomailStoreId()),
             $columns
         );
     }

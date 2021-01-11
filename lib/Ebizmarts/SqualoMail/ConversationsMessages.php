@@ -10,10 +10,10 @@
  * @date:     5/2/16 4:26 PM
  * @file:     ConversationsMessages.php
  */
-class MailChimp_ConversationsMessages extends MailChimp_Abstract
+class SqualoMail_ConversationsMessages extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ConversationsMessages
+     * @var SqualoMail_ConversationsMessages
      */
     public $messages;
 }

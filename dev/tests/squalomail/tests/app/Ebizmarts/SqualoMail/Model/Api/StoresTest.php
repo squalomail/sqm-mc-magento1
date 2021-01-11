@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_StoresTest extends PHPUnit_Framework_TestCase
 {
 
     public function setUp()
@@ -8,7 +8,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
         Mage::app('default');
     }
 
-    public function testCreateMailChimpStore()
+    public function testCreateSqualoMailStore()
     {
         $storeName = 'Madison Island - English';
         $date = '2017-10-23-19-34-31-92333600';
@@ -57,27 +57,27 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
         );
         $configValues = array(
             array(
-                Ebizmarts_MailChimp_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
+                Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
                 $response['connected_site']['site_script']['url']
             )
         );
 
-        $apiStoresMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Stores::class)
+        $apiStoresMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Stores::class)
             ->disableOriginalConstructor()
             ->setMethods(array('makeHelper', 'getAdminSession', 'addStore', 'makeDateHelper'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getApiByKey', 'getMageApp', 'saveSqualomailConfig'))
             ->getMock();
 
-        $helperDateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $helperDateMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getDateMicrotime'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -128,39 +128,39 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
         $adminSessionMock->expects($this->once())->method('addSuccess')->with($successMessage);
 
         $apiStoresMock
-            ->createMailChimpStore(
+            ->createSqualoMailStore(
                 $apiKey, $listId, $storeName, $currencyCode,
                 $storeDomain, $storeEmail, $primaryLocale, $timeZone, $storePhone, $address
             );
     }
 
-    public function testDeleteMailChimpStore()
+    public function testDeleteSqualoMailStore()
     {
         $apiKey = 'z1x2c3v4b5n6m7k8l9p0-us1';
         $squaloMailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $successMessage = "The Squalomail store was successfully deleted.";
 
-        $apiStoresMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Stores::class)
+        $apiStoresMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Stores::class)
             ->disableOriginalConstructor()
             ->setMethods(array('makeHelper', 'getAdminSession'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getApiByKey', 'cancelAllPendingBatches'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getEcommerce'))
             ->getMock();
 
-        $ecommerceMock = $this->getMockBuilder(MailChimp_Ecommerce::class)
+        $ecommerceMock = $this->getMockBuilder(SqualoMail_Ecommerce::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getStores'))
             ->getMock();
 
-        $ecommerceStoresMock = $this->getMockBuilder(MailChimp_EcommerceStore::class)
+        $ecommerceStoresMock = $this->getMockBuilder(SqualoMail_EcommerceStore::class)
             ->disableOriginalConstructor()
             ->setMethods(array('delete'))
             ->getMock();
@@ -190,6 +190,6 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
 
         $adminSessionMock->expects($this->once())->method('addSuccess')->with($successMessage);
 
-        $apiStoresMock->deleteMailChimpStore($squaloMailStoreId, $apiKey);
+        $apiStoresMock->deleteSqualoMailStore($squaloMailStoreId, $apiKey);
     }
 }

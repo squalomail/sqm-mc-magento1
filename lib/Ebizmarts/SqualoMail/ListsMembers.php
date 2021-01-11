@@ -10,18 +10,18 @@
  * @date:     5/2/16 3:49 PM
  * @file:     ListMembers.php
  */
-class MailChimp_ListsMembers extends MailChimp_Abstract
+class SqualoMail_ListsMembers extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ListsMembersActivity
+     * @var SqualoMail_ListsMembersActivity
      */
     public $memberActivity;
     /**
-     * @var MailChimp_ListsMembersGoals
+     * @var SqualoMail_ListsMembersGoals
      */
     public $memberGoal;
     /**
-     * @var MailChimp_ListsMembersNotes
+     * @var SqualoMail_ListsMembersNotes
      */
     public $memberNotes;
 
@@ -37,8 +37,8 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
      * @param null $location        Subscriber location information.
      * @param null $ipOpt           The IP address the subscriber used to confirm their opt-in status.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $listId,
@@ -83,7 +83,7 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
             $_params['ip_opt'] = $ipOpt;
         }
 
-        return $this->_master->call('lists/' . $listId . '/members', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('lists/' . $listId . '/members', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -103,12 +103,12 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
      *                                          timeframe.
      * @param null $beforeLastChanged  Restrict results to subscribers whose information changed before the set
      *                                          timeframe.
-     * @param null $uniqueEmailId      A unique identifier for the email address across all MailChimp lists.
+     * @param null $uniqueEmailId      A unique identifier for the email address across all SqualoMail lists.
      *                                          This parameter can be found in any links with Ecommerce 360 tracking
      *                                          enabled.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll(
         $listId,
@@ -171,7 +171,7 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
             $_params['unique_email_id'] = $uniqueEmailId;
         }
 
-        return $this->_master->call('lists/' . $listId . '/members', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/members', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -182,8 +182,8 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
      * @param null $excludeFields   A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                    with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $subscriberHash, $fields = null, $excludeFields = null)
     {
@@ -198,7 +198,7 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_MailChimp::GET
+            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_SqualoMail::GET
         );
     }
 
@@ -213,8 +213,8 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
      * @param null $vip             VIP status for subscriber.
      * @param null $location        Subscriber location information.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function update(
         $listId,
@@ -258,7 +258,7 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_MailChimp::PATCH
+            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_SqualoMail::PATCH
         );
     }
 
@@ -277,8 +277,8 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
      * @param $statusIfNew          Subscriber’s status used only on a PUT request if the email is not already present
      *                                  on the list. (subscribed | unsubscribed | cleaned | pending)
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function addOrUpdate(
         $listId,
@@ -324,7 +324,7 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_MailChimp::PUT
+            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_SqualoMail::PUT
         );
     }
 
@@ -332,13 +332,13 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
      * @param $listId               The unique id for the list.
      * @param $subscriberHash       The MD5 hash of the lowercase version of the list member’s email address.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($listId, $subscriberHash)
     {
         return $this->_master->call(
-            'lists/' . $listId . '/members/' . $subscriberHash, null, Ebizmarts_MailChimp::DELETE
+            'lists/' . $listId . '/members/' . $subscriberHash, null, Ebizmarts_SqualoMail::DELETE
         );
     }
 
@@ -347,13 +347,13 @@ class MailChimp_ListsMembers extends MailChimp_Abstract
      * @param $listId               The unique id for the list.
      * @param $mcEidCookie          The email id that comes with the link in the campaign email
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getEmailByMcEid($listId, $mcEidCookie)
     {
         return $this->_master->call(
-            'lists/' . $listId . '/members?unique_email_id=' . $mcEidCookie, null, Ebizmarts_MailChimp::GET
+            'lists/' . $listId . '/members?unique_email_id=' . $mcEidCookie, null, Ebizmarts_SqualoMail::GET
         );
     }
 }

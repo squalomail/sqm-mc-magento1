@@ -10,7 +10,7 @@
  * @date:     5/2/16 3:51 PM
  * @file:     ListsWebhooks.php
  */
-class MailChimp_ListsWebhooks extends MailChimp_Abstract
+class SqualoMail_ListsWebhooks extends SqualoMail_Abstract
 {
     /**
      * @param       $listId     The unique id for the list.
@@ -36,7 +36,7 @@ class MailChimp_ListsWebhooks extends MailChimp_Abstract
             $_params['sources'] = $sources;
         }
 
-        return $this->_master->call('lists/' . $listId . '/webhooks', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('lists/' . $listId . '/webhooks', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -66,41 +66,41 @@ class MailChimp_ListsWebhooks extends MailChimp_Abstract
 
         $urlCall = 'lists/' . $listId . '/webhooks/' . $webhookId;
 
-        return $this->_master->call($urlCall, $_params, Ebizmarts_MailChimp::PATCH);
+        return $this->_master->call($urlCall, $_params, Ebizmarts_SqualoMail::PATCH);
     }
 
     /**
      * @param $listId
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($listId)
     {
-        return $this->_master->call('lists/' . $listId .'/webhooks', null, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId .'/webhooks', null, Ebizmarts_SqualoMail::GET);
     }
 
     /**
      * @param $listId
      * @param $webhookId
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $webhookId)
     {
-        return $this->_master->call('lists/' . $listId . '/webhooks/' . $webhookId, null, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/webhooks/' . $webhookId, null, Ebizmarts_SqualoMail::GET);
     }
 
     /**
      * @param $listId
      * @param $webhookId
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($listId, $webhookId)
     {
-        return $this->_master->call('lists/' . $listId . '/webhooks/' . $webhookId, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call('lists/' . $listId . '/webhooks/' . $webhookId, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

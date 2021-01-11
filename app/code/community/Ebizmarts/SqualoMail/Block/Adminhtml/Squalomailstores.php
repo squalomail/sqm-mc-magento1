@@ -11,7 +11,7 @@
  * @date:     3/6/18 2:22 PM
  * @file:     Squalomailstores.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
     public function __construct()
     {

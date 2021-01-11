@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Creditmemo_Unsubscribe extends Mage_Core_Block_Template
+class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Creditmemo_Unsubscribe extends Mage_Core_Block_Template
 {
     /**
      * Render block HTML

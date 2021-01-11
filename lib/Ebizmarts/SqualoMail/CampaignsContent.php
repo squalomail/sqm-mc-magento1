@@ -10,10 +10,10 @@
  * @date:     5/2/16 4:16 PM
  * @file:     CampaignsContent.php
  */
-class MailChimp_CampaignsContent extends MailChimp_Abstract
+class SqualoMail_CampaignsContent extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_CampaignsContent
+     * @var SqualoMail_CampaignsContent
      */
     public $content;
 }

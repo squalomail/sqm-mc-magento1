@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_SubscribersTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_SubscribersTest extends PHPUnit_Framework_TestCase
 {
     const DEFAULT_STORE_ID = 1;
 
@@ -17,7 +17,7 @@ class Ebizmarts_MailChimp_Model_Api_SubscribersTest extends PHPUnit_Framework_Te
     public function testSqualomailStatus($magentoStatus, $expected)
     {
         $subscribersApiMock =
-            $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers::class)
+            $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Subscribers::class)
                 ->disableOriginalConstructor()
                 ->setMethods(array('magentoConfigNeedsConfirmation'))
                 ->getMock();

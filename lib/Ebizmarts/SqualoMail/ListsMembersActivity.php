@@ -10,7 +10,7 @@
  * @date:     5/2/16 4:31 PM
  * @file:     ListsMembersActivity.php
  */
-class MailChimp_ListsMembersActivity extends MailChimp_Abstract
+class SqualoMail_ListsMembersActivity extends SqualoMail_Abstract
 {
     /**
      * @param $listId           The unique id for the list.
@@ -20,8 +20,8 @@ class MailChimp_ListsMembersActivity extends MailChimp_Abstract
      * @param $excludeFields    A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                          with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $subscriberHash, $fields, $excludeFields)
     {
@@ -37,6 +37,6 @@ class MailChimp_ListsMembersActivity extends MailChimp_Abstract
 
         $url = 'lists/' . $listId . '/members/' . $subscriberHash . '/activity';
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 }

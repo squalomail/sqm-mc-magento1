@@ -10,7 +10,7 @@
  * @date:     7/5/16 2:19 PM
  * @file:     Date.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Date extends Mage_Adminhtml_Block_System_Config_Form_Field
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_Date extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
     public function render(Varien_Data_Form_Element_Abstract $element)
     {

@@ -1,9 +1,9 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_CustomersTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Customers
+     * @var Ebizmarts_SqualoMail_Model_Api_Customers
      */
     protected $_customersApiMock;
 
@@ -11,7 +11,7 @@ class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_Test
     {
         Mage::app('default');
 
-        $this->_customersApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Customers::class);
+        $this->_customersApiMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Customers::class);
     }
 
     public function tearDown()
@@ -127,7 +127,7 @@ class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_Test
         )->getMock();
 
         $customerCollectionResourceMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection::class)
             ->disableOriginalConstructor()->setMethods(
                 array('setSqualomailStoreId', 'setStoreId')
             )->getMock();
@@ -141,10 +141,10 @@ class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_Test
         $subscriberMock = $this->getMockBuilder(Mage_Newsletter_Model_Subscriber::class)
             ->disableOriginalConstructor()->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()->setMethods(array('getGeneralList'))->getMock();
 
-        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
+        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Ecommercesyncdata::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getId', 'getSqualomailSyncedFlag', 'getEcommerceSyncDataItem'))
             ->getMock();
@@ -190,7 +190,7 @@ class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_Test
             ->willReturnOnConsecutiveCalls($customerId, $customerId);
 
         $syncDataItemMock->expects($this->once())->method('getEcommerceSyncDataItem')
-            ->with($customerId, Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER, $squalomailStoreId)
+            ->with($customerId, Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER, $squalomailStoreId)
             ->willReturnSelf();
 
         $this->_customersApiMock->expects($this->once())->method('incrementCounterSentPerBatch')
@@ -295,7 +295,7 @@ class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_Test
         )->getMock();
 
         $customerCollectionResourceMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection::class)
             ->disableOriginalConstructor()->setMethods(
                 array('setSqualomailStoreId', 'setStoreId')
             )->getMock();
@@ -315,12 +315,12 @@ class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_Test
             ->setMethods(array('subscribe'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getGeneralList'))
             ->getMock();
 
-        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
+        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Ecommercesyncdata::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getId', 'getSqualomailSyncedFlag', 'getEcommerceSyncDataItem'))
             ->getMock();
@@ -409,7 +409,7 @@ class Ebizmarts_MailChimp_Model_Api_CustomersTest extends PHPUnit_Framework_Test
 
         $syncDataItemMock->expects($this->once())
             ->method('getEcommerceSyncDataItem')
-            ->with($customerId, Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER, $squalomailStoreId)
+            ->with($customerId, Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER, $squalomailStoreId)
             ->willReturn($syncDataItemMock);
 
         $subscriberMock

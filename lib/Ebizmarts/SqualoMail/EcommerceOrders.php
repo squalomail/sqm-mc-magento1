@@ -11,10 +11,10 @@
  * @file:     EcommerceOrders.php
  */
 
-class MailChimp_EcommerceOrders extends MailChimp_Abstract
+class SqualoMail_EcommerceOrders extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_EcommerceOrdersLines
+     * @var SqualoMail_EcommerceOrdersLines
      */
     public $lines;
 
@@ -37,8 +37,8 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
      * @param null  $billingAddress     The billing address for the order.
      * @param $lines                    An array of the order’s line items.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $storeId,
@@ -97,7 +97,7 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
             $_params['billing_address'] = $billingAddress;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/orders', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/orders', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -111,8 +111,8 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
      *                                  with this parameter can be slow.
      * @param null  $customerId     Restrict results to orders made by a specific customer.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll(
         $storeId,
@@ -144,7 +144,7 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
             $_params['customer_id'] = $customerId;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/orders', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/orders', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -155,8 +155,8 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
      * @param null  $excludeFields      A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                      with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($storeId, $orderId, $fields = null, $excludeFields = null)
     {
@@ -172,7 +172,7 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
 
         $url = 'ecommerce/stores/' . $storeId . '/orders/' . $orderId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -193,8 +193,8 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
      * @param null  $billingAddress     The billing address for the order.
      * @param $lines                    An array of the order’s line items.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify(
         $storeId,
@@ -269,20 +269,20 @@ class MailChimp_EcommerceOrders extends MailChimp_Abstract
 
         $url = 'ecommerce/stores/' . $storeId . '/orders/' . $orderId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::PATCH);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::PATCH);
     }
 
     /**
      * @param $storeId                  The store id.
      * @param $orderId                  The id for the order in a store.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($storeId, $orderId)
     {
         $url = 'ecommerce/stores/' . $storeId . '/orders/' . $orderId;
 
-        return $this->_master->call($url, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call($url, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

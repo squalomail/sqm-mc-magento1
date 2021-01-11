@@ -10,7 +10,7 @@
  * @date:     3/1/19 11:45 AM
  * @file      Comment.php
  */
-class Ebizmarts_MailChimp_Model_Adminhtml_Includetaxes_Comment
+class Ebizmarts_SqualoMail_Model_Adminhtml_Includetaxes_Comment
 {
     public function getCommentText()
     {

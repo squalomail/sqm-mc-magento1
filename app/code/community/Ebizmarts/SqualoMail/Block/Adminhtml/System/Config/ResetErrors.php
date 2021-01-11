@@ -11,7 +11,7 @@
  * @date:     5/27/16 1:02 PM
  * @file:     ResetErrors.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_ResetErrors
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_ResetErrors
     extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
     protected function _construct()
@@ -55,7 +55,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_ResetErrors
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

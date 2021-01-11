@@ -11,7 +11,7 @@
  * @date:     12/8/16 2:04 PM
  * @file:     Monkey.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_View_Info_Monkey extends Mage_Core_Block_Template
+class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_View_Info_Monkey extends Mage_Core_Block_Template
 {
 
     /**
@@ -56,10 +56,10 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_View_Info_Monkey extends M
             $campaignId = $this->getCampaignId();
             $order = $this->getCurrentOrder();
             $storeId = $order->getStoreId();
-            $helper = $this->getMailChimpHelper();
+            $helper = $this->getSqualoMailHelper();
 
             if ($helper->isEcomSyncDataEnabled($storeId)) {
-                $this->_campaignName = $helper->getMailChimpCampaignNameById($campaignId, $storeId);
+                $this->_campaignName = $helper->getSqualoMailCampaignNameById($campaignId, $storeId);
             }
         }
 
@@ -72,13 +72,13 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_View_Info_Monkey extends M
      */
     public function escapeQuote($data)
     {
-        return $this->getMailChimpHelper()->mcEscapeQuote($data);
+        return $this->getSqualoMailHelper()->mcEscapeQuote($data);
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
-    public function getMailChimpHelper()
+    public function getSqualoMailHelper()
     {
         return Mage::helper('squalomail');
     }
@@ -118,7 +118,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_View_Info_Monkey extends M
      */
     public function getStoreCodeFromOrder()
     {
-        $helper = $this->getMailChimpHelper();
+        $helper = $this->getSqualoMailHelper();
         $order = $this->getCurrentOrder();
         $storeId = $order->getStoreId();
         $storeCode = $helper->getMageApp()->getStore($storeId)->getCode();

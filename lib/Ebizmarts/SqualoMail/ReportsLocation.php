@@ -11,10 +11,10 @@
  * @date:     5/2/16 5:04 PM
  * @file:     ReportsLocation.php
  */
-class MailChimp_ReportsLocation extends MailChimp_Abstract
+class SqualoMail_ReportsLocation extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsLocation
+     * @var SqualoMail_ReportsLocation
      */
     public $location;
 }

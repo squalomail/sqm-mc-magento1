@@ -7,7 +7,7 @@
  * File   : Userinfo.php
  * Module : Ebizmarts_Mandrill
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_Userinfo
+class Ebizmarts_SqualoMail_Model_System_Config_Source_Userinfo
 {
 
     /**

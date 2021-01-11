@@ -7,12 +7,12 @@
  * File   : CustomerGroup.php
  * Module : magemonkey
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_CustomerGroup
+class Ebizmarts_SqualoMail_Model_System_Config_Source_CustomerGroup
 {
     protected $_categories = null;
 
     /**
-     * Ebizmarts_MailChimp_Model_System_Config_Source_CustomerGroup constructor.
+     * Ebizmarts_SqualoMail_Model_System_Config_Source_CustomerGroup constructor.
      *
      * @param  $params
      * @throws Mage_Core_Exception
@@ -54,7 +54,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_CustomerGroup
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

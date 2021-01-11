@@ -10,10 +10,10 @@
  * @date:     5/2/16 2:00 PM
  * @file:     ListsSegments.php
  */
-class MailChimp_ListsSegments extends MailChimp_Abstract
+class SqualoMail_ListsSegments extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ListsSegmentsMembers
+     * @var SqualoMail_ListsSegmentsMembers
      */
     public $segmentMembers;
 
@@ -24,7 +24,7 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
             $_params['fields'] = $fields;
         }
 
-        return $this->_master->call('lists/' . $listId . '/segments', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/segments', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -42,8 +42,8 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
      * @param null  $sinceUpdatedAt     Restrict results to segments update after the set time.
      * @param null  $beforeUpdatedAt    Restrict results to segments update before the set time.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll(
         $listId,
@@ -95,19 +95,19 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
             $_params['before_updated_at'] = $beforeUpdatedAt;
         }
 
-        return $this->_master->call('lists/' . $listId . '/segments', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/segments', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
      * @param $listId               The unique id for the list.
      * @param $segmentId            The unique id for the segment.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $segmentId)
     {
-        return $this->_master->call('lists/' . $listId . '/segments/' . $segmentId, null, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/segments/' . $segmentId, null, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -119,8 +119,8 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
      *                                  options field.
      * @param null $options
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add($listId, $name, $staticSegment = null, $options = null)
     {
@@ -134,7 +134,7 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
             $_params['options'] = $options;
         }
 
-        return $this->_master->call('lists/' . $listId . '/segments', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('lists/' . $listId . '/segments', $_params, Ebizmarts_SqualoMail::POST);
     }
     /**
      * @param $listId               The unique id for the list.
@@ -146,8 +146,8 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
      *                                  options field.
      * @param null $options
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify($listId, $segmentId, $name, $staticSegment = null, $options = null)
     {
@@ -165,7 +165,7 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/segments/' . $segmentId, $_params, Ebizmarts_MailChimp::PATCH
+            'lists/' . $listId . '/segments/' . $segmentId, $_params, Ebizmarts_SqualoMail::PATCH
         );
     }
 
@@ -173,11 +173,11 @@ class MailChimp_ListsSegments extends MailChimp_Abstract
      * @param $listId                   The unique id for the list.
      * @param $segmentId                The unique id for the segment.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($listId, $segmentId)
     {
-        return $this->_master->call('lists/' . $listId . '/segments/' . $segmentId, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call('lists/' . $listId . '/segments/' . $segmentId, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

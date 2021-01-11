@@ -10,7 +10,7 @@
  * @date:     5/2/16 3:46 PM
  * @file:     ListsGrowthHistory.php
  */
-class MailChimp_ListsGrowthHistory extends MailChimp_Abstract
+class SqualoMail_ListsGrowthHistory extends SqualoMail_Abstract
 {
     /**
      * @param $listId               The unique id for the list.
@@ -22,8 +22,8 @@ class MailChimp_ListsGrowthHistory extends MailChimp_Abstract
      * @param null $offset          The number of records from a collection to skip. Iterating over large collections
      *                                        with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($listId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -45,7 +45,7 @@ class MailChimp_ListsGrowthHistory extends MailChimp_Abstract
             $_params['offset'] = $offset;
         }
 
-        return $this->_master->call('lists/' . $listId . '/growth-history', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/growth-history', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -56,8 +56,8 @@ class MailChimp_ListsGrowthHistory extends MailChimp_Abstract
      * @param null $excludeFields   A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                     with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $month, $fields = null, $excludeFields = null)
     {
@@ -71,7 +71,7 @@ class MailChimp_ListsGrowthHistory extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/growth-history/' . $month, $_params, Ebizmarts_MailChimp::GET
+            'lists/' . $listId . '/growth-history/' . $month, $_params, Ebizmarts_SqualoMail::GET
         );
     }
 }

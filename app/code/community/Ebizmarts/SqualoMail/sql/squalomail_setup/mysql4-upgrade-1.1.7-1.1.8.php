@@ -10,7 +10,7 @@ ADD INDEX `IDX_M4M_SALES_FLAT_ORDER_CUSTOMER_EMAIL` (`customer_email`);
 "
     );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 try {
@@ -21,7 +21,7 @@ ADD INDEX `batch_id` (`batch_id`);
 "
     );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $installer->endSetup();

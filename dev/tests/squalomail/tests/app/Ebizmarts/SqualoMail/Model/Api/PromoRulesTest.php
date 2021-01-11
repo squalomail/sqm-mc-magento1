@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_PromoRulesTest extends PHPUnit_Framework_TestCase
 {
     protected $_promoRulesApiMock;
 
@@ -13,9 +13,9 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
         Mage::app('default');
 
         /**
-         * @var Ebizmarts_MailChimp_Model_Api_PromoRules $apiPromoRulesMock promoRulesApiMock
+         * @var Ebizmarts_SqualoMail_Model_Api_PromoRules $apiPromoRulesMock promoRulesApiMock
          */
-        $this->_promoRulesApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_PromoRules::class);
+        $this->_promoRulesApiMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_PromoRules::class);
     }
 
     public function tearDown()
@@ -43,11 +43,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             )->getMock();
 
         $promoCollectionResourceMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoRules_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoRules_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setSqualomailStoreId', 'setStoreId'))->getMock();
 
-        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getDateMicrotime'))->disableOriginalConstructor()->getMock();
 
@@ -86,8 +86,8 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
         $promoRulesApiMock = $this->_promoRulesApiMock
             ->disableOriginalConstructor()
             ->setMethods(
-                array('getPromoRule', 'getHelper', '_updateSyncData', 'getMailChimpDiscountAmount',
-                    'getMailChimpType', 'getMailChimpTarget', 'ruleIsNotCompatible', 'ruleHasMissingInformation',
+                array('getPromoRule', 'getHelper', '_updateSyncData', 'getSqualoMailDiscountAmount',
+                    'getSqualoMailType', 'getSqualoMailTarget', 'ruleIsNotCompatible', 'ruleHasMissingInformation',
                     'getDateHelper')
             )
             ->getMock();
@@ -103,7 +103,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             )
             ->getMock();
 
-        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->setMethods(array('getDateMicrotime'))
             ->disableOriginalConstructor()
             ->getMock();
@@ -124,17 +124,17 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             ->willReturn($promoRuleMock);
         $promoRulesApiMock
             ->expects($this->once())
-            ->method('getMailChimpDiscountAmount')
+            ->method('getSqualoMailDiscountAmount')
             ->with($promoRuleMock)
             ->willReturn($promoRuleData['amount']);
         $promoRulesApiMock
             ->expects($this->once())
-            ->method('getMailChimpType')
+            ->method('getSqualoMailType')
             ->with($ruleSimpleAction)
             ->willReturn($promoRuleData['type']);
         $promoRulesApiMock
             ->expects($this->once())
-            ->method('getMailChimpTarget')
+            ->method('getSqualoMailTarget')
             ->with($ruleSimpleAction)
             ->willReturn($promoRuleData['target']);
         $promoRulesApiMock->expects($this->once())->method('ruleIsNotCompatible')->willReturn(false);
@@ -236,8 +236,8 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
-                    'getPromoRule', '_updateSyncData', 'getHelper', 'getMailChimpDiscountAmount', 'getMailChimpType',
-                    'getDateHelper', 'getMailChimpTarget', 'ruleIsNotCompatible', 'ruleHasMissingInformation',
+                    'getPromoRule', '_updateSyncData', 'getHelper', 'getSqualoMailDiscountAmount', 'getSqualoMailType',
+                    'getDateHelper', 'getSqualoMailTarget', 'ruleIsNotCompatible', 'ruleHasMissingInformation',
                     'addSyncDataError'
                 )
             )
@@ -253,11 +253,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             )
             ->getMock();
 
-        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squaloMailDateHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->setMethods(array('getDateMicrotime', 'formatDate'))
             ->disableOriginalConstructor()
             ->getMock();
@@ -280,19 +280,19 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
 
         $promoRulesApiMock
             ->expects($this->once())
-            ->method('getMailChimpDiscountAmount')
+            ->method('getSqualoMailDiscountAmount')
             ->with($promoRuleMock)
             ->willReturn($promoRuleData['amount']);
 
         $promoRulesApiMock
             ->expects($this->once())
-            ->method('getMailChimpType')
+            ->method('getSqualoMailType')
             ->with($ruleSimpleAction)
             ->willReturn($promoRuleData['type']);
 
         $promoRulesApiMock
             ->expects($this->once())
-            ->method('getMailChimpTarget')
+            ->method('getSqualoMailTarget')
             ->with($ruleSimpleAction)
             ->willReturn($promoRuleData['target']);
         $promoRulesApiMock->expects($this->once())->method('ruleIsNotCompatible')->willReturn(true);
@@ -341,7 +341,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
                     'type' => null,
                     'target' => 'total',
                     'enabled' => true,
-                    'error' => 'The rule type is not supported by the MailChimp schema.',
+                    'error' => 'The rule type is not supported by the SqualoMail schema.',
                     'isNotCompatible' => true,
                 )),
             'no target' =>
@@ -358,7 +358,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
                     'type' => 'fixed',
                     'target' => null,
                     'enabled' => true,
-                    'error' => 'The rule type is not supported by the MailChimp schema.',
+                    'error' => 'The rule type is not supported by the SqualoMail schema.',
                     'isNotCompatible' => true,
                 )
                 )
@@ -424,7 +424,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
     public function testRuleHasMissingInformation($providerData)
     {
         $result = $this->invokeMethod(
-            new Ebizmarts_MailChimp_Model_Api_PromoRules,
+            new Ebizmarts_SqualoMail_Model_Api_PromoRules,
             'ruleHasMissingInformation',
             array($providerData['params'])
         );
@@ -526,7 +526,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
     public function testRuleIsNotCompatible($providerData)
     {
         $result = $this->invokeMethod(
-            new Ebizmarts_MailChimp_Model_Api_PromoRules,
+            new Ebizmarts_SqualoMail_Model_Api_PromoRules,
             'ruleIsNotCompatible',
             array($providerData['params'])
         );

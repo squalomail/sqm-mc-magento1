@@ -8,7 +8,7 @@
  * @author   Ebizmarts Team <info@ebizmarts.com>
  * @license  http://opensource.org/licenses/osl-3.0.php
  */
-class Ebizmarts_MailChimp_Block_Customer_Newsletter_Index extends Mage_Customer_Block_Newsletter
+class Ebizmarts_SqualoMail_Block_Customer_Newsletter_Index extends Mage_Customer_Block_Newsletter
 {
 
     protected $_lists = array();
@@ -19,7 +19,7 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_Index extends Mage_Customer_
     protected $_api;
     protected $_template = "ebizmarts/squalomail/customer/newsletter/index.phtml";
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
     protected $_storeId;
@@ -35,13 +35,13 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_Index extends Mage_Customer_
      * @return array|null
      * @throws Mage_Core_Exception
      * @throws Mage_Core_Model_Store_Exception
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     public function getInterest()
     {
         $subscriber = $this->getSubscriberModel();
         $subscriber->loadByEmail($this->_getEmail());
-        $helper = $this->getMailChimpHelper();
+        $helper = $this->getSqualoMailHelper();
         $customerSession = $this->getCustomerSession();
         if (!$helper->isAdmin() && $customerSession->isLoggedIn()) {
             $customer = $customerSession->getCustomer();
@@ -62,13 +62,13 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_Index extends Mage_Customer_
      */
     public function escapeQuote($data)
     {
-        return $this->getMailChimpHelper()->mcEscapeQuote($data);
+        return $this->getSqualoMailHelper()->mcEscapeQuote($data);
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
-    public function getMailChimpHelper()
+    public function getSqualoMailHelper()
     {
         return $this->_helper;
     }

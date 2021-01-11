@@ -11,7 +11,7 @@
  * @date:     2019-10-02 15:54
  * @file:     Interestgroup.php
  */
-class Ebizmarts_MailChimp_Model_Resource_Interestgroup extends Mage_Core_Model_Resource_Db_Abstract
+class Ebizmarts_SqualoMail_Model_Resource_Interestgroup extends Mage_Core_Model_Resource_Db_Abstract
 {
 
     /**

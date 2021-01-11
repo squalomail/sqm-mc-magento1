@@ -13,7 +13,7 @@
 
 require_once Mage::getModuleDir('controllers', 'Mage_Checkout') . DS . 'CartController.php';
 
-class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
+class Ebizmarts_SqualoMail_CartController extends Mage_Checkout_CartController
 {
     public function loadquoteAction()
     {
@@ -27,10 +27,10 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
             $quoteSyncData = $this->getSqualomailEcommerceSyncDataModel()
                 ->getEcommerceSyncDataItem(
                     $params['id'],
-                    Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
+                    Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
                     $squalomailStoreId
                 );
-            $url = Mage::getUrl(Mage::getStoreConfig(Ebizmarts_MailChimp_Model_Config::ABANDONEDCART_PAGE, $storeId));
+            $url = Mage::getUrl(Mage::getStoreConfig(Ebizmarts_SqualoMail_Model_Config::ABANDONEDCART_PAGE, $storeId));
 
             if (isset($params['mc_cid'])) {
                 $url .= '?mc_cid=' . $params['mc_cid'];
@@ -91,7 +91,7 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
 
             $promoCodeSyncData = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $id,
-                Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE,
+                Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE,
                 $squalomailStoreId
             );
             $couponId = $promoCodeSyncData->getRelatedId();

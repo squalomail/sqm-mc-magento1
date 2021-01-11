@@ -32,12 +32,12 @@ $baseDir = Mage::getBaseDir();
 
 try {
     /**
-     * @var $fileHelper Ebizmarts_MailChimp_Helper_File
+     * @var $fileHelper Ebizmarts_SqualoMail_Helper_File
      */
     $fileHelper = Mage::helper('squalomail/file');
     $fileHelper->mkDir($baseDir . DS . 'var' . DS . 'squalomail');
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $installer->endSetup();

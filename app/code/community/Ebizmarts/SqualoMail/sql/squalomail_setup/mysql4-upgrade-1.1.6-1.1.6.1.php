@@ -10,7 +10,7 @@ ADD INDEX `squalomail_store_id` (`squalomail_store_id`), ADD INDEX `related_id` 
 "
     );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $installer->endSetup();

@@ -10,35 +10,35 @@
  * @date:     5/2/16 3:59 PM
  * @file:     Ecommerce.php
  */
-class MailChimp_Ecommerce extends MailChimp_Abstract
+class SqualoMail_Ecommerce extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_EcommerceStore
+     * @var SqualoMail_EcommerceStore
      */
     public $stores;
     /**
-     * @var MailChimp_EcommerceCarts
+     * @var SqualoMail_EcommerceCarts
      */
     public $carts;
     /**
-     * @var MailChimp_EcommerceCustomers
+     * @var SqualoMail_EcommerceCustomers
      */
     public $customers;
     /**
-     * @var MailChimp_EcommerceOrders
+     * @var SqualoMail_EcommerceOrders
      */
     public $orders;
     /**
-     * @var MailChimp_EcommerceProducts
+     * @var SqualoMail_EcommerceProducts
      */
     public $products;
     /**
-     * @var MailChimp_EcommercePromoRules
+     * @var SqualoMail_EcommercePromoRules
      */
     public $promoRules;
 
     /**
-     * @return MailChimp_EcommerceStore
+     * @return SqualoMail_EcommerceStore
      */
     public function getStores()
     {
@@ -46,7 +46,7 @@ class MailChimp_Ecommerce extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_EcommerceCarts
+     * @return SqualoMail_EcommerceCarts
      */
     public function getCarts()
     {
@@ -54,7 +54,7 @@ class MailChimp_Ecommerce extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_EcommerceCustomers
+     * @return SqualoMail_EcommerceCustomers
      */
     public function getCustomers()
     {
@@ -62,7 +62,7 @@ class MailChimp_Ecommerce extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_EcommerceOrders
+     * @return SqualoMail_EcommerceOrders
      */
     public function getOrders()
     {
@@ -70,7 +70,7 @@ class MailChimp_Ecommerce extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_EcommerceProducts
+     * @return SqualoMail_EcommerceProducts
      */
     public function getProducts()
     {
@@ -78,7 +78,7 @@ class MailChimp_Ecommerce extends MailChimp_Abstract
     }
 
     /**
-     * @return MailChimp_EcommercePromoRules
+     * @return SqualoMail_EcommercePromoRules
      */
     public function getPromoRules()
     {

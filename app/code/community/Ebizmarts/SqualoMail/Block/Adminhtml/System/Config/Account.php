@@ -1,21 +1,21 @@
 <?php
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/29/16 3:55 PM
  * @file:     Account.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Account extends Mage_Adminhtml_Block_System_Config_Form_Field
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_Account extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
     protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element)
     {
-        $firstErrorKey = Ebizmarts_MailChimp_Model_System_Config_Source_Account::NO_STORE_TEXT_KEY;
-        $firstMigrationKey = Ebizmarts_MailChimp_Model_System_Config_Source_Account::STORE_MIGRATION_TEXT_KEY;
-        $syncLabelKey = Ebizmarts_MailChimp_Model_System_Config_Source_Account::SYNC_LABEL_KEY;
+        $firstErrorKey = Ebizmarts_SqualoMail_Model_System_Config_Source_Account::NO_STORE_TEXT_KEY;
+        $firstMigrationKey = Ebizmarts_SqualoMail_Model_System_Config_Source_Account::STORE_MIGRATION_TEXT_KEY;
+        $syncLabelKey = Ebizmarts_SqualoMail_Model_System_Config_Source_Account::SYNC_LABEL_KEY;
         $values = $element->getValues();
         $html = '<ul id="squalomail_general_account_details" class="checkboxes">';
 
@@ -49,7 +49,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Account extends Mage_Adm
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

@@ -11,10 +11,10 @@
  * @date:     5/2/16 5:03 PM
  * @file:     ReportsEmailActivity.php
  */
-class MailChimp_ReportsEmailActivity extends MailChimp_Abstract
+class SqualoMail_ReportsEmailActivity extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsEmailActivity
+     * @var SqualoMail_ReportsEmailActivity
      */
     public $emailActivity;
 }

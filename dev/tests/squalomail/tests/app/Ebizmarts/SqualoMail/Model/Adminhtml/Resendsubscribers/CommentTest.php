@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Adminhtml_Resendsubscribers_CommentTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Adminhtml_Resendsubscribers_CommentTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @param array $data
@@ -8,12 +8,12 @@ class Ebizmarts_MailChimp_Model_Adminhtml_Resendsubscribers_CommentTest extends 
      */
     public function testGetCommentText($data)
     {
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCurrentScope'))
             ->getMock();
 
-        $commentMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Adminhtml_Resendsubscribers_Comment::class)
+        $commentMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Adminhtml_Resendsubscribers_Comment::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMcHelper'))
             ->getMock();

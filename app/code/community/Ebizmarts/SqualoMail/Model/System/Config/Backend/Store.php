@@ -11,7 +11,7 @@
  * @date:     8/4/16 8:28 PM
  * @file:     List.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Backend_Store extends Mage_Core_Model_Config_Data
+class Ebizmarts_SqualoMail_Model_System_Config_Backend_Store extends Mage_Core_Model_Config_Data
 {
     protected function _afterSave()
     {
@@ -35,7 +35,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Store extends Mage_Core_Mo
             if ($isSyncing === null) {
                 $configValues = array(
                     array(
-                        Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING . "_$newSqualomailStoreId",
+                        Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$newSqualomailStoreId",
                         true
                     )
                 );
@@ -45,7 +45,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Store extends Mage_Core_Mo
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -53,7 +53,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Store extends Mage_Core_Mo
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date
+     * @return Ebizmarts_SqualoMail_Helper_Date
      */
     protected function makeDateHelper()
     {

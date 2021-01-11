@@ -10,10 +10,10 @@
  * @date:     5/2/16 5:02 PM
  * @file:     ReportsEapURLReport.php
  */
-class MailChimp_ReportsEapURLReport extends MailChimp_Abstract
+class SqualoMail_ReportsEapURLReport extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsEapURLReport
+     * @var SqualoMail_ReportsEapURLReport
      */
     public $report;
 }

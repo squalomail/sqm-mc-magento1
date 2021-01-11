@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
 {
 
     public function setUp()
@@ -11,9 +11,9 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     public function testCustomMergeFieldAlreadyExists()
     {
         /**
-         * @var Ebizmarts_MailChimp_Helper_Data $helperMock
+         * @var Ebizmarts_SqualoMail_Helper_Data $helperMock
          */
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCustomMergeFields'))
             ->getMock();
@@ -35,9 +35,9 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $scopeId = 1;
         $scope = 'stores';
         /**
-         * @var Ebizmarts_MailChimp_Helper_Data $helperMock
+         * @var Ebizmarts_SqualoMail_Helper_Data $helperMock
          */
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isSubscriptionEnabled', 'getCheckoutSubscribeValue'))
             ->getMock();
@@ -45,7 +45,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->willReturn(true);
 
         $helperMock->expects($this->once())->method('getCheckoutSubscribeValue')->with($scopeId, $scope)
-            ->willReturn(Ebizmarts_MailChimp_Model_System_Config_Source_Checkoutsubscribe::NOT_CHECKED_BY_DEFAULT);
+            ->willReturn(Ebizmarts_SqualoMail_Model_System_Config_Source_Checkoutsubscribe::NOT_CHECKED_BY_DEFAULT);
 
         $this->assertTrue($helperMock->isCheckoutSubscribeEnabled($scopeId, $scope));
     }
@@ -55,9 +55,9 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $storeId = 1;
         $lastItemSent = 100;
         /**
-         * @var Ebizmarts_MailChimp_Helper_Data $helperMock
+         * @var Ebizmarts_SqualoMail_Helper_Data $helperMock
          */
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getResendEnabled', 'getResendTurn', 'getOrderResendLastId'))
             ->getMock();
@@ -76,7 +76,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->method('addFieldToFilter')
             ->with('entity_id', array('lteq' => $lastItemSent));
 
-        $helperMock->addResendFilter($collectionMock, $storeId, Ebizmarts_MailChimp_Model_Config::IS_ORDER);
+        $helperMock->addResendFilter($collectionMock, $storeId, Ebizmarts_SqualoMail_Model_Config::IS_ORDER);
     }
 
     public function testHandleResendFinish()
@@ -84,9 +84,9 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $scopeId = 1;
         $scope = 'stores';
         /**
-         * @var Ebizmarts_MailChimp_Helper_Data $helperMock
+         * @var Ebizmarts_SqualoMail_Helper_Data $helperMock
          */
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('allResendItemsSent', 'deleteResendConfigValues'))
             ->getMock();
@@ -104,13 +104,13 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $where = "status = 'pending' AND store_id = $squalomailStoreId";
         $tableName = 'squalomail_sync_batches';
-        $configValues = array(array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_ACTIVE, 0));
+        $configValues = array(array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_ACTIVE, 0));
         $storeIdOne = 1;
         $storeIdTwo = 2;
         $storeIdThree = 3;
         $storeIdsArray = array($storeIdOne, $storeIdTwo, $storeIdThree);
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getConfig', 'getCoreResource', 'saveSqualomailConfig', 'getAllStoresForScope'))
             ->getMock();
@@ -140,22 +140,22 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->willReturn($storeIdsArray);
 
         $params = array();
-        $params ['param2'] = array(Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING
+        $params ['param2'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
             . "_$squalomailStoreId", 'stores', $storeIdOne);
-        $params ['param3'] = array(Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING
+        $params ['param3'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
             . "_$squalomailStoreId", 'stores', $storeIdTwo);
-        $params ['param4'] = array(Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING
+        $params ['param4'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
             . "_$squalomailStoreId", 'stores', $storeIdThree);
-        $params ['param5'] = array(Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING
+        $params ['param5'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING
             . "_$squalomailStoreId", $scope, $scopeId);
-        $params ['param1'] = array(Ebizmarts_MailChimp_Model_Config::GENERAL_MCSTOREID, $scope, $scopeId);
-        $params ['param6'] = array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_CUSTOMER_LAST_ID, $scope, $scopeId);
-        $params ['param7'] = array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_PRODUCT_LAST_ID, $scope, $scopeId);
-        $params ['param8'] = array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_ORDER_LAST_ID, $scope, $scopeId);
-        $params ['param9'] = array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_CART_LAST_ID, $scope, $scopeId);
-        $params ['param10'] = array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_PCD_LAST_ID, $scope, $scopeId);
-        $params ['param11'] = array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_RESEND_ENABLED, $scope, $scopeId);
-        $params ['param12'] = array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_RESEND_TURN, $scope, $scopeId);
+        $params ['param1'] = array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCSTOREID, $scope, $scopeId);
+        $params ['param6'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_CUSTOMER_LAST_ID, $scope, $scopeId);
+        $params ['param7'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_PRODUCT_LAST_ID, $scope, $scopeId);
+        $params ['param8'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_ORDER_LAST_ID, $scope, $scopeId);
+        $params ['param9'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_CART_LAST_ID, $scope, $scopeId);
+        $params ['param10'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_PCD_LAST_ID, $scope, $scopeId);
+        $params ['param11'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_RESEND_ENABLED, $scope, $scopeId);
+        $params ['param12'] = array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_RESEND_TURN, $scope, $scopeId);
 
         $configMock
             ->expects($this->exactly(12))
@@ -197,7 +197,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $scopeId = 0;
         $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMCStoreId', 'getConfigValueForScope'))
             ->getMock();
@@ -210,7 +210,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock
             ->expects($this->once())
             ->method('getConfigValueForScope')
-            ->with(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId", $scopeId, $scope);
+            ->with(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId", $scopeId, $scope);
 
         $helperMock->getDateSyncFinishByStoreId($scopeId, $scope);
     }
@@ -226,9 +226,9 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $configEntries = array();
 
         /**
-         * @var Ebizmarts_MailChimp_Helper_Data $helperMock
+         * @var Ebizmarts_SqualoMail_Helper_Data $helperMock
          */
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getResendTurnConfigCollection', 'getResendTurn', 'getResendEnabled',
@@ -265,9 +265,9 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $configEntries = array();
 
         /**
-         * @var Ebizmarts_MailChimp_Helper_Data $helperMock
+         * @var Ebizmarts_SqualoMail_Helper_Data $helperMock
          */
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getResendTurnConfigCollection', 'getResendTurn', 'setIsSyncingIfFinishedPerScope',
@@ -294,9 +294,9 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock->handleResendDataAfter();
     }
 
-    public function testSaveMailChimpConfig()
+    public function testSaveSqualoMailConfig()
     {
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getConfig'))
             ->getMock();
@@ -310,14 +310,14 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $configMock
             ->expects($this->once())
             ->method('saveConfig')
-            ->with(Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_116, 1, 'default', 0);
+            ->with(Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_116, 1, 'default', 0);
         $configMock->expects($this->once())->method('cleanCache');
 
         $helperMock
-            ->saveMailChimpConfig(
+            ->saveSqualoMailConfig(
                 array(
                     array(
-                        Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_116,
+                        Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_116,
                         1
                     )
                 ),
@@ -341,7 +341,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $imageUrl = 'http://magento.com/catalog/product/image.jpg';
         $configImageSize = $data['configImageSize'];
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getProductResourceModel', 'getProductModel', 'getImageSize', 'getCurrentStoreId',
@@ -401,20 +401,20 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         return array(
             array(
                 array(
-                    'imageSize' => Ebizmarts_MailChimp_Model_Config::IMAGE_SIZE_DEFAULT,
-                    'configImageSize' => Ebizmarts_MailChimp_Helper_Data::DEFAULT_SIZE
+                    'imageSize' => Ebizmarts_SqualoMail_Model_Config::IMAGE_SIZE_DEFAULT,
+                    'configImageSize' => Ebizmarts_SqualoMail_Helper_Data::DEFAULT_SIZE
                 )
             ),
             array(
                 array(
-                    'imageSize' => Ebizmarts_MailChimp_Model_Config::IMAGE_SIZE_SMALL,
-                    'configImageSize' => Ebizmarts_MailChimp_Helper_Data::SMALL_SIZE
+                    'imageSize' => Ebizmarts_SqualoMail_Model_Config::IMAGE_SIZE_SMALL,
+                    'configImageSize' => Ebizmarts_SqualoMail_Helper_Data::SMALL_SIZE
                 )
             ),
             array(
                 array(
-                    'imageSize' => Ebizmarts_MailChimp_Model_Config::IMAGE_SIZE_THUMBNAIL,
-                    'configImageSize' => Ebizmarts_MailChimp_Helper_Data::THUMBNAIL_SIZE
+                    'imageSize' => Ebizmarts_SqualoMail_Model_Config::IMAGE_SIZE_THUMBNAIL,
+                    'configImageSize' => Ebizmarts_SqualoMail_Helper_Data::THUMBNAIL_SIZE
                 )
             )
         );
@@ -425,11 +425,11 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $productId = 1;
         $magentoStoreId = 1;
         $defaultStoreId = 0;
-        $imageSize = Ebizmarts_MailChimp_Model_Config::IMAGE_SIZE_DEFAULT;
+        $imageSize = Ebizmarts_SqualoMail_Model_Config::IMAGE_SIZE_DEFAULT;
         $imageUrl = 'http://magento.com/catalog/product/image.jpg';
-        $configImageSize = Ebizmarts_MailChimp_Helper_Data::ORIGINAL_SIZE;
+        $configImageSize = Ebizmarts_SqualoMail_Helper_Data::ORIGINAL_SIZE;
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getProductResourceModel', 'getProductModel', 'getImageSize', 'getCurrentStoreId',
@@ -487,7 +487,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $upperCaseImage = 'ImageSize';
         $functionName = 'getImageSizeUrl';
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setImageSizeVarToArray', 'setWordToCamelCase', 'setFunctionName'))
             ->getMock();
@@ -517,7 +517,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     {
         $imageSize = 'image_size';
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setWordToCamelCase'))
             ->getMock();
@@ -530,7 +530,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     {
         $imageArray = array('image', 'size');
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setImageSizeVarToArray'))
             ->getMock();
@@ -544,7 +544,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     {
         $upperCaseImage = 'ImageSize';
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setImageSizeVarToArray'))
             ->getMock();
@@ -558,7 +558,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     {
         $scopeId = 0;
         $scope = 'default';
-        $filters = Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        $filters = Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
         $deleteErrorsOnly = false;
 
         $connectionType = 'core_write';
@@ -569,11 +569,11 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $storeReturnWhere = "squalomail_store_id = " . $squalomailStoreId;
         $storeWhere = "squalomail_store_id = ?";
 
-        $squalomailFilters = Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        $squalomailFilters = Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
         $filterReturnWhere = "type IN (" . $squalomailFilters . ')';
         $filterWhere = "type IN (?)";
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMCStoreId', 'getCoreResource'))
             ->getMock();
@@ -619,7 +619,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $scope = 'default';
         $deleteErrorsOnly = true;
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('removeAllEcommerceSyncDataErrors'))
             ->getMock();
@@ -636,7 +636,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $deleteErrorsOnly = true;
         $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMCStoreId', 'removeEcommerceSyncDataByMCStore'))
             ->getMock();
@@ -657,7 +657,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveAllEcommerceSynddataErrors()
     {
-        $squalomailFilters = Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        $squalomailFilters = Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
         $filterReturnWhere = "type IN (" . $squalomailFilters . ')';
         $filterWhere = "type IN (?)";
 
@@ -665,7 +665,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $tableAlias = 'squalomail/ecommercesyncdata';
         $errorSyncWhere = "squalomail_sync_error != ''";
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCoreResource', 'removeEcommerceSyncDataByMCStore'))
             ->getMock();
@@ -711,11 +711,11 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $tableAlias = 'squalomail/ecommercesyncdata';
         $storeReturnWhere = "squalomail_store_id = $squalomailStoreId AND squalomail_sync_error != ''";
 
-        $squalomailFilters = Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        $squalomailFilters = Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
         $filterReturnWhere = "type IN (" . $squalomailFilters . ')';
         $filterWhere = "type IN (?)";
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCoreResource'))
             ->getMock();
@@ -767,11 +767,11 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $storeReturnWhere = "squalomail_store_id = " . $squalomailStoreId;
         $storeWhere = "squalomail_store_id = ?";
 
-        $squalomailFilters = Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        $squalomailFilters = Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
         $filterReturnWhere = "regtype IN (" . $squalomailFilters . ')';
         $filterWhere = "regtype IN (?)";
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('handleOldErrors', 'getMCStoreId', 'getCoreResource'))
             ->getMock();
@@ -821,11 +821,11 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $squalomailEcommTableAlias = 'squalomail/squalomailerrors';
         $squalomailEcommTableName = 'squalomail_errors';
         $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
-        $squalomailFilters = Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        $squalomailFilters = Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
         $filterReturnWhere = "type IN (" . $squalomailFilters . ')';
         $filterWhere = "type IN (?)";
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('handleOldErrors', 'getMCStoreId', 'getCoreResource'))
             ->getMock();
@@ -879,7 +879,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $storeReturnWhere = "store_id = " . $scopeId;
         $storeWhere = "store_id = ?";
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('handleOldErrors', 'getMCStoreId', 'getCoreResource'))
             ->getMock();
@@ -928,17 +928,17 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $accountIdValue = '123456789';
         $accountIdArray = array($accountIdKey => $accountIdValue);
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getApiByKey'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getRoot'))
             ->getMock();
 
-        $apiRootMock = $this->getMockBuilder(MailChimp_Root::class)
+        $apiRootMock = $this->getMockBuilder(SqualoMail_Root::class)
             ->disableOriginalConstructor()
             ->setMethods(array('info'))
             ->getMock();
@@ -969,7 +969,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $where = array("store_id = ?" => $scopeId);
         $setCondition = array('squalomail_sync_delta' => '0000-00-00 00:00:00', 'squalomail_sync_error' => '');
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getAllStoresForScope', 'getCoreResource'))
             ->getMock();
@@ -1014,11 +1014,11 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $scopeId = 1;
 
         $filters = array(
-            Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
-            Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
-            Ebizmarts_MailChimp_Model_Config::IS_ORDER,
-            Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
-            Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE . ', ' . Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE);
+            Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
+            Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER,
+            Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
+            Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
+            Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE . ', ' . Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE);
 
         $resendEnabled = 1;
         $resendTurn = 1;
@@ -1028,16 +1028,16 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $cartLastId = 10;
         $promoCodeLastId = 10;
         $configValues = array(
-            array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_CUSTOMER_LAST_ID, $customerLastId),
-            array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_PRODUCT_LAST_ID, $productLastId),
-            array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_ORDER_LAST_ID, $orderLastId),
-            array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_CART_LAST_ID, $cartLastId),
-            array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_PCD_LAST_ID, $promoCodeLastId),
-            array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_RESEND_ENABLED, $resendEnabled),
-            array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_RESEND_TURN, $resendTurn)
+            array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_CUSTOMER_LAST_ID, $customerLastId),
+            array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_PRODUCT_LAST_ID, $productLastId),
+            array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_ORDER_LAST_ID, $orderLastId),
+            array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_CART_LAST_ID, $cartLastId),
+            array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_PCD_LAST_ID, $promoCodeLastId),
+            array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_RESEND_ENABLED, $resendEnabled),
+            array(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_RESEND_TURN, $resendTurn)
         );
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
@@ -1106,7 +1106,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $expectedResult = true;
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isSubscriptionEnabled', 'isEcommerceEnabled', 'getMCStoreId'))
             ->getMock();
@@ -1138,7 +1138,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $isStoreCreation = false;
         $expectedResult = false;
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -1162,22 +1162,22 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getApiByKey'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getLists'))
             ->getMock();
 
-        $apiListsMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiListsMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterestCategory'))
             ->getMock();
 
-        $apiListsInterestCategoryMock = $this->getMockBuilder(MailChimp_ListsInterestCategory::class)
+        $apiListsInterestCategoryMock = $this->getMockBuilder(SqualoMail_ListsInterestCategory::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getAll'))
             ->getMock();
@@ -1214,27 +1214,27 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         );
         $interestsResponse = array('interests' => array(array('id' => 2, 'name' => 'Group Name')));
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getApi', 'getGeneralList'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getLists'))
             ->getMock();
 
-        $apiListsMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiListsMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterestCategory'))
             ->getMock();
 
-        $apiListsInterestCategoryMock = $this->getMockBuilder(MailChimp_ListsInterestCategory::class)
+        $apiListsInterestCategoryMock = $this->getMockBuilder(SqualoMail_ListsInterestCategory::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getAll', 'getInterests'))
             ->getMock();
 
-        $apiListsInterestCategoryInterestsMock = $this->getMockBuilder(MailChimp_ListInterestCategoryInterests::class)
+        $apiListsInterestCategoryInterestsMock = $this->getMockBuilder(SqualoMail_ListInterestCategoryInterests::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getAll'))
             ->getMock();
@@ -1323,28 +1323,28 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getApi', 'getGeneralList', 'getLocalInterestCategories'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getLists'))
             ->getMock();
 
-        $apiListsMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiListsMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterestCategory'))
             ->getMock();
 
-        $apiListsInterestCategoryMock = $this->getMockBuilder(MailChimp_ListsInterestCategory::class)
+        $apiListsInterestCategoryMock = $this->getMockBuilder(SqualoMail_ListsInterestCategory::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getAll', 'getInterests'))
             ->getMock();
 
         $apiListsInterestCategoryInterestsMock = $this->getMockBuilder(
-            MailChimp_ListInterestCategoryInterests::class
+            SqualoMail_ListInterestCategoryInterests::class
         )
             ->disableOriginalConstructor()
             ->setMethods(array('getAll'))
@@ -1421,7 +1421,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         );
         $expectedResult = $interest;
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
@@ -1431,7 +1431,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             )
             ->getMock();
 
-        $interestGroupMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Interestgroup::class)
+        $interestGroupMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Interestgroup::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getByRelatedIdStoreId', 'getId', 'getGroupdata'))
             ->getMock();
@@ -1462,7 +1462,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $storeId = 1;
         $expectedResult = array();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isSubscriptionEnabled'))
             ->getMock();
@@ -1489,7 +1489,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         );
         $currentDateTime = '2018-07-26 12:43:40';
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getInterestGroupsIfAvailable', 'isAdmin', 'getCustomerSession',
@@ -1497,14 +1497,14 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             )
             ->getMock();
 
-        $helperDateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $helperDateMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('formatDate')
             )
             ->getMock();
 
-        $interestGroupMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Interestgroup::class)
+        $interestGroupMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Interestgroup::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getByRelatedIdStoreId', 'getSubscriberId', 'getCustomerId', 'setSubscriberId',
@@ -1581,7 +1581,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
 
         $expectedResult = '<script type="text/javascript" src="' . $jsUrl . '" defer></script>';
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array('getMageApp', 'isEcomSyncDataEnabled', 'getConfigValueForScope',
@@ -1618,7 +1618,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $helperMock
             ->expects($this->once())
             ->method('getConfigValueForScope')
-            ->with(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId", 0, 'default')
+            ->with(Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId", 0, 'default')
             ->willReturn(null);
         $helperMock
             ->expects($this->once())
@@ -1644,7 +1644,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $stores = array($storeIdOne => $storeMock, $storeIdTwo => $storeMock, $storeIdThree => $storeMock);
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp', 'getApiKey'))
             ->getMock();
@@ -1673,7 +1673,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
 
     public function testGetSessionLastRealOrderM19()
     {
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCheckOutSession'))
             ->getMock();
@@ -1697,7 +1697,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     public function testGetSessionLastRealOrderM17()
     {
         $orderId = 4;
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCheckOutSession', 'getSalesOrderModel'))
             ->getMock();
@@ -1725,7 +1725,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     public function testSetCurrentStore()
     {
         $storeId = 1;
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp'))
             ->getMock();
@@ -1752,7 +1752,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     public function testGetCurrentStoreId()
     {
         $storeId = 1;
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp'))
             ->getMock();
@@ -1791,7 +1791,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $scopeId = 0;
         $scope = 'stores';
 
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('removeErrorsFromSubscribers', 'removeEcommerceSyncData', 'clearErrorGrid'))
             ->getMock();
@@ -1823,7 +1823,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             'a1s2d3f5h6h6j7k8l9p0' => 2
         );
 
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getStoreRelation', 'getMCStoreId'))
             ->getMock();
@@ -1925,19 +1925,19 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $ebizmartsSqualomailMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $ebizmartsSqualomailMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()->setMethods(array('getLists'))
             ->getMock();
 
-        $squalomailListsMock = $this->getMockBuilder(MailChimp_Lists::class)
+        $squalomailListsMock = $this->getMockBuilder(SqualoMail_Lists::class)
             ->disableOriginalConstructor()->setMethods(array('getMergeFields'))
             ->getMock();
 
-        $squalomailListsMergeFieldsMock = $this->getMockBuilder(MailChimp_ListsMergeFields::class)
+        $squalomailListsMergeFieldsMock = $this->getMockBuilder(SqualoMail_ListsMergeFields::class)
             ->disableOriginalConstructor()->setMethods(array('getAll'))
             ->getMock();
 
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
@@ -2005,7 +2005,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
             array("squalomail", "FNAME", "magento", "5")
         );
 
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('unserialize', 'getCustomMergeFieldsSerialized'))
             ->getMock();
@@ -2024,19 +2024,19 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
     {
         $storeId = 6;
 
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getApi'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()->setMethods(array('getRoot'))
             ->getMock();
 
         $helperDataMock->expects($this->once())->method('getApi')->with($storeId)
             ->willReturn($apiMock);
 
-        $apiRootMock = $this->getMockBuilder(MailChimp_Root::class)
+        $apiRootMock = $this->getMockBuilder(SqualoMail_Root::class)
             ->disableOriginalConstructor()
             ->setMethods(array('info'))
             ->getMock();
@@ -2053,7 +2053,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $index = 0;
         $statusChanged = "SENT";
 
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCountersDataSentToSqualomail', 'setCountersDataSentToSqualomail'))
             ->getMock();
@@ -2070,7 +2070,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $index = 0;
         $statusChanged = "NOT SENT";
 
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCountersDataSentToSqualomail', 'setCountersDataSentToSqualomail'))
             ->getMock();
@@ -2088,7 +2088,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
         $serializedData = 'a:2:{s:5:"data1";s:6:"value1";s:5:"data2";s:6:"value2";}';
 
         // Sets any methods so the mock initializes the required method
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('unserialize'))
             ->getMock();
@@ -2105,7 +2105,7 @@ class Ebizmarts_MailChimp_Helper_DataTest extends PHPUnit_Framework_TestCase
 
 
         // Sets any methods so the mock initializes the required method
-        $helperDataMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperDataMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('serialize'))
             ->getMock();

@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandleTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_Subscribers_InterestGroupHandleTest extends PHPUnit_Framework_TestCase
 {
     const DEFAULT_STORE_ID = 1;
 
@@ -42,17 +42,17 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandleTest extends 
         ));
 
         $interestGroupHandleMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Subscribers_InterestGroupHandle::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper', 'getDateHelper', '_getStoreId',
                 'getInterestGroupModel', 'getSubscriber'))
             ->getMock();
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('arrayEncode', 'getApi'))
             ->getMock();
 
-        $dateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $dateHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCurrentDateTime'))
             ->getMock();
@@ -67,28 +67,28 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandleTest extends 
             ->setMethods(array('getSubscriberId', 'getStoreId'))
             ->getMock();
 
-        $interestGroupMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Interestgroup::class)
+        $interestGroupMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Interestgroup::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getByRelatedIdStoreId', 'setGroupdata', 'setSubscriberId',
                 'setCustomerId', 'setStoreId', 'setUpdatedAt', 'save'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getLists'))
             ->getMock();
 
-        $listsMock = $this->getMockBuilder(MailChimp_Lists::class)
+        $listsMock = $this->getMockBuilder(SqualoMail_Lists::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterestCategory'))
             ->getMock();
 
-        $interestCategoryMock = $this->getMockBuilder(MailChimp_ListsInterestCategory::class)
+        $interestCategoryMock = $this->getMockBuilder(SqualoMail_ListsInterestCategory::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterests'))
             ->getMock();
 
-        $interestMock = $this->getMockBuilder(MailChimp_ListInterestCategoryInterests::class)
+        $interestMock = $this->getMockBuilder(SqualoMail_ListInterestCategoryInterests::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getAll'))
             ->getMock();
@@ -163,17 +163,17 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandleTest extends 
         ));
 
         $interestGroupHandleMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Subscribers_InterestGroupHandle::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper', 'getDateHelper', '_getStoreId',
                 'getInterestGroupModel', 'getSubscriberModel'))
             ->getMock();
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('arrayEncode', 'getApi'))
             ->getMock();
 
-        $dateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $dateHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCurrentDateTime'))
             ->getMock();
@@ -188,28 +188,28 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandleTest extends 
             ->setMethods(array('getSubscriberId', 'loadByEmail', 'getStoreId', 'getCustomerId'))
             ->getMock();
 
-        $interestGroupMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Interestgroup::class)
+        $interestGroupMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Interestgroup::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getByRelatedIdStoreId', 'setGroupdata', 'setSubscriberId',
                 'setCustomerId', 'setStoreId', 'setUpdatedAt', 'save'))
             ->getMock();
 
-        $apiMock = $this->getMockBuilder(Ebizmarts_MailChimp::class)
+        $apiMock = $this->getMockBuilder(Ebizmarts_SqualoMail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getLists'))
             ->getMock();
 
-        $listsMock = $this->getMockBuilder(MailChimp_Lists::class)
+        $listsMock = $this->getMockBuilder(SqualoMail_Lists::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterestCategory'))
             ->getMock();
 
-        $interestCategoryMock = $this->getMockBuilder(MailChimp_ListsInterestCategory::class)
+        $interestCategoryMock = $this->getMockBuilder(SqualoMail_ListsInterestCategory::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getInterests'))
             ->getMock();
 
-        $interestMock = $this->getMockBuilder(MailChimp_ListInterestCategoryInterests::class)
+        $interestMock = $this->getMockBuilder(SqualoMail_ListInterestCategoryInterests::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getAll'))
             ->getMock();

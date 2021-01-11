@@ -10,10 +10,10 @@
  * @date:     4/29/16 3:53 PM
  * @file:     CampaignFolders.php
  */
-class MailChimp_CampaignFolders extends MailChimp_Abstract
+class SqualoMail_CampaignFolders extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_CampaignFolders
+     * @var SqualoMail_CampaignFolders
      */
     public $folders;
 }

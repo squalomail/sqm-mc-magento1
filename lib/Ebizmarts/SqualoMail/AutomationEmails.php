@@ -10,10 +10,10 @@
  * @date:     5/2/16 4:12 PM
  * @file:     AutomationEmails.php
  */
-class MailChimp_AutomationEmails extends MailChimp_Abstract
+class SqualoMail_AutomationEmails extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_AutomationEmailsQuque
+     * @var SqualoMail_AutomationEmailsQuque
      */
     public $queue;
 }

@@ -11,18 +11,18 @@
  * @date:     4/29/16 3:55 PM
  * @file:     Campaigns.php
  */
-class MailChimp_Campaigns extends MailChimp_Abstract
+class SqualoMail_Campaigns extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_CampaignsContent
+     * @var SqualoMail_CampaignsContent
      */
     public $content;
     /**
-     * @var MailChimp_CampaignsFeedback
+     * @var SqualoMail_CampaignsFeedback
      */
     public $feedback;
     /**
-     * @var MailChimp_CampaignsSendChecklist
+     * @var SqualoMail_CampaignsSendChecklist
      */
     public $sendChecklist;
 
@@ -102,9 +102,9 @@ class MailChimp_Campaigns extends MailChimp_Abstract
         }
 
         if ($id) {
-            return $this->_master->call('campaigns/' . $id, $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('campaigns/' . $id, $_params, Ebizmarts_SqualoMail::GET);
         } else {
-            return $this->_master->call('campaigns', $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('campaigns', $_params, Ebizmarts_SqualoMail::GET);
         }
     }
 }

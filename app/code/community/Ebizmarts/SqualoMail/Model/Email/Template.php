@@ -11,7 +11,7 @@
  * @date:     8/30/16 2:46 PM
  * @file:     Template.php
  */
-class Ebizmarts_MailChimp_Model_Email_Template extends Ebizmarts_MailChimp_Model_Email_TemplateBase
+class Ebizmarts_SqualoMail_Model_Email_Template extends Ebizmarts_SqualoMail_Model_Email_TemplateBase
 {
     protected $_mail = null;
 
@@ -246,7 +246,7 @@ class Ebizmarts_MailChimp_Model_Email_Template extends Ebizmarts_MailChimp_Model
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Mandrill
+     * @return Ebizmarts_SqualoMail_Helper_Mandrill
      */
     protected function makeMandrillHelper()
     {
@@ -328,7 +328,7 @@ class Ebizmarts_MailChimp_Model_Email_Template extends Ebizmarts_MailChimp_Model
      */
     protected function isMandrillEnabled($storeId)
     {
-        return Mage::getStoreConfig(Ebizmarts_MailChimp_Model_Config::MANDRILL_ACTIVE, $storeId);
+        return Mage::getStoreConfig(Ebizmarts_SqualoMail_Model_Config::MANDRILL_ACTIVE, $storeId);
     }
 
     /**

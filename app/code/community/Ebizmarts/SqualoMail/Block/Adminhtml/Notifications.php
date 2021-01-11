@@ -11,7 +11,7 @@
  * @date:     2/20/19 10:37 AM
  * @file:     Notifications.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Notifications extends Mage_Adminhtml_Block_Template
+class Ebizmarts_SqualoMail_Block_Adminhtml_Notifications extends Mage_Adminhtml_Block_Template
 {
 
     public function getMessageNotification()
@@ -34,7 +34,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Notifications extends Mage_Adminhtml_B
         $helper = $this->makeHelper();
         $message = 'Are you sure you want to delete the local data in order to send all items again?\n'
             . 'Automations will work normally but the synchronization process for the old data will take '
-            . 'longer than resetting the MailChimp store.';
+            . 'longer than resetting the SqualoMail store.';
         return $helper->__($message);
     }
 
@@ -61,7 +61,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Notifications extends Mage_Adminhtml_B
 
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

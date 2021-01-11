@@ -12,7 +12,7 @@
  */
 
 
-class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Action
+class Ebizmarts_SqualoMail_GroupController extends Mage_Core_Controller_Front_Action
 {
     public function indexAction()
     {
@@ -62,7 +62,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data|Mage_Core_Helper_Abstract
+     * @return Ebizmarts_SqualoMail_Helper_Data|Mage_Core_Helper_Abstract
      */
     protected function getHelper()
     {
@@ -70,7 +70,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date
+     * @return Ebizmarts_SqualoMail_Helper_Date
      */
     protected function getDateHelper()
     {
@@ -78,7 +78,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Subscribers
+     * @return Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     protected function getApiSubscriber()
     {
@@ -102,7 +102,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Interestgroup
+     * @return Ebizmarts_SqualoMail_Model_Interestgroup
      */
     protected function getInterestGroupModel()
     {

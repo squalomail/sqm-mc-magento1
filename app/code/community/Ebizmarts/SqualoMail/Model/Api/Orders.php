@@ -9,7 +9,7 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
+class Ebizmarts_SqualoMail_Model_Api_Orders extends Ebizmarts_SqualoMail_Model_Api_ItemSynchronizer
 {
     const BATCH_LIMIT = 50;
     const BATCH_LIMIT_ONLY_ORDERS = 500;
@@ -28,12 +28,12 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
     protected $_listsCampaignIds = array();
 
     /**
-     * @var $_ecommerceOrdersCollection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Orders_Collection
+     * @var $_ecommerceOrdersCollection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Orders_Collection
      */
     protected $_ecommerceOrdersCollection;
 
     /**
-     * Set the request for orders to be created on MailChimp
+     * Set the request for orders to be created on SqualoMail
      *
      * @return array
      * @throws Mage_Core_Exception
@@ -57,7 +57,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         $this->_counter = 0;
         $this->_batchId = 'storeid-'
             . $magentoStoreId . '_'
-            . Ebizmarts_MailChimp_Model_Config::IS_ORDER
+            . Ebizmarts_SqualoMail_Model_Config::IS_ORDER
             . '_' . $dateHelper->getDateMicrotime();
         $resendTurn = $helper->getResendTurn($magentoStoreId);
 
@@ -108,7 +108,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
 
                 if ($orderJson !== false) {
                     if (!empty($orderJson)) {
-                        $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::ORD_MOD);
+                        $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::ORD_MOD);
 
                         $batchArray[$this->_counter]['method'] = "PATCH";
                         $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $squalomailStoreId
@@ -134,7 +134,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                     $jsonErrorMsg = json_last_error_msg();
                     $this->logSyncError(
                         $jsonErrorMsg,
-                        Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                        Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                         $magentoStoreId,
                         'magento_side_error',
                         'Json Encode Failure',
@@ -155,7 +155,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
             } catch (Exception $e) {
                 $this->logSyncError(
                     $e->getMessage(),
-                    Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                    Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -185,7 +185,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         $newOrders = $this->getResourceModelOrderCollection();
         // select carts for the current Magento store id
         $newOrders->addFieldToFilter('store_id', array('eq' => $magentoStoreId));
-        $helper->addResendFilter($newOrders, $magentoStoreId, Ebizmarts_MailChimp_Model_Config::IS_ORDER);
+        $helper->addResendFilter($newOrders, $magentoStoreId, Ebizmarts_SqualoMail_Model_Config::IS_ORDER);
         // filter by first date if exists.
         if ($this->_firstDate) {
             $newOrders->addFieldToFilter('created_at', array('gt' => $this->_firstDate));
@@ -209,7 +209,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
 
                 if ($orderJson !== false) {
                     if (!empty($orderJson)) {
-                        $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::ORD_NEW);
+                        $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::ORD_NEW);
 
                         $batchArray[$this->_counter]['method'] = "POST";
                         $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $squalomailStoreId . '/orders';
@@ -234,7 +234,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                     $jsonErrorMsg = json_last_error_msg();
                     $this->logSyncError(
                         "Order " . $order->getEntityId() . " json encode failed (".$jsonErrorMsg.")",
-                        Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                        Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                         $magentoStoreId,
                         'magento_side_error',
                         'Json Encode Failure',
@@ -254,7 +254,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
             } catch (Exception $e) {
                 $this->logSyncError(
                     $e->getMessage(),
-                    Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                    Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -382,7 +382,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
             $data['promos'] = $dataPromo;
         }
 
-        $statusArray = $this->_getMailChimpStatus($order);
+        $statusArray = $this->_getSqualoMailStatus($order);
 
         if (isset($statusArray['financial_status'])) {
             $data['financial_status'] = $statusArray['financial_status'];
@@ -624,7 +624,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      * @param $order
      * @return array
      */
-    protected function _getMailChimpStatus($order)
+    protected function _getSqualoMailStatus($order)
     {
         $totalItemsOrdered = $order->getData('total_qty_ordered');
         $squaloMailStatus = array();
@@ -720,7 +720,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
     }
 
     /**
-     * Replace all orders with old id with the increment id on MailChimp.
+     * Replace all orders with old id with the increment id on SqualoMail.
      *
      * @param  $initialTime
      * @param  $squalomailStoreId
@@ -734,10 +734,10 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         $this->_counter = 0;
         $this->_batchId = 'storeid-'
             . $magentoStoreId . '_'
-            . Ebizmarts_MailChimp_Model_Config::IS_ORDER . '_'
+            . Ebizmarts_SqualoMail_Model_Config::IS_ORDER . '_'
             . $dateHelper->getDateMicrotime();
         $lastId = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_LAST_ORDER_ID,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_LAST_ORDER_ID,
             $magentoStoreId,
             'stores'
         );
@@ -769,7 +769,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         foreach ($orderCollection as $order) {
             //Delete order
             $orderId = $order->getEntityId();
-            $config = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_LAST_ORDER_ID, $orderId));
+            $config = array(array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_LAST_ORDER_ID, $orderId));
 
             if (!$dateHelper->timePassed($initialTime)) {
                 $batchArray[$this->_counter]['method'] = "DELETE";
@@ -922,7 +922,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
     {
         $result = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
             $orderId,
-            Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+            Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
             $squalomailStoreId
         );
 
@@ -981,11 +981,11 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     protected function isTypeProduct()
     {
-        return Ebizmarts_MailChimp_Model_Config::IS_PRODUCT;
+        return Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT;
     }
 
     /**
-     * @return false|Ebizmarts_MailChimp_Model_Api_Customers
+     * @return false|Ebizmarts_SqualoMail_Model_Api_Customers
      */
     protected function getCustomerModel()
     {
@@ -1063,11 +1063,11 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                         }
                     }
                 }
-            } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+            } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                 $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] = $isCampaingFromCurrentList = true;
                 $this->logSyncError(
                     $e->getMessage(),
-                    Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                    Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -1075,11 +1075,11 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                     $orderId,
                     0
                 );
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] = $isCampaingFromCurrentList = false;
                 $this->logSyncError(
                     $e->getFriendlyMessage(),
-                    Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                    Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -1091,7 +1091,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                 $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] = $isCampaingFromCurrentList = true;
                 $this->logSyncError(
                     $e->getMessage(),
-                    Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                    Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -1106,7 +1106,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Products
+     * @return Ebizmarts_SqualoMail_Model_Api_Products
      */
     protected function getApiProduct()
     {
@@ -1126,11 +1126,11 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     protected function getItemType()
     {
-        return Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        return Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Orders_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Orders_Collection
      */
     public function getEcommerceOrdersCollection()
     {
@@ -1138,12 +1138,12 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Orders_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Orders_Collection
      */
     public function createEcommerceOrdersCollection()
     {
         /**
-         * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Orders_Collection
+         * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Orders_Collection
          */
         $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_orders_collection');
 

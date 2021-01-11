@@ -1,16 +1,16 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     7/11/19 11:24 AM
  * @file:     Date.php
  */
-class Ebizmarts_MailChimp_Helper_Date extends Mage_Core_Helper_Abstract
+class Ebizmarts_SqualoMail_Helper_Date extends Mage_Core_Helper_Abstract
 {
 
     /**

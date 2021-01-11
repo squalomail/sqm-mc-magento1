@@ -6,7 +6,7 @@
  * @license    http://opensource.org/licenses/osl-3.0.php
  */
 
-class Ebizmarts_MailChimp_Model_System_Config_Source_IncludingTaxes
+class Ebizmarts_SqualoMail_Model_System_Config_Source_IncludingTaxes
 {
     /**
      * Options getter

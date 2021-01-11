@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Adminhtml_Storeid_Comment
+class Ebizmarts_SqualoMail_Model_Adminhtml_Storeid_Comment
 {
     public function getCommentText()
     {

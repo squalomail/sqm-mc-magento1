@@ -11,11 +11,11 @@
  * @date:     4/29/16 4:08 PM
  * @file:     EcommerceStores.php
  */
-class MailChimp_EcommerceStore extends MailChimp_Abstract
+class SqualoMail_EcommerceStore extends SqualoMail_Abstract
 {
     /**
      * @param $id              The unique identifier for the store
-     * @param $listId          The unique identifier for the MailChimp List associated with the store. The list_id for
+     * @param $listId          The unique identifier for the SqualoMail List associated with the store. The list_id for
      *                              a specific store cannot change.
      * @param $name            The name of the store.
      * @param $platform        The e-commerce platform of the store.
@@ -29,7 +29,7 @@ class MailChimp_EcommerceStore extends MailChimp_Abstract
      * @param $phone           The store phone number.
      * @param $address         The store address.
      * @return mixed
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     public function add(
         $id,
@@ -83,7 +83,7 @@ class MailChimp_EcommerceStore extends MailChimp_Abstract
             $_params['address'] = $address;
         }
 
-        return $this->_master->call('ecommerce/stores', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('ecommerce/stores', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -96,7 +96,7 @@ class MailChimp_EcommerceStore extends MailChimp_Abstract
      * @param $offset           The number of records from a collection to skip. Iterating over large collections with
      *                          this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     public function get($id = null, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -118,9 +118,9 @@ class MailChimp_EcommerceStore extends MailChimp_Abstract
         }
 
         if ($id) {
-            return $this->_master->call('ecommerce/stores/' . $id, $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('ecommerce/stores/' . $id, $_params, Ebizmarts_SqualoMail::GET);
         } else {
-            return $this->_master->call('ecommerce/stores', $_params, Ebizmarts_MailChimp::GET);
+            return $this->_master->call('ecommerce/stores', $_params, Ebizmarts_SqualoMail::GET);
         }
     }
 
@@ -138,7 +138,7 @@ class MailChimp_EcommerceStore extends MailChimp_Abstract
      * @param $phone           The store phone number.
      * @param $address         The store address.
      * @return mixed
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     public function edit(
         $storeId,
@@ -200,16 +200,16 @@ class MailChimp_EcommerceStore extends MailChimp_Abstract
             $_params['address'] = $address;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId, $_params, Ebizmarts_MailChimp::PATCH);
+        return $this->_master->call('ecommerce/stores/' . $storeId, $_params, Ebizmarts_SqualoMail::PATCH);
     }
 
     /**
      * @param $storeId      The store id.
      * @return mixed
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     public function delete($storeId)
     {
-        return $this->_master->call('ecommerce/stores/' . $storeId, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call('ecommerce/stores/' . $storeId, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

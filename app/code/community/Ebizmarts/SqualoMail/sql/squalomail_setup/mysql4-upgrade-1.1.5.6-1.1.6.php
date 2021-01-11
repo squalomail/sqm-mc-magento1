@@ -25,7 +25,7 @@ try {
  "
     );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $installer->endSetup();

@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_ProcessWebhookTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_ProcessWebhookTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -11,12 +11,12 @@ class Ebizmarts_MailChimp_Model_ProcessWebhookTest extends PHPUnit_Framework_Tes
     {
         $data = array('list_id' => 'a1s2d3f4t5', 'email' => 'pepe@ebizmarts.com');
 
-        $processWebhookMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_ProcessWebhook::class)
+        $processWebhookMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_ProcessWebhook::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getSqualomailTagsModel'))
             ->getMock();
 
-        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags::class)
             ->disableOriginalConstructor()
             ->setMethods(array('processMergeFields'))
             ->getMock();

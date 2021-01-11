@@ -9,7 +9,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
+class Ebizmarts_SqualoMail_Model_Api_Subscribers_SqualomailTags
 {
     const GENDER_VALUE_MALE = 1;
     const GENDER_VALUE_FEMALE = 2;
@@ -31,15 +31,15 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      */
     protected $_customer;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_mcHelper;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Date
+     * @var Ebizmarts_SqualoMail_Helper_Date
      */
     protected $_mcDateHelper;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Webhook
+     * @var Ebizmarts_SqualoMail_Helper_Webhook
      */
     protected $_mcWebhookHelper;
     /**
@@ -48,15 +48,15 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     protected $_lastOrder;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
+     * @var Ebizmarts_SqualoMail_Model_Api_Subscribers_InterestGroupHandle
      */
     protected $_interestGroupHandle;
 
     public function __construct()
     {
-        $this->setMailChimpHelper();
-        $this->setMailChimpDateHelper();
-        $this->setMailChimpWebhookHelper();
+        $this->setSqualoMailHelper();
+        $this->setSqualoMailDateHelper();
+        $this->setSqualoMailWebhookHelper();
 
         $this->_interestGroupHandle = Mage::getModel('squalomail/api_subscribers_InterestGroupHandle');
     }
@@ -126,7 +126,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     /**
      * @return array
      */
-    public function getMailChimpTags()
+    public function getSqualoMailTags()
     {
         return $this->_squaloMailTags;
     }
@@ -135,7 +135,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      * @param $key
      * @param $value
      */
-    public function addMailChimpTag($key, $value)
+    public function addSqualoMailTag($key, $value)
     {
         $this->_squaloMailTags[$key] = $value;
     }
@@ -144,7 +144,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
      * @param $key
      * @return mixed|null
      */
-    public function getMailChimpTagValue($key)
+    public function getSqualoMailTagValue($key)
     {
         $squalomailTagValue = null;
 
@@ -174,7 +174,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     /**
      * @throws Mage_Core_Exception
      */
-    public function buildMailChimpTags()
+    public function buildSqualoMailTags()
     {
         $helper = $this->getSqualomailHelper();
         $storeId = $this->getStoreId();
@@ -280,7 +280,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         $helper = $this->getSqualomailHelper();
         $webhookHelper = $this->getSqualomailWebhookHelper();
         $scopeArray = $helper->getFirstScopeFromConfig(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_LIST,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_LIST,
             $listId
         );
         $api = $helper->getApi($scopeArray['scope_id'], $scopeArray['scope']);
@@ -303,7 +303,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
                     $helper->unsubscribeMember($subscriber);
                 }
             }
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $helper->logError($e->getFriendlyMessage());
         } catch (Exception $e) {
             $helper->logError($e->getMessage());
@@ -335,8 +335,8 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
             $this->_addTags($attributeCode, $subscriber, $customer, $key, $attribute);
         }
 
-        if ($this->getMailChimpTagValue($key) !== null) {
-            $eventValue = $this->getMailChimpTagValue($key);
+        if ($this->getSqualoMailTagValue($key) !== null) {
+            $eventValue = $this->getSqualoMailTagValue($key);
         }
 
         return $eventValue;
@@ -362,7 +362,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         } elseif ($attributeCode == 'lastname') {
             $this->addLastName($key, $subscriber, $customer);
         } elseif ($attributeCode == 'store_id') {
-            $this->addMailChimpTag($key, $this->getStoreId());
+            $this->addSqualoMailTag($key, $this->getStoreId());
         } elseif ($attributeCode == 'website_id') {
             $this->addWebsiteId($key);
         } elseif ($attributeCode == 'created_in') {
@@ -421,7 +421,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
             'squalomail_merge_field_send_after',
             array(
                 'subscriber' => $this->getSubscriber(),
-                'vars' => $this->getMailChimpTags(),
+                'vars' => $this->getSqualoMailTags(),
                 'new_vars' => &$newVars
             )
         );
@@ -644,8 +644,8 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
             $this->addStoreCodeFromCustomizedAttribute($key);
         }
 
-        if ((string)$this->getMailChimpTagValue($key) != '') {
-            $eventValue = $this->getMailChimpTagValue($key);
+        if ((string)$this->getSqualoMailTagValue($key) != '') {
+            $eventValue = $this->getSqualoMailTagValue($key);
         }
 
         return $eventValue;
@@ -719,7 +719,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         if ($address) {
             $company = $address->getCompany();
             if ($company) {
-                $this->addMailChimpTag($key, $company);
+                $this->addSqualoMailTag($key, $company);
             }
         }
 
@@ -759,7 +759,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     public function getSqualomailHelper()
     {
@@ -769,13 +769,13 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     /**
      * @param $mageMCHelper
      */
-    protected function setMailChimpHelper()
+    protected function setSqualoMailHelper()
     {
         $this->_mcHelper = Mage::helper('squalomail');
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date
+     * @return Ebizmarts_SqualoMail_Helper_Date
      */
     public function getSqualomailDateHelper()
     {
@@ -785,13 +785,13 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     /**
      * @param $mageMCDateHelper
      */
-    protected function setMailChimpDateHelper()
+    protected function setSqualoMailDateHelper()
     {
         $this->_mcDateHelper = Mage::helper('squalomail/date');
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Webhook
+     * @return Ebizmarts_SqualoMail_Helper_Webhook
      */
     public function getSqualomailWebhookHelper()
     {
@@ -801,7 +801,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     /**
      * @param $mageMCWebhookHelper
      */
-    protected function setMailChimpWebhookHelper()
+    protected function setSqualoMailWebhookHelper()
     {
         $this->_mcWebhookHelper = Mage::helper('squalomail/webhook');
     }
@@ -832,7 +832,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
 
                 $this->dispatchMergeVarBefore($attributeCode, $eventValue);
                 if ($eventValue !== null) {
-                    $this->addMailChimpTag($key, $eventValue);
+                    $this->addSqualoMailTag($key, $eventValue);
                 }
             }
         }
@@ -851,7 +851,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
 
         $this->dispatchMergeVarBefore($customAtt, $eventValue);
         if ($eventValue !== null) {
-            $this->addMailChimpTag($key, $eventValue);
+            $this->addSqualoMailTag($key, $eventValue);
         }
     }
 
@@ -866,7 +866,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         $addressData = $this->getAddressData($address);
 
         if (!empty($addressData)) {
-            $this->addMailChimpTag($key, $addressData);
+            $this->addSqualoMailTag($key, $addressData);
         }
     }
 
@@ -879,7 +879,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     {
         if ($this->getCustomerGroupLabel($attributeCode, $customer)) {
             $genderValue = $this->getCustomerGroupLabel($attributeCode, $customer);
-            $this->addMailChimpTag($key, $this->getGenderLabel($this->_squaloMailTags, $key, $genderValue));
+            $this->addSqualoMailTag($key, $this->getGenderLabel($this->_squaloMailTags, $key, $genderValue));
         }
     }
 
@@ -893,9 +893,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         if ($this->getCustomerGroupLabel($attributeCode, $customer)) {
             $groupId = (int)$this->getCustomerGroupLabel($attributeCode, $customer);
             $customerGroup = Mage::helper('customer')->getGroups()->toOptionHash();
-            $this->addMailChimpTag($key, $customerGroup[$groupId]);
+            $this->addSqualoMailTag($key, $customerGroup[$groupId]);
         } else {
-            $this->addMailChimpTag($key, 'NOT LOGGED IN');
+            $this->addSqualoMailTag($key, 'NOT LOGGED IN');
         }
     }
 
@@ -909,7 +909,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         $firstName = $this->getFirstName($subscriber, $customer);
 
         if ($firstName) {
-            $this->addMailChimpTag($key, $firstName);
+            $this->addSqualoMailTag($key, $firstName);
         }
     }
 
@@ -923,7 +923,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         $lastName = $this->getLastName($subscriber, $customer);
 
         if ($lastName) {
-            $this->addMailChimpTag($key, $lastName);
+            $this->addSqualoMailTag($key, $lastName);
         }
     }
 
@@ -933,7 +933,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     protected function addWebsiteId($key)
     {
         $websiteId = $this->getWebSiteByStoreId($this->getStoreId());
-        $this->addMailChimpTag($key, $websiteId);
+        $this->addSqualoMailTag($key, $websiteId);
     }
 
     /**
@@ -942,7 +942,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     protected function addCreatedIn($key)
     {
         $storeName = Mage::getModel('core/store')->load($this->getStoreId())->getName();
-        $this->addMailChimpTag($key, $storeName);
+        $this->addSqualoMailTag($key, $storeName);
     }
 
     /**
@@ -953,7 +953,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     protected function addDob($attributeCode, $key, $customer)
     {
         if ($this->getCustomerGroupLabel($attributeCode, $customer)) {
-            $this->addMailChimpTag($key, $this->getDateOfBirth($attributeCode, $customer));
+            $this->addSqualoMailTag($key, $this->getDateOfBirth($attributeCode, $customer));
         }
     }
 
@@ -967,7 +967,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     {
         $mergeValue = $this->getUnknownMergeField($attributeCode, $customer, $attribute);
         if ($mergeValue !== null) {
-            $this->addMailChimpTag($key, $mergeValue);
+            $this->addSqualoMailTag($key, $mergeValue);
         }
     }
 
@@ -982,7 +982,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         if ($address) {
             $telephone = $address->getTelephone();
             if ($telephone) {
-                $this->addMailChimpTag($key, $telephone);
+                $this->addSqualoMailTag($key, $telephone);
             }
         }
     }
@@ -999,7 +999,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
             $countryCode = $address->getCountry();
             if ($countryCode) {
                 $countryName = Mage::getModel('directory/country')->loadByCode($countryCode)->getName();
-                $this->addMailChimpTag($key, $countryName);
+                $this->addSqualoMailTag($key, $countryName);
             }
         }
     }
@@ -1015,7 +1015,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         if ($address) {
             $zipCode = $address->getPostcode();
             if ($zipCode) {
-                $this->addMailChimpTag($key, $zipCode);
+                $this->addSqualoMailTag($key, $zipCode);
             }
         }
     }
@@ -1031,7 +1031,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
         if ($address) {
             $state = $address->getRegion();
             if ($state) {
-                $this->addMailChimpTag($key, $state);
+                $this->addSqualoMailTag($key, $state);
             }
         }
     }
@@ -1044,7 +1044,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     {
         $dop = $this->getLastDateOfPurchase();
         if ($dop) {
-            $this->addMailChimpTag($key, $dop);
+            $this->addSqualoMailTag($key, $dop);
         }
     }
 
@@ -1054,7 +1054,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_SqualomailTags
     protected function addStoreCodeFromCustomizedAttribute($key)
     {
         $storeCode = Mage::getModel('core/store')->load($this->getStoreId())->getCode();
-        $this->addMailChimpTag($key, $storeCode);
+        $this->addSqualoMailTag($key, $storeCode);
     }
 
     /**

@@ -9,7 +9,7 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
+class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Api_ItemSynchronizer
 {
     const BATCH_LIMIT = 100;
 
@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
     protected $_token = null;
 
     /**
-     * @var $_ecommerceQuotesCollection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Quote_Collection
+     * @var $_ecommerceQuotesCollection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Quote_Collection
      */
     protected $_ecommerceQuotesCollection;
 
@@ -56,7 +56,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
         $this->setBatchId(
             'storeid-'
             . $magentoStoreId . '_'
-            . Ebizmarts_MailChimp_Model_Config::IS_QUOTE . '_'
+            . Ebizmarts_SqualoMail_Model_Config::IS_QUOTE . '_'
             . $date
         );
 
@@ -204,7 +204,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
 
             if ($cartJson !== false) {
                 if (!empty($cartJson)) {
-                    $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::QUO_MOD);
+                    $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::QUO_MOD);
 
                     $counter = $this->getCounter();
                     $allCarts[$counter]['method'] = 'PATCH';
@@ -225,7 +225,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
                 //json encode failed
                 $this->logSyncError(
                     $jsonErrorMessage,
-                    Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
+                    Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -260,7 +260,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
         $newCarts->addFieldToFilter('items_count', array('gt' => 0));
         // select carts for the current Magento store id
         $newCarts->addFieldToFilter('store_id', array('eq' => $magentoStoreId));
-        $helper->addResendFilter($newCarts, $magentoStoreId, Ebizmarts_MailChimp_Model_Config::IS_QUOTE);
+        $helper->addResendFilter($newCarts, $magentoStoreId, Ebizmarts_SqualoMail_Model_Config::IS_QUOTE);
         // filter by first date if exists.
         if ($this->getFirstDate()) {
             $newCarts->addFieldToFilter('updated_at', array('gt' => $this->getFirstDate()));
@@ -327,7 +327,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
 
             if ($cartJson !== false) {
                 if (!empty($cartJson)) {
-                    $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::QUO_NEW);
+                    $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::QUO_NEW);
 
                     $counter = $this->getCounter();
                     $allCarts[$counter]['method'] = 'POST';
@@ -362,7 +362,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
                 //json encode failed
                 $this->logSyncError(
                     $jsonErrorMessage,
-                    Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
+                    Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -447,7 +447,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
 
     /**
      * @param $items
-     * @param $apiProduct Ebizmarts_MailChimp_Model_Api_Products
+     * @param $apiProduct Ebizmarts_SqualoMail_Model_Api_Products
      * @return array
      */
     protected function _processCartLines($items, $apiProduct)
@@ -787,11 +787,11 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     protected function isTypeProduct()
     {
-        return Ebizmarts_MailChimp_Model_Config::IS_PRODUCT;
+        return Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT;
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Products
+     * @return Ebizmarts_SqualoMail_Model_Api_Products
      */
     protected function getApiProducts()
     {
@@ -803,16 +803,16 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
      */
     protected function getItemType()
     {
-        return Ebizmarts_MailChimp_Model_Config::IS_QUOTE;
+        return Ebizmarts_SqualoMail_Model_Config::IS_QUOTE;
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Quote_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Quote_Collection
      */
     public function createEcommerceQuoteCollection()
     {
         /**
-         * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Quote_Collection
+         * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Quote_Collection
          */
         $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_quote_collection');
 
@@ -820,7 +820,7 @@ class Ebizmarts_MailChimp_Model_Api_Carts extends Ebizmarts_MailChimp_Model_Api_
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Quote_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Quote_Collection
      */
     public function getEcommerceQuoteCollection()
     {

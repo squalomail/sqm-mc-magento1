@@ -11,7 +11,7 @@
  * @date:     12/12/17 3:28 PM
  * @file:     Abandoned.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder
+class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder
     extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
 {
     const SYNCED = 1;
@@ -45,7 +45,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOr
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -53,7 +53,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOr
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Orders
+     * @return Ebizmarts_SqualoMail_Model_Api_Orders
      */
     protected function makeApiOrders()
     {

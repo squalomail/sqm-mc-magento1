@@ -10,7 +10,7 @@
  * @date:     5/2/16 3:42 PM
  * @file:     AbuseReports.php
  */
-class MailChimp_ListsAbuseReports extends MailChimp_Abstract
+class SqualoMail_ListsAbuseReports extends SqualoMail_Abstract
 {
     /**
      * @param $listId               The unique id for the list.
@@ -22,8 +22,8 @@ class MailChimp_ListsAbuseReports extends MailChimp_Abstract
      * @param null $offset          The number of records from a collection to skip. Iterating over large collections
      *                                       with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($listId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -45,7 +45,7 @@ class MailChimp_ListsAbuseReports extends MailChimp_Abstract
             $_params['offset'] = $offset;
         }
 
-        return $this->_master->call('lists/' . $listId . '/abuse_reports', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/abuse_reports', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -59,8 +59,8 @@ class MailChimp_ListsAbuseReports extends MailChimp_Abstract
      * @param null $offset          The number of records from a collection to skip. Iterating over large collections
      *                                        with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $reportId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -83,7 +83,7 @@ class MailChimp_ListsAbuseReports extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/abuse_reports/' . $reportId, $_params, Ebizmarts_MailChimp::GET
+            'lists/' . $listId . '/abuse_reports/' . $reportId, $_params, Ebizmarts_SqualoMail::GET
         );
     }
 }

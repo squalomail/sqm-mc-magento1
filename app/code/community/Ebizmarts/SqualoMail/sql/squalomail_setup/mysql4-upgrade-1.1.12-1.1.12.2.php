@@ -18,7 +18,7 @@ try {
         Varien_Db_Adapter_Interface::INDEX_TYPE_INDEX
     );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $setup = new Mage_Eav_Model_Entity_Setup('core_setup');
@@ -30,13 +30,13 @@ $attributeGroupId = $setup->getDefaultAttributeGroupId($entityTypeId, $attribute
 $setup->addAttribute(
     "customer", "squalomail_store_view", array(
         "type" => "int",
-        "label" => "Store View (For MailChimp)",
+        "label" => "Store View (For SqualoMail)",
         "input" => "select",
         "source" => "squalomail/system_config_source_squalomailStoreView",
         "visible" => true,
         "required" => false,
         "unique" => false,
-        "note" => "A store view must be specified to sync this customer to MailChimp"
+        "note" => "A store view must be specified to sync this customer to SqualoMail"
 
     )
 );
@@ -65,9 +65,9 @@ try {
         ->setData("sort_order", 100);
     $attribute->save();
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
-$installer->deleteConfigData(Ebizmarts_MailChimp_Model_Config::ENABLE_POPUP);
+$installer->deleteConfigData(Ebizmarts_SqualoMail_Model_Config::ENABLE_POPUP);
 
 $installer->endSetup();

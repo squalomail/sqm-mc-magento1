@@ -1,22 +1,22 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     5/19/16 3:55 PM
  * @file:     WebhookController.php
  */
-class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_Action
+class Ebizmarts_SqualoMail_WebhookController extends Mage_Core_Controller_Front_Action
 {
     protected $_squalomailHelper = null;
     protected $_squalomailWebhookHelper = null;
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data|Mage_Core_Helper_Abstract
+     * @return Ebizmarts_SqualoMail_Helper_Data|Mage_Core_Helper_Abstract
      */
     protected function getHelper()
     {
@@ -28,7 +28,7 @@ class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_A
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Webhook
+     * @return Ebizmarts_SqualoMail_Helper_Webhook
      */
     protected function getWebhookHelper()
     {
@@ -102,7 +102,7 @@ class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_A
 
         try {
             $api = $helper->getApi($storeId);
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $helper->logError($e->getMessage());
             $api = null;
         }
@@ -115,7 +115,7 @@ class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_A
                         $webhookHelper->deleteWebhookFromList($api->getLists()->getWebhooks(), $listId, $webhook['id']);
                     }
                 }
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 $helper->logError($e->getFriendlyMessage());
             }
         }

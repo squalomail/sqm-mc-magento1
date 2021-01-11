@@ -1,16 +1,16 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/29/16 3:55 PM
  * @file:     Account.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_List
+class Ebizmarts_SqualoMail_Model_System_Config_Source_List
 {
 
     /**
@@ -22,13 +22,13 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_List
     protected $_lists = array();
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
 
     /**
-     * Ebizmarts_MailChimp_Model_System_Config_Source_List constructor.
+     * Ebizmarts_SqualoMail_Model_System_Config_Source_List constructor.
      *
      * @param  $params
      * @throws Exception
@@ -62,9 +62,9 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_List
                         $message = 'Please create an audience in your SqualoMail application.';
                         Mage::getSingleton('adminhtml/session')->addWarning($message);
                     }
-                } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+                } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                     $helper->logError($e->getMessage());
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $helper->logError($e->getFriendlyMessage());
                 }
             }
@@ -100,7 +100,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_List
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -108,7 +108,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_List
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

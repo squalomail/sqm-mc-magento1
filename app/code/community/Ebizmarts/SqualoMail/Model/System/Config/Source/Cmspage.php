@@ -10,7 +10,7 @@
  * @date:     7/6/16 2:56 PM
  * @file:     Cmspage.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_Cmspage
+class Ebizmarts_SqualoMail_Model_System_Config_Source_Cmspage
 {
 
     public function toOptionArray()

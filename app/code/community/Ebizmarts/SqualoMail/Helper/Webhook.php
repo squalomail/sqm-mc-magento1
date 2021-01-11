@@ -1,19 +1,19 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     3/20/2020 11:14 AM
  * @file:     Webhook.php
  */
-class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
+class Ebizmarts_SqualoMail_Helper_Webhook extends Mage_Core_Helper_Abstract
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
@@ -32,7 +32,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
     {
         $helper = $this->getHelper();
         return $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_UNSUBSCRIBE,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_UNSUBSCRIBE,
             $scopeId,
             $scope
         );
@@ -50,7 +50,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
     {
         $helper = $this->getHelper();
         return $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_WEBHOOK_ID,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_WEBHOOK_ID,
             $scopeId,
             $scope
         );
@@ -76,7 +76,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
     {
         $helper = $this->getHelper();
         $webhookScope = $helper->getRealScopeForConfig(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_LIST,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_LIST,
             $scopeId,
             $scope
         );
@@ -106,27 +106,27 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
             if ($webhookId && $apiKey && $listId) {
                 try {
                     $api->getLists()->getWebhooks()->delete($listId, $webhookId);
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $helper->logError($e->getFriendlyMessage());
                 } catch (Exception $e) {
                     $helper->logError($e->getMessage());
                 }
 
                 $helper->getConfig()
-                    ->deleteConfig(Ebizmarts_MailChimp_Model_Config::GENERAL_WEBHOOK_ID, $scope, $scopeId);
+                    ->deleteConfig(Ebizmarts_SqualoMail_Model_Config::GENERAL_WEBHOOK_ID, $scope, $scopeId);
             } else {
                 $webhookUrl = $this->getWebhookUrl($scopeId, $scope);
                 try {
                     if ($listId) {
                         $this->_deletedWebhooksByListId($api, $listId, $webhookUrl);
                     }
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $helper->logError($e->getFriendlyMessage());
                 } catch (Exception $e) {
                     $helper->logError($e->getMessage());
                 }
             }
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $helper->logError($e->getMessage());
         }
     }
@@ -215,21 +215,21 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
                 if ($createWebhook) {
                     $newWebhook = $api->getLists()->getWebhooks()->add($listId, $hookUrl, $events, $sources);
                     $newWebhookId = $newWebhook['id'];
-                    $configValues = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_WEBHOOK_ID, $newWebhookId));
+                    $configValues = array(array(Ebizmarts_SqualoMail_Model_Config::GENERAL_WEBHOOK_ID, $newWebhookId));
                     $helper->saveSqualomailConfig($configValues, $scopeId, $scope);
 
                     return true;
                 } else {
                     return $this->__('The webhook already exists.');
                 }
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 $errorMessage = $e->getFriendlyMessage();
                 $helper->logError($errorMessage);
                 $textToCompare = 'The resource submitted could not be validated. '
                     . 'For field-specific details, see the \'errors\' array.';
 
                 if ($e->getSqualomailDetails() == $textToCompare) {
-                    $errorMessage = 'Your store could not be accessed by MailChimp\'s Api. '
+                    $errorMessage = 'Your store could not be accessed by SqualoMail\'s Api. '
                         . 'Please confirm the URL: ' . $hookUrl
                         . ' is accessible externally to allow the webhook creation.';
                     $helper->logError($errorMessage);
@@ -239,7 +239,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
             } catch (Exception $e) {
                 $helper->logError($e->getMessage());
             }
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $helper->logError($e->getMessage());
         }
     }
@@ -253,7 +253,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
         $store = $helper->getMageApp()->getDefaultStoreView();
         $webhooksKey = $this->getWebhooksKey();
         //Generating Webhooks URL
-        $url = Ebizmarts_MailChimp_Model_ProcessWebhook::WEBHOOKS_PATH;
+        $url = Ebizmarts_SqualoMail_Model_ProcessWebhook::WEBHOOKS_PATH;
         $hookUrl = $store->getUrl(
             $url,
             array(
@@ -271,7 +271,7 @@ class Ebizmarts_MailChimp_Helper_Webhook extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {

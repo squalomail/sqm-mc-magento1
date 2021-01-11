@@ -12,17 +12,17 @@
  * @file:     Store.php
  */
 
-class Ebizmarts_MailChimp_Model_System_Config_Source_Store
+class Ebizmarts_SqualoMail_Model_System_Config_Source_Store
 {
     protected $_stores = array();
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
     /**
-     * Ebizmarts_MailChimp_Model_System_Config_Source_Store constructor.
+     * Ebizmarts_SqualoMail_Model_System_Config_Source_Store constructor.
      *
      * @param  $params
      * @throws Exception
@@ -40,9 +40,9 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Store
                 try {
                     $api = $helper->getApiByKey($apiKey);
                     $this->_stores = $api->getEcommerce()->getStores()->get(null, null, null, 100);
-                } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+                } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                     $helper->logError($e->getMessage());
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $helper->logError($e->getMessage());
                 }
             }
@@ -80,7 +80,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Store
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -88,7 +88,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Store
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

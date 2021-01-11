@@ -10,10 +10,10 @@
  * @date:     4/29/16 4:34 PM
  * @file:     EcommerceProducts.php
  */
-class MailChimp_EcommerceProducts extends MailChimp_Abstract
+class SqualoMail_EcommerceProducts extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_EcommerceProductsVariants
+     * @var SqualoMail_EcommerceProductsVariants
      */
     public $variants;
 
@@ -31,8 +31,8 @@ class MailChimp_EcommerceProducts extends MailChimp_Abstract
      *                                      each product. A variant can use the same id and title as the parent product.
      * @param null  $publishedAtForeign The date and time the product was published.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $storeId,
@@ -78,7 +78,7 @@ class MailChimp_EcommerceProducts extends MailChimp_Abstract
             $_params['published_at_foreign'] = $publishedAtForeign;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/products', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/products', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -91,8 +91,8 @@ class MailChimp_EcommerceProducts extends MailChimp_Abstract
      * @param null  $offset         The number of records from a collection to skip. Iterating over large collections
      *                                  with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($storeId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -114,7 +114,7 @@ class MailChimp_EcommerceProducts extends MailChimp_Abstract
             $_params['offset'] = $offset;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/products', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/products', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -125,8 +125,8 @@ class MailChimp_EcommerceProducts extends MailChimp_Abstract
      * @param null  $excludeFields  A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                  with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($storeId, $productId, $fields = null, $excludeFields = null)
     {
@@ -142,20 +142,20 @@ class MailChimp_EcommerceProducts extends MailChimp_Abstract
 
         $url = 'ecommerce/stores/' . $storeId . '/products/' . $productId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
      * @param $storeId              The store id.
      * @param $productId            The id for the product of a store.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($storeId, $productId)
     {
         $url = 'ecommerce/stores/' . $storeId . '/products/' . $productId;
 
-        return $this->_master->call($url, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call($url, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

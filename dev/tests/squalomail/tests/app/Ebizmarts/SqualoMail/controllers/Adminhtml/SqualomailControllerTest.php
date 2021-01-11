@@ -1,18 +1,18 @@
 <?php
 
-require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/SqualomailController.php';
+require_once BP . DS . 'app/code/community/Ebizmarts/SqualoMail/controllers/Adminhtml/SqualomailController.php';
 
-class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Adminhtml_SqualomailControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_SqualomailController $squalomailController
+     * @var Ebizmarts_SqualoMail_Adminhtml_SqualomailController $squalomailController
      */
     protected $_squalomailController;
 
     public function setUp()
     {
         Mage::app('default');
-        $this->_squalomailController = $this->getMockBuilder(Ebizmarts_MailChimp_Adminhtml_SqualomailController::class);
+        $this->_squalomailController = $this->getMockBuilder(Ebizmarts_SqualoMail_Adminhtml_SqualomailController::class);
     }
 
     public function tearDown()
@@ -47,7 +47,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             ->setMethods(array('createBlock'))
             ->getMock();
 
-        $blockMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail::class)
+        $blockMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Block_Adminhtml_Customer_Edit_Tab_Squalomail::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setCustomerId', 'setUseAjax', 'toHtml'))
             ->getMock();
@@ -84,7 +84,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             ->setMethods(array('getHelper'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp', 'resendSubscribers'))
             ->getMock();
@@ -141,12 +141,12 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             ->setMethods(array('getHelper', 'getWebhookHelper'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp', 'getGeneralList'))
             ->getMock();
 
-        $webhookHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Webhook::class)
+        $webhookHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Webhook::class)
             ->disableOriginalConstructor()
             ->setMethods(array('createNewWebhook'))
             ->getMock();
@@ -225,7 +225,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             ->setMethods(array('setHeader', 'setBody'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isApiKeyObscure'))
             ->getMock();
@@ -257,7 +257,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
         $mcStoreId = 'q1w2e3r4t5y6u7i8o9p0';
         $syncDate = "2019-02-01 20:00:05";
         $optionSyncFlag = array(
-            'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::SYNC_LABEL_KEY,
+            'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::SYNC_LABEL_KEY,
             'label' => 'Initial sync: ' . $syncDate
         );
         $liElement = "<li>Initial sync: <span style='color: forestgreen;font-weight: bold;'>$syncDate</span></li>";
@@ -265,50 +265,50 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             . "$syncDate<\/span><\/li>";
         $data = array(
             array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::USERNAME_KEY,
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::USERNAME_KEY,
                 'label' => 'Username: Ebizmarts Corp.'
             ), array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_ACCOUNT_SUB_KEY,
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_ACCOUNT_SUB_KEY,
                 'label' => 'Total Account Subscribers: 104'
             ), array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_LIST_SUB_KEY,
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_LIST_SUB_KEY,
                 'label' => 'Total List Subscribers: 18'
             ), array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::STORENAME_KEY,
-                'label' => 'Ecommerce Data uploaded to MailChimp store Madison Island - English:'
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::STORENAME_KEY,
+                'label' => 'Ecommerce Data uploaded to SqualoMail store Madison Island - English:'
             ),
             $optionSyncFlag,
             array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_CUS_KEY,
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_CUS_KEY,
                 'label' => '  Total Customers: 10'
             ), array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_PRO_KEY,
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_PRO_KEY,
                 'label' => '  Total Products: 10'
             ), array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_ORD_KEY,
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_ORD_KEY,
                 'label' => '  Total Orders: 10'
             ), array(
-                'value' => Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_QUO_KEY,
+                'value' => Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_QUO_KEY,
                 'label' => '  Total Carts: 10'
             )
         );
-        $jsonData = '[{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::USERNAME_KEY
+        $jsonData = '[{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::USERNAME_KEY
             . ',"label":"Username: Ebizmarts Corp."},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_ACCOUNT_SUB_KEY
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_ACCOUNT_SUB_KEY
             . ',"label":"Total Account Subscribers: 104"},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_LIST_SUB_KEY
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_LIST_SUB_KEY
             . ',"label":"Total List Subscribers: 18"},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::STORENAME_KEY
-            . ',"label":"Ecommerce Data uploaded to MailChimp store Madison Island - English:"},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::SYNC_LABEL_KEY
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::STORENAME_KEY
+            . ',"label":"Ecommerce Data uploaded to SqualoMail store Madison Island - English:"},'
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::SYNC_LABEL_KEY
             . ',"label":"' . $liElementEscaped . '"},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_CUS_KEY
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_CUS_KEY
             . ',"label":"  Total Customers: 10"},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_PRO_KEY
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_PRO_KEY
             . ',"label":"  Total Products: 10"},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_ORD_KEY
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_ORD_KEY
             . ',"label":"  Total Orders: 10"},'
-            . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_QUO_KEY
+            . '{"value":' . Ebizmarts_SqualoMail_Model_System_Config_Source_Account::TOTAL_QUO_KEY
             . ',"label":"  Total Carts: 10"}]';
 
         $squalomailControllerMock = $this->_squalomailController
@@ -316,7 +316,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             ->setMethods(array('getHelper', 'getRequest', 'getSourceAccountInfoOptions', 'getResponse'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getSyncFlagDataHtml'))
             ->getMock();
@@ -388,7 +388,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             ->setMethods(array('setHeader', 'setBody'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isApiKeyObscure'))
             ->getMock();
@@ -447,7 +447,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailControllerTest extends PHPUnit_Fra
             ->setMethods(array('setHeader', 'setBody'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isApiKeyObscure'))
             ->getMock();

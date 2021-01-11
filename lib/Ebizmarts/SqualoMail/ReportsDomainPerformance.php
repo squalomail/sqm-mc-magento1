@@ -10,10 +10,10 @@
  * @date:     5/2/16 5:01 PM
  * @file:     ReportsDomainPerformance.php
  */
-class MailChimp_ReportsDomainPerformance extends MailChimp_Abstract
+class SqualoMail_ReportsDomainPerformance extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsDomainPerformance
+     * @var SqualoMail_ReportsDomainPerformance
      */
     public $domainPerformance;
 }

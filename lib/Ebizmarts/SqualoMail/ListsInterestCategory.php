@@ -10,15 +10,15 @@
  * @date:     5/2/16 3:48 PM
  * @file:     ListsInterestCategory.php
  */
-class MailChimp_ListsInterestCategory extends MailChimp_Abstract
+class SqualoMail_ListsInterestCategory extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ListInterestCategoryInterests
+     * @var SqualoMail_ListInterestCategoryInterests
      */
     public $interests;
 
     /**
-     * @return MailChimp_ListInterestCategoryInterests
+     * @return SqualoMail_ListInterestCategoryInterests
      */
     public function getInterests()
     {
@@ -33,8 +33,8 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
      * @param $type               Determines how this category’s interests are displayed on signup forms.
      *                              (checkboxes | dropdown | radio | hidden)
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add($listId, $title, $type, $displayOrder = null)
     {
@@ -44,7 +44,7 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
             $_params['display_order'] = $displayOrder;
         }
 
-        return $this->_master->call('lists/' . $listId . '/interest-categories', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('lists/' . $listId . '/interest-categories', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -58,8 +58,8 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
      *                                     with this parameter can be slow.
      * @param null $type            Restrict results a type of interest group
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($listId, $fields = null, $excludeFields = null, $count = null, $offset = null, $type = null)
     {
@@ -84,7 +84,7 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
             $_params['type'] = $type;
         }
 
-        return $this->_master->call('lists/' . $listId . '/interest-categories', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/interest-categories', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -95,8 +95,8 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
      * @param null $excludeFields   A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                     with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $interestCategoryId, $fields = null, $excludeFields = null)
     {
@@ -110,7 +110,7 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
         }
 
         $url = 'lists/' . $listId . '/interest-categories/' . $interestCategoryId;
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -122,8 +122,8 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
      * @param $type                 Determines how this category’s interests are displayed on signup forms.
      *                                  (checkboxes | dropdown | radio | hidden)
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify($listId, $interestCategoryId, $title, $type, $displayOrder = null)
     {
@@ -135,20 +135,20 @@ class MailChimp_ListsInterestCategory extends MailChimp_Abstract
 
         $url = 'lists/' . $listId . '/interest-categories/' . $interestCategoryId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::PATCH);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::PATCH);
     }
 
     /**
      * @param $listId               The unique id for the list.
      * @param $interestCategoryId   The unique id for the interest category.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($listId, $interestCategoryId)
     {
         $url = 'lists/' . $listId . '/interest-categories/' . $interestCategoryId;
 
-        return $this->_master->call($url, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call($url, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

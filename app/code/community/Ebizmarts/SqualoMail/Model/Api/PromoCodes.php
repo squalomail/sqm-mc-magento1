@@ -9,18 +9,18 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
+class Ebizmarts_SqualoMail_Model_Api_PromoCodes extends Ebizmarts_SqualoMail_Model_Api_ItemSynchronizer
 {
     const BATCH_LIMIT = 50;
 
     protected $_batchId;
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_PromoRules
+     * @var Ebizmarts_SqualoMail_Model_Api_PromoRules
      */
     protected $_apiPromoRules;
 
     /**
-     * @var $_ecommercePromoCodesCollection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
+     * @var $_ecommercePromoCodesCollection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
      */
     protected $_ecommercePromoCodesCollection;
 
@@ -44,7 +44,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
         $batchArray = array();
         $this->_batchId = 'storeid-'
             . $magentoStoreId . '_'
-            . Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE . '_'
+            . Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE . '_'
             . $this->getDateHelper()->getDateMicrotime();
         $batchArray = array_merge($batchArray, $this->_getDeletedPromoCodes());
         $batchArray = array_merge($batchArray, $this->_getNewPromoCodes());
@@ -114,7 +114,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
             try {
                 $promoRuleSyncData = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $ruleId,
-                    Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE,
+                    Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE,
                     $squalomailStoreId
                 );
 
@@ -167,7 +167,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
                     $jsonErrorMsg = json_last_error_msg();
                     $this->logSyncError(
                         "Promo code" . $codeId . " json encode failed (".$jsonErrorMsg.")",
-                        Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE,
+                        Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE,
                         $magentoStoreId,
                         'magento_side_error',
                         'Json Encode Failure',
@@ -187,7 +187,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
             } catch (Exception $e) {
                 $this->logSyncError(
                     $e->getMessage(),
-                    Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE,
+                    Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE,
                     $magentoStoreId,
                     'magento_side_error',
                     'Json Encode Failure',
@@ -229,7 +229,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
          * @var Mage_SalesRule_Model_Resource_Coupon_Collection $collection
          */
         $collection = $this->getPromoCodeResourceCollection();
-        $helper->addResendFilter($collection, $magentoStoreId, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE);
+        $helper->addResendFilter($collection, $magentoStoreId, Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE);
 
         $promoCollectionResource = $this->getEcommercePromoCodesCollection();
         $promoCollectionResource->addWebsiteColumn($collection);
@@ -245,7 +245,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
     {
         $deletedPromoCodes = $this->getSqualomailEcommerceSyncDataModel()->getCollection();
         $where = "squalomail_store_id = '" . $this->getSqualomailStoreId()
-            . "' AND type = '" . Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE
+            . "' AND type = '" . Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE
             . "' AND squalomail_sync_deleted = 1";
 
         $this->_ecommercePromoCodesCollection->addWhere($deletedPromoCodes, $where, $this->getBatchLimitFromConfig());
@@ -314,7 +314,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_PromoRules|false|Mage_Core_Model_Abstract
+     * @return Ebizmarts_SqualoMail_Model_Api_PromoRules|false|Mage_Core_Model_Abstract
      */
     public function getApiPromoRules()
     {
@@ -342,7 +342,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
     {
         $promoCodes = $this->getSqualomailEcommerceSyncDataModel()->getAllEcommerceSyncDataItemsPerId(
             $codeId,
-            Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE
+            Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE
         );
 
         foreach ($promoCodes as $promoCode) {
@@ -362,7 +362,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
         foreach ($promoCodeIds as $promoCodeId) {
             $promoCodeSyncDataItems = $this->getSqualomailEcommerceSyncDataModel()->getAllEcommerceSyncDataItemsPerId(
                 $promoCodeId,
-                Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE
+                Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE
             );
 
             foreach ($promoCodeSyncDataItems as $promoCodeSyncDataItem) {
@@ -378,7 +378,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
     {
         $promoCodeSyncDataItem = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
             $promoCodeId,
-            Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE,
+            Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE,
             $this->getSqualomailStoreId()
         );
         $promoCodeSyncDataItem->delete();
@@ -394,12 +394,12 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
         $helper = $this->getHelper();
         $promoRules = $this->getSqualomailEcommerceSyncDataModel()->getAllEcommerceSyncDataItemsPerId(
             $promoRuleId,
-            Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE
+            Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE
         );
 
         foreach ($promoRules as $promoRule) {
             $squalomailStoreId = $promoRule->getSqualomailStoreId();
-            $api = $helper->getApiByMailChimpStoreId($squalomailStoreId);
+            $api = $helper->getApiBySqualoMailStoreId($squalomailStoreId);
 
             if ($api !== null) {
                 try {
@@ -409,10 +409,10 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
                     foreach ($squaloMailPromoCodes['promo_codes'] as $promoCode) {
                         $this->deletePromoCodeSyncData($promoCode['id']);
                     }
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $this->logSyncError(
                         $e->getFriendlyMessage(),
-                        Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE,
+                        Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE,
                         $this->getMagentoStoreId(),
                         'magento_side_error',
                         'Problem retrieving object',
@@ -462,16 +462,16 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
      */
     protected function getItemType()
     {
-        return Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE;
+        return Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE;
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
      */
     public function createEcommercePromoCodesCollection()
     {
         /**
-         * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
+         * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
          */
         $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_promoCodes_collection');
 
@@ -479,7 +479,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodes extends Ebizmarts_MailChimp_Model
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
      */
     public function getEcommercePromoCodesCollection()
     {

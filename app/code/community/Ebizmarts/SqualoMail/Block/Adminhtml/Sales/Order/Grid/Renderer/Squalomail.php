@@ -10,7 +10,7 @@
  * @date:     7/7/16 1:31 PM
  * @file:     Abandoned.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_Squalomail
+class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_Squalomail
     extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
 {
     /**
@@ -28,7 +28,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_Squalomail
             if ($order->getSqualomailAbandonedcartFlag() || $order->getSqualomailCampaignId()) {
                 $result = '<img src="'
                     . $this->getSkinUrl("ebizmarts/squalomail/images/logo-freddie-monocolor-200.png")
-                    . '" width="40" title="hep hep thanks MailChimp" />';
+                    . '" width="40" title="hep hep thanks SqualoMail" />';
             }
         } catch (Exception $e) {
             Mage::throwException($e->getMessage());

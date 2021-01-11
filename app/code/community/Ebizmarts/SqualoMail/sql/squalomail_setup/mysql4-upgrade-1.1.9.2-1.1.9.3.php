@@ -10,7 +10,7 @@ ADD COLUMN `deleted_related_id` INT(10) DEFAULT NULL;
 "
     );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $installer->endSetup();

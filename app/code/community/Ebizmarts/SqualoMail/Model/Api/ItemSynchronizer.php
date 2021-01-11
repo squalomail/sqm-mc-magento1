@@ -9,15 +9,15 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
+class Ebizmarts_SqualoMail_Model_Api_ItemSynchronizer
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_squalomailHelper;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Date
+     * @var Ebizmarts_SqualoMail_Helper_Date
      */
     protected $_squalomailDateHelper;
 
@@ -262,7 +262,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -270,7 +270,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date
+     * @return Ebizmarts_SqualoMail_Helper_Date
      */
     protected function getDateHelper()
     {
@@ -287,11 +287,11 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
+     * @return Ebizmarts_SqualoMail_Model_Ecommercesyncdata
      */
     public function getSqualomailEcommerceSyncDataModel()
     {
-        return new Ebizmarts_MailChimp_Model_Ecommercesyncdata();
+        return new Ebizmarts_SqualoMail_Model_Ecommercesyncdata();
     }
 
     /**

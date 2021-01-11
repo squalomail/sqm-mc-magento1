@@ -10,18 +10,18 @@
  * @date:     5/2/16 4:48 PM
  * @file:     Reports.php
  */
-class MailChimp_Reports extends MailChimp_Abstract
+class SqualoMail_Reports extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsCampaignAdvice
+     * @var SqualoMail_ReportsCampaignAdvice
      */
     public $campaignAdvice;
     /**
-     * @var MailChimp_ReportsClickReports
+     * @var SqualoMail_ReportsClickReports
      */
     public $clickReports;
     /**
-     * @var MailChimp_ReportsDomainPerformance
+     * @var SqualoMail_ReportsDomainPerformance
      */
     public $domainPerformance;
     /**
@@ -29,7 +29,7 @@ class MailChimp_Reports extends MailChimp_Abstract
      */
     public $eapURLReport;
     /**
-     * @var MailChimp_ReportsEmailActivity
+     * @var SqualoMail_ReportsEmailActivity
      */
     public $emailActivity;
     /**
@@ -37,15 +37,15 @@ class MailChimp_Reports extends MailChimp_Abstract
      */
     public $location;
     /**
-     * @var MailChimp_ReportsSentTo
+     * @var SqualoMail_ReportsSentTo
      */
     public $sentTo;
     /**
-     * @var MailChimp_ReportsSubReports
+     * @var SqualoMail_ReportsSubReports
      */
     public $subReports;
     /**
-     * @var MailChimp_ReportsUnsubscribes
+     * @var SqualoMail_ReportsUnsubscribes
      */
     public $unsubscribes;
 }

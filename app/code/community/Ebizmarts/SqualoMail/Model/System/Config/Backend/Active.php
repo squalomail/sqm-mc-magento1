@@ -11,7 +11,7 @@
  * @date:     8/4/16 8:28 PM
  * @file:     List.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Backend_Active extends Mage_Core_Model_Config_Data
+class Ebizmarts_SqualoMail_Model_System_Config_Backend_Active extends Mage_Core_Model_Config_Data
 {
     protected function _afterSave()
     {
@@ -35,7 +35,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Active extends Mage_Core_M
             if ($apiKey && $listId) {
                 $webhookHelper->createNewWebhook($scopeId, $scope, $listId);
             } else {
-                $configValue = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_ACTIVE, false));
+                $configValue = array(array(Ebizmarts_SqualoMail_Model_Config::GENERAL_ACTIVE, false));
                 $helper->saveSqualomailConfig($configValue, $scopeId, $scope);
                 $message = $helper->__('Please add an api key and select an audience before enabling the extension.');
                 $this->getAdminSession()->addError($message);
@@ -44,7 +44,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Active extends Mage_Core_M
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -52,7 +52,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Active extends Mage_Core_M
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Webhook
+     * @return Ebizmarts_SqualoMail_Helper_Webhook
      */
     protected function makeWebhookHelper()
     {

@@ -9,7 +9,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @file:     Edit.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
     {
@@ -107,7 +107,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Edit extends Mage_Adm
     {
         $helper = $this->makeHelper();
         $currentMCStoreId = Mage::registry('current_squalomailstore')->getStoreid();
-        $keyIfExist = $helper->getScopeByMailChimpStoreId($currentMCStoreId);
+        $keyIfExist = $helper->getScopeBySqualoMailStoreId($currentMCStoreId);
 
         if ($keyIfExist === null) {
             $keyIfExist = false;
@@ -117,7 +117,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Edit extends Mage_Adm
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

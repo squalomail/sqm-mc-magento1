@@ -10,7 +10,7 @@
  * @date:     6/10/16 12:38 AM
  * @file:     Grid.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends Mage_Adminhtml_Block_Widget_Grid
+class Ebizmarts_SqualoMail_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     protected $_lists = array();
@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends M
     protected $_api;
     protected $_customer;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
     protected $_storeId;
@@ -61,7 +61,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends M
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     public function getHelper()
     {
@@ -77,7 +77,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends M
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -101,7 +101,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Squalomail extends M
     }
 
     /**
-     * If customer was created in admin panel use the store view selected for MailChimp.
+     * If customer was created in admin panel use the store view selected for SqualoMail.
      *
      * @return mixed
      */

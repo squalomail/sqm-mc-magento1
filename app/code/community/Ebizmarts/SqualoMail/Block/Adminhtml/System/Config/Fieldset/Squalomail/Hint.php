@@ -1,15 +1,15 @@
 <?php
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/29/16 3:55 PM
  * @file:     Hint.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Squalomail_Hint
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_Fieldset_Squalomail_Hint
     extends Mage_Adminhtml_Block_Abstract implements Varien_Data_Form_Element_Renderer_Interface
 {
     protected $_template = 'ebizmarts/squalomail/system/config/fieldset/hint.phtml';
@@ -28,9 +28,9 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Squalomail_Hint
     /**
      * @return string
      */
-    public function getMailChimpVersion()
+    public function getSqualoMailVersion()
     {
-        return (string)Mage::getConfig()->getNode('modules/Ebizmarts_MailChimp/version');
+        return (string)Mage::getConfig()->getNode('modules/Ebizmarts_SqualoMail/version');
     }
 
     /**
@@ -95,7 +95,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Squalomail_Hint
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -103,7 +103,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Squalomail_Hint
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Migration
+     * @return Ebizmarts_SqualoMail_Helper_Migration
      */
     protected function makeMigrationHelper()
     {

@@ -10,10 +10,10 @@
  * @date:     5/2/16 4:19 PM
  * @file:     CampaignsSendChecklist.php
  */
-class MailChimp_CampaignsSendChecklist extends MailChimp_Abstract
+class SqualoMail_CampaignsSendChecklist extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_CampaignsSendChecklist
+     * @var SqualoMail_CampaignsSendChecklist
      */
     public $checklist;
 }

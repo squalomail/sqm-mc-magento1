@@ -1,7 +1,7 @@
 <?php
 $block = $this;
 $interest = $block->getInterest();
-$helper = $block->getMailChimpHelper();
+$helper = $block->getSqualoMailHelper();
 ?>
 <p>
     <?php if($helper->isInterestGroupEnabled($this->_getStoreId())): ?>

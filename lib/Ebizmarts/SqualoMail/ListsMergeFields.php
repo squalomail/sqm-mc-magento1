@@ -10,7 +10,7 @@
  * @date:     5/2/16 3:50 PM
  * @file:     ListsMergeFields.php
  */
-class MailChimp_ListsMergeFields extends MailChimp_Abstract
+class SqualoMail_ListsMergeFields extends SqualoMail_Abstract
 {
     /**
      * @param       $listId         The unique id for the list.
@@ -24,8 +24,8 @@ class MailChimp_ListsMergeFields extends MailChimp_Abstract
      * @param null  $type           The merge field type.
      * @param null  $required       The boolean value if the merge field is required.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll(
         $listId,
@@ -62,24 +62,24 @@ class MailChimp_ListsMergeFields extends MailChimp_Abstract
             $_params['required'] = $required;
         }
 
-        return $this->_master->call('lists/'. $listId . '/merge-fields', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/'. $listId . '/merge-fields', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
      * @param $listId               The unique id for the list.
      * @param $mergeId              The id for the merge field.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $mergeId)
     {
-        return $this->_master->call('lists/' . $listId . '/merge-fields/' . $mergeId, null, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/merge-fields/' . $mergeId, null, Ebizmarts_SqualoMail::GET);
     }
 
     /**
      * @param           $listId         The unique id for the list.
-     * @param null      $tag            The tag used in MailChimp campaigns and for the /members endpoint.
+     * @param null      $tag            The tag used in SqualoMail campaigns and for the /members endpoint.
      * @param           $name           The name of the merge field.
      * @param           $type           The type for the merge field.
      * @param null      $required       The boolean value if the merge field is required.
@@ -89,8 +89,8 @@ class MailChimp_ListsMergeFields extends MailChimp_Abstract
      * @param null      $options        Extra options for some merge field types.
      * @param null      $helpText       Extra text to help the subscriber fill out the form.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $listId,
@@ -135,13 +135,13 @@ class MailChimp_ListsMergeFields extends MailChimp_Abstract
             $_params['help_text'] = $helpText;
         }
 
-        return $this->_master->call('lists/' . $listId . '/merge-fields/', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('lists/' . $listId . '/merge-fields/', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
      * @param $listId               The unique id for the list.
      * @param $mergeId              The id for the merge field.
-     * @param null $tag             The tag used in MailChimp campaigns and for the /members endpoint.
+     * @param null $tag             The tag used in SqualoMail campaigns and for the /members endpoint.
      * @param null $name            The name of the merge field.
      * @param null $type            The type for the merge field.
      * @param null $required        The boolean value if the merge field is required.
@@ -151,8 +151,8 @@ class MailChimp_ListsMergeFields extends MailChimp_Abstract
      * @param null $options         Extra options for some merge field types.
      * @param null $helpText        Extra text to help the subscriber fill out the form.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify(
         $listId,
@@ -207,7 +207,7 @@ class MailChimp_ListsMergeFields extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/merge-fields/' . $mergeId, $_params, Ebizmarts_MailChimp::PATCH
+            'lists/' . $listId . '/merge-fields/' . $mergeId, $_params, Ebizmarts_SqualoMail::PATCH
         );
     }
 
@@ -215,13 +215,13 @@ class MailChimp_ListsMergeFields extends MailChimp_Abstract
      * @param $listId               The unique id for the list.
      * @param $mergeId              The id for the merge field.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($listId, $mergeId)
     {
         return $this->_master->call(
-            'lists/' . $listId . '/merge-fields/' . $mergeId, null, Ebizmarts_MailChimp::DELETE
+            'lists/' . $listId . '/merge-fields/' . $mergeId, null, Ebizmarts_SqualoMail::DELETE
         );
     }
 }

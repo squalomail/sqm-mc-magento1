@@ -5,14 +5,14 @@
  * Date: 2/20/19
  * Time: 3:11 PM
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_NotificationsTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Block_Adminhtml_NotificationsTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Block_Adminhtml_Notifications $_block
+     * @var Ebizmarts_SqualoMail_Block_Adminhtml_Notifications $_block
      */
     protected $_block;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data $_helperMock
+     * @var Ebizmarts_SqualoMail_Helper_Data $_helperMock
      */
     protected $_helperMock;
 
@@ -20,8 +20,8 @@ class Ebizmarts_MailChimp_Block_Adminhtml_NotificationsTest extends PHPUnit_Fram
     {
         $app = Mage::app('default');
         $layout = $app->getLayout();
-        $this->_block = new Ebizmarts_MailChimp_Block_Adminhtml_Notifications;
-        $this->_helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $this->_block = new Ebizmarts_SqualoMail_Block_Adminhtml_Notifications;
+        $this->_helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isImageCacheFlushed', 'isEcomSyncDataEnabledInAnyScope', 'getUrlForNotification'))
             ->getMock();
@@ -34,7 +34,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_NotificationsTest extends PHPUnit_Fram
     {
         $helperMock = $this->_helperMock;
 
-        $blockMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Adminhtml_Notifications::class)
+        $blockMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Block_Adminhtml_Notifications::class)
             ->disableOriginalConstructor()
             ->setMethods(array('makeHelper'))
             ->getMock();
@@ -51,7 +51,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_NotificationsTest extends PHPUnit_Fram
     {
         $helperMock = $this->_helperMock;
 
-        $blockMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Adminhtml_Notifications::class)
+        $blockMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Block_Adminhtml_Notifications::class)
             ->disableOriginalConstructor()
             ->setMethods(array('makeHelper'))
             ->getMock();
@@ -65,7 +65,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_NotificationsTest extends PHPUnit_Fram
     {
         $helperMock = $this->_helperMock;
 
-        $blockMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Adminhtml_Notifications::class)
+        $blockMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Block_Adminhtml_Notifications::class)
             ->disableOriginalConstructor()
             ->setMethods(array('makeHelper'))
             ->getMock();

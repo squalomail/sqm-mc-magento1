@@ -8,7 +8,7 @@
  * @author   Ebizmarts Team <info@ebizmarts.com>
  * @license  http://opensource.org/licenses/osl-3.0.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_Log
+class Ebizmarts_SqualoMail_Model_System_Config_Source_Log
 {
     const NONE = 0;
     const ERROR_LOG = 1;

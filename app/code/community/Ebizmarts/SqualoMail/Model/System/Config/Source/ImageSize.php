@@ -8,7 +8,7 @@
  * @author   Ebizmarts Team <info@ebizmarts.com>
  * @license  http://opensource.org/licenses/osl-3.0.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_ImageSize
+class Ebizmarts_SqualoMail_Model_System_Config_Source_ImageSize
 {
     const BASE = 0;
     const SMALL = 1;

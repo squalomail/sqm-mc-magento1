@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_PromoCodesTest extends PHPUnit_Framework_TestCase
 {
     protected $_promoCodesApiMock;
 
@@ -16,9 +16,9 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
         Mage::app('default');
 
         /**
-         * @var Ebizmarts_MailChimp_Model_Api_PromoCodes $apiPromoCodesMock promoCodesApiMock
+         * @var Ebizmarts_SqualoMail_Model_Api_PromoCodes $apiPromoCodesMock promoCodesApiMock
          */
-        $this->_promoCodesApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_PromoCodes::class);
+        $this->_promoCodesApiMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_PromoCodes::class);
     }
 
     public function tearDown()
@@ -36,11 +36,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
             )->getMock();
 
         $promoCollectionResourceMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoCodes_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setSqualomailStoreId', 'setStoreId'))->getMock();
 
-        $squalomailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squalomailDateHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getDateMicrotime'))->getMock();
 
@@ -81,13 +81,13 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
             ->disableOriginalConstructor()
             ->getMock();
 
-        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('addResendFilter'))
             ->getMock();
 
         $promoCollectionResourceMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_PromoCodes_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('addWebsiteColumn', 'joinPromoRuleData'))
             ->getMock();
@@ -96,7 +96,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
         $promoCodesApiMock->expects($this->once())->method('getPromoCodeResourceCollection')
             ->willReturn($promoCodesCollectionMock);
         $squaloMailHelperMock->expects($this->once())->method('addResendFilter')
-            ->with($promoCodesCollectionMock, $magentoStoreId, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE);
+            ->with($promoCodesCollectionMock, $magentoStoreId, Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE);
         $promoCodesApiMock->expects($this->once())->method('getEcommercePromoCodesCollection')
             ->willReturn($promoCollectionResourceMock);
 
@@ -139,11 +139,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
             ->getMock();
 
         $syncDataItemCollectionMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
+        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Ecommercesyncdata::class)
             ->disableOriginalConstructor()
             ->setMethods(array('delete', 'getAllEcommerceSyncDataItemsPerId'))
             ->getMock();
@@ -163,7 +163,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
         $syncDataItemMock
             ->expects($this->once())
             ->method('getAllEcommerceSyncDataItemsPerId')
-            ->with(self::PROMOCODE_ID, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE)
+            ->with(self::PROMOCODE_ID, Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE)
             ->willReturn($syncDataItemCollectionMock);
 
         $syncDataItems[] = $syncDataItemMock;
@@ -184,7 +184,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
             ->setMethods(array('getSqualomailEcommerceSyncDataModel'))
             ->getMock();
 
-        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
+        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Ecommercesyncdata::class)
             ->disableOriginalConstructor()
             ->setMethods(array('delete', 'getEcommerceSyncDataItem'))
             ->getMock();
@@ -197,7 +197,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
         $syncDataItemMock
             ->expects($this->once())
             ->method('getEcommerceSyncDataItem')
-            ->with(self::PROMOCODE_ID, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE)
+            ->with(self::PROMOCODE_ID, Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE)
             ->willReturn($syncDataItemMock);
 
         $syncDataItemMock->expects($this->once())->method('delete');

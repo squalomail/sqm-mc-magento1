@@ -1,6 +1,6 @@
 <?php
 
-class MailChimpTest extends PHPUnit_Framework_TestCase
+class SqualoMailTest extends PHPUnit_Framework_TestCase
 {
 
     public function setUp()
@@ -13,7 +13,7 @@ class MailChimpTest extends PHPUnit_Framework_TestCase
         /**
          * @var Mandrill_Message|PHPUnit_Framework_MockObject_MockObject $messageMock
          */
-        $apiMock = $this->getMockBuilder('Ebizmarts_MailChimp')
+        $apiMock = $this->getMockBuilder('Ebizmarts_SqualoMail')
             ->disableOriginalConstructor()
             ->getMock();
 

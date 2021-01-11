@@ -11,7 +11,7 @@
  * @file:     Interestgroup.php
  */
 
-class Ebizmarts_MailChimp_Model_Interestgroup extends Mage_Core_Model_Abstract
+class Ebizmarts_SqualoMail_Model_Interestgroup extends Mage_Core_Model_Abstract
 {
     /**
      * Initialize model

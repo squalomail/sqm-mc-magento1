@@ -1,29 +1,29 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     7/24/19 2:47 PM
  * @file:     ClearEcommerce.php
  */
-class Ebizmarts_MailChimp_Model_ClearEcommerce
+class Ebizmarts_SqualoMail_Model_ClearEcommerce
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Date
+     * @var Ebizmarts_SqualoMail_Helper_Date
      */
     protected $_dateHelper;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection
+     * @var Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Collection
      */
     protected $_ecommerceData;
 
@@ -39,7 +39,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data|Mage_Core_Helper_Abstract
+     * @return Ebizmarts_SqualoMail_Helper_Data|Mage_Core_Helper_Abstract
      */
     protected function getHelper()
     {
@@ -47,7 +47,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date|Mage_Core_Helper_Abstract
+     * @return Ebizmarts_SqualoMail_Helper_Date|Mage_Core_Helper_Abstract
      */
     protected function getDateHelper()
     {
@@ -60,17 +60,17 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
      */
     public function clearEcommerceData()
     {
-        $itemsPRO = $this->getItemsToDelete(Ebizmarts_MailChimp_Model_Config::IS_PRODUCT);
-        $itemsCUS = $this->getItemsToDelete(Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER);
-        $itemsQUO = $this->getItemsToDelete(Ebizmarts_MailChimp_Model_Config::IS_QUOTE);
-        $itemsPRL = $this->getItemsToDelete(Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE);
-        $itemsPCD = $this->getItemsToDelete(Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE);
+        $itemsPRO = $this->getItemsToDelete(Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT);
+        $itemsCUS = $this->getItemsToDelete(Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER);
+        $itemsQUO = $this->getItemsToDelete(Ebizmarts_SqualoMail_Model_Config::IS_QUOTE);
+        $itemsPRL = $this->getItemsToDelete(Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE);
+        $itemsPCD = $this->getItemsToDelete(Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE);
 
-        $this->processData($itemsPRO, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT);
-        $this->processData($itemsCUS, Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER);
-        $this->processData($itemsQUO, Ebizmarts_MailChimp_Model_Config::IS_QUOTE);
-        $this->processData($itemsPRL, Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE);
-        $this->processData($itemsPCD, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE);
+        $this->processData($itemsPRO, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT);
+        $this->processData($itemsCUS, Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER);
+        $this->processData($itemsQUO, Ebizmarts_SqualoMail_Model_Config::IS_QUOTE);
+        $this->processData($itemsPRL, Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE);
+        $this->processData($itemsPCD, Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE);
     }
 
     /**
@@ -122,19 +122,19 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
     {
         $items = array();
         switch ($type) {
-            case Ebizmarts_MailChimp_Model_Config::IS_PRODUCT:
+            case Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT:
                 $items = $this->getProductItems();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_QUOTE:
+            case Ebizmarts_SqualoMail_Model_Config::IS_QUOTE:
                 $items = $this->getQuoteItems();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER:
+            case Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER:
                 $items = $this->getCustomerItems();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE:
+            case Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE:
                 $items = $this->getPromoRuleItems();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE:
+            case Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE:
                 $items = $this->getPromoCodeItems();
                 break;
         }
@@ -238,19 +238,19 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
     protected function getDeletedRows($type)
     {
         switch ($type) {
-            case Ebizmarts_MailChimp_Model_Config::IS_PRODUCT:
+            case Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT:
                 $this->addProductDeletedRowsToFilter();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_QUOTE:
+            case Ebizmarts_SqualoMail_Model_Config::IS_QUOTE:
                 $this->addQuoteDeletedRowsToFilter();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER:
+            case Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER:
                 $this->addCustomerDeletedRowsToFilter();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE:
+            case Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE:
                 $this->addRuleDeletedRowsToFilter();
                 break;
-            case Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE:
+            case Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE:
                 $this->addCouponDeletedRowsToFilter();
                 break;
         }
@@ -297,7 +297,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Collection
      */
     protected function getEcommerceCollection()
     {
@@ -357,7 +357,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
         $ecommerceData = $this->getEcommerceCollection();
         $ecommerceData->addFieldToFilter(
             'main_table.type',
-            array('eq' => Ebizmarts_MailChimp_Model_Config::IS_PRODUCT)
+            array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT)
         );
 
         $entityTable = $resource->getTableName('catalog/product');
@@ -375,7 +375,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
         $ecommerceData = $this->getEcommerceCollection();
         $ecommerceData->addFieldToFilter(
             'main_table.type',
-            array('eq' => Ebizmarts_MailChimp_Model_Config::IS_QUOTE)
+            array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_QUOTE)
         );
 
         $entityTable = $resource->getTableName('sales/quote');
@@ -393,7 +393,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
         $ecommerceData = $this->getEcommerceCollection();
         $ecommerceData->addFieldToFilter(
             'main_table.type',
-            array('eq' => Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER)
+            array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER)
         );
 
         $entityTable = $resource->getTableName('customer/entity');
@@ -411,7 +411,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
         $ecommerceData = $this->getEcommerceCollection();
         $ecommerceData->addFieldToFilter(
             'main_table.type',
-            array('eq' => Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE)
+            array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE)
         );
 
         $entityTable = $resource->getTableName('salesrule/rule');
@@ -429,7 +429,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
         $ecommerceData = $this->getEcommerceCollection();
         $ecommerceData->addFieldToFilter(
             'main_table.type',
-            array('eq' => Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE)
+            array('eq' => Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE)
         );
 
         $entityTable = $resource->getTableName('salesrule/coupon');

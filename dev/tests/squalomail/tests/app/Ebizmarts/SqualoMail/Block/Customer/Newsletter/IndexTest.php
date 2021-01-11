@@ -5,16 +5,16 @@
  * Time: 3:49 PM
  */
 
-class Ebizmarts_MailChimp_Block_Customer_Newsletter_IndexTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Block_Customer_Newsletter_IndexTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \Ebizmarts_MailChimp_Block_Customer_Newsletter_Index $_block
+     * @var \Ebizmarts_SqualoMail_Block_Customer_Newsletter_Index $_block
      */
     protected $_block;
 
     /**
-     * @var \Ebizmarts_MailChimp_Block_Customer_Newsletter_Index
+     * @var \Ebizmarts_SqualoMail_Block_Customer_Newsletter_Index
      */
     protected $_indexMock;
 
@@ -22,8 +22,8 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_IndexTest extends PHPUnit_Fr
     {
         $app = Mage::app('default');
         $layout = $app->getLayout();
-        $this->_block = new Ebizmarts_MailChimp_Block_Customer_Newsletter_Index;
-        $this->_indexMock = $this->getMockBuilder(Ebizmarts_MailChimp_Block_Customer_Newsletter_Index::class);
+        $this->_block = new Ebizmarts_SqualoMail_Block_Customer_Newsletter_Index;
+        $this->_indexMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Block_Customer_Newsletter_Index::class);
 
         /* We are required to set layouts before we can do anything with blocks */
         $this->_block->setLayout($layout);
@@ -39,7 +39,7 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_IndexTest extends PHPUnit_Fr
 
         $indexMock = $this->_indexMock
             ->disableOriginalConstructor()
-            ->setMethods(array('getSubscriberModel', '_getEmail', 'getMailChimpHelper', 'getCustomerSession'))
+            ->setMethods(array('getSubscriberModel', '_getEmail', 'getSqualoMailHelper', 'getCustomerSession'))
             ->getMock();
 
 
@@ -48,7 +48,7 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_IndexTest extends PHPUnit_Fr
             ->setMethods(array('loadByEmail', 'getSubscriberId', 'getStoreId'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isAdmin', 'getInterestGroups'))
             ->getMock();
@@ -68,7 +68,7 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_IndexTest extends PHPUnit_Fr
 
         $subscriberMock->expects($this->once())->method('loadByEmail')->with($emailAddress);
 
-        $indexMock->expects($this->once())->method('getMailChimpHelper')->willReturn($helperMock);
+        $indexMock->expects($this->once())->method('getSqualoMailHelper')->willReturn($helperMock);
         $indexMock->expects($this->once())->method('getCustomerSession')->willReturn($customerSessionMock);
 
         $helperMock->expects($this->once())->method('isAdmin')->willReturn(false);

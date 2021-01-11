@@ -10,7 +10,7 @@
  * @date:     5/27/16 1:02 PM
  * @file:     ResendSubscribers.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_ResendSubscribers
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_ResendSubscribers
     extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
     protected function _construct()
@@ -52,7 +52,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_ResendSubscribers
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

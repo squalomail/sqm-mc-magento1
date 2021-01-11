@@ -14,10 +14,10 @@ try {
     if ($configDataCollection->getSize()) {
         // Sets the migration flag to edit webhooks.
         Mage::helper('squalomail')
-            ->saveMailChimpConfig(
+            ->saveSqualoMailConfig(
                 array(
                     array(
-                        Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1120,
+                        Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1120,
                         1)
                 ),
                 0,
@@ -25,7 +25,7 @@ try {
             );
     }
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $installer->endSetup();

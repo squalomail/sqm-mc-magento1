@@ -1,22 +1,22 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     6/28/16 3:55 PM
  * @file:     Mapfields.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_Form_Field_Mapfields
     extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
 {
     protected $_customerAttributes;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
@@ -79,7 +79,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     public function getHelper()
     {
@@ -119,7 +119,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
     /**
      * @return string
      */
-    protected function _getMailChimpValue()
+    protected function _getSqualoMailValue()
     {
         return Mage::getSingleton('core/session')->getSqualomailValue();
     }
@@ -127,7 +127,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
     /**
      * @return string
      */
-    protected function _getMailChimpLabel()
+    protected function _getSqualoMailLabel()
     {
         return Mage::getSingleton('core/session')->getSqualomailLabel();
     }

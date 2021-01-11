@@ -9,7 +9,7 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_Stores
+class Ebizmarts_SqualoMail_Model_Api_Stores
 {
 
     /**
@@ -28,7 +28,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
      * @return mixed
      * @throws Exception
      */
-    public function createMailChimpStore(
+    public function createSqualoMailStore(
         $apiKey,
         $listId,
         $storeName,
@@ -66,7 +66,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             );
             $configValues = array(
                 array(
-                    Ebizmarts_MailChimp_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
+                    Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
                     $response['connected_site']['site_script']['url']
                 )
             );
@@ -74,12 +74,12 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             $successMessage = $helper->__("The Squalomail store was successfully created.");
             $adminSession = $this->getAdminSession();
             $adminSession->addSuccess($successMessage);
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $response = $errorMessage = $e->getMessage();
             $helper->logError($errorMessage);
             $adminSession = $this->getAdminSession();
             $adminSession->addError($errorMessage);
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $adminSession = $this->getAdminSession();
             $response = $errorMessage = $e->getFriendlyMessage();
             $helper->logError($errorMessage);
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
      * @return mixed|string
      * @throws Mage_Core_Exception
      */
-    public function editMailChimpStore(
+    public function editSqualoMailStore(
         $squalomailStoreId,
         $apiKey,
         $storeName,
@@ -145,12 +145,12 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             $successMessage = $helper->__("The Squalomail store was successfully edited.");
             $adminSession = $this->getAdminSession();
             $adminSession->addSuccess($successMessage);
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $response = $errorMessage = $e->getMessage();
             $helper->logError($errorMessage);
             $adminSession = $this->getAdminSession();
             $adminSession->addError($errorMessage);
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $adminSession = $this->getAdminSession();
             $response = $errorMessage = $e->getFriendlyMessage();
             $helper->logError($errorMessage);
@@ -167,7 +167,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     }
 
     /**
-     * @param $e MailChimp_Error
+     * @param $e SqualoMail_Error
      * @return string
      */
     protected function getUserFriendlyMessage($e)
@@ -209,15 +209,15 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     }
 
     /**
-     * Delete MailChimp store.
+     * Delete SqualoMail store.
      *
      * @param  $squalomailStoreId
      * @param  $apiKey
      * @return mixed|string
      * @throws Mage_Core_Exception
-     * @throws Ebizmarts_MailChimp_Helper_Data_ApiKeyException
+     * @throws Ebizmarts_SqualoMail_Helper_Data_ApiKeyException
      */
-    public function deleteMailChimpStore($squalomailStoreId, $apiKey)
+    public function deleteSqualoMailStore($squalomailStoreId, $apiKey)
     {
         $helper = $this->makeHelper();
 
@@ -228,12 +228,12 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             $successMessage = $helper->__("The Squalomail store was successfully deleted.");
             $adminSession = $this->getAdminSession();
             $adminSession->addSuccess($successMessage);
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $response = $errorMessage = $e->getMessage();
             $helper->logError($errorMessage);
             $adminSession = $this->getAdminSession();
             $adminSession->addError($errorMessage);
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $response = $errorMessage = $e->getFriendlyMessage();
             $helper->logError($errorMessage);
             $adminSession = $this->getAdminSession();
@@ -262,10 +262,10 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     /**
      * Set is_syncing value for the given scope.
      *
-     * @param  $squalomailApi Ebizmarts_MailChimp
+     * @param  $squalomailApi Ebizmarts_SqualoMail
      * @param  $isSincingValue
      * @param  $squalomailStoreId
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     public function editIsSyncing($squalomailApi, $isSincingValue, $squalomailStoreId)
     {
@@ -279,7 +279,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -287,7 +287,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Dat3
+     * @return Ebizmarts_SqualoMail_Helper_Dat3
      */
     protected function makeDateHelper()
     {

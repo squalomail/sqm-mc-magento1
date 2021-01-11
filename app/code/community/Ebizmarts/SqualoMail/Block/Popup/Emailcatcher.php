@@ -1,16 +1,16 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/29/16 3:55 PM
  * @file:     Emailcatcher.php
  */
-class Ebizmarts_MailChimp_Block_Popup_Emailcatcher extends Mage_Core_Block_Template
+class Ebizmarts_SqualoMail_Block_Popup_Emailcatcher extends Mage_Core_Block_Template
 {
     /**
      * @param $data
@@ -22,7 +22,7 @@ class Ebizmarts_MailChimp_Block_Popup_Emailcatcher extends Mage_Core_Block_Templ
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     public function getHelper()
     {
@@ -33,9 +33,9 @@ class Ebizmarts_MailChimp_Block_Popup_Emailcatcher extends Mage_Core_Block_Templ
     {
         $storeId = Mage::app()->getStore()->getId();
 
-        return Mage::getStoreConfig(Ebizmarts_MailChimp_Model_Config::ENABLE_POPUP, $storeId)
+        return Mage::getStoreConfig(Ebizmarts_SqualoMail_Model_Config::ENABLE_POPUP, $storeId)
             && Mage::getStoreConfig(
-                Ebizmarts_MailChimp_Model_Config::POPUP_CAN_CANCEL,
+                Ebizmarts_SqualoMail_Model_Config::POPUP_CAN_CANCEL,
                 $storeId
             );
     }
@@ -44,21 +44,21 @@ class Ebizmarts_MailChimp_Block_Popup_Emailcatcher extends Mage_Core_Block_Templ
     {
         $storeId = Mage::app()->getStore()->getId();
 
-        return Mage::getStoreConfig(Ebizmarts_MailChimp_Model_Config::POPUP_HEADING, $storeId);
+        return Mage::getStoreConfig(Ebizmarts_SqualoMail_Model_Config::POPUP_HEADING, $storeId);
     }
 
     protected function _popupMessage()
     {
         $storeId = Mage::app()->getStore()->getId();
 
-        return Mage::getStoreConfig(Ebizmarts_MailChimp_Model_Config::POPUP_TEXT, $storeId);
+        return Mage::getStoreConfig(Ebizmarts_SqualoMail_Model_Config::POPUP_TEXT, $storeId);
     }
 
     protected function _modalSubscribe()
     {
         $storeId = Mage::app()->getStore()->getId();
 
-        return Mage::getStoreConfig(Ebizmarts_MailChimp_Model_Config::POPUP_SUBSCRIPTION, $storeId);
+        return Mage::getStoreConfig(Ebizmarts_SqualoMail_Model_Config::POPUP_SUBSCRIPTION, $storeId);
     }
 
     protected function _getStoreId()

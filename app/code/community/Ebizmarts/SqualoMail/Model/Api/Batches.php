@@ -9,57 +9,57 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_Batches
+class Ebizmarts_SqualoMail_Model_Api_Batches
 {
     const SEND_PROMO_ENABLED = 1;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_squalomailHelper;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Date
+     * @var Ebizmarts_SqualoMail_Helper_Date
      */
     protected $_squalomailDateHelper;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Curl
+     * @var Ebizmarts_SqualoMail_Helper_Curl
      */
     protected $_squalomailCurlHelper;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Customers
+     * @var Ebizmarts_SqualoMail_Model_Api_Customers
      */
     protected $_apiCustomers;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Products
+     * @var Ebizmarts_SqualoMail_Model_Api_Products
      */
     protected $_apiProducts;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Carts
+     * @var Ebizmarts_SqualoMail_Model_Api_Carts
      */
     protected $_apiCarts;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Orders
+     * @var Ebizmarts_SqualoMail_Model_Api_Orders
      */
     protected $_apiOrders;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_PromoRules
+     * @var Ebizmarts_SqualoMail_Model_Api_PromoRules
      */
     protected $_apiPromoRules;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_PromoCodes
+     * @var Ebizmarts_SqualoMail_Model_Api_PromoCodes
      */
     protected $_apiPromoCodes;
 
     /**
-     * @var Ebizmarts_MailChimp_Model_Api_Subscribers
+     * @var Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     protected $_apiSubscribers;
 
@@ -79,7 +79,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -87,7 +87,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Curl
+     * @return Ebizmarts_SqualoMail_Helper_Curl
      */
     protected function getSqualomailCurlHelper()
     {
@@ -95,7 +95,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date
+     * @return Ebizmarts_SqualoMail_Helper_Date
      */
     protected function getDateHelper()
     {
@@ -103,7 +103,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Stores
+     * @return Ebizmarts_SqualoMail_Model_Api_Stores
      */
     protected function getApiStores()
     {
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Customers
+     * @return Ebizmarts_SqualoMail_Model_Api_Customers
      */
     protected function getApiCustomers()
     {
@@ -119,7 +119,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Products
+     * @return Ebizmarts_SqualoMail_Model_Api_Products
      */
     public function getApiProducts()
     {
@@ -127,7 +127,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Carts
+     * @return Ebizmarts_SqualoMail_Model_Api_Carts
      */
     public function getApiCarts()
     {
@@ -135,7 +135,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Orders
+     * @return Ebizmarts_SqualoMail_Model_Api_Orders
      */
     public function getApiOrders()
     {
@@ -143,7 +143,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_PromoRules
+     * @return Ebizmarts_SqualoMail_Model_Api_PromoRules
      */
     public function getApiPromoRules()
     {
@@ -151,7 +151,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_PromoCodes
+     * @return Ebizmarts_SqualoMail_Model_Api_PromoCodes
      */
     public function getApiPromoCodes()
     {
@@ -159,7 +159,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Subscribers
+     * @return Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     protected function getApiSubscribers()
     {
@@ -167,7 +167,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Synchbatches
+     * @return Ebizmarts_SqualoMail_Model_Synchbatches
      */
     protected function getSyncBatchesModel()
     {
@@ -230,7 +230,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                     $this->_sendEcommerceBatch($storeId);
                 } else {
                     $helper->logError(
-                        "Could not connect to MailChimp: Make sure the API Key is correct "
+                        "Could not connect to SqualoMail: Make sure the API Key is correct "
                         . "and there is an internet connection"
                     );
                     return;
@@ -258,13 +258,13 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * Get results of batch operations sent to MailChimp.
+     * Get results of batch operations sent to SqualoMail.
      *
      * @param       $magentoStoreId
      * @param bool  $isEcommerceData
      * @throws Mage_Core_Exception
      */
-    public function _getResults($magentoStoreId, $isEcommerceData = true, $status = Ebizmarts_MailChimp_Helper_Data::BATCH_PENDING)
+    public function _getResults($magentoStoreId, $isEcommerceData = true, $status = Ebizmarts_SqualoMail_Helper_Data::BATCH_PENDING)
     {
         $helper = $this->getHelper();
         $squalomailStoreId = $helper->getMCStoreId($magentoStoreId);
@@ -324,8 +324,8 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * Send Customers, Products, Orders, Carts to MailChimp store for given scope.
-     * Return true if MailChimp store is reset in the process.
+     * Send Customers, Products, Orders, Carts to SqualoMail store for given scope.
+     * Return true if SqualoMail store is reset in the process.
      *
      * @param  $magentoStoreId
      * @throws Mage_Core_Exception
@@ -418,9 +418,9 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                         $customerAmount, $productAmount, $orderAmount,
                         $squalomailStoreId, $magentoStoreId
                     );
-                } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+                } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                     $helper->logError($e->getMessage());
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $helper->logError($e->getFriendlyMessage());
 
                     if ($batchJson && !isset($batchResponse['id'])) {
@@ -432,7 +432,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                     $helper->logError($batchArray);
                 }
             }
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $helper->logError($e->getFriendlyMessage());
         } catch (Exception $e) {
             $helper->logError($e->getMessage());
@@ -443,10 +443,10 @@ class Ebizmarts_MailChimp_Model_Api_Batches
      * @param $batchArray
      * @param $squalomailStoreId
      * @param $magentoStoreId
-     * @throws Ebizmarts_MailChimp_Helper_Data_ApiKeyException
+     * @throws Ebizmarts_SqualoMail_Helper_Data_ApiKeyException
      * @throws Mage_Core_Exception
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
 
     protected function _processBatchOperations($batchArray, $squalomailStoreId, $magentoStoreId)
@@ -498,7 +498,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
         if ($this->shouldFlagAsSyncing($syncingFlag, $itemAmount, $helper)) {
             //Set is syncing per scope in 1 until sync finishes.
             $configValue = array(
-                array(Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId", 1)
+                array(Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId", 1)
             );
             $helper->saveSqualomailConfig($configValue, $magentoStoreId, 'stores');
         } else {
@@ -506,7 +506,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                 //Set is syncing per scope to a date because it is not sending any more items.
                 $configValue = array(
                     array(
-                        Ebizmarts_MailChimp_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId",
+                        Ebizmarts_SqualoMail_Model_Config::GENERAL_MCISSYNCING . "_$squalomailStoreId",
                         $dateHelper->formatDate(null, 'Y-m-d H:i:s')
                     )
                 );
@@ -683,16 +683,16 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                             $this->_showResumeSubscriber($batchResponse['id'], $storeId);
 
                             return array($batchResponse, $limit);
-                        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+                        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                             $helper->logError($e->getMessage());
-                        } catch (MailChimp_Error $e) {
+                        } catch (SqualoMail_Error $e) {
                             $helper->logRequest($batchJson);
                             $helper->logError($e->getFriendlyMessage());
                         }
                     }
                 }
             }
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $helper->logError($e->getFriendlyMessage());
         } catch (Exception $e) {
             $helper->logError($e->getMessage());
@@ -744,10 +744,10 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                     }
                 }
             }
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $helper->logError($e->getMessage());
             $files['error'] = $e->getMessage();
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $this->deleteBatchItems($batchId);
             $files['error'] = $e->getFriendlyMessage();
             $helper->logError($e->getFriendlyMessage());
@@ -846,7 +846,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                         $squalomailErrors->setBatchId($batchId);
                         $squalomailErrors->setStoreId($store[1]);
 
-                        if ($type != Ebizmarts_MailChimp_Model_Config::IS_SUBSCRIBER) {
+                        if ($type != Ebizmarts_SqualoMail_Model_Config::IS_SUBSCRIBER) {
                             $squalomailErrors->setSqualomailStoreId($squalomailStoreId);
                         }
 
@@ -893,9 +893,9 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     {
         $error = $response['title'] . " : " . $response['detail'];
 
-        if ($type == Ebizmarts_MailChimp_Model_Config::IS_PRODUCT) {
+        if ($type == Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT) {
             $dataProduct = $this->getDataProduct($squalomailStoreId, $id, $type);
-            $isProductDisabledInMagento = Ebizmarts_MailChimp_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO;
+            $isProductDisabledInMagento = Ebizmarts_SqualoMail_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO;
 
             if ($dataProduct->getSqualomailSyncDeleted()
                 || $dataProduct->getSqualomailSyncError() == $isProductDisabledInMagento
@@ -932,7 +932,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * Handle batch for order id replacement with the increment id in MailChimp.
+     * Handle batch for order id replacement with the increment id in SqualoMail.
      *
      * @param $initialTime
      * @param $magentoStoreId
@@ -953,7 +953,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
             );
             try {
                 /**
-                 * @var $squalomailApi Ebizmarts_MailChimp
+                 * @var $squalomailApi Ebizmarts_SqualoMail
                  */
                 $squalomailApi = $helper->getApi($magentoStoreId);
 
@@ -975,16 +975,16 @@ class Ebizmarts_MailChimp_Model_Api_Batches
                         $batch->save();
                     }
                 }
-            } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+            } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                 $helper->logError($e->getMessage());
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 $helper->logError($e->getFriendlyMessage());
             } catch (Exception $e) {
                 $helper->logError($e->getMessage());
                 $helper->logError("Json encode fails");
                 $helper->logError($batchArray);
             }
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $helper->logError($e->getFriendlyMessage());
         } catch (Exception $e) {
             $helper->logError($e->getMessage());
@@ -1017,7 +1017,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     ) {
         $helper = $this->getHelper();
 
-        if ($itemType == Ebizmarts_MailChimp_Model_Config::IS_SUBSCRIBER) {
+        if ($itemType == Ebizmarts_SqualoMail_Model_Config::IS_SUBSCRIBER) {
             $helper->updateSubscriberSyndData($itemId, $syncDelta, $syncError, 0, null);
         } else {
             $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
@@ -1039,7 +1039,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
+     * @return Ebizmarts_SqualoMail_Model_Ecommercesyncdata
      */
     protected function getSqualomailEcommerceSyncDataModel()
     {
@@ -1099,20 +1099,20 @@ class Ebizmarts_MailChimp_Model_Api_Batches
             if ($ecomEnabled && $date) {
                 try {
                     $api = $helper->getApi($magentoStoreId);
-                    $isSyncingDate = $helper->getDateSyncFinishByMailChimpStoreId($squalomailStoreId);
+                    $isSyncingDate = $helper->getDateSyncFinishBySqualoMailStoreId($squalomailStoreId);
                     if (!$isSyncingDate && $squalomailStoreId) {
                         $this->getApiStores()->editIsSyncing($api, false, $squalomailStoreId);
                         $config = array(
                             array(
-                                Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
+                                Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
                                 $date
                             )
                         );
                         $helper->saveSqualomailConfig($config, 0, 'default');
                     }
-                } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+                } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                     $helper->logError($e->getMessage());
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $helper->logError($e->getFriendlyMessage());
                 } catch (Exception $e) {
                     $helper->logError($e->getMessage());
@@ -1130,10 +1130,10 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     {
         $isMarkedAsDeleted = null;
 
-        if ($type == Ebizmarts_MailChimp_Model_Config::IS_PRODUCT) {
+        if ($type == Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT) {
             $dataProduct = $this->getDataProduct($squalomailStoreId, $id, $type);
             $isMarkedAsDeleted = $dataProduct->getSqualomailSyncDeleted();
-            $isProductDisabledInMagento = Ebizmarts_MailChimp_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO;
+            $isProductDisabledInMagento = Ebizmarts_SqualoMail_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO;
 
             if (!$isMarkedAsDeleted || $dataProduct->getSqualomailSyncError() != $isProductDisabledInMagento) {
                 $this->saveSyncData(
@@ -1262,11 +1262,11 @@ class Ebizmarts_MailChimp_Model_Api_Batches
             if ($this->isSetAnyCounterSubscriberOrEcommerceNotSent($counter)) {
                 if ($helper->isErrorLogEnabled()) {
                     $helper->logBatchStatus(
-                        'Please check Squalomail Errors grid or MailChimp_Errors.log for more details.'
+                        'Please check Squalomail Errors grid or SqualoMail_Errors.log for more details.'
                     );
                 } else {
                     $helper->logBatchStatus(
-                        'Please check Squalomail Errors grid and enable MailChimp_Errors.log for more details.'
+                        'Please check Squalomail Errors grid and enable SqualoMail_Errors.log for more details.'
                     );
                 }
             }
@@ -1306,7 +1306,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     {
         $syncModified = 0;
 
-        if ($type == Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER && $this->isFirstArrival($syncDataItem)) {
+        if ($type == Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER && $this->isFirstArrival($syncDataItem)) {
             $syncModified = 1;
         }
 
@@ -1314,7 +1314,7 @@ class Ebizmarts_MailChimp_Model_Api_Batches
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_File
+     * @return Ebizmarts_SqualoMail_Helper_File
      */
     protected function getSqualomailFileHelper()
     {

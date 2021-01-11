@@ -1,29 +1,29 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     3/20/2020 11:14 AM
  * @file:     Webhook.php
  */
-class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
+class Ebizmarts_SqualoMail_Helper_Migration extends Mage_Core_Helper_Abstract
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Date
+     * @var Ebizmarts_SqualoMail_Helper_Date
      */
     protected $_dateHelper;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Webhook
+     * @var Ebizmarts_SqualoMail_Helper_Webhook
      */
     protected $_webhookHelper;
 
@@ -44,22 +44,22 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
 
         $initialTime = $dateHelper->getTimestamp();
         $migrateFrom115 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_115,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_115,
             0,
             'default'
         );
         $migrateFrom116 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_116,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_116,
             0,
             'default'
         );
         $migrateFrom1164 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1164,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1164,
             0,
             'default'
         );
         $migrateFrom1120 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1120,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1120,
             0,
             'default'
         );
@@ -217,7 +217,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
+     * @return Ebizmarts_SqualoMail_Model_Ecommercesyncdata
      */
     protected function getSqualomailEcommerceSyncDataModel()
     {
@@ -245,7 +245,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                 $customerCollection->addAttributeToFilter('squalomail_sync_delta', array('gt' => '0000-00-00 00:00:00'));
                 $customerCollection->getSelect()->joinLeft(
                     array('m4m' => $squalomailTableName),
-                    "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER
+                    "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER
                     . "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
@@ -274,7 +274,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $customerId,
-                            Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
+                            Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER,
                             $squalomailStoreId,
                             $syncDelta,
                             $syncError,
@@ -310,7 +310,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                 $productCollection->addAttributeToFilter('squalomail_sync_delta', array('gt' => '0000-00-00 00:00:00'));
                 $productCollection->getSelect()->joinLeft(
                     array('m4m' => $squalomailTableName),
-                    "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT
+                    "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT
                     . "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
@@ -341,7 +341,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $productId,
-                            Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                            Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                             $squalomailStoreId,
                             $syncDelta,
                             $syncError,
@@ -387,7 +387,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                 $orderCollection->getSelect()->joinLeft(
                     array('m4m' => $squalomailTableName),
                     "m4m.related_id = main_table.entity_id AND m4m.type = '"
-                    . Ebizmarts_MailChimp_Model_Config::IS_ORDER .
+                    . Ebizmarts_SqualoMail_Model_Config::IS_ORDER .
                     "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
@@ -417,7 +417,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $orderId,
-                            Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                            Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                             $squalomailStoreId,
                             $syncDelta,
                             $syncError,
@@ -455,7 +455,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                 $quoteCollection->getSelect()->joinLeft(
                     array('m4m' => $squalomailTableName),
                     "m4m.related_id = main_table.entity_id AND m4m.type = '"
-                    . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
+                    . Ebizmarts_SqualoMail_Model_Config::IS_QUOTE
                     . "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
@@ -491,7 +491,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData = $this->getSqualomailEcommerceSyncDataModel();
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $quoteId,
-                            Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
+                            Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
                             $squalomailStoreId,
                             $syncDelta,
                             $syncError,
@@ -527,7 +527,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     {
         $helper = $this->getHelper();
         $helper->getConfig()->deleteConfig(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_115,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_115,
             'default',
             0
         );
@@ -569,7 +569,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Update Order ids to the Increment id in MailChimp.
+     * Update Order ids to the Increment id in SqualoMail.
      *
      * @param  $initialTime
      * @return bool
@@ -611,25 +611,25 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         $migrationFinished = false;
 
         $migrateFrom115 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_115,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_115,
             0,
             'default'
         );
 
         $migrateFrom116 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_116,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_116,
             0,
             'default'
         );
 
         $migrateFrom1164 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1164,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1164,
             0,
             'default'
         );
 
         $migrateFrom1120 = $helper->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1120,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1120,
             0,
             'default'
         );
@@ -649,14 +649,14 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         $helper = $this->getHelper();
         $stores = $helper->getMageApp()->getStores();
         $helper->getConfig()->deleteConfig(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_116,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_116,
             'default',
             0
         );
 
         foreach ($stores as $storeId => $store) {
             $helper->getConfig()->deleteConfig(
-                Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_LAST_ORDER_ID,
+                Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_LAST_ORDER_ID,
                 'stores',
                 $storeId
             );
@@ -690,7 +690,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         $helper = $this->getHelper();
 
         $helper->getConfig()->deleteConfig(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1164,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1164,
             'default',
             0
         );
@@ -757,7 +757,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         $helper = $this->getHelper();
 
         $helper->getConfig()->deleteConfig(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1120,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1120,
             'default',
             0
         );
@@ -791,7 +791,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -799,7 +799,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Date
+     * @var Ebizmarts_SqualoMail_Helper_Date
      */
     protected function getDateHelper()
     {
@@ -807,7 +807,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Webhook
+     * @var Ebizmarts_SqualoMail_Helper_Webhook
      */
     protected function getWebhookHelper()
     {

@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
+class Ebizmarts_SqualoMail_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
     extends Mage_Adminhtml_Block_Widget_Form
 {
     protected function _prepareForm()
@@ -32,7 +32,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
                 'label' => "Products",
                 'id'    => 'products',
                 'title' => "Products",
-                'value' =>  Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                'value' =>  Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                 'required' => false,
                 'checked'  => '1',
             )
@@ -45,7 +45,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
                 'label' => "Customers",
                 'id' => 'customers',
                 'title' => 'Customers',
-                'value' => Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
+                'value' => Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER,
                 'required' => false,
                 'checked'  => '1',
             )
@@ -58,7 +58,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
                 'label' => "Orders",
                 'id' => 'orders',
                 'title' => 'Orders',
-                'value' => Ebizmarts_MailChimp_Model_Config::IS_ORDER,
+                'value' => Ebizmarts_SqualoMail_Model_Config::IS_ORDER,
                 'required' => false,
                 'checked'  => '1',
             )
@@ -71,7 +71,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
                 'label' => "Carts",
                 'id' => 'carts',
                 'title' => 'Carts',
-                'value' => Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
+                'value' => Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
                 'required' => false,
                 'checked'  => '1',
             )
@@ -84,8 +84,8 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
                 'label' => "Promo Rules",
                 'id' => 'promo',
                 'title' => 'Promo Rules',
-                'value' => Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE. ', '
-                    . Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE,
+                'value' => Ebizmarts_SqualoMail_Model_Config::IS_PROMO_CODE. ', '
+                    . Ebizmarts_SqualoMail_Model_Config::IS_PROMO_RULE,
                 'required' => false,
                 'checked'  => '1',
             )

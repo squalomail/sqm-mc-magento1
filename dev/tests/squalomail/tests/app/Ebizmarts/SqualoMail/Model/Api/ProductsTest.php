@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_Api_ProductsTest extends PHPUnit_Framework_TestCase
 {
     protected $_productsApiMock;
 
@@ -13,9 +13,9 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         Mage::app('default');
 
         /**
-         * @var Ebizmarts_MailChimp_Model_Api_Products $apiProductsMock productsApiMock
+         * @var Ebizmarts_SqualoMail_Model_Api_Products $apiProductsMock productsApiMock
          */
-        $this->_productsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Products::class);
+        $this->_productsApiMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Products::class);
     }
 
     public function tearDown()
@@ -47,7 +47,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->disableOriginalConstructor()->setMethods(array('getId'))->getMock();
 
         $productCollectionResourceMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('setSqualomailStoreId', 'setStoreId'))
             ->getMock();
@@ -67,7 +67,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
                 )
             )->getMock();
 
-       $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+       $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
            ->disableOriginalConstructor()
             ->setMethods(
                 array(
@@ -76,7 +76,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
                 )
             )->getMock();
 
-        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
+        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Ecommercesyncdata::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getId', 'getEcommerceSyncDataItem'))
             ->getMock();
@@ -113,7 +113,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
 
         $syncDataItemMock->expects($this->once())
             ->method('getEcommerceSyncDataItem')
-            ->with(15, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId)
+            ->with(15, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT, $squalomailStoreId)
             ->willReturnSelf();
 
         $productMock
@@ -154,7 +154,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
 
         $helperMock->expects($this->once())
             ->method('modifyCounterSentPerBatch')
-            ->with(Ebizmarts_MailChimp_Helper_Data::PRO_MOD);
+            ->with(Ebizmarts_SqualoMail_Helper_Data::PRO_MOD);
 
         $syncDataItemMock->expects($this->once())->method('getId')->willReturn($syncDataItemId);
 
@@ -190,13 +190,13 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->getMock();
 
         $helperMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('addResendFilter'))
             ->getMock();
 
         $productResourceCollectionMock = $this
-            ->getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection::class)
+            ->getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('joinQtyAndBackorders', 'limitCollection'))
             ->getMock();
@@ -213,7 +213,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $this->_productsApiMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
 
         $helperMock->expects($this->once())->method('addResendFilter')
-            ->with($productsCollectionMock, $magentoStoreId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT);
+            ->with($productsCollectionMock, $magentoStoreId, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT);
 
         $this->_productsApiMock->expects($this->once())->method('createEcommerceProductsCollection')
             ->willReturn($productResourceCollectionMock);
@@ -237,7 +237,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->setMethods(array('getHelper', 'getParentId', 'getProductWithAttributesById', 'getUrlByPath'))
             ->getMock();
 
-        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getProductResourceModel'))
             ->getMock();
@@ -297,7 +297,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->setMethods(array('getParentId', 'getHelper'))
             ->getMock();
 
-        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squaloMailHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getImageUrlById'))
             ->getMock();
@@ -420,7 +420,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $ecomSyncDateFlag = '2018-03-14 15:03:36';
         $itemOneSyncDelta = '2018-03-14 15:03:37';
         $itemTwoSyncDelta = '2018-03-14 15:03:35';
-        $error = "This product type is not supported on MailChimp. (product id: $groupedProductId)";
+        $error = "This product type is not supported on SqualoMail. (product id: $groupedProductId)";
 
         $productsApiMock = $this->_productsApiMock
             ->setMethods(
@@ -458,12 +458,12 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->setMethods(array('getId'))
             ->getMock();
 
-        $dateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $dateHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('formatDate'))
             ->getMock();
 
-        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Ecommercesyncdata::class)
+        $syncDataItemMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Ecommercesyncdata::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getSqualomailSyncModified', 'getSqualomailSyncDelta', 'getEcommerceSyncDataItem'))
             ->getMock();
@@ -519,9 +519,9 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->willReturn($syncDataItemMock);
 
         $syncDataItemMock->expects($this->exactly(3))->method('getEcommerceSyncDataItem')->withConsecutive(
-            array($groupedProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId),
-            array($oldProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId),
-            array($newProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId)
+            array($groupedProductId, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT, $squalomailStoreId),
+            array($oldProductId, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT, $squalomailStoreId),
+            array($newProductId, Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT, $squalomailStoreId)
         )->willReturnOnConsecutiveCalls(
             $syncDataItemMock,
             $syncDataItemMock,
@@ -597,7 +597,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $finalSku = $data['finalSku'];
 
         $productsApiMock = $this->_productsApiMock
-            ->setMethods(array('getMailChimpProductPrice'))
+            ->setMethods(array('getSqualoMailProductPrice'))
             ->getMock();
 
         $productMock = $this->getMockBuilder(Mage_Catalog_Model_Product::class)
@@ -608,7 +608,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
 
         $productsApiMock
             ->expects($this->once())
-            ->method('getMailChimpProductPrice')
+            ->method('getSqualoMailProductPrice')
             ->with($productMock)
             ->willReturn($price);
 
@@ -680,7 +680,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             )->getMock();
 
         $productCollectionResourceMock = $this->
-        getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection::class)
+        getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('joinSqualomailSyncDataDeleted'))
             ->getMock();
@@ -813,7 +813,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $whereCondition = 'm4m.squalomail_sync_delta IS NOT NULL '
             . "AND m4m.squalomail_sync_delta < '$dateToday 00:00:00'";
 
-        $helperDateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $helperDateMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('formatDate'))
             ->getMock();
@@ -838,7 +838,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             )->getMock();
 
         $productsCollectionResourceMock = $this->
-        getMockBuilder(Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection::class)
+        getMockBuilder(Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection::class)
             ->disableOriginalConstructor()
             ->setMethods(array('addWhere'))
             ->getMock();

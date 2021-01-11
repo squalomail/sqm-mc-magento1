@@ -10,7 +10,7 @@
  * @file:     Form.php
  */
 
-class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Ebizmarts_SqualoMail_Block_Adminhtml_Squalomailstores_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
 
     protected function _prepareForm()
@@ -227,7 +227,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Squalomailstores_Edit_Form extends Mag
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

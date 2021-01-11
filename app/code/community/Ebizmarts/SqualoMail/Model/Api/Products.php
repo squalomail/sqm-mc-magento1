@@ -9,7 +9,7 @@
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
+class Ebizmarts_SqualoMail_Model_Api_Products extends Ebizmarts_SqualoMail_Model_Api_ItemSynchronizer
 {
     const PRODUCT_IS_ENABLED = 1;
     const BATCH_LIMIT = 100;
@@ -31,7 +31,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
     const PRODUCT_DISABLED_IN_MAGENTO = 'This product was deleted because it is disabled in Magento.';
 
     /**
-     * @var $_ecommerceProductsCollection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection
+     * @var $_ecommerceProductsCollection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection
      */
     protected $_ecommerceProductsCollection;
 
@@ -108,14 +108,14 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
                     $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
-                        Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                        Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
                     );
 
                     if ($dataProduct->getId()) {
-                        $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::PRO_MOD);
+                        $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::PRO_MOD);
                     } else {
-                        $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::PRO_NEW);
+                        $helper->modifyCounterSentPerBatch(Ebizmarts_SqualoMail_Helper_Data::PRO_NEW);
                     }
 
                     //update product delta
@@ -123,7 +123,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                 } else {
                     $this->addSyncDataError(
                         $productId,
-                        "This product type is not supported on MailChimp. (product id: $productId)",
+                        "This product type is not supported on SqualoMail. (product id: $productId)",
                         null,
                         false,
                         $dateHelper->formatDate(null, 'Y-m-d H:i:s')
@@ -230,7 +230,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             $jsonErrorMsg = json_last_error_msg();
             $this->logSyncError(
                 $jsonErrorMsg,
-                Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                 $magentoStoreId,
                 'magento_side_error',
                 'Json Encode Failure',
@@ -283,7 +283,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             foreach ($parentIds as $parentId) {
                 $productSyncDataItem = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $parentId,
-                    Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                    Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                     $squalomailStoreId
                 );
 
@@ -300,7 +300,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                         $jsonErrorMsg = json_last_error_msg();
                         $this->logSyncError(
                             $jsonErrorMsg,
-                            Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                            Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                             $magentoStoreId,
                             'magento_side_error',
                             'Json Encode Failure',
@@ -345,7 +345,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             //json encode failed
             $this->logSyncError(
                 $jsonErrorMsg,
-                Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                 $magentoStoreId,
                 'magento_side_error',
                 'Json Encode Failure',
@@ -358,7 +358,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
             $this->logSyncError(
                 $jsonErrorMsg,
-                Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                 $magentoStoreId,
                 'magento_side_error',
                 'Json Encode Failure',
@@ -431,7 +431,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
         $data["url"] = $url;
         //image
-        $imageUrl = $this->getMailChimpImageUrl($product, $magentoStoreId);
+        $imageUrl = $this->getSqualoMailImageUrl($product, $magentoStoreId);
 
         if ($imageUrl) {
             $data["image_url"] = $imageUrl;
@@ -537,7 +537,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
     }
 
     /**
-     * Return products belonging to an order or a cart in a valid format to be sent to MailChimp.
+     * Return products belonging to an order or a cart in a valid format to be sent to SqualoMail.
      *
      * @param  $order
      * @return array
@@ -559,7 +559,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             $productId = $product->getId();
             $productSyncData = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $productId,
-                Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                 $squalomailStoreId
             );
 
@@ -570,7 +570,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                 if ($productId) {
                     $this->addSyncDataError(
                         $productId,
-                        "This product type is not supported on MailChimp. (product id: $productId)",
+                        "This product type is not supported on SqualoMail. (product id: $productId)",
                         null,
                         null,
                         $dateHelper->formatDate(null, 'Y-m-d H:i:s')
@@ -620,7 +620,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     public function makeBatchId($magentoStoreId)
     {
-        $batchId = 'storeid-' . $magentoStoreId . '_' . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT;
+        $batchId = 'storeid-' . $magentoStoreId . '_' . Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT;
         $batchId .= '_' . $this->getDateHelper()->getDateMicrotime();
 
         return $batchId;
@@ -646,7 +646,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
         $this->getHelper()->addResendFilter(
             $collection,
             $magentoStoreId,
-            Ebizmarts_MailChimp_Model_Config::IS_PRODUCT
+            Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT
         );
 
         $productsCollectionResource = $this->createEcommerceProductsCollection();
@@ -746,7 +746,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
         $sku = $product->getSku();
         $data["sku"] = $sku ? $sku : '';
 
-        $price = $this->getMailChimpProductPrice($product, $magentoStoreId);
+        $price = $this->getSqualoMailProductPrice($product, $magentoStoreId);
 
         if ($price) {
             $data["price"] = $price;
@@ -1063,10 +1063,10 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      * @param $magentoStoreId
      * @return mixed|null
      */
-    protected function getMailChimpImageUrl($product, $magentoStoreId)
+    protected function getSqualoMailImageUrl($product, $magentoStoreId)
     {
         $imageUrl = $this->getHelper()
-            ->getMailChimpProductImageUrl(
+            ->getSqualoMailProductImageUrl(
                 $this->_parentImageUrl,
                 $this->getHelper()->getImageUrlById(
                     $product->getId(),
@@ -1085,7 +1085,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      * @param $magentoStoreId
      * @return float
      */
-    protected function getMailChimpProductPrice($product, $magentoStoreId)
+    protected function getSqualoMailProductPrice($product, $magentoStoreId)
     {
         $price = null;
         $parentId = null;
@@ -1283,11 +1283,11 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function getItemType()
     {
-        return Ebizmarts_MailChimp_Model_Config::IS_PRODUCT;
+        return Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT;
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection
      */
     public function getEcommerceProductsCollection()
     {
@@ -1295,12 +1295,12 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection
      */
     public function createEcommerceProductsCollection()
     {
         /**
-         * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection
+         * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Product_Collection
          */
         $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_product_collection');
 

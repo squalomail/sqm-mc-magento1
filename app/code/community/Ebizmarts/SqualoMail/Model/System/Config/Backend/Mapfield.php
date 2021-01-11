@@ -10,11 +10,11 @@
  * @date:     8/4/16 5:56 PM
  * @file:     Apikey.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Backend_Mapfield
+class Ebizmarts_SqualoMail_Model_System_Config_Backend_Mapfield
     extends Mage_Adminhtml_Model_System_Config_Backend_Serialized_Array
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 

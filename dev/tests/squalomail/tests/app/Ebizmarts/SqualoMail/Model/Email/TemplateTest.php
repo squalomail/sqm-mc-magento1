@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_TemplateTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_TemplateTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -35,9 +35,9 @@ class Ebizmarts_MailChimp_Model_TemplateTest extends PHPUnit_Framework_TestCase
         $mandrillSenders = array(array('domain' => 'email.com'));
 
         /**
-         * @var Ebizmarts_MailChimp_Model_Email_Template $templateMock
+         * @var Ebizmarts_SqualoMail_Model_Email_Template $templateMock
          */
-        $templateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Email_Template::class)
+        $templateMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Email_Template::class)
             ->disableOriginalConstructor()
             ->setMethods(
                 array(
@@ -55,7 +55,7 @@ class Ebizmarts_MailChimp_Model_TemplateTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('getStore'))
             ->getMock();
 
-        $mandrillHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Mandrill::class)
+        $mandrillHelperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Mandrill::class)
             ->disableOriginalConstructor()
             ->setMethods(array('isMandrillEnabled', 'getUserAgent'))
             ->getMock();
@@ -119,7 +119,7 @@ class Ebizmarts_MailChimp_Model_TemplateTest extends PHPUnit_Framework_TestCase
     {
         $storeId = 1;
 
-        $templateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Email_Template::class)
+        $templateMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Email_Template::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getDesignConfig', 'isMandrillEnabled', 'createMandrillMessage'))
             ->getMock();
@@ -149,7 +149,7 @@ class Ebizmarts_MailChimp_Model_TemplateTest extends PHPUnit_Framework_TestCase
     {
         $storeId = 1;
 
-        $templateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Email_Template::class)
+        $templateMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Email_Template::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getDesignConfig', 'isMandrillEnabled'))
             ->getMock();

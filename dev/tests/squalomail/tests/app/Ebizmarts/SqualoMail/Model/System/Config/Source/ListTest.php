@@ -1,6 +1,6 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_System_Config_Source_ListTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Model_System_Config_Source_ListTest extends PHPUnit_Framework_TestCase
 {
     const DEFAULT_STORE_ID = 1;
 
@@ -25,12 +25,12 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_ListTest extends PHPUnit_Fr
             ))
         );
 
-        $listMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_System_Config_Source_List::class)
+        $listMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_System_Config_Source_List::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper', 'getMCLists'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getCurrentScope', 'getGeneralList'))
             ->getMock();

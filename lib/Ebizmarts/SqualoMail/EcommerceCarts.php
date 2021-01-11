@@ -10,7 +10,7 @@
  * @date:     4/29/16 4:12 PM
  * @file:     EcommerceStoresCarts.php
  */
-class MailChimp_EcommerceCarts extends MailChimp_Abstract
+class SqualoMail_EcommerceCarts extends SqualoMail_Abstract
 {
     /**
      * @param       $storeId        The store id.
@@ -22,8 +22,8 @@ class MailChimp_EcommerceCarts extends MailChimp_Abstract
      * @param null  $offset         The number of records from a collection to skip. Iterating over large collections
      *                                  with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($storeId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -45,6 +45,6 @@ class MailChimp_EcommerceCarts extends MailChimp_Abstract
             $_params['offset'] = $offset;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/carts', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/carts', $_params, Ebizmarts_SqualoMail::GET);
     }
 }

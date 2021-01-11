@@ -10,7 +10,7 @@
  * @date:     8/4/16 5:56 PM
  * @file:     Apikey.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Backend_Apikey extends Mage_Core_Model_Config_Data
+class Ebizmarts_SqualoMail_Model_System_Config_Backend_Apikey extends Mage_Core_Model_Config_Data
 {
     protected function _afterSave()
     {
@@ -20,7 +20,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Apikey extends Mage_Core_M
         $valueChanged = $this->isValueChanged();
 
         if ($valueChanged && !$this->getValue()) {
-            $configValue = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_ACTIVE, false));
+            $configValue = array(array(Ebizmarts_SqualoMail_Model_Config::GENERAL_ACTIVE, false));
             $helper->saveSqualomailConfig($configValue, $scopeId, $scope);
             $message = $helper->__(
                 'Please note the extension has been disabled due to the lack of an api key or audience configured.'
@@ -30,7 +30,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Apikey extends Mage_Core_M
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

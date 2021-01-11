@@ -6,7 +6,7 @@
  * Time: 4:15 PM
  */
 
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateWebhook
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_CreateWebhook
     extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
     protected function _construct()
@@ -64,7 +64,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateWebhook
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

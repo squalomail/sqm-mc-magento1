@@ -10,7 +10,7 @@
  * @date:     4/29/16 4:36 PM
  * @file:     EcommerceProductsVariants.php
  */
-class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
+class SqualoMail_EcommerceProductsVariants extends SqualoMail_Abstract
 {
     /**
      * @param       $storeId                    The store id.
@@ -24,8 +24,8 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
      * @param null  $startsAtimageUrl           The image URL for a product variant.
      * @param null  $startsAtbackorders         The backorders of a product variant.
      * @param null  $startsAtvisibility         The visibility of a product variant.
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $storeId,
@@ -73,7 +73,7 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
 
         $url = '/ecommerce/stores/' . $storeId . '/products/' . $productId . '/variants';
 
-        $this->_master->call($url, $_params, Ebizmarts_MailChimp::POST);
+        $this->_master->call($url, $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -86,8 +86,8 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
      * @param null  $count          The number of records to return.
      * @param null  $offset         The number of records from a collection to skip. Iterating over large collections
      *                                  with this parameter can be slow.
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($storeId, $productId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -110,7 +110,7 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
         }
 
         $url = 'ecommerce/stores/' . $storeId . '/products/' . $productId . '/variants';
-        $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -121,8 +121,8 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
      *                                        dot notation.
      * @param null  $excludeFields      A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                        with dot notation.
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($storeId, $productId, $variantId, $fields = null, $excludeFields = null)
     {
@@ -137,7 +137,7 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
         }
 
         $url = 'ecommerce/stores/' . $storeId . '/products/' . $productId . '/variants/' . $variantId;
-        $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -152,8 +152,8 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
      * @param null  $startsAtimageUrl           The image URL for a product variant.
      * @param null  $startsAtbackorders         The backorders of a product variant.
      * @param null  $startsAtvisibility         The visibility of a product variant.
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify(
         $storeId,
@@ -204,7 +204,7 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
         }
 
         $url = 'ecommerce/stores/' . $storeId . '/products/' . $productId . '/variants/' . $variantId;
-        $this->_master->call($url, $_params, Ebizmarts_MailChimp::PATCH);
+        $this->_master->call($url, $_params, Ebizmarts_SqualoMail::PATCH);
     }
 
     /**
@@ -219,8 +219,8 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
      * @param null  $startsAtimageUrl           The image URL for a product variant.
      * @param null  $startsAtbackorders         The backorders of a product variant.
      * @param null  $startsAtvisibility         The visibility of a product variant.
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function addOrModify(
         $storeId,
@@ -267,18 +267,18 @@ class MailChimp_EcommerceProductsVariants extends MailChimp_Abstract
         }
 
         $url = 'ecommerce/stores/' . $storeId . '/products/' . $productId . '/variants/' . $variantId;
-        $this->_master->call($url, $_params, Ebizmarts_MailChimp::PUT);
+        $this->_master->call($url, $_params, Ebizmarts_SqualoMail::PUT);
     }
     /**
      * @param $storeId                  The store id.
      * @param $productId                The id for the product of a store.
      * @param $variantId                The id for the product variant.
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($storeId, $productId, $variantId)
     {
         $url = 'ecommerce/stores/' . $storeId . '/products/' . $productId . '/variants/' . $variantId;
-        $this->_master->call($url, null, Ebizmarts_MailChimp::DELETE);
+        $this->_master->call($url, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

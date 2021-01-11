@@ -11,11 +11,11 @@
  * @date:     4/29/16 4:34 PM
  * @file:     EcommerceProducts.php
  */
-class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
+class SqualoMail_EcommercePromoRulesPromoCodes extends SqualoMail_Abstract
 {
 
     /**
-     * @param string $storeId            The MailChimp store id.
+     * @param string $storeId            The SqualoMail store id.
      * @param int    $promoRuleId        A unique identifier for the promo rule.
      * @param int    $promoCodeId        A unique identifier for the promo code associated to the rule above.
      * @param string $code               The discount code. Restricted to UTF-8 characters with max length 50.
@@ -27,8 +27,8 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
      * @param null   $updatedAtForeign   The date and time the promotion was updated in ISO 8601 format.
      *
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $storeId,
@@ -61,12 +61,12 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
 
         return $this->_master->call(
             'ecommerce/stores/' . $storeId . '/promo-rules/' . $promoRuleId
-            . '/promo-codes', $_params, Ebizmarts_MailChimp::POST
+            . '/promo-codes', $_params, Ebizmarts_SqualoMail::POST
         );
     }
 
     /**
-     * @param string $storeId       The MailChimp store id.
+     * @param string $storeId       The SqualoMail store id.
      * @param int    $promoRuleId   A unique identifier for the promo rule.
      * @param null   $fields        A comma-separated list of fields to return. Reference parameters of sub-objects
      *                              with dot notation.
@@ -76,8 +76,8 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
      * @param null   $offset        The number of records from a collection to skip. Iterating over large collections
      *                              with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($storeId, $promoRuleId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -100,12 +100,12 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
 
         return $this->_master->call(
             'ecommerce/stores/' . $storeId . '/promo-rules/' . $promoRuleId
-            . '/promo-codes', $_params, Ebizmarts_MailChimp::GET
+            . '/promo-codes', $_params, Ebizmarts_SqualoMail::GET
         );
     }
 
     /**
-     * @param string $storeId       The MailChimp store id.
+     * @param string $storeId       The SqualoMail store id.
      * @param int    $promoRuleId   The id for the promo rule of a store.
      * @param int    $promoCodeId   A unique identifier for the promo code associated to the rule above.
      * @param null   $fields        A comma-separated list of fields to return. Reference parameters of sub-objects
@@ -113,8 +113,8 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
      * @param null   $excludeFields A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                              with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($storeId, $promoRuleId, $promoCodeId, $fields = null, $excludeFields = null)
     {
@@ -129,11 +129,11 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
 
         $url = 'ecommerce/stores/' . $storeId . '/promo-rules//' . $promoRuleId . '/promo-codes/' . $promoCodeId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
-     * @param string $storeId            The MailChimp store id.
+     * @param string $storeId            The SqualoMail store id.
      * @param int    $promoRuleId        A unique identifier for the promo rule.
      * @param int    $promoCodeId        A unique identifier for the promo code associated to the rule above.
      * @param string $code               The discount code. Restricted to UTF-8 characters with max length 50.
@@ -145,8 +145,8 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
      * @param null   $updatedAtForeign   The date and time the promotion was updated in ISO 8601 format.
      *
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify(
         $storeId,
@@ -187,22 +187,22 @@ class MailChimp_EcommercePromoRulesPromoCodes extends MailChimp_Abstract
 
         return $this->_master->call(
             'ecommerce/stores/' . $storeId . '/promo-rules/' . $promoRuleId . '/promo-codes/'
-            . $promoCodeId, $_params, Ebizmarts_MailChimp::PATCH
+            . $promoCodeId, $_params, Ebizmarts_SqualoMail::PATCH
         );
     }
 
     /**
-     * @param int $storeId     The MailChimp store id.
+     * @param int $storeId     The SqualoMail store id.
      * @param int $promoRuleId The id for the promo rule of a store.
      * @param int $promoCodeId A unique identifier for the promo code associated to the rule above.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($storeId, $promoRuleId, $promoCodeId)
     {
         $url = 'ecommerce/stores/' . $storeId . '/promo-rules/' . $promoRuleId . '/promo-codes/' . $promoCodeId;
 
-        return $this->_master->call($url, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call($url, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

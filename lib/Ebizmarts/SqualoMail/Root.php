@@ -11,7 +11,7 @@
  * @date:     4/29/16 1:18 PM
  * @file:     Root.php
  */
-class MailChimp_Root extends MailChimp_Abstract
+class SqualoMail_Root extends SqualoMail_Abstract
 {
     public function info($fields = null, $excludeFields = null)
     {
@@ -25,6 +25,6 @@ class MailChimp_Root extends MailChimp_Abstract
             $_params['exclude_fields'] = $excludeFields;
         }
 
-        return $this->_master->call('', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('', $_params, Ebizmarts_SqualoMail::GET);
     }
 }

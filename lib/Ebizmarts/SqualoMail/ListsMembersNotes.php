@@ -10,15 +10,15 @@
  * @date:     5/2/16 4:33 PM
  * @file:     ListsMembersNotes.php
  */
-class MailChimp_ListsMembersNotes extends MailChimp_Abstract
+class SqualoMail_ListsMembersNotes extends SqualoMail_Abstract
 {
     /**
      * @param       $listId             The unique id for the list.
      * @param       $subscriberHash     The MD5 hash of the lowercase version of the list member’s email address.
      * @param null  $note               The content of the note.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add($listId, $subscriberHash, $note = null)
     {
@@ -29,7 +29,7 @@ class MailChimp_ListsMembersNotes extends MailChimp_Abstract
         }
 
         return $this->_master->call(
-            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_MailChimp::POST
+            'lists/' . $listId . '/members/' . $subscriberHash, $_params, Ebizmarts_SqualoMail::POST
         );
     }
 
@@ -44,8 +44,8 @@ class MailChimp_ListsMembersNotes extends MailChimp_Abstract
      * @param null  $offset             The number of records from a collection to skip. Iterating over large collections
      *                                      with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll(
         $listId,
@@ -75,7 +75,7 @@ class MailChimp_ListsMembersNotes extends MailChimp_Abstract
 
         $url = 'lists/' . $listId . '/members/' . $subscriberHash . '/notes';
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -87,8 +87,8 @@ class MailChimp_ListsMembersNotes extends MailChimp_Abstract
      * @param null  $excludeFields      A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                     with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($listId, $subscriberHash, $noteId, $fields = null, $excludeFields = null)
     {
@@ -104,7 +104,7 @@ class MailChimp_ListsMembersNotes extends MailChimp_Abstract
 
         $url = 'lists/' . $listId . '/members/' . $subscriberHash . '/notes/' . $noteId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -113,8 +113,8 @@ class MailChimp_ListsMembersNotes extends MailChimp_Abstract
      * @param       $noteId             The id for the note.
      * @param null  $note               The content of the note.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify($listId, $subscriberHash, $noteId, $note = null)
     {
@@ -126,12 +126,12 @@ class MailChimp_ListsMembersNotes extends MailChimp_Abstract
 
         $url = 'lists/' . $listId . '/members/' . $subscriberHash . '/notes/' . $noteId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::PATCH);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::PATCH);
     }
     public function delete($listId, $subscriberHash, $noteId)
     {
         $url = 'lists/' . $listId . '/members/' . $subscriberHash . '/notes/' . $noteId;
 
-        return $this->_master->call($url, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call($url, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

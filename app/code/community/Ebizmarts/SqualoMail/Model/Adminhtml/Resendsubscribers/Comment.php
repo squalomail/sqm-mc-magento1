@@ -1,9 +1,9 @@
 <?php
 
-class Ebizmarts_MailChimp_Model_Adminhtml_Resendsubscribers_Comment
+class Ebizmarts_SqualoMail_Model_Adminhtml_Resendsubscribers_Comment
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_mcHelper;
 
@@ -13,7 +13,7 @@ class Ebizmarts_MailChimp_Model_Adminhtml_Resendsubscribers_Comment
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     public function getMcHelper()
     {
@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Model_Adminhtml_Resendsubscribers_Comment
     }
 
     /**
-     * @param Ebizmarts_MailChimp_Helper_Data $mcHelper
+     * @param Ebizmarts_SqualoMail_Helper_Data $mcHelper
      */
     public function setMcHelper()
     {

@@ -8,7 +8,7 @@
  * @author   Ebizmarts Team <info@ebizmarts.com>
  * @license  http://opensource.org/licenses/osl-3.0.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Userinfo extends Mage_Adminhtml_Block_System_Config_Form_Field
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_Userinfo extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
 
     protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element)

@@ -1,18 +1,18 @@
 <?php
 
-require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/EcommerceController.php';
+require_once BP . DS . 'app/code/community/Ebizmarts/SqualoMail/controllers/Adminhtml/EcommerceController.php';
 
-class Ebizmarts_MailChimp_Adminhtml_EcommerceControllerTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Adminhtml_EcommerceControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_EcommerceController $ecommerceController
+     * @var Ebizmarts_SqualoMail_Adminhtml_EcommerceController $ecommerceController
      */
     protected $_ecommerceController;
 
     public function setUp()
     {
         Mage::app('default');
-        $this->_ecommerceController = $this->getMockBuilder(Ebizmarts_MailChimp_Adminhtml_EcommerceController::class);
+        $this->_ecommerceController = $this->getMockBuilder(Ebizmarts_SqualoMail_Adminhtml_EcommerceController::class);
     }
 
     public function tearDown()
@@ -34,7 +34,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceControllerTest extends PHPUnit_Fram
             ->setMethods(array('makeHelper'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp', 'resetErrors'))
             ->getMock();
@@ -104,7 +104,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceControllerTest extends PHPUnit_Fram
         $paramFilters = 'filter';
         $scope = 'stores';
         $scopeId = 1;
-        $filter = Ebizmarts_MailChimp_Model_Config::IS_ORDER;
+        $filter = Ebizmarts_SqualoMail_Model_Config::IS_ORDER;
 
         $result = 'Redirecting... <script type="text/javascript">window.top.location.reload();</script>';
 
@@ -113,7 +113,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceControllerTest extends PHPUnit_Fram
             ->setMethods(array('makeHelper', 'getRequest', 'addSuccess'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp', 'resendMCEcommerceData', 'getCurrentScope'))
             ->getMock();
@@ -176,7 +176,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceControllerTest extends PHPUnit_Fram
             ->setMethods(array('makeHelper'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp', 'isSubscriptionEnabled', 'createMergeFields'))
             ->getMock();

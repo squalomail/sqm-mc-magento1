@@ -11,7 +11,7 @@
  * @date:     2019-10-02 15:53
  * @file:     Ecommercesyncdata.php
  */
-class Ebizmarts_MailChimp_Model_Ecommercesyncdata_Quote extends Ebizmarts_MailChimp_Model_Ecommercesyncdata
+class Ebizmarts_SqualoMail_Model_Ecommercesyncdata_Quote extends Ebizmarts_SqualoMail_Model_Ecommercesyncdata
 {
 
     /**

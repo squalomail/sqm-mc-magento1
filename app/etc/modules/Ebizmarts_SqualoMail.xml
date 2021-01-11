@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Ebizmarts_MailChimp>
+        <Ebizmarts_SqualoMail>
             <active>true</active>
             <codePool>community</codePool>
-        </Ebizmarts_MailChimp>
+        </Ebizmarts_SqualoMail>
     </modules>
 </config>

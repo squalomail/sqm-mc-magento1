@@ -10,7 +10,7 @@
  * @date:     5/2/16 3:45 PM
  * @file:     ListsClients.php
  */
-class MailChimp_ListsClients extends MailChimp_Abstract
+class SqualoMail_ListsClients extends SqualoMail_Abstract
 {
     /**
      * @param $listId               The unique id for the list.
@@ -19,8 +19,8 @@ class MailChimp_ListsClients extends MailChimp_Abstract
      * @param null $excludeFields   A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                       with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getTop($listId, $fields = null, $excludeFields = null)
     {
@@ -34,6 +34,6 @@ class MailChimp_ListsClients extends MailChimp_Abstract
             $_params['exclude_fields'] = $excludeFields;
         }
 
-        return $this->_master->call('lists/' . $listId . '/clients', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('lists/' . $listId . '/clients', $_params, Ebizmarts_SqualoMail::GET);
     }
 }

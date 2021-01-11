@@ -151,7 +151,7 @@ class Mandrill_Mandrill
         }
 
         /**
-         * @var $curlHelper Ebizmarts_MailChimp_Helper_Curl
+         * @var $curlHelper Ebizmarts_SqualoMail_Helper_Curl
          */
         $curlHelper = Mage::helper('squalomail/curl');
         $this->setCurlOptionsAddOptions($curlOptions);
@@ -237,7 +237,7 @@ class Mandrill_Mandrill
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_File
+     * @return Ebizmarts_SqualoMail_Helper_File
      */
     protected function getFileHelper()
     {

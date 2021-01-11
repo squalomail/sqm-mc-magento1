@@ -10,7 +10,7 @@
  * @date:     8/4/16 8:28 PM
  * @file:     List.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Model_Config_Data
+class Ebizmarts_SqualoMail_Model_System_Config_Backend_List extends Mage_Core_Model_Config_Data
 {
     protected function _afterSave()
     {
@@ -24,18 +24,18 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
 
         $moduleIsActive = (isset($groups['general']['fields']['active']['value']))
             ? $groups['general']['fields']['active']['value']
-            : $helper->isMailChimpEnabled($scopeId, $scope);
+            : $helper->isSqualoMailEnabled($scopeId, $scope);
         $apiKey = (isset($groups['general']['fields']['apikey']['value']))
             ? $groups['general']['fields']['apikey']['value']
             : $helper->getApiKey($scopeId, $scope);
         $thisScopeHasSubMinSyncDateFlag = $helper->getIfConfigExistsForScope(
-            Ebizmarts_MailChimp_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
+            Ebizmarts_SqualoMail_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
             $scopeId,
             $scope
         );
 
         if ($valueChanged && !$this->getValue()) {
-            $configValue = array(array(Ebizmarts_MailChimp_Model_Config::GENERAL_ACTIVE, false));
+            $configValue = array(array(Ebizmarts_SqualoMail_Model_Config::GENERAL_ACTIVE, false));
             $helper->saveSqualomailConfig($configValue, $scopeId, $scope);
             $message = $helper->__(
                 'Please note the extension has been disabled due to the lack of an api key or audience configured.'
@@ -46,7 +46,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
         if ($valueChanged && ($moduleIsActive || $thisScopeHasSubMinSyncDateFlag) && $this->getValue()) {
             $configValues = array(
                 array(
-                    Ebizmarts_MailChimp_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
+                    Ebizmarts_SqualoMail_Model_Config::GENERAL_SUBMINSYNCDATEFLAG,
                     $dateHelper->formatDate(null, "Y-m-d H:i:s")
                 )
             );
@@ -59,7 +59,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getSqualomailHelper()
     {
@@ -67,7 +67,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date
+     * @return Ebizmarts_SqualoMail_Helper_Date
      */
     protected function getSqualomailDateHelper()
     {
@@ -75,7 +75,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Webhook
+     * @return Ebizmarts_SqualoMail_Helper_Webhook
      */
     protected function getSqualomailWebhookHelper()
     {

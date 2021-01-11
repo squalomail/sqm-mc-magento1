@@ -2,10 +2,10 @@
 
 /**
  *
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * Class Ebizmarts_MailChimp_Helper_Curl
- * @category  Ebizmarts_MailChimp
+ * Class Ebizmarts_SqualoMail_Helper_Curl
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
@@ -13,7 +13,7 @@
  * @file:     Curl.php
  */
 
-class Ebizmarts_MailChimp_Helper_File extends Mage_Core_Helper_Abstract
+class Ebizmarts_SqualoMail_Helper_File extends Mage_Core_Helper_Abstract
 {
     /**
      * @var $_ioFile Varien_Io_File

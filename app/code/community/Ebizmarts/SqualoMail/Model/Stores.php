@@ -11,7 +11,7 @@
  * @date:     3/5/18 1:30 PM
  * @file:     Stores.php
  */
-class Ebizmarts_MailChimp_Model_Stores extends Mage_Core_Model_Abstract
+class Ebizmarts_SqualoMail_Model_Stores extends Mage_Core_Model_Abstract
 {
     /**
      * Initialize model

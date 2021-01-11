@@ -10,22 +10,22 @@
  * @date:     4/29/16 4:15 PM
  * @file:     EcommerceStoresCustomers.php
  */
-class MailChimp_EcommerceCustomers extends MailChimp_Abstract
+class SqualoMail_EcommerceCustomers extends SqualoMail_Abstract
 {
     /**
      * @param $storeId          The store id.
      * @param $id               A unique identifier for the customer.
      * @param $emailAddress     The customer’s email address.
      * @param $optInStatus      The customer’s opt-in status. This value will never overwrite the opt-in status of a
-     *                          pre-existing MailChimp list member, but will apply to list members that are added
+     *                          pre-existing SqualoMail list member, but will apply to list members that are added
      *                          through the e-commerce API endpoints.
      * @param null                                                  $company     The customer’s company.
      * @param null                                                  $firstName   The customer’s first name.
      * @param null                                                  $lastName    The customer’s last name.
      * @param null                                                  $address     The customer’s address.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function add(
         $storeId,
@@ -56,7 +56,7 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
             $_params['address'] = $address;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/customers', $_params, Ebizmarts_MailChimp::POST);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/customers', $_params, Ebizmarts_SqualoMail::POST);
     }
 
     /**
@@ -69,8 +69,8 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
      * @param null  $offset         The number of records from a collection to skip. Iterating over large collections
      *                                  with this parameter can be slow.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getAll($storeId, $fields = null, $excludeFields = null, $count = null, $offset = null)
     {
@@ -92,7 +92,7 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
             $_params['offset'] = $offset;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/customers', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/customers', $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -103,8 +103,8 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
      * @param null  $excludeFields A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                  with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function get($storeId, $customerId, $fields = null, $excludeFields = null)
     {
@@ -120,7 +120,7 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
 
         $url = 'ecommerce/stores/' . $storeId . '/customers/' . $customerId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::GET);
     }
 
     /**
@@ -131,8 +131,8 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
      * @param null  $excludeFields  A comma-separated list of fields to exclude. Reference parameters of sub-objects
      *                                  with dot notation.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function getByEmail($storeId, $customerEmail, $fields = null, $excludeFields = null)
     {
@@ -146,21 +146,21 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
             $_params['exclude_fields'] = $excludeFields;
         }
 
-        return $this->_master->call('ecommerce/stores/' . $storeId . '/customers', $_params, Ebizmarts_MailChimp::GET);
+        return $this->_master->call('ecommerce/stores/' . $storeId . '/customers', $_params, Ebizmarts_SqualoMail::GET);
     }
     /**
      * @param       $storeId        The store id.
      * @param       $customerId     A unique identifier for the customer.
      * @param       $optInStatus    The customer’s opt-in status. This value will never overwrite the opt-in status of a
-     *                                pre-existing MailChimp list member, but will apply to list members that are added
+     *                                pre-existing SqualoMail list member, but will apply to list members that are added
      *                                  through the e-commerce API endpoints.
      * @param null   $company       The customer’s company.
      * @param null   $firstName     The customer’s first name.
      * @param null   $lastName      The customer’s last name.
      * @param null   $address       The customer’s address.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function modify(
         $storeId,
@@ -196,7 +196,7 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
 
         $url = 'ecommerce/stores/' . $storeId . '/customers/' . $customerId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::PATCH);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::PATCH);
     }
 
     /**
@@ -204,15 +204,15 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
      * @param       $customerId     A unique identifier for the customer.
      * @param       $emailAddress   The customer’s email address.
      * @param       $optInStatus    The customer’s opt-in status. This value will never overwrite the opt-in status of a
-     *                                 pre-existing MailChimp list member, but will apply to list members that are added
+     *                                 pre-existing SqualoMail list member, but will apply to list members that are added
      *                                  through the e-commerce API endpoints.
      * @param null  $company        The customer’s company.
      * @param null  $firstName      The customer’s first name.
      * @param null  $lastName       The customer’s last name.
      * @param null  $address        The customer’s address.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function addOrModify(
         $storeId,
@@ -245,20 +245,20 @@ class MailChimp_EcommerceCustomers extends MailChimp_Abstract
 
         $url = 'ecommerce/stores/' . $storeId . '/customers/' . $customerId;
 
-        return $this->_master->call($url, $_params, Ebizmarts_MailChimp::PUT);
+        return $this->_master->call($url, $_params, Ebizmarts_SqualoMail::PUT);
     }
 
     /**
      * @param $storeId          The store id.
      * @param $customerId       A unique identifier for the customer.
      * @return mixed
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function delete($storeId, $customerId)
     {
         $url = 'ecommerce/stores/' . $storeId . '/customers/' . $customerId;
 
-        return $this->_master->call($url, null, Ebizmarts_MailChimp::DELETE);
+        return $this->_master->call($url, null, Ebizmarts_SqualoMail::DELETE);
     }
 }

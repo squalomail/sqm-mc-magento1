@@ -8,11 +8,11 @@
  * @author   Ebizmarts Team <info@ebizmarts.com>
  * @license  http://opensource.org/licenses/osl-3.0.php
  */
-class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_Template
+class Ebizmarts_SqualoMail_Block_Checkout_Success_Groups extends Mage_Core_Block_Template
 {
     protected $_currentIntesrest;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
     protected $_toreId;
@@ -45,7 +45,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
     /**
      * @return array|null
      * @throws Mage_Core_Exception
-     * @throws MailChimp_Error
+     * @throws SqualoMail_Error
      */
     public function getInterest()
     {
@@ -54,7 +54,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
         $subscriber->loadByEmail($order->getCustomerEmail());
         $subscriberId = $subscriber->getSubscriberId();
         $customerId = $order->getCustomerId();
-        $helper = $this->getMailChimpHelper();
+        $helper = $this->getSqualoMailHelper();
         $interest = $helper->getInterestGroups($customerId, $subscriberId, $order->getStoreId());
         return $interest;
     }
@@ -66,7 +66,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
     public function getMessageBefore()
     {
         $storeId = $this->_storeId;
-        $message = $this->getMailChimpHelper()->getCheckoutSuccessHtmlBefore($storeId);
+        $message = $this->getSqualoMailHelper()->getCheckoutSuccessHtmlBefore($storeId);
         return $message;
     }
 
@@ -77,7 +77,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
     public function getMessageAfter()
     {
         $storeId = $this->_storeId;
-        $message = $this->getMailChimpHelper()->getCheckoutSuccessHtmlAfter($storeId);
+        $message = $this->getSqualoMailHelper()->getCheckoutSuccessHtmlAfter($storeId);
         return $message;
     }
 
@@ -87,13 +87,13 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
      */
     public function escapeQuote($data)
     {
-        return $this->getMailChimpHelper()->mcEscapeQuote($data);
+        return $this->getSqualoMailHelper()->mcEscapeQuote($data);
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data|Mage_Core_Helper_Abstract
+     * @return Ebizmarts_SqualoMail_Helper_Data|Mage_Core_Helper_Abstract
      */
-    public function getMailChimpHelper()
+    public function getSqualoMailHelper()
     {
         return $this->_helper;
     }
@@ -116,6 +116,6 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
      */
     protected function getSessionLastRealOrder()
     {
-        return $this->getMailChimpHelper()->getSessionLastRealOrder();
+        return $this->getSqualoMailHelper()->getSessionLastRealOrder();
     }
 }

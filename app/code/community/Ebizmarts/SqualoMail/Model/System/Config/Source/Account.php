@@ -1,16 +1,16 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/29/16 3:55 PM
  * @file:     Account.php
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_Account
+class Ebizmarts_SqualoMail_Model_System_Config_Source_Account
 {
 
     /**
@@ -22,12 +22,12 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
     protected $_accountDetails = null;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
 
     /**
-     * @var Ebizmarts_MailChimp_Helper_Migration
+     * @var Ebizmarts_SqualoMail_Helper_Migration
      */
     protected $_migrationHelper;
 
@@ -52,7 +52,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
     const SYNC_FLAG_STATUS = 1;
 
     /**
-     * Ebizmarts_MailChimp_Model_System_Config_Source_Account constructor.
+     * Ebizmarts_SqualoMail_Model_System_Config_Source_Account constructor.
      *
      * @param  $params
      * @throws Exception
@@ -83,7 +83,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
                         if (empty($mcStore)) {
                             $this->_accountDetails['store_exists'] = false;
                         }
-                    } catch (MailChimp_Error $e) {
+                    } catch (SqualoMail_Error $e) {
                         if ($helper->isEcomSyncDataEnabled($scopeArray['scope_id'], $scopeArray['scope'])) {
                             $message = $helper->__(
                                 'It seems your Squalomail store was deleted. '
@@ -120,14 +120,14 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
                             $totalCarts = $ecommerceApi->getCarts()->getAll($mcStoreId, 'total_items');
                             $this->_accountDetails['total_carts'] = $totalCarts['total_items'];
                         }
-                    } catch (MailChimp_Error $e) {
+                    } catch (SqualoMail_Error $e) {
                         $helper->logError($e->getMessage());
                     }
-                } catch (MailChimp_Error $e) {
+                } catch (SqualoMail_Error $e) {
                     $this->_accountDetails = self::INVALID_KEY_MSG;
                     $helper->logError($e->getMessage());
                 }
-            } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+            } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
                 $this->_accountDetails = self::INVALID_KEY_MSG;
                 $helper->logError($e->getMessage());
             }
@@ -204,7 +204,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
                 );
             } elseif ($helper->isEcomSyncDataEnabled($scopeArray['scope_id'], $scopeArray['scope'], true)) {
                 $noStoreText = $helper->__(
-                    'No MailChimp store was configured for this scope, parent scopes might be '
+                    'No SqualoMail store was configured for this scope, parent scopes might be '
                     . 'sending data for this store anyways.'
                 );
                 $returnArray = array_merge(
@@ -239,7 +239,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -247,7 +247,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Migration
+     * @return Ebizmarts_SqualoMail_Helper_Migration
      */
     protected function makeMigrationHelper()
     {
@@ -262,7 +262,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
     protected function getDateSync($squalomailStoreId)
     {
         $date = $this->makeHelper()->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
+            Ebizmarts_SqualoMail_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
             0,
             'default'
         );

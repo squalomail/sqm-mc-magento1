@@ -3,9 +3,9 @@
 /**
  * Author : Ebizmarts <info@ebizmarts.com>
  * File   : Fieldtype.php
- * Module : Ebizmarts_MailChimp
+ * Module : Ebizmarts_SqualoMail
  */
-class Ebizmarts_MailChimp_Model_System_Config_Source_Fieldtype
+class Ebizmarts_SqualoMail_Model_System_Config_Source_Fieldtype
 {
     public function getFieldTypes()
     {

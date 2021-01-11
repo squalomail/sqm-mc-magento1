@@ -11,7 +11,7 @@
  * @file:     SqualomailSychBatches.php
  */
 
-class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstract
+class Ebizmarts_SqualoMail_Model_Ecommercesyncdata extends Mage_Core_Model_Abstract
 {
     /**
      * Initialize model
@@ -72,7 +72,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
      * @param  $itemId
      * @param  $itemType
      * @param  $squalomailStoreId
-     * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
+     * @return Ebizmarts_SqualoMail_Model_Ecommercesyncdata
      */
     public function getEcommerceSyncDataItem($itemId, $itemType, $squalomailStoreId)
     {
@@ -97,7 +97,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
     /**
      * @param $itemId
      * @param $itemType
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Collection
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Collection
      */
     public function getAllEcommerceSyncDataItemsPerId($itemId, $itemType)
     {
@@ -119,7 +119,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
      * @param $syncedFlag
      * @param $deletedRelatedId
      * @param $allowBatchRemoval
-     * @param Ebizmarts_MailChimp_Model_Ecommercesyncdata $ecommerceSyncDataItem
+     * @param Ebizmarts_SqualoMail_Model_Ecommercesyncdata $ecommerceSyncDataItem
      */
     protected function setEcommerceSyncDataItemValues(
         $itemId,
@@ -132,7 +132,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
         $syncedFlag,
         $deletedRelatedId,
         $allowBatchRemoval,
-        Ebizmarts_MailChimp_Model_Ecommercesyncdata $ecommerceSyncDataItem
+        Ebizmarts_SqualoMail_Model_Ecommercesyncdata $ecommerceSyncDataItem
     ) {
         if ($itemId) {
             $ecommerceSyncDataItem->setData("related_id", $itemId);
@@ -158,7 +158,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
         if ($syncDeleted !== null) {
             $ecommerceSyncDataItem->setData("squalomail_sync_deleted", $syncDeleted);
 
-            if ($itemType == Ebizmarts_MailChimp_Model_Config::IS_PRODUCT && $syncError == '') {
+            if ($itemType == Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT && $syncError == '') {
                 $ecommerceSyncDataItem->setData("squalomail_sync_error", $syncError);
             }
         }

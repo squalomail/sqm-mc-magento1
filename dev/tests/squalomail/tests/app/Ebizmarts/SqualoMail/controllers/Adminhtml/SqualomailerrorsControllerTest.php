@@ -1,11 +1,11 @@
 <?php
 
-require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Adminhtml/SqualomailerrorsController.php';
+require_once BP . DS . 'app/code/community/Ebizmarts/SqualoMail/controllers/Adminhtml/SqualomailerrorsController.php';
 
-class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsControllerTest extends PHPUnit_Framework_TestCase
+class Ebizmarts_SqualoMail_Adminhtml_SqualomailerrorsControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController $squalomailerrorsController
+     * @var Ebizmarts_SqualoMail_Adminhtml_SqualomailerrorsController $squalomailerrorsController
      */
     protected $_squalomailerrorsController;
 
@@ -13,7 +13,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsControllerTest extends PHPUn
     {
         Mage::app('default');
         $this->_squalomailerrorsController = $this->getMockBuilder(
-            Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController::class
+            Ebizmarts_SqualoMail_Adminhtml_SqualomailerrorsController::class
         );
     }
 
@@ -50,7 +50,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsControllerTest extends PHPUn
             )
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMageApp', 'isEcomSyncDataEnabled'))
             ->getMock();
@@ -65,12 +65,12 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsControllerTest extends PHPUn
             ->setMethods(array('setHeader', 'setBody'))
             ->getMock();
 
-        $apiBatchesMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Batches::class)
+        $apiBatchesMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Batches::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getBatchResponse', 'getMagentoBaseDir', 'batchDirExists', 'removeBatchDir'))
             ->getMock();
 
-        $squalomailerrorsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Squalomailerrors::class)
+        $squalomailerrorsMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Squalomailerrors::class)
             ->disableOriginalConstructor()
             ->setMethods(array('load', 'getBatchId', 'getStoreId', 'getSqualomailStoreId'))
             ->getMock();

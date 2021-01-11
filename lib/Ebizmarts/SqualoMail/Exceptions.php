@@ -11,7 +11,7 @@
  * @file:     Exceptions.php
  */
 
-class MailChimp_Error extends Exception
+class SqualoMail_Error extends Exception
 {
 
     /**

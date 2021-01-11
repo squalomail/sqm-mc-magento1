@@ -11,10 +11,10 @@
  * @date:     5/2/16 5:05 PM
  * @file:     ReportsSentTo.php
  */
-class MailChimp_ReportsSentTo extends MailChimp_Abstract
+class SqualoMail_ReportsSentTo extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_ReportsSentTo
+     * @var SqualoMail_ReportsSentTo
      */
     public $sentTo;
 }

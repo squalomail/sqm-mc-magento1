@@ -11,17 +11,17 @@ try {
     );
 
     Mage::helper('squalomail')
-        ->saveMailChimpConfig(
+        ->saveSqualoMailConfig(
             array(
                 array(
-                    Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_1164,
+                    Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_1164,
                     1)
             ),
             0,
             'default'
         );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 $installer->endSetup();

@@ -10,7 +10,7 @@ ADD INDEX `idx_status_store_id` (`status`,`store_id`);
 "
     );
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
+    Mage::log($e->getMessage(), null, 'SqualoMail_Errors.log', true);
 }
 
 

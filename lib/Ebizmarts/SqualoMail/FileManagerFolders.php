@@ -10,10 +10,10 @@
  * @date:     4/29/16 4:57 PM
  * @file:     FileManagerFolders.php
  */
-class MailChimp_FileManagerFolders extends MailChimp_Abstract
+class SqualoMail_FileManagerFolders extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_FileManagerFolders
+     * @var SqualoMail_FileManagerFolders
      */
     public $folders;
 }

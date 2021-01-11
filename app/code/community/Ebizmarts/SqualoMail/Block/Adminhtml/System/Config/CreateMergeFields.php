@@ -10,7 +10,7 @@
  * @date:     30/8/16 1:02 PM
  * @file:     CreateMergeFields.php
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateMergeFields
+class Ebizmarts_SqualoMail_Block_Adminhtml_System_Config_CreateMergeFields
     extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
 
@@ -55,7 +55,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateMergeFields
         $helper = $this->makeHelper();
         $message =
             'There was an error on the merge fields creation. '
-            . 'Please check the MailChimp_Errors.log file for more information.';
+            . 'Please check the SqualoMail_Errors.log file for more information.';
         if (!$helper->isErrorLogEnabled()) {
             $message =
                 'There was an error on the merge fields creation. '
@@ -66,7 +66,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateMergeFields
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

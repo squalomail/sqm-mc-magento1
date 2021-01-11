@@ -11,7 +11,7 @@
  * @date:     5/27/16 1:50 PM
  * @file:     EcommerceController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_EcommerceController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_SqualoMail_Adminhtml_EcommerceController extends Mage_Adminhtml_Controller_Action
 {
     public function renderresendecomAction()
     {
@@ -67,7 +67,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceController extends Mage_Adminhtml_C
                 $this->addSuccess($helper->__('Ecommerce data resent succesfully'));
                 $success = $helper->__('Redirecting... ')
                     . '<script type="text/javascript">window.top.location.reload();</script>';
-            } catch (MailChimp_Error $e) {
+            } catch (SqualoMail_Error $e) {
                 $helper->logError($e->getFriendlyMessage());
                 $this->addError($e->getFriendlyMessage());
             } catch (Exception $e) {
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceController extends Mage_Adminhtml_C
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {

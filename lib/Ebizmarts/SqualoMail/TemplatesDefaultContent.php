@@ -11,10 +11,10 @@
  * @date:     5/2/16 5:24 PM
  * @file:     TemplatesDefaultContent.php
  */
-class MailChimp_TemplatesDefaultContent extends MailChimp_Abstract
+class SqualoMail_TemplatesDefaultContent extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_TemplatesDefaultContent
+     * @var SqualoMail_TemplatesDefaultContent
      */
     public $defaultContent;
 }

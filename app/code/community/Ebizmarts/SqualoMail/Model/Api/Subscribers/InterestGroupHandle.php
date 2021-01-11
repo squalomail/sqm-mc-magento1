@@ -9,14 +9,14 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
+class Ebizmarts_SqualoMail_Model_Api_Subscribers_InterestGroupHandle
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_helper;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Date
+     * @var Ebizmarts_SqualoMail_Helper_Date
      */
     protected $_dateHelper;
 
@@ -47,9 +47,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
     }
 
     /**
-     * @throws Ebizmarts_MailChimp_Helper_Data_ApiKeyException
-     * @throws MailChimp_Error
-     * @throws MailChimp_HttpError
+     * @throws Ebizmarts_SqualoMail_Helper_Data_ApiKeyException
+     * @throws SqualoMail_Error
+     * @throws SqualoMail_HttpError
      */
     public function processGroupsData()
     {
@@ -62,7 +62,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
 
         try {
             $api = $helper->getApi($storeId);
-        } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
+        } catch (Ebizmarts_SqualoMail_Helper_Data_ApiKeyException $e) {
             $helper->logError($e->getMessage());
             return;
         }
@@ -151,7 +151,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
                 $interests = $apiInterests->getAll($this->_listId, $grouping['unique_id']);
                 $groups = $this->_getCustomerGroups($interests, $grouping);
             }
-        } catch (MailChimp_Error $e) {
+        } catch (SqualoMail_Error $e) {
             $helper->logError($e->getFriendlyMessage());
             Mage::getSingleton('adminhtml/session')->addError($e->getFriendlyMessage());
         } catch (Exception $e) {
@@ -210,7 +210,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Interestgroup
+     * @return Ebizmarts_SqualoMail_Model_Interestgroup
      */
     protected function getInterestGroupModel()
     {
@@ -218,7 +218,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function getHelper()
     {
@@ -226,7 +226,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Date|Mage_Core_Helper_Abstract
+     * @return Ebizmarts_SqualoMail_Helper_Date|Mage_Core_Helper_Abstract
      */
     protected function getDateHelper()
     {

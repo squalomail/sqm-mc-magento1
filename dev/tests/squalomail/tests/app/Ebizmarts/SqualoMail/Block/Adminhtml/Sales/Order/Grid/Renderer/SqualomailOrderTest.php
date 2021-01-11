@@ -5,12 +5,12 @@
  * Time: 3:49 PM
  */
 
-class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrderTest
+class Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrderTest
     extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder $_block
+     * @var \Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder $_block
      */
     protected $_block;
     /**
@@ -22,7 +22,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOr
     {
         $app = Mage::app('default');
         $layout = $app->getLayout();
-        $this->_block = new Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder;
+        $this->_block = new Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder;
         $this->_orderMock = $this->getMockBuilder(Mage_Sales_Model_Order::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getStoreId', 'getEntityId', 'getCreatedAt'))
@@ -59,18 +59,18 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOr
         $orderMock = $this->_orderMock;
 
         $blockMock = $this->getMockBuilder(
-            Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder::class
+            Ebizmarts_SqualoMail_Block_Adminhtml_Sales_Order_Grid_Renderer_SqualomailOrder::class
         )
             ->disableOriginalConstructor()
             ->setMethods(array('makeHelper', 'makeApiOrders'))
             ->getMock();
 
-        $helperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $helperMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getMCStoreId', 'isEcomSyncDataEnabled', 'getEcommerceFirstDate'))
             ->getMock();
 
-        $modelMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Orders::class)
+        $modelMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Api_Orders::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getSyncedOrder'))
             ->getMock();

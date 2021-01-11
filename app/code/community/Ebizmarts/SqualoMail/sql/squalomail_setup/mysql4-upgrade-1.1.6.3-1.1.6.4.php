@@ -3,10 +3,10 @@
 $installer = $this;
 
 Mage::helper('squalomail')
-    ->saveMailChimpConfig(
+    ->saveSqualoMailConfig(
         array(
             array(
-                Ebizmarts_MailChimp_Model_Config::GENERAL_MIGRATE_FROM_116,
+                Ebizmarts_SqualoMail_Model_Config::GENERAL_MIGRATE_FROM_116,
                 1)
         ),
         0,

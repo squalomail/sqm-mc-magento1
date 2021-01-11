@@ -10,14 +10,14 @@
 /**
  * Cron processor class
  */
-class Ebizmarts_MailChimp_Model_Cron
+class Ebizmarts_SqualoMail_Model_Cron
 {
     /**
-     * @var Ebizmarts_MailChimp_Helper_Data
+     * @var Ebizmarts_SqualoMail_Helper_Data
      */
     protected $_squaloMailHelper;
     /**
-     * @var Ebizmarts_MailChimp_Helper_Migration
+     * @var Ebizmarts_SqualoMail_Helper_Migration
      */
     protected $_squaloMailMigrationHelper;
 

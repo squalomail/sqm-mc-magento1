@@ -11,14 +11,14 @@
  * @date:     6/10/16 12:35 PM
  * @file:     SqualomailerrorsController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_SqualoMail_Adminhtml_SqualomailerrorsController extends Mage_Adminhtml_Controller_Action
 {
     const MAX_RETRIES = 5;
 
     public function indexAction()
     {
         $this->_title($this->__('Newsletter'))
-            ->_title($this->__('MailChimp'));
+            ->_title($this->__('SqualoMail'));
 
         $this->loadLayout();
         $this->_setActiveMenu('newsletter/squalomail');
@@ -58,7 +58,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController extends Mage_Admi
                 $files = $apiBatches->getBatchResponse($batchId, $storeId);
                 $fileContent = array();
                 if (array_key_exists('error', $files)) {
-                    $fileContent = $this->__("Response was deleted from MailChimp server.");
+                    $fileContent = $this->__("Response was deleted from SqualoMail server.");
                     break;
                 }
 
@@ -103,7 +103,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController extends Mage_Admi
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController extends Mage_Admi
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Squalomailerrors
+     * @return Ebizmarts_SqualoMail_Model_Squalomailerrors
      */
     protected function getSqualomailerrorsModel()
     {
@@ -119,7 +119,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController extends Mage_Admi
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Batches
+     * @return Ebizmarts_SqualoMail_Model_Api_Batches
      */
     protected function getApiBatches()
     {
@@ -146,7 +146,7 @@ class Ebizmarts_MailChimp_Adminhtml_SqualomailerrorsController extends Mage_Admi
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_File
+     * @return Ebizmarts_SqualoMail_Helper_File
      */
     protected function getFileHelper()
     {

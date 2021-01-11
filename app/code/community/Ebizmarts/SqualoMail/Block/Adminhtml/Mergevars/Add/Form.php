@@ -4,9 +4,9 @@
  * Date   : 4/24/13
  * Time   : 4:00 PM
  * File   : Form.php
- * Module : Ebizmarts_MailChimp
+ * Module : Ebizmarts_SqualoMail
  */
-class Ebizmarts_MailChimp_Block_Adminhtml_Mergevars_Add_Form extends Mage_Adminhtml_Block_Widget_Form
+class Ebizmarts_SqualoMail_Block_Adminhtml_Mergevars_Add_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     protected function _prepareForm()
     {

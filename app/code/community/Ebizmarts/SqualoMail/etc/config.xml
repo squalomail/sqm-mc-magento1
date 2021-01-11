@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Ebizmarts_MailChimp>
+        <Ebizmarts_SqualoMail>
             <version>1.1.21</version>
-        </Ebizmarts_MailChimp>
+        </Ebizmarts_SqualoMail>
         <Ebizmarts_Mandrill>
             <version>1.1.21</version>
         </Ebizmarts_Mandrill>
@@ -135,11 +135,11 @@
         </events>
         <models>
             <squalomail>
-                <class>Ebizmarts_MailChimp_Model</class>
+                <class>Ebizmarts_SqualoMail_Model</class>
                 <resourceModel>squalomail_resource</resourceModel>
             </squalomail>
             <squalomail_resource>
-                <class>Ebizmarts_MailChimp_Model_Resource</class>
+                <class>Ebizmarts_SqualoMail_Model_Resource</class>
                 <entities>
                     <synchbatches>
                         <table>squalomail_sync_batches</table>
@@ -163,20 +163,20 @@
             </squalomail_resource>
             <newsletter>
                 <rewrite>
-                    <subscriber>Ebizmarts_MailChimp_Model_Subscriber</subscriber>
+                    <subscriber>Ebizmarts_SqualoMail_Model_Subscriber</subscriber>
                 </rewrite>
             </newsletter>
             <core>
                 <rewrite>
-                    <email_template>Ebizmarts_MailChimp_Model_Email_Template</email_template>
-                    <email_queue>Ebizmarts_MailChimp_Model_Email_Queue</email_queue>
+                    <email_template>Ebizmarts_SqualoMail_Model_Email_Template</email_template>
+                    <email_queue>Ebizmarts_SqualoMail_Model_Email_Queue</email_queue>
                 </rewrite>
             </core>
         </models>
         <resources>
             <squalomail_setup>
                 <setup>
-                    <module>Ebizmarts_MailChimp</module>
+                    <module>Ebizmarts_SqualoMail</module>
                     <class>Mage_Eav_Model_Entity_Setup</class>
                 </setup>
                 <connection>
@@ -196,12 +196,12 @@
         </resources>
         <blocks>
             <squalomail>
-                <class>Ebizmarts_MailChimp_Block</class>
+                <class>Ebizmarts_SqualoMail_Block</class>
             </squalomail>
         </blocks>
         <helpers>
             <squalomail>
-                <class>Ebizmarts_MailChimp_Helper</class>
+                <class>Ebizmarts_SqualoMail_Helper</class>
             </squalomail>
         </helpers>
         <fieldsets>
@@ -239,25 +239,25 @@
         </events>
         <translate>
             <modules>
-                <Ebizmarts_MailChimp>
+                <Ebizmarts_SqualoMail>
                     <files>
-                        <default>Ebizmarts_MailChimp.csv</default>
+                        <default>Ebizmarts_SqualoMail.csv</default>
                     </files>
-                </Ebizmarts_MailChimp>
+                </Ebizmarts_SqualoMail>
             </modules>
         </translate>
         <routers>
             <monkey>
                 <use>standard</use>
                 <args>
-                    <module>Ebizmarts_MailChimp</module>
+                    <module>Ebizmarts_SqualoMail</module>
                     <frontName>monkey</frontName>
                 </args>
             </monkey>
             <squalomail>
                 <use>standard</use>
                 <args>
-                    <module>Ebizmarts_MailChimp</module>
+                    <module>Ebizmarts_SqualoMail</module>
                     <frontName>squalomail</frontName>
                 </args>
             </squalomail>
@@ -275,7 +275,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <squalomail after="Mage_Adminhtml">Ebizmarts_MailChimp_Adminhtml</squalomail>
+                        <squalomail after="Mage_Adminhtml">Ebizmarts_SqualoMail_Adminhtml</squalomail>
                     </modules>
                 </args>
             </adminhtml>
@@ -291,11 +291,11 @@
         </layout>
         <translate>
             <modules>
-                <Ebizmarts_MailChimp>
+                <Ebizmarts_SqualoMail>
                     <files>
-                        <default>Ebizmarts_MailChimp.csv</default>
+                        <default>Ebizmarts_SqualoMail.csv</default>
                     </files>
-                </Ebizmarts_MailChimp>
+                </Ebizmarts_SqualoMail>
             </modules>
         </translate>
         <events>
@@ -400,7 +400,7 @@
                 <popup_insist>1</popup_insist>
             </emailcatcher>
             <warning_message><![CDATA[Warning. If you save the configuration, the current store in squalomail will be recreated]]></warning_message>
-            <popup_message><![CDATA[This will affect Automations created on your MailChimp account. Do you want to proceed?]]></popup_message>
+            <popup_message><![CDATA[This will affect Automations created on your SqualoMail account. Do you want to proceed?]]></popup_message>
             <abandonedcart>
                 <cart_batch_amount>100</cart_batch_amount>
             </abandonedcart>

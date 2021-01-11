@@ -10,10 +10,10 @@
  * @date:     4/29/16 3:47 PM
  * @file:     AuthorizedApps.php
  */
-class MailChimp_AuthorizedApps extends MailChimp_Abstract
+class SqualoMail_AuthorizedApps extends SqualoMail_Abstract
 {
     /**
-     * @var MailChimp_AuthorizedApps
+     * @var SqualoMail_AuthorizedApps
      */
     public $apps;
 }

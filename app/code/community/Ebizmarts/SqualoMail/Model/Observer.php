@@ -1,16 +1,16 @@
 <?php
 
 /**
- * MailChimp For Magento
+ * SqualoMail For Magento
  *
- * @category  Ebizmarts_MailChimp
+ * @category  Ebizmarts_SqualoMail
  * @author    Ebizmarts Team <info@ebizmarts.com>
  * @copyright Ebizmarts (http://ebizmarts.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @date:     4/29/16 3:55 PM
  * @file:     Observer.php
  */
-class Ebizmarts_MailChimp_Model_Observer
+class Ebizmarts_SqualoMail_Model_Observer
 {
 
     const PRODUCT_IS_ENABLED = 1;
@@ -32,7 +32,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Orders
+     * @return Ebizmarts_SqualoMail_Model_Api_Orders
      */
     protected function makeApiOrder()
     {
@@ -40,7 +40,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_PromoCodes
+     * @return Ebizmarts_SqualoMail_Model_Api_PromoCodes
      */
     protected function makeApiPromoCode()
     {
@@ -48,7 +48,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_PromoRules
+     * @return Ebizmarts_SqualoMail_Model_Api_PromoRules
      */
     protected function makeApiPromoRule()
     {
@@ -56,7 +56,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
@@ -64,7 +64,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Products
+     * @return Ebizmarts_SqualoMail_Model_Api_Products
      */
     protected function makeApiProduct()
     {
@@ -72,7 +72,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Subscribers
+     * @return Ebizmarts_SqualoMail_Model_Api_Subscribers
      */
     protected function makeApiSubscriber()
     {
@@ -88,7 +88,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Api_Customers
+     * @return Ebizmarts_SqualoMail_Model_Api_Customers
      */
     protected function makeApiCustomer()
     {
@@ -322,7 +322,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * When Customer object is saved set it to be updated on MailChimp if getSqualomailUpdateObserverRan() is false.
+     * When Customer object is saved set it to be updated on SqualoMail if getSqualomailUpdateObserverRan() is false.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -405,7 +405,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * Set the products included the order to be updated on MailChimp on the next cron job run.
+     * Set the products included the order to be updated on SqualoMail on the next cron job run.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -450,7 +450,7 @@ class Ebizmarts_MailChimp_Model_Observer
                     $productId = $item->getProductId();
                     $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
-                        Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                        Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
                     );
 
@@ -473,7 +473,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata
      */
     public function getSqualomailEcommerceSyncDataModel()
     {
@@ -563,7 +563,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * Add section in order view with MailChimp campaign data if available.
+     * Add section in order view with SqualoMail campaign data if available.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -593,7 +593,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * Add column to associate orders in grid gained from MailChimp campaigns and automations.
+     * Add column to associate orders in grid gained from SqualoMail campaigns and automations.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -608,13 +608,13 @@ class Ebizmarts_MailChimp_Model_Observer
         if ($block instanceof Mage_Adminhtml_Block_Sales_Order_Grid
             && $ecommEnabledAnyScope && $addColumnConfig
         ) {
-            if ($addColumnConfig == Ebizmarts_MailChimp_Model_Config::ADD_MAILCHIMP_LOGO_TO_GRID
-                || $addColumnConfig == Ebizmarts_MailChimp_Model_Config::ADD_BOTH_TO_GRID
+            if ($addColumnConfig == Ebizmarts_SqualoMail_Model_Config::ADD_MAILCHIMP_LOGO_TO_GRID
+                || $addColumnConfig == Ebizmarts_SqualoMail_Model_Config::ADD_BOTH_TO_GRID
             ) {
                 $block->addColumnAfter(
                     'squalomail_campaign_id',
                     array(
-                        'header' => $helper->__('MailChimp'),
+                        'header' => $helper->__('SqualoMail'),
                         'index' => 'squalomail_campaign_id',
                         'align' => 'center',
                         'filter' => false,
@@ -626,13 +626,13 @@ class Ebizmarts_MailChimp_Model_Observer
                 );
             }
 
-            if ($addColumnConfig == Ebizmarts_MailChimp_Model_Config::ADD_SYNC_STATUS_TO_GRID
-                || $addColumnConfig == Ebizmarts_MailChimp_Model_Config::ADD_BOTH_TO_GRID
+            if ($addColumnConfig == Ebizmarts_SqualoMail_Model_Config::ADD_SYNC_STATUS_TO_GRID
+                || $addColumnConfig == Ebizmarts_SqualoMail_Model_Config::ADD_BOTH_TO_GRID
             ) {
                 $block->addColumnAfter(
                     'squalomail_synced_flag',
                     array(
-                        'header' => $helper->__('Synced to MailChimp'),
+                        'header' => $helper->__('Synced to SqualoMail'),
                         'index' => 'squalomail_synced_flag',
                         'align' => 'center',
                         'filter' => false,
@@ -675,7 +675,7 @@ class Ebizmarts_MailChimp_Model_Observer
                 array('mc' => $collection->getTable('squalomail/ecommercesyncdata')),
                 $adapter->quoteInto(
                     'mc.related_id=main_table.entity_id AND type = ?',
-                    Ebizmarts_MailChimp_Model_Config::IS_ORDER
+                    Ebizmarts_SqualoMail_Model_Config::IS_ORDER
                 ),
                 array('mc.squalomail_synced_flag', 'mc.id')
             );
@@ -736,7 +736,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * Set the products included in the credit memo to be updated on MailChimp on the next cron job run.
+     * Set the products included in the credit memo to be updated on SqualoMail on the next cron job run.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -765,7 +765,7 @@ class Ebizmarts_MailChimp_Model_Observer
                 $productId = $item->getProductId();
                 $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $productId,
-                    Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                    Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                     $squalomailStoreId
                 );
 
@@ -806,7 +806,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * Set the products included in the credit memo to be updated on MailChimp on the next cron job run.
+     * Set the products included in the credit memo to be updated on SqualoMail on the next cron job run.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -835,7 +835,7 @@ class Ebizmarts_MailChimp_Model_Observer
                 $productId = $item->getProductId();
                 $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $productId,
-                    Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                    Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                     $squalomailStoreId
                 );
 
@@ -853,7 +853,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * Set the products canceled to be updated on MailChimp on the next cron job run.
+     * Set the products canceled to be updated on SqualoMail on the next cron job run.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -875,7 +875,7 @@ class Ebizmarts_MailChimp_Model_Observer
             $productId = $item->getProductId();
             $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $productId,
-                Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                 $squalomailStoreId
             );
 
@@ -890,7 +890,7 @@ class Ebizmarts_MailChimp_Model_Observer
     }
 
     /**
-     * When Product object is saved set it to be updated on MailChimp if getSqualomailUpdateObserverRan() is false.
+     * When Product object is saved set it to be updated on SqualoMail if getSqualomailUpdateObserverRan() is false.
      *
      * @param  Varien_Event_Observer $observer
      * @return Varien_Event_Observer
@@ -914,7 +914,7 @@ class Ebizmarts_MailChimp_Model_Observer
                 if ($status[$product->getId()] == self::PRODUCT_IS_ENABLED) {
                     $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $product->getId(),
-                        Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                        Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
                     );
 
@@ -922,7 +922,7 @@ class Ebizmarts_MailChimp_Model_Observer
                     $errorMessage = $dataProduct->getSqualomailSyncError();
 
                     if ($isMarkedAsDeleted
-                        || $errorMessage == Ebizmarts_MailChimp_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO
+                        || $errorMessage == Ebizmarts_SqualoMail_Model_Api_Products::PRODUCT_DISABLED_IN_MAGENTO
                     ) {
                         $dataProduct->delete();
                     } else {
@@ -946,7 +946,7 @@ class Ebizmarts_MailChimp_Model_Observer
         $productIds = $observer->getEvent()->getProductIds();
         $helper = $this->makeHelper();
         $apiProduct = $this->makeApiProduct();
-        $squalomailStoreIdsArray = $helper->getAllMailChimpStoreIds();
+        $squalomailStoreIdsArray = $helper->getAllSqualoMailStoreIds();
 
         foreach ($squalomailStoreIdsArray as $scopeData => $squalomailStoreId) {
             $scopeArray = $this->getScopeArrayFromString($scopeData);
@@ -957,7 +957,7 @@ class Ebizmarts_MailChimp_Model_Observer
                 foreach ($productIds as $productId) {
                     $dataProduct = $this->getSqualomailEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
-                        Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
+                        Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT,
                         $squalomailStoreId
                     );
 
@@ -1045,7 +1045,7 @@ class Ebizmarts_MailChimp_Model_Observer
     {
         $message = 'Image cache has been flushed please resend the products in order to update image URL.';
         $helper = $this->makeHelper();
-        $configValues = array(array(Ebizmarts_MailChimp_Model_Config::PRODUCT_IMAGE_CACHE_FLUSH, 1));
+        $configValues = array(array(Ebizmarts_SqualoMail_Model_Config::PRODUCT_IMAGE_CACHE_FLUSH, 1));
         $helper->saveSqualomailConfig($configValues, 0, 'default');
         $helper->addAdminWarning($message);
 
@@ -1058,7 +1058,7 @@ class Ebizmarts_MailChimp_Model_Observer
             ->getTableName('squalomail/ecommercesyncdata');
         $sqlQuery = "UPDATE " . $tableName . " "
             . "SET squalomail_sync_modified = 1 "
-            . "WHERE type = '" . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT . "';";
+            . "WHERE type = '" . Ebizmarts_SqualoMail_Model_Config::IS_PRODUCT . "';";
         $connection = $this->getCoreResource()->getConnection('core_write');
         $connection->query($sqlQuery);
     }
@@ -1154,7 +1154,7 @@ class Ebizmarts_MailChimp_Model_Observer
             $customerId = (int)$this->getRequest()->getParam('id');
             $customer = Mage::getModel('customer/customer')->load($customerId);
             $storeId = $customer->getStoreId();
-            //If the customer was created in the admin panel use the store view selected for MailChimp.
+            //If the customer was created in the admin panel use the store view selected for SqualoMail.
             if (!$storeId) {
                 $storeId = $customer->getSqualomailStoreView();
             }
@@ -1165,7 +1165,7 @@ class Ebizmarts_MailChimp_Model_Observer
             ) {
                 $block->addTab(
                     'squalomail', array(
-                        'label' => $helper->__('MailChimp'),
+                        'label' => $helper->__('SqualoMail'),
                         'url' => $block->getUrl('adminhtml/squalomail/index', array('_current' => true)),
                         'class' => 'ajax'
                     )
@@ -1312,7 +1312,7 @@ class Ebizmarts_MailChimp_Model_Observer
      */
     protected function isEmailConfirmationRequired($subscriberSource)
     {
-        return $subscriberSource === Ebizmarts_MailChimp_Model_Subscriber::SUBSCRIBE_CONFIRMATION;
+        return $subscriberSource === Ebizmarts_SqualoMail_Model_Subscriber::SUBSCRIBE_CONFIRMATION;
     }
 
     /**
@@ -1330,6 +1330,6 @@ class Ebizmarts_MailChimp_Model_Observer
      */
     protected function isSqualomailSave($subscriberSource)
     {
-        return $subscriberSource === Ebizmarts_MailChimp_Model_Subscriber::MAILCHIMP_SUBSCRIBE;
+        return $subscriberSource === Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE;
     }
 }

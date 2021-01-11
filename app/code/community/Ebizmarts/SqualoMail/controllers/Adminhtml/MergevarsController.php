@@ -10,7 +10,7 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @file:     MergevarsController.php
  */
-class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_Controller_Action
+class Ebizmarts_SqualoMail_Adminhtml_MergevarsController extends Mage_Adminhtml_Controller_Action
 {
 
     public function addmergevarAction()
@@ -34,7 +34,7 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
                 ->addError(
                     $this->__(
                         'There was an error processing the new field. '
-                        . 'MailChimp tag value can not be numeric.'
+                        . 'SqualoMail tag value can not be numeric.'
                     )
                 );
         } elseif ($helper->customMergeFieldAlreadyExists($value, $scopeArray['scope_id'], $scopeArray['scope'])) {
@@ -42,7 +42,7 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
                 ->addError(
                     $this->__(
                         'There was an error processing the new field. '
-                        . 'MailChimp tag value already exists.'
+                        . 'SqualoMail tag value already exists.'
                     )
                 );
         } elseif ($blankSpacesAmount > 0) {
@@ -50,7 +50,7 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
                 ->addError(
                     $this->__(
                         'There was an error processing the new field. '
-                        . 'MailChimp tag value can not contain blank spaces.'
+                        . 'SqualoMail tag value can not contain blank spaces.'
                     )
                 );
         } else {
@@ -58,12 +58,12 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
             $customMergeFields[] = array('label' => $label, 'value' => $value, 'field_type' => $fieldType);
             $configValues = array(
                 array(
-                    Ebizmarts_MailChimp_Model_Config::GENERAL_CUSTOM_MAP_FIELDS, $helper->serialize($customMergeFields)
+                    Ebizmarts_SqualoMail_Model_Config::GENERAL_CUSTOM_MAP_FIELDS, $helper->serialize($customMergeFields)
                 )
             );
             $helper->saveSqualomailConfig($configValues, $scopeArray['scope_id'], $scopeArray['scope']);
-            Mage::getSingleton('core/session')->setMailChimpValue($value);
-            Mage::getSingleton('core/session')->setMailChimpLabel($label);
+            Mage::getSingleton('core/session')->setSqualoMailValue($value);
+            Mage::getSingleton('core/session')->setSqualoMailLabel($label);
             Mage::getSingleton('adminhtml/session')->addSuccess($this->__('The custom value was added successfully.'));
         }
 
@@ -83,7 +83,7 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
     }
 
     /**
-     * @return Ebizmarts_MailChimp_Helper_Data
+     * @return Ebizmarts_SqualoMail_Helper_Data
      */
     protected function makeHelper()
     {
