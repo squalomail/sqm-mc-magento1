@@ -65,7 +65,7 @@ class Ebizmarts_SqualoMail_Model_Config
     const IMAGE_SIZE_SMALL              = 'small_image';
     const IMAGE_SIZE_THUMBNAIL          = 'thumbnail';
     const PRODUCT_IMAGE_CACHE_FLUSH     = 'squalomail/ecommerce/product_image_cache_flush';
-    const ADD_MAILCHIMP_LOGO_TO_GRID    = 1;
+    const ADD_SQUALOMAIL_LOGO_TO_GRID    = 1;
     const ADD_SYNC_STATUS_TO_GRID       = 2;
     const ADD_BOTH_TO_GRID              = 3;
 

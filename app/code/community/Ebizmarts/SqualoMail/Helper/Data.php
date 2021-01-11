@@ -28,8 +28,8 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     const QUO_MOD = "QuoteModified";
     const QUO_NEW = "QuoteNew";
 
-    const DATA_NOT_SENT_TO_MAILCHIMP = 'NOT SENT';
-    const DATA_SENT_TO_MAILCHIMP = 'SENT';
+    const DATA_NOT_SENT_TO_SQUALOMAIL = 'NOT SENT';
+    const DATA_SENT_TO_SQUALOMAIL = 'SENT';
 
     const BATCH_STATUS_LOG = 'Squalomail_Batch_Status.log';
     const BATCH_CANCELED = 'canceled';
@@ -2271,7 +2271,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
                 $subscriber->setData("squalomail_sync_deleted", $syncDeleted);
             }
 
-            $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+            $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::SQUALOMAIL_SUBSCRIBE);
             $subscriber->save();
         }
     }
@@ -3077,7 +3077,7 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     protected function setMemberGeneralData($subscriber)
     {
         $subscriber->setImportMode(true);
-        $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+        $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::SQUALOMAIL_SUBSCRIBE);
         $subscriber->setIsStatusChanged(true);
         $subscriber->save();
     }
@@ -4006,16 +4006,16 @@ class Ebizmarts_SqualoMail_Helper_Data extends Mage_Core_Helper_Abstract
     public function modifyCounterDataSentToSqualomail($index, $hasError = false, $increment = 1)
     {
         $counterGetResponsesBatch = $this->getCountersDataSentToSqualomail();
-        $statusChanged = self::DATA_SENT_TO_MAILCHIMP;
+        $statusChanged = self::DATA_SENT_TO_SQUALOMAIL;
 
         if ($hasError === true) {
-            $count = isset($counterGetResponsesBatch[$index][self::DATA_NOT_SENT_TO_MAILCHIMP])
-                ? $counterGetResponsesBatch[$index][self::DATA_NOT_SENT_TO_MAILCHIMP]
+            $count = isset($counterGetResponsesBatch[$index][self::DATA_NOT_SENT_TO_SQUALOMAIL])
+                ? $counterGetResponsesBatch[$index][self::DATA_NOT_SENT_TO_SQUALOMAIL]
                 : 0;
-            $statusChanged = self::DATA_NOT_SENT_TO_MAILCHIMP;
+            $statusChanged = self::DATA_NOT_SENT_TO_SQUALOMAIL;
         } else {
-            $count = isset($counterGetResponsesBatch[$index][self::DATA_SENT_TO_MAILCHIMP])
-                ? $counterGetResponsesBatch[$index][self::DATA_SENT_TO_MAILCHIMP]
+            $count = isset($counterGetResponsesBatch[$index][self::DATA_SENT_TO_SQUALOMAIL])
+                ? $counterGetResponsesBatch[$index][self::DATA_SENT_TO_SQUALOMAIL]
                 : 0;
         }
 

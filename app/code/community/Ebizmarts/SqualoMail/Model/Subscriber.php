@@ -8,7 +8,7 @@
  */
 class Ebizmarts_SqualoMail_Model_Subscriber extends Mage_Newsletter_Model_Subscriber
 {
-    const MAILCHIMP_SUBSCRIBE = 'SqualoMail';
+    const SQUALOMAIL_SUBSCRIBE = 'SqualoMail';
     const SUBSCRIBE_CONFIRMATION = 'SqualoMail_Confirmation';
 
     /**

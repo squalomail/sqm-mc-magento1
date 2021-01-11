@@ -170,7 +170,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
     protected function _saveSubscriber($subscriber, $error, $syncDelta = null, $setSource = false)
     {
         if ($setSource) {
-            $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+            $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::SQUALOMAIL_SUBSCRIBE);
         }
 
         $subscriber->setData("squalomail_sync_delta", $syncDelta);
@@ -313,7 +313,7 @@ class Ebizmarts_SqualoMail_Model_Api_Subscribers
             }
 
             if ($saveSubscriber) {
-                $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+                $subscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::SQUALOMAIL_SUBSCRIBE);
                 $subscriber->save();
             }
         }

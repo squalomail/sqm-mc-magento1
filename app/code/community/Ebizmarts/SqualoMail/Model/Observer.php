@@ -608,7 +608,7 @@ class Ebizmarts_SqualoMail_Model_Observer
         if ($block instanceof Mage_Adminhtml_Block_Sales_Order_Grid
             && $ecommEnabledAnyScope && $addColumnConfig
         ) {
-            if ($addColumnConfig == Ebizmarts_SqualoMail_Model_Config::ADD_MAILCHIMP_LOGO_TO_GRID
+            if ($addColumnConfig == Ebizmarts_SqualoMail_Model_Config::ADD_SQUALOMAIL_LOGO_TO_GRID
                 || $addColumnConfig == Ebizmarts_SqualoMail_Model_Config::ADD_BOTH_TO_GRID
             ) {
                 $block->addColumnAfter(
@@ -1330,6 +1330,6 @@ class Ebizmarts_SqualoMail_Model_Observer
      */
     protected function isSqualomailSave($subscriberSource)
     {
-        return $subscriberSource === Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE;
+        return $subscriberSource === Ebizmarts_SqualoMail_Model_Subscriber::SQUALOMAIL_SUBSCRIBE;
     }
 }

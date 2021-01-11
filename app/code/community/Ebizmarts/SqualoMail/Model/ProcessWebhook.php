@@ -121,7 +121,7 @@ class Ebizmarts_SqualoMail_Model_ProcessWebhook
             if (!$newSubscriber->getId()) {
                 if ($oldSubscriber->getId()) {
                     $oldSubscriber->setSubscriberEmail($new);
-                    $oldSubscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
+                    $oldSubscriber->setSubscriberSource(Ebizmarts_SqualoMail_Model_Subscriber::SQUALOMAIL_SUBSCRIBE);
                     $oldSubscriber->save();
                 } else {
                     $helper->subscribeMember($newSubscriber);
