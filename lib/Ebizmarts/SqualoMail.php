@@ -204,7 +204,7 @@ class Ebizmarts_SqualoMail
 
     protected $_apiKey;
     protected $_ch;
-    protected $_root = 'https://api.squalomail.com/#API_ENDPOINT_PATH#';
+    protected $_root = 'https://api.squalomail.com/mc/v3';
     protected $_debug = false;
 
     const POST = 'POST';

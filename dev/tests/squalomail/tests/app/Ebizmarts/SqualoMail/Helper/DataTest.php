@@ -1576,7 +1576,7 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
     public function testGetSQMJs()
     {
         $storeId = 1;
-        $jsUrl = 'https://api.squalomail.com/#API_ENDPOINT_PATH#/ecommerce/stores/sitejs';
+        $jsUrl = 'https://api.squalomail.com/mc/v3/ecommerce/stores/sitejs';
         $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9p0';
 
         $expectedResult = '<script type="text/javascript" src="' . $jsUrl . '" defer></script>';
@@ -1884,38 +1884,38 @@ class Ebizmarts_SqualoMail_Helper_DataTest extends PHPUnit_Framework_TestCase
                         0 => array
                         (
                             "rel" => "self",
-                            "href" => "https://api.squalomail.com/#API_ENDPOINT_PATH#/lists/b514eebd1a/merge-fields/3",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields/3",
                             "method" => "GET",
-                            "targetSchema" => "https://api.squalomail.com/#API_ENDPOINT_PATH#"
+                            "targetSchema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/Response.json",
                         ),
 
                         1 => array
                         (
                             "rel" => "parent",
-                            "href" => "https://api.squalomail.com/#API_ENDPOINT_PATH#/lists/b514eebd1a/merge-fields",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields",
                             "method" => "GET",
-                            "targetSchema" => "https://api.squalomail.com/#API_ENDPOINT_PATH#"
+                            "targetSchema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/CollectionResponse.json",
-                            "schema" => "https://api.squalomail.com/#API_ENDPOINT_PATH#"
+                            "schema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/CollectionLinks/Lists/MergeFields.json",
                         ),
 
                         2 => array
                         (
                             "rel" => "update",
-                            "href" => "https://api.squalomail.com/#API_ENDPOINT_PATH#/lists/b514eebd1a/merge-fields/3",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields/3",
                             "method" => "PATCH",
-                            "targetSchema" => "https://api.squalomail.com/#API_ENDPOINT_PATH#"
+                            "targetSchema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/Response.json",
-                            "schema" => "https://api.squalomail.com/#API_ENDPOINT_PATH#"
+                            "schema" => "https://api.squalomail.com/mc/v3"
                                 . "/schema/3.0/Definitions/Lists/MergeFields/PATCH.json",
                         ),
 
                         3 => array
                         (
                             "rel" => "delete",
-                            "href" => "https://api.squalomail.com/#API_ENDPOINT_PATH#/lists/b514eebd1a/merge-fields/3",
+                            "href" => "https://api.squalomail.com/mc/v3/lists/b514eebd1a/merge-fields/3",
                             "method" => "DELETE",
                         )
 
