@@ -20,7 +20,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_OauthWizard
     {
         parent::_prepareLayout();
         if (!$this->getTemplate()) {
-            $this->setTemplate('ebizmarts/mailchimp/system/config/oauth_wizard.phtml');
+            $this->setTemplate('ebizmarts/squalomail/system/config/oauth_wizard.phtml');
         }
 
         return $this;
@@ -52,8 +52,8 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_OauthWizard
 
         $this->addData(
             array(
-            'button_label' => $this->helper('mailchimp')->__($label),
-            'button_url' => $this->helper('mailchimp/oauth2')->authorizeRequestUrl(),
+            'button_label' => $this->helper('squalomail')->__($label),
+            'button_url' => $this->helper('squalomail/oauth2')->authorizeRequestUrl(),
             'html_id' => $element->getHtmlId(),
             )
         );

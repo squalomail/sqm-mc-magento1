@@ -22,6 +22,6 @@ class Ebizmarts_MailChimp_Model_Resource_Webhookrequest_Collection extends
     public function _construct()
     {
         parent::_construct();
-        $this->_init('mailchimp/webhookrequest');
+        $this->_init('squalomail/webhookrequest');
     }
 }

@@ -5,7 +5,7 @@ $installer = $this;
 try {
     $installer->run(
         "
-ALTER TABLE `{$this->getTable('mailchimp_sync_batches')}`
+ALTER TABLE `{$this->getTable('squalomail_sync_batches')}`
 ADD INDEX `idx_status_store_id` (`status`,`store_id`);
 "
     );

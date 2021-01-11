@@ -2,24 +2,24 @@
 
 <config>
     <tabs>
-        <mailchimp translate="label" module="mailchimp">
+        <squalomail translate="label" module="squalomail">
             <label><![CDATA[Mailchimp]]></label>
             <sort_order>400</sort_order>
-        </mailchimp>
+        </squalomail>
     </tabs>
     <sections>
-        <mailchimp translate="label" module="mailchimp">
-            <class>mailchimp-section</class>
+        <squalomail translate="label" module="squalomail">
+            <class>squalomail-section</class>
             <label>Mailchimp Configuration</label>
-            <header_css>mailchimp-header</header_css>
-            <tab>mailchimp</tab>
+            <header_css>squalomail-header</header_css>
+            <tab>squalomail</tab>
             <sort_order>100</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
             <groups>
                 <hint>
-                    <frontend_model>mailchimp/adminhtml_system_config_fieldset_mailchimp_hint</frontend_model>
+                    <frontend_model>squalomail/adminhtml_system_config_fieldset_squalomail_hint</frontend_model>
                     <sort_order>0</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
@@ -38,7 +38,7 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <comment><![CDATA[By enabling this extension, you agree to SqualoMail's terms.]]></comment>
-                            <backend_model>mailchimp/system_config_backend_active</backend_model>
+                            <backend_model>squalomail/system_config_backend_active</backend_model>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -57,7 +57,7 @@
                         <oauth_wizard translate="button_label">
                             <label></label>
                             <button_label>Get API credentials</button_label>
-                            <frontend_model>mailchimp/adminhtml_system_config_oauthWizard</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_oauthWizard</frontend_model>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -67,19 +67,19 @@
                             <label>Mailchimp Store</label>
                             <frontend_type>select</frontend_type>
                             <source_model>Ebizmarts_MailChimp_Model_System_Config_Source_Store</source_model>
-                            <backend_model>mailchimp/system_config_backend_store</backend_model>
+                            <backend_model>squalomail/system_config_backend_store</backend_model>
                             <sort_order>35</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <can_be_empty>0</can_be_empty>
                             <comment>
-                                <model>mailchimp/adminhtml_storeid_comment</model>
+                                <model>squalomail/adminhtml_storeid_comment</model>
                             </comment>
                         </storeid>
                         <account_details translate="label">
                             <label>Account details</label>
-                            <frontend_model>mailchimp/adminhtml_system_config_account</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_account</frontend_model>
                             <source_model>Ebizmarts_MailChimp_Model_System_Config_Source_Account</source_model>
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
@@ -88,31 +88,31 @@
                         </account_details>
                         <reset_errors translate="comment">
                             <frontend_type>button</frontend_type>
-                            <frontend_model>mailchimp/adminhtml_system_config_resetErrors</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_resetErrors</frontend_model>
                             <sort_order>42</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment>
-                                <model>mailchimp/adminhtml_reseterrors_comment</model>
+                                <model>squalomail/adminhtml_reseterrors_comment</model>
                             </comment>
                         </reset_errors>
                         <resend_subscriber translate ="comment">
                             <frontend_type>button</frontend_type>
-                            <frontend_model>mailchimp/adminhtml_system_config_resendSubscribers</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_resendSubscribers</frontend_model>
                             <sort_order>44</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment>
-                                <model>mailchimp/adminhtml_resendsubscribers_comment</model>
+                                <model>squalomail/adminhtml_resendsubscribers_comment</model>
                             </comment>
                         </resend_subscriber>
                         <list translate="label comment">
                             <label>General Subscription</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_list</source_model>
-                            <backend_model>mailchimp/system_config_backend_list</backend_model>
+                            <source_model>squalomail/system_config_source_list</source_model>
+                            <backend_model>squalomail/system_config_backend_list</backend_model>
                             <sort_order>45</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -123,7 +123,7 @@
                         <interest_categories translate="label comment">
                             <label>Interest Categories</label>
                             <frontend_type>multiselect</frontend_type>
-                            <source_model>mailchimp/system_config_source_customerGroup</source_model>
+                            <source_model>squalomail/system_config_source_customerGroup</source_model>
                             <sort_order>48</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -168,7 +168,7 @@
                         <subscriber_batch_amount translate="label comment">
                             <label>Subscriber amount to be sent per run</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_batchLimit</source_model>
+                            <source_model>squalomail/system_config_source_batchLimit</source_model>
                             <sort_order>53</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -178,7 +178,7 @@
                         <connection_timeout translate="label comment">
                             <label>Connection timeout (in secs)</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_connectionTimeout</source_model>
+                            <source_model>squalomail/system_config_source_connectionTimeout</source_model>
                             <sort_order>54</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -188,7 +188,7 @@
                         <checkout_subscribe translate="label comment">
                             <label>Subscribe On Checkout</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_checkoutsubscribe</source_model>
+                            <source_model>squalomail/system_config_source_checkoutsubscribe</source_model>
                             <sort_order>55</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -197,8 +197,8 @@
                         </checkout_subscribe>
                         <map_fields translate="label comment">
                             <label>Customer Fields Mapping</label>
-                            <frontend_model>mailchimp/adminhtml_system_config_form_field_mapfields</frontend_model>
-                            <backend_model>mailchimp/system_config_backend_mapfield</backend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_form_field_mapfields</frontend_model>
+                            <backend_model>squalomail/system_config_backend_mapfield</backend_model>
                             <sort_order>56</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -208,7 +208,7 @@
                         <create_fields translate="label comment">
                             <label>Create Merge Fields on Mailchimp</label>
                             <frontend_type>button</frontend_type>
-                            <frontend_model>mailchimp/adminhtml_system_config_createMergeFields</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_createMergeFields</frontend_model>
                             <sort_order>57</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -218,7 +218,7 @@
                         <create_webhook>
                             <label translate="comment">Create Webhook</label>
                             <frontend_type>button</frontend_type>
-                            <frontend_model>mailchimp/adminhtml_system_config_createWebhook</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_createWebhook</frontend_model>
                             <sort_order>58</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -228,7 +228,7 @@
                         <webhook_delete translate="label">
                             <label>Webhook Delete Subscriber Action</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_webhookDelete</source_model>
+                            <source_model>squalomail/system_config_source_webhookDelete</source_model>
                             <sort_order>59</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -238,7 +238,7 @@
                             <label>Enable Two Way Sync</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <backend_model>mailchimp/system_config_backend_twowaysync</backend_model>
+                            <backend_model>squalomail/system_config_backend_twowaysync</backend_model>
                             <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -260,7 +260,7 @@
                         <enable_log translate="label comment">
                             <label>Enable Log</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_log</source_model>
+                            <source_model>squalomail/system_config_source_log</source_model>
                             <sort_order>80</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -270,7 +270,7 @@
                         <order_grid translate="label">
                             <label>Display on order grid</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_orderGrid</source_model>
+                            <source_model>squalomail/system_config_source_orderGrid</source_model>
                             <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -290,7 +290,7 @@
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <backend_model>mailchimp/system_config_backend_ecommerce</backend_model>
+                            <backend_model>squalomail/system_config_backend_ecommerce</backend_model>
                             <sort_order>205</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -311,7 +311,7 @@
                         <image_size translate="label">
                             <label>Select product image size to send</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_imageSize</source_model>
+                            <source_model>squalomail/system_config_source_imageSize</source_model>
                             <sort_order>209</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -323,13 +323,13 @@
                         <include_taxes translate="label">
                             <label>Include tax in product price</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_includingTaxes</source_model>
+                            <source_model>squalomail/system_config_source_includingTaxes</source_model>
                             <sort_order>210</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <comment>
-                                <model>mailchimp/adminhtml_includetaxes_comment</model>
+                                <model>squalomail/adminhtml_includetaxes_comment</model>
                             </comment>
                             <depends>
                                 <active>1</active>
@@ -338,7 +338,7 @@
                         <firstdate translate="label comment">
                             <label>First date</label>
                             <frontend_type>date</frontend_type>
-                            <frontend_model>mailchimp/adminhtml_system_config_date</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_date</frontend_model>
                             <sort_order>211</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -362,13 +362,13 @@
                         </send_promo>
                         <resend_ecommerce_data translate="comment">
                             <frontend_type>button</frontend_type>
-                            <frontend_model>mailchimp/adminhtml_system_config_resendEcommerceData</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_resendEcommerceData</frontend_model>
                             <sort_order>230</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment>
-                                <model>mailchimp/adminhtml_resendecommercedata_comment</model>
+                                <model>squalomail/adminhtml_resendecommercedata_comment</model>
                             </comment>
                             <depends>
                                 <active>1</active>
@@ -377,7 +377,7 @@
                         <customer_batch_amount translate="label">
                             <label>Customer amount to be sent per run</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_batchLimit</source_model>
+                            <source_model>squalomail/system_config_source_batchLimit</source_model>
                             <sort_order>240</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -386,7 +386,7 @@
                         <product_batch_amount translate="label">
                             <label>Product amount to be sent per run</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_batchLimit</source_model>
+                            <source_model>squalomail/system_config_source_batchLimit</source_model>
                             <sort_order>250</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -395,7 +395,7 @@
                         <order_batch_amount translate="label">
                             <label>Order amount to be sent per run</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_batchLimit</source_model>
+                            <source_model>squalomail/system_config_source_batchLimit</source_model>
                             <sort_order>260</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -424,7 +424,7 @@
                         <firstdate translate="label">
                             <label>First date</label>
                             <frontend_type>date</frontend_type>
-                            <frontend_model>mailchimp/adminhtml_system_config_date</frontend_model>
+                            <frontend_model>squalomail/adminhtml_system_config_date</frontend_model>
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -437,7 +437,7 @@
                         <page translate="label comment">
                             <label>Redirect page</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_cmspage</source_model>
+                            <source_model>squalomail/system_config_source_cmspage</source_model>
                             <sort_order>26</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -450,7 +450,7 @@
                         <cart_batch_amount translate="label">
                             <label>Cart amount to be sent per run</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>mailchimp/system_config_source_batchLimit</source_model>
+                            <source_model>squalomail/system_config_source_batchLimit</source_model>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -460,19 +460,19 @@
                     </fields>
                 </abandonedcart>
             </groups>
-        </mailchimp>
-        <mandrill translate="label" module="mailchimp">
+        </squalomail>
+        <mandrill translate="label" module="squalomail">
             <class>mandrill-section</class>
             <label>Mandrill Configuration</label>
             <header_css>mandrill-header</header_css>
-            <tab>mailchimp</tab>
+            <tab>squalomail</tab>
             <sort_order>110</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
             <groups>
                 <hint>
-                    <frontend_model>mailchimp/adminhtml_system_config_fieldset_mandrill_hint</frontend_model>
+                    <frontend_model>squalomail/adminhtml_system_config_fieldset_mandrill_hint</frontend_model>
                     <sort_order>0</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
@@ -523,8 +523,8 @@
                         </enable_log>
                         <user_info translate="label comment">
                             <label>Account Info</label>
-                            <frontend_model>mailchimp/adminhtml_system_config_userinfo</frontend_model>
-                            <source_model>mailchimp/system_config_source_userinfo</source_model>
+                            <frontend_model>squalomail/adminhtml_system_config_userinfo</frontend_model>
+                            <source_model>squalomail/system_config_source_userinfo</source_model>
                             <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

@@ -26,7 +26,7 @@ class Ebizmarts_MailChimp_Block_Popup_Emailcatcher extends Mage_Core_Block_Templ
      */
     public function getHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     protected function _canCancel()

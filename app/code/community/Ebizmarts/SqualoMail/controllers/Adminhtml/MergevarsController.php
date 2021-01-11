@@ -75,7 +75,7 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
         switch ($this->getRequest()->getActionName()) {
         case 'addmergevar':
         case 'saveadd':
-            $acl = 'system/config/mailchimp';
+            $acl = 'system/config/squalomail';
             break;
         }
 
@@ -87,6 +87,6 @@ class Ebizmarts_MailChimp_Adminhtml_MergevarsController extends Mage_Adminhtml_C
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 }

@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
     public function _construct()
     {
         parent::_construct();
-        $this->_init('mailchimp/ecommercesyncdata');
+        $this->_init('squalomail/ecommercesyncdata');
     }
 
     /**
@@ -29,7 +29,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
      *
      * @param       $itemId
      * @param       $itemType
-     * @param       $mailchimpStoreId
+     * @param       $squalomailStoreId
      * @param null  $syncDelta
      * @param null  $syncError
      * @param int   $syncModified
@@ -43,7 +43,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
     public function saveEcommerceSyncData(
         $itemId,
         $itemType,
-        $mailchimpStoreId,
+        $squalomailStoreId,
         $syncDelta = null,
         $syncError = null,
         $syncModified = 0,
@@ -54,7 +54,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
         $deletedRelatedId = null,
         $allowBatchRemoval = true
     ) {
-        $ecommerceSyncDataItem = $this->getEcommerceSyncDataItem($itemId, $itemType, $mailchimpStoreId);
+        $ecommerceSyncDataItem = $this->getEcommerceSyncDataItem($itemId, $itemType, $squalomailStoreId);
 
         if (!$saveOnlyIfexists || $ecommerceSyncDataItem->getMailchimpSyncDelta()) {
             $this->setEcommerceSyncDataItemValues(
@@ -71,15 +71,15 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
      *
      * @param  $itemId
      * @param  $itemType
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @return Ebizmarts_MailChimp_Model_Ecommercesyncdata
      */
-    public function getEcommerceSyncDataItem($itemId, $itemType, $mailchimpStoreId)
+    public function getEcommerceSyncDataItem($itemId, $itemType, $squalomailStoreId)
     {
         $collection = $this->getCollection()
             ->addFieldToFilter('related_id', array('eq' => $itemId))
             ->addFieldToFilter('type', array('eq' => $itemType))
-            ->addFieldToFilter('mailchimp_store_id', array('eq' => $mailchimpStoreId))
+            ->addFieldToFilter('squalomail_store_id', array('eq' => $squalomailStoreId))
             ->setCurPage(1)
             ->setPageSize(1);
 
@@ -88,7 +88,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
         } else {
             $ecommerceSyndDataItem = $this->setData("related_id", $itemId)
                 ->setData("type", $itemType)
-                ->setData("mailchimp_store_id", $mailchimpStoreId);
+                ->setData("squalomail_store_id", $squalomailStoreId);
         }
 
         return $ecommerceSyndDataItem;
@@ -139,7 +139,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
         }
 
         if ($syncDelta) {
-            $ecommerceSyncDataItem->setData("mailchimp_sync_delta", $syncDelta);
+            $ecommerceSyncDataItem->setData("squalomail_sync_delta", $syncDelta);
         } elseif ($allowBatchRemoval === true) {
             $ecommerceSyncDataItem->setData("batch_id", null);
         }
@@ -149,22 +149,22 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
         }
 
         if ($syncError) {
-            $ecommerceSyncDataItem->setData("mailchimp_sync_error", $syncError);
+            $ecommerceSyncDataItem->setData("squalomail_sync_error", $syncError);
         }
 
         //Always set modified value to 0 when saving sync delta or errors.
-        $ecommerceSyncDataItem->setData("mailchimp_sync_modified", $syncModified);
+        $ecommerceSyncDataItem->setData("squalomail_sync_modified", $syncModified);
 
         if ($syncDeleted !== null) {
-            $ecommerceSyncDataItem->setData("mailchimp_sync_deleted", $syncDeleted);
+            $ecommerceSyncDataItem->setData("squalomail_sync_deleted", $syncDeleted);
 
             if ($itemType == Ebizmarts_MailChimp_Model_Config::IS_PRODUCT && $syncError == '') {
-                $ecommerceSyncDataItem->setData("mailchimp_sync_error", $syncError);
+                $ecommerceSyncDataItem->setData("squalomail_sync_error", $syncError);
             }
         }
 
         if ($token) {
-            $ecommerceSyncDataItem->setData("mailchimp_token", $token);
+            $ecommerceSyncDataItem->setData("squalomail_token", $token);
         }
 
         if ($deletedRelatedId) {
@@ -172,7 +172,7 @@ class Ebizmarts_MailChimp_Model_Ecommercesyncdata extends Mage_Core_Model_Abstra
         }
 
         if ($syncedFlag !== null) {
-            $ecommerceSyncDataItem->setData("mailchimp_synced_flag", $syncedFlag);
+            $ecommerceSyncDataItem->setData("squalomail_synced_flag", $syncedFlag);
         }
     }
 }

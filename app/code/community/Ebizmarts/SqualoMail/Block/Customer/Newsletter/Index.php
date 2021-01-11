@@ -17,7 +17,7 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_Index extends Mage_Customer_
     protected $_generalList = array();
     protected $_form;
     protected $_api;
-    protected $_template = "ebizmarts/mailchimp/customer/newsletter/index.phtml";
+    protected $_template = "ebizmarts/squalomail/customer/newsletter/index.phtml";
     /**
      * @var Ebizmarts_MailChimp_Helper_Data
      */
@@ -26,8 +26,8 @@ class Ebizmarts_MailChimp_Block_Customer_Newsletter_Index extends Mage_Customer_
 
     public function __construct()
     {
-        $this->setTemplate('ebizmarts/mailchimp/customer/newsletter/index.phtml');
-        $this->_helper = Mage::helper('mailchimp');
+        $this->setTemplate('ebizmarts/squalomail/customer/newsletter/index.phtml');
+        $this->_helper = Mage::helper('squalomail');
         $this->_storeId = Mage::app()->getStore()->getId();
     }
 

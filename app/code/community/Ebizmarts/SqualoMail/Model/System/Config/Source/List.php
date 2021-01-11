@@ -47,7 +47,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_List
 
                     //Add filter to only show the lists for the selected store when MC store selected.
                     $mcStoreId = (!empty($params))
-                        ? $params['mailchimp_store_id']
+                        ? $params['squalomail_store_id']
                         : $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope']);
                     if ($mcStoreId !== '' && $mcStoreId !== null) {
                         $listId = $helper->getListIdByApiKeyAndMCStoreId($apiKey, $mcStoreId);
@@ -112,7 +112,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_List
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**

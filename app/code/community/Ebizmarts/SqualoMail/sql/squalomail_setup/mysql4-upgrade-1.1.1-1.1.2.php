@@ -19,7 +19,7 @@ $installer->startSetup();
 try {
     $installer->run(
         "
- ALTER TABLE `{$this->getTable('mailchimp_errors')}`
+ ALTER TABLE `{$this->getTable('squalomail_errors')}`
  ADD column `batch_id` varchar(64) NOT NULL DEFAULT 0;
  "
     );

@@ -12,7 +12,7 @@
 class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
     extends Mage_Adminhtml_Block_Abstract implements Varien_Data_Form_Element_Renderer_Interface
 {
-    protected $_template = 'ebizmarts/mailchimp/system/config/fieldset/hint.phtml';
+    protected $_template = 'ebizmarts/squalomail/system/config/fieldset/hint.phtml';
 
     /**
      * Render fieldset html
@@ -46,7 +46,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
      */
     protected function _prepareLayout()
     {
-        $this->getLayout()->getBlock('head')->addJs('ebizmarts/mailchimp/config.js');
+        $this->getLayout()->getBlock('head')->addJs('ebizmarts/squalomail/config.js');
         return parent::_prepareLayout();
     }
 
@@ -55,7 +55,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
      */
     public function getStoresUrl()
     {
-        return  Mage::helper('adminhtml')->getUrl('adminhtml/mailchimp/getStores');
+        return  Mage::helper('adminhtml')->getUrl('adminhtml/squalomail/getStores');
     }
 
     /**
@@ -63,7 +63,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
      */
     public function getListUrl()
     {
-        return  Mage::helper('adminhtml')->getUrl('adminhtml/mailchimp/getList');
+        return  Mage::helper('adminhtml')->getUrl('adminhtml/squalomail/getList');
     }
 
     /**
@@ -71,7 +71,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
      */
     public function getInfoUrl()
     {
-        return  Mage::helper('adminhtml')->getUrl('adminhtml/mailchimp/getInfo');
+        return  Mage::helper('adminhtml')->getUrl('adminhtml/squalomail/getInfo');
     }
 
     /**
@@ -79,7 +79,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
      */
     public function getInterestUrl()
     {
-        return  Mage::helper('adminhtml')->getUrl('adminhtml/mailchimp/getInterest');
+        return  Mage::helper('adminhtml')->getUrl('adminhtml/squalomail/getInterest');
     }
 
     public function isApiKeySet()
@@ -99,7 +99,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -107,6 +107,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Fieldset_Mailchimp_Hint
      */
     protected function makeMigrationHelper()
     {
-        return Mage::helper('mailchimp/migration');
+        return Mage::helper('squalomail/migration');
     }
 }

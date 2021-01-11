@@ -29,10 +29,10 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
 
     public function __construct()
     {
-        $this->_helper = Mage::helper('mailchimp');
-        $this->_dateHelper = Mage::helper('mailchimp/date');
+        $this->_helper = Mage::helper('squalomail');
+        $this->_dateHelper = Mage::helper('squalomail/date');
 
-        $this->_ecommerceData = Mage::getModel('mailchimp/ecommercesyncdata')
+        $this->_ecommerceData = Mage::getModel('squalomail/ecommercesyncdata')
             ->getCollection()
             ->addFieldToSelect('related_id')
             ->setPageSize(100);
@@ -290,7 +290,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerce
         $helper = $this->getHelper();
         $resource = $helper->getCoreResource();
         $connection = $resource->getConnection('core_write');
-        $tableName = $resource->getTableName('mailchimp/ecommercesyncdata');
+        $tableName = $resource->getTableName('squalomail/ecommercesyncdata');
         $connection->delete($tableName, $where);
 
         $this->clearEcommerceCollection();

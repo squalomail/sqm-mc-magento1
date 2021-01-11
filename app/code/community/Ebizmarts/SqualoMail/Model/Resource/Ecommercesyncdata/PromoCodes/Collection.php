@@ -29,10 +29,10 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoCodes_Collection
      */
     public function joinLeftEcommerceSyncData($preFilteredPromoCodesCollection, $columns = array('m4m.*'))
     {
-        $joinCondition = "m4m.related_id = main_table.coupon_id AND m4m.type = '%s' AND m4m.mailchimp_store_id = '%s'";
-        $mailchimpTableName = $this->getMailchimpEcommerceDataTableName();
+        $joinCondition = "m4m.related_id = main_table.coupon_id AND m4m.type = '%s' AND m4m.squalomail_store_id = '%s'";
+        $squalomailTableName = $this->getMailchimpEcommerceDataTableName();
         $preFilteredPromoCodesCollection->getSelect()->joinLeft(
-            array("m4m" => $mailchimpTableName),
+            array("m4m" => $squalomailTableName),
             sprintf($joinCondition, Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE, $this->getMailchimpStoreId()),
             $columns
         );

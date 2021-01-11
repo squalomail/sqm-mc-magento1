@@ -40,7 +40,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
             ->disableOriginalConstructor()
             ->setMethods(array('setMailchimpStoreId', 'setStoreId'))->getMock();
 
-        $mailchimpDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
+        $squalomailDateHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
             ->disableOriginalConstructor()
             ->setMethods(array('getDateMicrotime'))->getMock();
 
@@ -52,9 +52,9 @@ class Ebizmarts_MailChimp_Model_Api_PromoCodesTest extends PHPUnit_Framework_Tes
         $promoCollectionResourceMock->expects($this->once())->method('setMailchimpStoreId')->with(self::MC_STORE_ID);
         $promoCollectionResourceMock->expects($this->once())->method('setStoreId')->with(self::STORE_ID);
 
-        $promoCodesApiMock->expects($this->once())->method('getDateHelper')->willReturn($mailchimpDateHelperMock);
+        $promoCodesApiMock->expects($this->once())->method('getDateHelper')->willReturn($squalomailDateHelperMock);
 
-        $mailchimpDateHelperMock->expects($this->once())->method('getDateMicrotime');
+        $squalomailDateHelperMock->expects($this->once())->method('getDateMicrotime');
 
         $promoCodesApiMock->expects($this->once())->method('_getDeletedPromoCodes')->willReturn($batchArray);
 

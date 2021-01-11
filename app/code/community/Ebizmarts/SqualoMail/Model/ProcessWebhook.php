@@ -36,20 +36,20 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
      * @const string
      */
 
-    const WEBHOOKS_PATH = 'mailchimp/webhook/index/';
+    const WEBHOOKS_PATH = 'squalomail/webhook/index/';
 
     public function __construct()
     {
-        $this->_helper = Mage::helper('mailchimp');
-        $this->_dateHelper = Mage::helper('mailchimp/date');
+        $this->_helper = Mage::helper('squalomail');
+        $this->_dateHelper = Mage::helper('squalomail/date');
 
-        $this->_tags = Mage::getModel('mailchimp/api_subscribers_MailchimpTags');
-        $this->_interestGroupHandle = Mage::getModel('mailchimp/api_subscribers_InterestGroupHandle');
+        $this->_tags = Mage::getModel('squalomail/api_subscribers_MailchimpTags');
+        $this->_interestGroupHandle = Mage::getModel('squalomail/api_subscribers_InterestGroupHandle');
     }
 
     public function saveWebhookRequest(array $data)
     {
-        Mage::getModel('mailchimp/webhookrequest')
+        Mage::getModel('squalomail/webhookrequest')
             ->setType($data['type'])
             ->setFiredAt($data['fired_at'])
             ->setDataRequest($this->_helper->serialize($data['data']))
@@ -63,7 +63,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
      */
     public function processWebhookData()
     {
-        $collection = Mage::getModel('mailchimp/webhookrequest')->getCollection();
+        $collection = Mage::getModel('squalomail/webhookrequest')->getCollection();
         $collection->addFieldToFilter('processed', array('eq' => 0));
         $collection->getSelect()->limit(self::BATCH_LIMIT);
 
@@ -222,7 +222,7 @@ class Ebizmarts_MailChimp_Model_ProcessWebhook
         $helper = $this->getHelper();
         $resource = $helper->getCoreResource();
         $connection = $resource->getConnection('core_write');
-        $tableName = $resource->getTableName('mailchimp/webhookrequest');
+        $tableName = $resource->getTableName('squalomail/webhookrequest');
         $where = array("fired_at < NOW() - INTERVAL 30 DAY AND processed = 1");
         $connection->delete($tableName, $where);
     }

@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Userinfo
      */
     public function __construct()
     {
-        $mandillHelper = Mage::helper('mailchimp/mandrill');
+        $mandillHelper = Mage::helper('squalomail/mandrill');
         $storeId = Mage::app()->getStore()->getId();
         if (Mage::app()->getRequest()->getParam('store')) {
             $stores = Mage::app()->getStores();
@@ -57,7 +57,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Userinfo
      */
     public function toOptionArray()
     {
-        $helper = Mage::helper('mailchimp');
+        $helper = Mage::helper('squalomail');
         if (is_array($this->_accountDetails)) {
             if (!isset($this->_accountDetails['status'])) {
                 return array(

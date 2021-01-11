@@ -5,28 +5,28 @@ $installer = $this;
 try {
     /* Mailchimp field change and migration */
     $installer->run(
-        "ALTER TABLE `{$this->getTable('mailchimp_stores')}`
+        "ALTER TABLE `{$this->getTable('squalomail_stores')}`
         CHANGE COLUMN `apikey` `apikey` VARCHAR(128) NOT NULL;"
     );
 
     $installer->run(
-        "TRUNCATE `{$this->getTable('mailchimp_stores')}`;"
+        "TRUNCATE `{$this->getTable('squalomail_stores')}`;"
     );
 
     $configDataCollection = Mage::getModel('core/config_data')
         ->getCollection()
-        ->addFieldToFilter('path', 'mailchimp/general/apikey');
+        ->addFieldToFilter('path', 'squalomail/general/apikey');
 
-    $mailchimpShards = array('us');
+    $squalomailShards = array('us');
     foreach ($configDataCollection as $data) {
         $dbApiKey = $data->getValue();
-        foreach ($mailchimpShards as $shard) {
+        foreach ($squalomailShards as $shard) {
             if (strpos($dbApiKey, "-$shard") !== false) {
                 list($hash, $server) = explode("-$shard", $dbApiKey);
                 if (is_numeric($server) && strlen($hash) === 32) {
                     $encryptedApiKey = Mage::helper('core')->encrypt($dbApiKey);
                     $installer->setConfigData(
-                        'mailchimp/general/apikey',
+                        'squalomail/general/apikey',
                         $encryptedApiKey,
                         $data->getScope(),
                         $data->getScopeId()

@@ -28,11 +28,11 @@ $attributeSetId = $setup->getDefaultAttributeSetId($entityTypeId);
 $attributeGroupId = $setup->getDefaultAttributeGroupId($entityTypeId, $attributeSetId);
 
 $setup->addAttribute(
-    "customer", "mailchimp_store_view", array(
+    "customer", "squalomail_store_view", array(
         "type" => "int",
         "label" => "Store View (For MailChimp)",
         "input" => "select",
-        "source" => "mailchimp/system_config_source_mailchimpStoreView",
+        "source" => "squalomail/system_config_source_squalomailStoreView",
         "visible" => true,
         "required" => false,
         "unique" => false,
@@ -42,14 +42,14 @@ $setup->addAttribute(
 );
 
 try {
-    $attribute = Mage::getSingleton("eav/config")->getAttribute("customer", "mailchimp_store_view");
+    $attribute = Mage::getSingleton("eav/config")->getAttribute("customer", "squalomail_store_view");
 
 
     $setup->addAttributeToGroup(
         $entityTypeId,
         $attributeSetId,
         $attributeGroupId,
-        'mailchimp_store_view',
+        'squalomail_store_view',
         '999'  //sort_order
     );
 

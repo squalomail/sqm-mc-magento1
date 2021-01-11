@@ -9,7 +9,7 @@ function getCampaign() {
         urlparams.forEach(
             function (item) {
                 if (item.key === 'utm_source') {
-                    let reg = /^mailchimp$/;
+                    let reg = /^squalomail$/;
 
                     if (reg.exec(item.value)) {
                         isMailchimp = true;
@@ -28,7 +28,7 @@ function getCampaign() {
 
         if (utmIndex !== -1) {
             let value = urlparams[utmIndex + 1];
-            let reg = /^mailchimp$/;
+            let reg = /^squalomail$/;
 
             if (reg.exec(value)) {
                 isMailchimp = true;
@@ -41,19 +41,19 @@ function getCampaign() {
     }
 
     if (mc_cid && !isMailchimp) {
-        Mage.Cookies.clear('mailchimp_campaign_id');
-        Mage.Cookies.set('mailchimp_campaign_id', mc_cid);
+        Mage.Cookies.clear('squalomail_campaign_id');
+        Mage.Cookies.set('squalomail_campaign_id', mc_cid);
     }
 
-    let landingPage = Mage.Cookies.get('mailchimp_landing_page');
+    let landingPage = Mage.Cookies.get('squalomail_landing_page');
 
     if (!landingPage) {
-        Mage.Cookies.set('mailchimp_landing_page', location);
+        Mage.Cookies.set('squalomail_landing_page', location);
     }
 
     if (isMailchimp) {
-        Mage.Cookies.clear('mailchimp_campaign_id');
-        Mage.Cookies.set('mailchimp_landing_page', location);
+        Mage.Cookies.clear('squalomail_campaign_id');
+        Mage.Cookies.set('squalomail_landing_page', location);
     }
 }
 

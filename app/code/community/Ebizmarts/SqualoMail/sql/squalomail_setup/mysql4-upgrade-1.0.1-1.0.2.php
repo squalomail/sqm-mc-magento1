@@ -17,7 +17,7 @@ $installer->startSetup();
 
 $installer->run(
     "
-    CREATE TABLE IF NOT EXISTS `{$this->getTable('mailchimp_errors')}` (
+    CREATE TABLE IF NOT EXISTS `{$this->getTable('squalomail_errors')}` (
         `id`     INT(10) unsigned NOT NULL auto_increment,
         `type`   VARCHAR(256) DEFAULT '',
         `title`  VARCHAR(128) DEFAULT '',
@@ -34,7 +34,7 @@ $installer->run(
 try {
     $installer->run(
         "
-      ALTER TABLE `{$this->getTable('mailchimp_sync_batches')}` MODIFY `store_id` VARCHAR(50) NOT NULL;
+      ALTER TABLE `{$this->getTable('squalomail_sync_batches')}` MODIFY `store_id` VARCHAR(50) NOT NULL;
     "
     );
 } catch (Exception $e) {

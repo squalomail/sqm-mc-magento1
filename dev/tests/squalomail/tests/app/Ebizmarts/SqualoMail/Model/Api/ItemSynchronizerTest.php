@@ -34,8 +34,8 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizerTest extends PHPUnit_Framewo
         $coreResourceMock
             ->expects($this->once())
             ->method('getTableName')
-            ->with('mailchimp/ecommercesyncdata')
-            ->willReturn('mailchimp_ecommerce_sync_data');
+            ->with('squalomail/ecommercesyncdata')
+            ->willReturn('squalomail_ecommerce_sync_data');
 
         $_syncItemApiMock->getMailchimpEcommerceDataTableName();
     }

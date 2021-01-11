@@ -12,19 +12,19 @@
  */
 class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_Action
 {
-    protected $_mailchimpHelper = null;
-    protected $_mailchimpWebhookHelper = null;
+    protected $_squalomailHelper = null;
+    protected $_squalomailWebhookHelper = null;
 
     /**
      * @return Ebizmarts_MailChimp_Helper_Data|Mage_Core_Helper_Abstract
      */
     protected function getHelper()
     {
-        if (!$this->_mailchimpHelper) {
-            $this->_mailchimpHelper = Mage::helper('mailchimp');
+        if (!$this->_squalomailHelper) {
+            $this->_squalomailHelper = Mage::helper('squalomail');
         }
 
-        return $this->_mailchimpHelper;
+        return $this->_squalomailHelper;
     }
 
     /**
@@ -32,11 +32,11 @@ class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_A
      */
     protected function getWebhookHelper()
     {
-        if (!$this->_mailchimpWebhookHelper) {
-            $this->_mailchimpWebhookHelper = Mage::helper('mailchimp/webhook');
+        if (!$this->_squalomailWebhookHelper) {
+            $this->_squalomailWebhookHelper = Mage::helper('squalomail/webhook');
         }
 
-        return $this->_mailchimpWebhookHelper;
+        return $this->_squalomailWebhookHelper;
     }
 
     /**
@@ -79,7 +79,7 @@ class Ebizmarts_MailChimp_WebhookController extends Mage_Core_Controller_Front_A
             //Validate "wkey" GET parameter
             if ($myKey == $requestKey) {
                 if ($request->getPost('type')) {
-                    Mage::getModel('mailchimp/processWebhook')->saveWebhookRequest($data);
+                    Mage::getModel('squalomail/processWebhook')->saveWebhookRequest($data);
                 } else {
                     $helper->logError($this->__('Webhook successfully created.'));
                 }

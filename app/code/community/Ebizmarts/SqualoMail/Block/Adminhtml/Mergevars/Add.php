@@ -12,7 +12,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mergevars_Add extends Mage_Adminhtml_B
     public function __construct()
     {
         $this->_controller = 'adminhtml_mergevars';
-        $this->_blockGroup = 'mailchimp';
+        $this->_blockGroup = 'squalomail';
 
         parent::__construct();
         $this->_removeButton("delete");
@@ -25,6 +25,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mergevars_Add extends Mage_Adminhtml_B
      */
     public function getHeaderText()
     {
-        return Mage::helper('mailchimp')->__('New Field Type');
+        return Mage::helper('squalomail')->__('New Field Type');
     }
 }

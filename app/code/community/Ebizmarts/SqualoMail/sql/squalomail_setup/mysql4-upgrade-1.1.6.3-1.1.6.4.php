@@ -2,7 +2,7 @@
 
 $installer = $this;
 
-Mage::helper('mailchimp')
+Mage::helper('squalomail')
     ->saveMailChimpConfig(
         array(
             array(

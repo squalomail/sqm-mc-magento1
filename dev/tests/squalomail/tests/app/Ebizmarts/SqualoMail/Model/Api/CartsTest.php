@@ -146,10 +146,10 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
     {
         $arrayAddFieldToFilter = array('eq' => 0);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_deleted = 0";
+        $where = "m4m.squalomail_sync_deleted = 0";
         $conditionSelect = "m4m.related_id = main_table.entity_id AND m4m.type = '"
             . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
-            . "' AND m4m.mailchimp_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
+            . "' AND m4m.squalomail_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
                 'getMailchimpStoreId',
@@ -262,15 +262,15 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             . '"email_address":"test@ebizmarts.com","opt_in_status":false,"first_name":"Lucia",'
             . '"last_name":"en el checkout","address":{"address1":"asdf","city":"asd",'
             . '"postal_code":"212312","country":"Tajikistan","country_code":"TJ"}},'
-            . '"campaign_id":"482d28ee12","checkout_url":"http:\/\/f3364930.ngrok.io\/mailchimp\/cart'
+            . '"campaign_id":"482d28ee12","checkout_url":"http:\/\/f3364930.ngrok.io\/squalomail\/cart'
             . '\/loadquote\?id=692&token=ec4f79b2e4677d2edc5bf78c934e5794","currency_code":"USD",'
             . '"order_total":"1700.0000","tax_total":0,"lines":[{"id":"1","product_id":"425",'
             . '"product_variant_id":"310","quantity":5,"price":"1700.0000"}]}';
         $customerId = 1;
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_deleted = 0
-        AND m4m.mailchimp_sync_delta < updated_at";
+        $where = "m4m.squalomail_sync_deleted = 0
+        AND m4m.squalomail_sync_delta < updated_at";
 
         $allCarts = array(
             array(
@@ -341,14 +341,14 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('addWhere'))
             ->getMock();
 
-        $mailchimpHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squalomailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('modifyCounterSentPerBatch', 'getEntityId'))
             ->getMock();
         //----------------------------
         $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
-        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($mailchimpHelperMock);
+        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($squalomailHelperMock);
         $cartsApiMock->expects($this->once())->method('getBatchId')->willReturn(self::BATCH_ID);
         $cartsApiMock->expects($this->once())->method('getQuoteCollection')->willReturn($cartsCollectionMock);
 
@@ -368,7 +368,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $cartsResourceCollectionModelMock->expects($this->once())->method('addWhere')
             ->with(
                 $cartsCollectionMock,
-                "m4m.mailchimp_sync_deleted = 0 AND m4m.mailchimp_sync_delta < updated_at",
+                "m4m.squalomail_sync_deleted = 0 AND m4m.squalomail_sync_delta < updated_at",
                 self::BATCH_LIMIT_FROM_CONFIG
             );
 
@@ -415,8 +415,8 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $cartsApiMock->expects($this->once())->method('addProductNotSentData')->with($cartModelMock, $allCarts)
             ->willReturn($allCarts);
         $cartsApiMock->expects($this->once())->method('makeCart')->with($cartModelMock, true)->willReturn($cartJson);
-        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($mailchimpHelperMock);
-        $mailchimpHelperMock->expects($this->once())->method('modifyCounterSentPerBatch')
+        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($squalomailHelperMock);
+        $squalomailHelperMock->expects($this->once())->method('modifyCounterSentPerBatch')
             ->with(Ebizmarts_MailChimp_Helper_Data::QUO_MOD);
 
         $cartsApiMock->expects($this->once())->method('setToken')->with(null);
@@ -426,19 +426,19 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
     public function testGetModifiedQuotesGuestCustomer()
     {
-        $mcTableName = 'mailchimp_ecommerce_sync_data';
+        $mcTableName = 'squalomail_ecommerce_sync_data';
         $customerId = '';
         $customerEmailAddress = 'test@ebizmarts.com';
         $stringStoreId = 'store_id';
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_deleted = 0
-        AND m4m.mailchimp_sync_delta < updated_at";
+        $where = "m4m.squalomail_sync_deleted = 0
+        AND m4m.squalomail_sync_delta < updated_at";
         $arrayTableName = array('m4m' => $mcTableName);
         $conditionSelect = "m4m.related_id = main_table.entity_id AND m4m.type = '"
             . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
-            . "' AND m4m.mailchimp_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
-        $mailchimpSelect = array('m4m.*');
+            . "' AND m4m.squalomail_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
+        $squalomailSelect = array('m4m.*');
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
@@ -487,14 +487,14 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('addWhere'))
             ->getMock();
 
-        $mailchimpHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squalomailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('modifyCounterSentPerBatch', 'getEntityId'))
             ->getMock();
 
         $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
-        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($mailchimpHelperMock);
+        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($squalomailHelperMock);
         $cartsApiMock->expects($this->once())->method('getBatchId')->willReturn(self::BATCH_ID);
         $cartsApiMock->expects($this->once())->method('getQuoteCollection')->willReturn($cartsCollectionMock);
 
@@ -514,7 +514,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $cartsResourceCollectionModelMock->expects($this->once())->method('addWhere')
             ->with(
                 $cartsCollectionMock,
-                "m4m.mailchimp_sync_deleted = 0 AND m4m.mailchimp_sync_delta < updated_at",
+                "m4m.squalomail_sync_deleted = 0 AND m4m.squalomail_sync_delta < updated_at",
                 self::BATCH_LIMIT_FROM_CONFIG
             );
 
@@ -552,11 +552,11 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $customerId = 1;
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_deleted = 0
-        AND m4m.mailchimp_sync_delta < updated_at";
+        $where = "m4m.squalomail_sync_deleted = 0
+        AND m4m.squalomail_sync_delta < updated_at";
         $conditionSelect = "m4m.related_id = main_table.entity_id AND m4m.type = '"
             . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
-            . "' AND m4m.mailchimp_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
+            . "' AND m4m.squalomail_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
         $allCarts = array(
             array(
                 'method' => 'DELETE',
@@ -626,14 +626,14 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             ->setMethods(array('addWhere'))
             ->getMock();
 
-        $mailchimpHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
+        $squalomailHelperMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Data::class)
             ->disableOriginalConstructor()
             ->setMethods(array('modifyCounterSentPerBatch', 'getEntityId'))
             ->getMock();
 
         $cartsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn(self::MAILCHIMP_STORE_ID);
         $cartsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn(self::MAGENTO_STORE_ID);
-        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($mailchimpHelperMock);
+        $cartsApiMock->expects($this->once())->method('getHelper')->willReturn($squalomailHelperMock);
         $cartsApiMock->expects($this->once())->method('getBatchId')->willReturn(self::BATCH_ID);
         $cartsApiMock->expects($this->once())->method('getQuoteCollection')->willReturn($cartsCollectionMock);
 
@@ -653,7 +653,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $cartsResourceCollectionModelMock->expects($this->once())->method('addWhere')
             ->with(
                 $cartsCollectionMock,
-                "m4m.mailchimp_sync_deleted = 0 AND m4m.mailchimp_sync_delta < updated_at",
+                "m4m.squalomail_sync_deleted = 0 AND m4m.squalomail_sync_delta < updated_at",
                 self::BATCH_LIMIT_FROM_CONFIG
             );
 
@@ -725,7 +725,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
             . '"email_address":"test@ebizmarts.com","opt_in_status":false,"first_name":"Lucia",'
             . '"last_name":"en el checkout","address":{"address1":"asdf","city":"asd","postal_code":"212312",'
             . '"country":"Tajikistan","country_code":"TJ"}},"campaign_id":"482d28ee12",'
-            . '"checkout_url":"http:\/\/f3364930.ngrok.io\/mailchimp\/cart\/loadquote\?'
+            . '"checkout_url":"http:\/\/f3364930.ngrok.io\/squalomail\/cart\/loadquote\?'
             . 'id=692&token=ec4f79b2e4677d2edc5bf78c934e5794","currency_code":"USD","order_total":"1700.0000",'
             . '"tax_total":0,"lines":[{"id":"1","product_id":"425","product_variant_id":"310","quantity":5,'
             . '"price":"1700.0000"}]}';
@@ -737,7 +737,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $arrayAddFieldToFilterCustomerEmail = array('notnull' => true);
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_delta IS NULL";
+        $where = "m4m.squalomail_sync_delta IS NULL";
         $allVisbleItems = array('item');
         $sizeOrderCollection = 0;
         $addFieldToFilterOrderCollection = array('eq' => self::CUSTOMER_EMAIL_BY_CART);
@@ -931,7 +931,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $arrayAddFieldToFilterCustomerEmail = array('notnull' => true);
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_delta IS NULL";
+        $where = "m4m.squalomail_sync_delta IS NULL";
         $allVisbleItems = array('item');
         $sizeOrderCollection = 1;
         $addFieldToFilterOrderCollection = array('eq' => '');
@@ -1059,7 +1059,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $arrayAddFieldToFilterCustomerEmail = array('notnull' => true);
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_delta IS NULL";
+        $where = "m4m.squalomail_sync_delta IS NULL";
         $allVisbleItems = array();
         $addFieldToFilterOrderCollection = array('eq' => '');
         $stringCustomerEmailMainTable = 'main_table.customer_email';
@@ -1187,7 +1187,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $arrayAddFieldToFilterCustomerEmail = array('notnull' => true);
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_delta IS NULL";
+        $where = "m4m.squalomail_sync_delta IS NULL";
         $allVisbleItems = array('item');
         $sizeOrderCollection = 0;
         $addFieldToFilterOrderCollection = array('eq' => self::CUSTOMER_EMAIL_BY_CART);
@@ -1345,7 +1345,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
         $arrayAddFieldToFilterCustomerEmail = array('notnull' => true);
         $arrayAddFieldToFilter = array('eq' => 1);
         $arrayAddFieldToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
-        $where = "m4m.mailchimp_sync_delta IS NULL";
+        $where = "m4m.squalomail_sync_delta IS NULL";
         $allVisbleItems = array('item');
         $sizeOrderCollection = 0;
         $addFieldToFilterOrderCollection = array('eq' => self::CUSTOMER_EMAIL_BY_CART);
@@ -1516,19 +1516,19 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
     public function testGetAllCartsByEmail()
     {
-        $mailchimpTableName = 'm4m';
+        $squalomailTableName = 'm4m';
         $stringIsActive = 'is_active';
         $arrayAddToFilterIsActive = array('eq' => 1);
         $stringStoreId = 'store_id';
         $arrayAddToFilterStoreId = array('eq' => self::MAGENTO_STORE_ID);
         $stringCustomerId = 'customer_email';
         $arrayAddToFilterCustomerId = array('eq' => self::CUSTOMER_EMAIL_BY_CART);
-        $arrayMailchimpTableName = array('m4m' => $mailchimpTableName);
+        $arrayMailchimpTableName = array('m4m' => $squalomailTableName);
         $condition = "m4m.related_id = main_table.entity_id AND m4m.type = '"
             . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
-            . "' AND m4m.mailchimp_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
-        $mailchimpSelect = array('m4m.*');
-        $where = "m4m.mailchimp_sync_deleted = 0 AND m4m.mailchimp_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
+            . "' AND m4m.squalomail_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
+        $squalomailSelect = array('m4m.*');
+        $where = "m4m.squalomail_sync_deleted = 0 AND m4m.squalomail_store_id = '" . self::MAILCHIMP_STORE_ID . "'";
 
         $cartsApiMock = $this->_cartsApiMock
             ->setMethods(
@@ -1665,7 +1665,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
     {
         $checkoutUrl = 'test';
         $isModified = false;
-        $mailchimpCampaignId = 'qwe123erq';
+        $squalomailCampaignId = 'qwe123erq';
 
         $cartsApiMock = $this->_cartsApiMock->setMethods(
             array(
@@ -1715,7 +1715,7 @@ class Ebizmarts_MailChimp_Model_Api_CartsTest extends PHPUnit_Framework_TestCase
 
         $cartModelMock->expects($this->once())
             ->method('getMailchimpCampaignId')
-            ->willReturn($mailchimpCampaignId);
+            ->willReturn($squalomailCampaignId);
 
         $cartModelMock->expects($this->once())
             ->method('getEntityId')

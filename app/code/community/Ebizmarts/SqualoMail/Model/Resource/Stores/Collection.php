@@ -22,6 +22,6 @@ class Ebizmarts_MailChimp_Model_Resource_Stores_Collection extends Mage_Core_Mod
     public function _construct()
     {
         parent::_construct();
-        $this->_init('mailchimp/stores');
+        $this->_init('squalomail/stores');
     }
 }

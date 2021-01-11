@@ -17,8 +17,8 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors extends Mage_Adminhtml
     {
         // The blockGroup must match the first half of how we call the block, and controller matches the second half
         // ie. foo_bar/adminhtml_baz
-        $this->_blockGroup = 'mailchimp';
-        $this->_controller = 'adminhtml_mailchimperrors';
+        $this->_blockGroup = 'squalomail';
+        $this->_controller = 'adminhtml_squalomailerrors';
         $this->_headerText = $this->__('Mailchimp errors');
 
         parent::__construct();

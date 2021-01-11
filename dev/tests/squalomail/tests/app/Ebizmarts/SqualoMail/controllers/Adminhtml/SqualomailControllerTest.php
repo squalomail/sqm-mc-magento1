@@ -5,29 +5,29 @@ require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Admin
 class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_MailchimpController $mailchimpController
+     * @var Ebizmarts_MailChimp_Adminhtml_MailchimpController $squalomailController
      */
-    protected $_mailchimpController;
+    protected $_squalomailController;
 
     public function setUp()
     {
         Mage::app('default');
-        $this->_mailchimpController = $this->getMockBuilder(Ebizmarts_MailChimp_Adminhtml_MailchimpController::class);
+        $this->_squalomailController = $this->getMockBuilder(Ebizmarts_MailChimp_Adminhtml_MailchimpController::class);
     }
 
     public function tearDown()
     {
-        $this->_mailchimpController = null;
+        $this->_squalomailController = null;
     }
 
     public function testIndexAction()
     {
         $customerId = 1;
-        $type = 'mailchimp/adminhtml_customer_edit_tab_mailchimp';
-        $name = 'admin.customer.mailchimp';
+        $type = 'squalomail/adminhtml_customer_edit_tab_squalomail';
+        $name = 'admin.customer.squalomail';
         $result = '<body></body>';
 
-        $mailchimpControllerMock = $this->_mailchimpController
+        $squalomailControllerMock = $this->_squalomailController
             ->disableOriginalConstructor()
             ->setMethods(array('getRequest', 'getResponse', 'getLayout', 'getHtml'))
             ->getMock();
@@ -52,23 +52,23 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('setCustomerId', 'setUseAjax', 'toHtml'))
             ->getMock();
 
-        $mailchimpControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
+        $squalomailControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
 
         $requestMock->expects($this->once())->method('getParam')->with('id')->willReturn($customerId);
 
-        $mailchimpControllerMock->expects($this->once())->method('getLayout')->willReturn($layoutMock);
+        $squalomailControllerMock->expects($this->once())->method('getLayout')->willReturn($layoutMock);
 
         $layoutMock->expects($this->once())->method('createBlock')->with($type, $name)->willReturn($blockMock);
 
         $blockMock->expects($this->once())->method('setCustomerId')->with($customerId)->willReturnSelf();
         $blockMock->expects($this->once())->method('setUseAjax')->with(true)->willReturnSelf();
 
-        $mailchimpControllerMock->expects($this->once())->method('getHtml')->with($blockMock)->willReturn($result);
+        $squalomailControllerMock->expects($this->once())->method('getHtml')->with($blockMock)->willReturn($result);
 
-        $mailchimpControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
+        $squalomailControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
         $responseMock->expects($this->once())->method('setBody')->with($result);
 
-        $mailchimpControllerMock->indexAction();
+        $squalomailControllerMock->indexAction();
     }
 
     public function testResendSubscribersAction()
@@ -79,7 +79,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
         $scopeId = 1;
         $result = 1;
 
-        $mailchimpControllerMock = $this->_mailchimpController
+        $squalomailControllerMock = $this->_squalomailController
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper'))
             ->getMock();
@@ -104,7 +104,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('setBody'))
             ->getMock();
 
-        $mailchimpControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
+        $squalomailControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
 
         $helperMock->expects($this->once())->method('getMageApp')->willReturn($mageAppMock);
 
@@ -124,7 +124,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
 
         $responseMock->expects($this->once())->method('setBody')->with($result);
 
-        $mailchimpControllerMock->resendSubscribersAction();
+        $squalomailControllerMock->resendSubscribersAction();
     }
 
     public function testCreateWebhookAction()
@@ -136,7 +136,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
         $listId = 'ca841a1103';
         $message = 1;
 
-        $mailchimpControllerMock = $this->_mailchimpController
+        $squalomailControllerMock = $this->_squalomailController
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper', 'getWebhookHelper'))
             ->getMock();
@@ -166,8 +166,8 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('setBody'))
             ->getMock();
 
-        $mailchimpControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $mailchimpControllerMock
+        $squalomailControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
+        $squalomailControllerMock
             ->expects($this->once())
             ->method('getWebhookHelper')
             ->willReturn($webhookHelperMock);
@@ -195,7 +195,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
 
         $responseMock->expects($this->once())->method('setBody')->with($message);
 
-        $mailchimpControllerMock->createWebhookAction();
+        $squalomailControllerMock->createWebhookAction();
     }
 
     public function testGetStoresAction()
@@ -210,7 +210,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
         $jsonData = '[{"id":"","name":"--- Select a Mailchimp Store ---"},'
             . '{"id":"a1s2d3f4g5h6j7k8l9p0","name":"Madison Island - English"}]';
 
-        $mailchimpControllerMock = $this->_mailchimpController
+        $squalomailControllerMock = $this->_squalomailController
             ->disableOriginalConstructor()
             ->setMethods(array('getRequest', 'getResponse', 'getSourceStoreOptions', 'getHelper'))
             ->getMock();
@@ -230,30 +230,30 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('isApiKeyObscure'))
             ->getMock();
 
-        $mailchimpControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $mailchimpControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
+        $squalomailControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
+        $squalomailControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
 
         $requestMock->expects($this->once())->method('getParam')->with($apiKeyParam)->willReturn($apiKey);
         $helperMock->expects($this->once())->method('isApiKeyObscure')->with($apiKey)->willReturn(false);
 
-        $mailchimpControllerMock
+        $squalomailControllerMock
             ->expects($this->once())
             ->method('getSourceStoreOptions')
             ->with($apiKey)
             ->willReturn($data);
-        $mailchimpControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
+        $squalomailControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
 
         $responseMock->expects($this->once())->method('setHeader')->with('Content-type', 'application/json');
         $responseMock->expects($this->once())->method('setBody')->with($jsonData);
 
-        $mailchimpControllerMock->getStoresAction();
+        $squalomailControllerMock->getStoresAction();
     }
 
     public function testGetInfoAction()
     {
         $apiKeyParam = 'api_key';
         $apiKey = 'a1s2d3f4g5h6j7k8l9z1x2c3v4v4-us1';
-        $storeIdParam = 'mailchimp_store_id';
+        $storeIdParam = 'squalomail_store_id';
         $mcStoreId = 'q1w2e3r4t5y6u7i8o9p0';
         $syncDate = "2019-02-01 20:00:05";
         $optionSyncFlag = array(
@@ -311,7 +311,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             . '{"value":' . Ebizmarts_MailChimp_Model_System_Config_Source_Account::TOTAL_QUO_KEY
             . ',"label":"  Total Carts: 10"}]';
 
-        $mailchimpControllerMock = $this->_mailchimpController
+        $squalomailControllerMock = $this->_squalomailController
             ->disableOriginalConstructor()
             ->setMethods(array('getHelper', 'getRequest', 'getSourceAccountInfoOptions', 'getResponse'))
             ->getMock();
@@ -331,8 +331,8 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('setHeader', 'setBody'))
             ->getMock();
 
-        $mailchimpControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $mailchimpControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
+        $squalomailControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
+        $squalomailControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
 
         $requestMock->expects($this->exactly(2))->method('getParam')->withConsecutive(
             array($storeIdParam),
@@ -342,7 +342,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             $apiKey
         );
 
-        $mailchimpControllerMock
+        $squalomailControllerMock
             ->expects($this->once())
             ->method('getSourceAccountInfoOptions')
             ->with($apiKey, $mcStoreId)
@@ -354,26 +354,26 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->with($optionSyncFlag, "")
             ->willReturn($liElement);
 
-        $mailchimpControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
+        $squalomailControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
 
         $responseMock->expects($this->once())->method('setHeader')->with('Content-type', 'application/json');
         $responseMock->expects($this->once())->method('setBody')->with($jsonData);
 
-        $mailchimpControllerMock->getInfoAction();
+        $squalomailControllerMock->getInfoAction();
     }
 
     public function testGetListAction()
     {
         $apiKeyParam = 'api_key';
         $apiKey = 'a1s2d3f4g5h6j7k8l9z1x2c3v4v4-us1';
-        $storeIdParam = 'mailchimp_store_id';
+        $storeIdParam = 'squalomail_store_id';
         $mcStoreId = 'q1w2e3r4t5y6u7i8o9p0';
         $listId = 'a1s2d3f4g5';
 
         $data = array(array('id' => $listId, 'name' => 'Newsletter'));
         $jsonData = '[{"id":"' . $listId . '","name":"Newsletter"}]';
 
-        $mailchimpControllerMock = $this->_mailchimpController
+        $squalomailControllerMock = $this->_squalomailController
             ->disableOriginalConstructor()
             ->setMethods(array('getRequest', 'getSourceListOptions', 'getResponse', 'getHelper'))
             ->getMock();
@@ -393,8 +393,8 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('isApiKeyObscure'))
             ->getMock();
 
-        $mailchimpControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $mailchimpControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
+        $squalomailControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
+        $squalomailControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
 
         $requestMock->expects($this->exactly(2))->method('getParam')->withConsecutive(
             array($apiKeyParam),
@@ -406,17 +406,17 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
 
         $helperMock->expects($this->once())->method('isApiKeyObscure')->with($apiKey)->willReturn(false);
 
-        $mailchimpControllerMock
+        $squalomailControllerMock
             ->expects($this->once())
             ->method('getSourceListOptions')
             ->with($apiKey, $mcStoreId)
             ->willReturn($data);
-        $mailchimpControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
+        $squalomailControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
 
         $responseMock->expects($this->once())->method('setHeader')->with('Content-type', 'application/json');
         $responseMock->expects($this->once())->method('setBody')->with($jsonData);
 
-        $mailchimpControllerMock->getListAction();
+        $squalomailControllerMock->getListAction();
     }
 
     public function testGetInterestAction()
@@ -432,7 +432,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
         );
         $jsonData = '[{"value":"bc15dbe6a5","label":"Checkboxes"},{"value":"2a2f23d671","label":"DropDown"}]';
 
-        $mailchimpControllerMock = $this->_mailchimpController
+        $squalomailControllerMock = $this->_squalomailController
             ->disableOriginalConstructor()
             ->setMethods(array('getRequest', 'getSourceInterestOptions', 'getResponse', 'getHelper'))
             ->getMock();
@@ -452,8 +452,8 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
             ->setMethods(array('isApiKeyObscure'))
             ->getMock();
 
-        $mailchimpControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
-        $mailchimpControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
+        $squalomailControllerMock->expects($this->once())->method('getHelper')->willReturn($helperMock);
+        $squalomailControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
 
         $requestMock->expects($this->exactly(2))->method('getParam')->withConsecutive(
             array($apiKeyParam),
@@ -465,16 +465,16 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpControllerTest extends PHPUnit_Fram
 
         $helperMock->expects($this->once())->method('isApiKeyObscure')->with($apiKey)->willReturn(false);
 
-        $mailchimpControllerMock
+        $squalomailControllerMock
             ->expects($this->once())
             ->method('getSourceInterestOptions')
             ->with($apiKey, $listId)
             ->willReturn($data);
-        $mailchimpControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
+        $squalomailControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
 
         $responseMock->expects($this->once())->method('setHeader')->with('Content-type', 'application/json');
         $responseMock->expects($this->once())->method('setBody')->with($jsonData);
 
-        $mailchimpControllerMock->getInterestAction();
+        $squalomailControllerMock->getInterestAction();
     }
 }

@@ -103,7 +103,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceController extends Mage_Adminhtml_C
         case 'renderresendecom':
         case 'resendEcommerceData':
         case 'createMergeFields':
-            $acl = 'system/config/mailchimp';
+            $acl = 'system/config/squalomail';
             break;
         }
 
@@ -115,7 +115,7 @@ class Ebizmarts_MailChimp_Adminhtml_EcommerceController extends Mage_Adminhtml_C
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**

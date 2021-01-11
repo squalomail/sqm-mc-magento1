@@ -29,11 +29,11 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Quote_Collection exte
      */
     public function joinLeftEcommerceSyncData($preFilteredQuotesCollection)
     {
-        $mailchimpTableName = $this->getMailchimpEcommerceDataTableName();
+        $squalomailTableName = $this->getMailchimpEcommerceDataTableName();
         $preFilteredQuotesCollection->getSelect()->joinLeft(
-            array('m4m' => $mailchimpTableName),
+            array('m4m' => $squalomailTableName),
             "m4m.related_id = main_table.entity_id AND m4m.type = '" . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
-            . "' AND m4m.mailchimp_store_id = '" . $this->getMailchimpStoreId() . "'",
+            . "' AND m4m.squalomail_store_id = '" . $this->getMailchimpStoreId() . "'",
             array('m4m.*')
         );
     }

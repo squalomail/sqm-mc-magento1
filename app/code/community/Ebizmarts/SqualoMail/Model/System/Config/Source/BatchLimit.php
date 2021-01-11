@@ -17,10 +17,10 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_BatchLimit
     public function toOptionArray()
     {
         return array(
-            array('value' => 50, 'label' => Mage::helper('mailchimp')->__('50')),
-            array('value' => 100, 'label' => Mage::helper('mailchimp')->__('100')),
-            array('value' => 200, 'label' => Mage::helper('mailchimp')->__('200')),
-            array('value' => 500, 'label' => Mage::helper('mailchimp')->__('500'))
+            array('value' => 50, 'label' => Mage::helper('squalomail')->__('50')),
+            array('value' => 100, 'label' => Mage::helper('squalomail')->__('100')),
+            array('value' => 200, 'label' => Mage::helper('squalomail')->__('200')),
+            array('value' => 500, 'label' => Mage::helper('squalomail')->__('500'))
         );
     }
 }

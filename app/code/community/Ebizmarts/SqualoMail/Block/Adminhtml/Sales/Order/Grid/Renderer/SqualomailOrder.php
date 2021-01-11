@@ -23,8 +23,8 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_MailchimpOrd
         $orderDate = $row->getCreatedAt();
         $helper = $this->makeHelper();
         if ($helper->isEcomSyncDataEnabled($storeId)) {
-            $mailchimpStoreId = $helper->getMCStoreId($storeId);
-            $resultArray = $this->makeApiOrders()->getSyncedOrder($orderId, $mailchimpStoreId);
+            $squalomailStoreId = $helper->getMCStoreId($storeId);
+            $resultArray = $this->makeApiOrders()->getSyncedOrder($orderId, $squalomailStoreId);
             $id = $resultArray['order_id'];
             $status = $resultArray['synced_status'];
 
@@ -49,7 +49,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_MailchimpOrd
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -57,6 +57,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_MailchimpOrd
      */
     protected function makeApiOrders()
     {
-        return Mage::getModel('mailchimp/api_orders');
+        return Mage::getModel('squalomail/api_orders');
     }
 }

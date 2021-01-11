@@ -1,36 +1,36 @@
-ul.tabs a.mailchimp-section:hover {
+ul.tabs a.squalomail-section:hover {
     background-color: #D8E6E6;
     background-image: url(../../../images/tabs_link_over_bg.gif);
 }
 
-ul.tabs a.mailchimp-section {
+ul.tabs a.squalomail-section {
     border-bottom: 1px;
     border-bottom-style: dotted;
     text-indent: -9999px;
 }
 
-ul.tabs a.mailchimp-section:hover {
+ul.tabs a.squalomail-section:hover {
     border-bottom: 1px;
     border-bottom-style: dotted;
     text-indent: -9999px;
 }
 
-ul.tabs a.mailchimp-section span,
-ul.tabs a.mailchimp-section:hover span {
-    background: url(../images/mailchimp-tab.png) no-repeat 18px;
+ul.tabs a.squalomail-section span,
+ul.tabs a.squalomail-section:hover span {
+    background: url(../images/squalomail-tab.png) no-repeat 18px;
     overflow: hidden;
     padding-left: 20px;
     background-size: contain;
 
 }
 
-ul.tabs a.mailchimp-section.active, ul.tabs a.mailchimp-section.active:hover {
+ul.tabs a.squalomail-section.active, ul.tabs a.squalomail-section.active:hover {
     background: white;
     border-bottom-color: #8BA5A5;
 }
 
-h3.mailchimp-header {
-    background: url(../images/mailchimp-tab.png) no-repeat 0 0;
+h3.squalomail-header {
+    background: url(../images/squalomail-tab.png) no-repeat 0 0;
     height: 22px;
     overflow: hidden;
     padding-left: 20px;;
@@ -39,13 +39,13 @@ h3.mailchimp-header {
     background-size: contain;
 }
 
-fieldset#mailchimp_general p.note a.mc-link {
-    background: url(../images/mailchimp-ico.png) no-repeat left top;
+fieldset#squalomail_general p.note a.mc-link {
+    background: url(../images/squalomail-ico.png) no-repeat left top;
     padding-left: 18px;
     padding-bottom: 4px;
 }
 
-.mailchimp-nowarp {
+.squalomail-nowarp {
     white-space: nowrap;
 }
 
@@ -54,7 +54,7 @@ button.add span span, button.cancel span span, button.delete span span {
     padding-left: 0;
 }
 
-tr#row_mailchimp_general_account_details ul {
+tr#row_squalomail_general_account_details ul {
     padding: 5px;
     color: #444;
     background-color: #fdfdfd;
@@ -92,17 +92,17 @@ tr#row_mailchimp_general_account_details ul {
 * Progress Bar
 */
 
-div.mailchimp-notice {
+div.squalomail-notice {
     background: #EAF0EE;
     border: 1px solid #CCCCCC;
     margin-bottom: 10px;
     padding: 11px 0 0 10px;
 }
 
-.mailchimp-image {
+.squalomail-image {
     margin: 0 0 4px 10px;
 }
 
-textarea#mailchimp_general_interest_success_before, textarea#mailchimp_general_interest_success_after {
+textarea#squalomail_general_interest_success_before, textarea#squalomail_general_interest_success_after {
     height: 5em;
 }

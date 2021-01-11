@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Model_Resource_Interestgroup extends Mage_Core_Model_R
      */
     public function _construct()
     {
-        $this->_init('mailchimp/interestgroup', 'id');
+        $this->_init('squalomail/interestgroup', 'id');
     }
 
     /**

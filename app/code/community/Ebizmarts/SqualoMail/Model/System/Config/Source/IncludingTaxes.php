@@ -27,6 +27,6 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_IncludingTaxes
      */
     protected function getHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 }

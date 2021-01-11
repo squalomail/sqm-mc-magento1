@@ -5,8 +5,8 @@ $installer = $this;
 try {
     $installer->run(
         "
-ALTER TABLE `{$this->getTable('mailchimp_ecommerce_sync_data')}`
-ADD INDEX `mailchimp_store_id` (`mailchimp_store_id`), ADD INDEX `related_id` (`related_id`);
+ALTER TABLE `{$this->getTable('squalomail_ecommerce_sync_data')}`
+ADD INDEX `squalomail_store_id` (`squalomail_store_id`), ADD INDEX `related_id` (`related_id`);
 "
     );
 } catch (Exception $e) {

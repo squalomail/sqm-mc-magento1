@@ -12,7 +12,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
     {
         $storeName = 'Madison Island - English';
         $date = '2017-10-23-19-34-31-92333600';
-        $mailchimpStoreId = hash('md5', $storeName . '_' . $date);
+        $squalomailStoreId = hash('md5', $storeName . '_' . $date);
         $apiKey = 'z1x2c3v4b5n6m7k8l9p0-us1';
         $listId = 'a1s2d3f4g5';
         $currencyCode = 'USD';
@@ -26,7 +26,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
         $address = 'address';
         $successMessage = "The Mailchimp store was successfully created.";
         $response = array(
-            'id' => $mailchimpStoreId,
+            'id' => $squalomailStoreId,
             'list_id' => $listId,
             'name' => $storeName,
             'platform' => 'Magento',
@@ -57,7 +57,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
         );
         $configValues = array(
             array(
-                Ebizmarts_MailChimp_Model_Config::ECOMMERCE_MC_JS_URL . "_$mailchimpStoreId",
+                Ebizmarts_MailChimp_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
                 $response['connected_site']['site_script']['url']
             )
         );
@@ -116,7 +116,7 @@ class Ebizmarts_MailChimp_Model_Api_StoresTest extends PHPUnit_Framework_TestCas
             ->expects($this->once())
             ->method('addStore')
             ->with(
-                $apiMock, $mailchimpStoreId, $listId, $storeName,
+                $apiMock, $squalomailStoreId, $listId, $storeName,
                 $currencyCode, $isSyncing, $storeDomain, $storeEmail,
                 $currencySymbol, $primaryLocale, $timeZone, $storePhone, $address
             )->willReturn($response);

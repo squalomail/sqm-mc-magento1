@@ -19,11 +19,11 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_WebhookDelete
      */
     public function toOptionArray()
     {
-        $mailchimpHelper = Mage::helper('mailchimp');
+        $squalomailHelper = Mage::helper('squalomail');
 
         return array(
-            array('value' => 0, 'label' => $mailchimpHelper->__('Unsubscribe')),
-            array('value' => 1, 'label' => $mailchimpHelper->__('Delete subscriber'))
+            array('value' => 0, 'label' => $squalomailHelper->__('Unsubscribe')),
+            array('value' => 1, 'label' => $squalomailHelper->__('Delete subscriber'))
         );
     }
 }

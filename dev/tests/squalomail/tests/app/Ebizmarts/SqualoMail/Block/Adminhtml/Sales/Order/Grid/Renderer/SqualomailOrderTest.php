@@ -40,7 +40,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_MailchimpOrd
     public function testRender($syncedData)
     {
         $orderId = $syncedData['order_id'];
-        $mailchimpStoreId = '5axx998994cxxxx47e6b3b5dxxxx26e2';
+        $squalomailStoreId = '5axx998994cxxxx47e6b3b5dxxxx26e2';
         $storeId = 1;
         $status = $syncedData['synced_status'];
         $orderDate = $syncedData['order_date'];
@@ -82,14 +82,14 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Sales_Order_Grid_Renderer_MailchimpOrd
         $orderMock->expects($this->once())->method('getEntityId')->willReturn($orderId);
         $orderMock->expects($this->once())->method('getCreatedAt')->willReturn($orderDate);
 
-        $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($mailchimpStoreId);
+        $helperMock->expects($this->once())->method('getMCStoreId')->with($storeId)->willReturn($squalomailStoreId);
         $helperMock->expects($this->once())->method('isEcomSyncDataEnabled')->with($storeId)->willReturn(true);
         $helperMock->expects($this->any())->method('getEcommerceFirstDate')->with($storeId)->willReturn($firstDate);
 
         $modelMock
             ->expects($this->once())
             ->method('getSyncedOrder')
-            ->with($orderId, $mailchimpStoreId)
+            ->with($orderId, $squalomailStoreId)
             ->willReturn($syncedData);
 
         $result = $blockMock->render($orderMock);

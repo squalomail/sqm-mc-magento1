@@ -19,7 +19,7 @@ class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
      */
     public function log($message, $storeId)
     {
-        if (Mage::helper('mailchimp/mandrill')->isMandrillLogEnabled($storeId)) {
+        if (Mage::helper('squalomail/mandrill')->isMandrillLogEnabled($storeId)) {
             Mage::log($message, null, 'Mandrill_Request.log', true);
         }
     }
@@ -51,7 +51,7 @@ class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
      */
     public function isMandrillLogEnabled($scopeId = 0, $scope = null)
     {
-        return Mage::helper('mailchimp')
+        return Mage::helper('squalomail')
             ->getConfigValueForScope(
                 Ebizmarts_MailChimp_Model_Config::MANDRILL_LOG,
                 $scopeId,
@@ -68,7 +68,7 @@ class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
      */
     public function isMandrillEnabled($scopeId = 0, $scope = null)
     {
-        return Mage::helper('mailchimp')
+        return Mage::helper('squalomail')
             ->getConfigValueForScope(
                 Ebizmarts_MailChimp_Model_Config::MANDRILL_ACTIVE,
                 $scopeId,
@@ -85,9 +85,9 @@ class Ebizmarts_MailChimp_Helper_Mandrill extends Mage_Core_Helper_Abstract
      */
     public function getMandrillApiKey($scopeId = 0, $scope = null)
     {
-        $mailchimpHelper = Mage::helper('mailchimp');
-        return $mailchimpHelper->decryptData(
-            $mailchimpHelper
+        $squalomailHelper = Mage::helper('squalomail');
+        return $squalomailHelper->decryptData(
+            $squalomailHelper
                 ->getConfigValueForScope(
                     Ebizmarts_MailChimp_Model_Config::MANDRILL_APIKEY,
                     $scopeId,

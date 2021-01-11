@@ -250,7 +250,7 @@ class Ebizmarts_MailChimp_Model_Email_Template extends Ebizmarts_MailChimp_Model
      */
     protected function makeMandrillHelper()
     {
-        return Mage::helper('mailchimp/mandrill');
+        return Mage::helper('squalomail/mandrill');
     }
 
     /**

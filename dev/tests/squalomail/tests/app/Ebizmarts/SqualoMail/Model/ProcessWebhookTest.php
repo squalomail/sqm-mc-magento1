@@ -16,16 +16,16 @@ class Ebizmarts_MailChimp_Model_ProcessWebhookTest extends PHPUnit_Framework_Tes
             ->setMethods(array('getMailchimpTagsModel'))
             ->getMock();
 
-        $mailchimpTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
+        $squalomailTagsApiMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags::class)
             ->disableOriginalConstructor()
             ->setMethods(array('processMergeFields'))
             ->getMock();
 
         $processWebhookMock->expects($this->once())
             ->method('getMailchimpTagsModel')
-            ->willReturn($mailchimpTagsApiMock);
+            ->willReturn($squalomailTagsApiMock);
 
-        $mailchimpTagsApiMock->expects($this->once())
+        $squalomailTagsApiMock->expects($this->once())
             ->method('processMergeFields')
             ->with($data)
             ->willReturnSelf();

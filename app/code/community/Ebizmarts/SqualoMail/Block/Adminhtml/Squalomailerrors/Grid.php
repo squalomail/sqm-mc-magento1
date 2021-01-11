@@ -16,7 +16,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
     public function __construct()
     {
         parent::__construct();
-        $this->setId('mailchimp_mailchimperrors_grid');
+        $this->setId('squalomail_squalomailerrors_grid');
         $this->setDefaultSort('id');
         $this->setDefaultDir('DESC');
         $this->setUseAjax(true);
@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('mailchimp/mailchimperrors')->getCollection();
+        $collection = Mage::getModel('squalomail/squalomailerrors')->getCollection();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -35,7 +35,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'title',
             array(
-            'header' => Mage::helper('mailchimp')->__('Title'),
+            'header' => Mage::helper('squalomail')->__('Title'),
             'index' => 'title',
             'sortable' => true
             )
@@ -43,7 +43,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'status',
             array(
-            'header' => Mage::helper('mailchimp')->__('Status'),
+            'header' => Mage::helper('squalomail')->__('Status'),
             'index' => 'status',
             'width' => '100px',
             'sortable' => true
@@ -52,7 +52,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'regtype',
             array(
-            'header' => Mage::helper('mailchimp')->__('Reg Type'),
+            'header' => Mage::helper('squalomail')->__('Reg Type'),
             'index' => 'regtype',
             'width' => '100px',
             'sortable' => true
@@ -61,7 +61,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'store_id',
             array(
-                'header' => Mage::helper('mailchimp')->__('Store Id'),
+                'header' => Mage::helper('squalomail')->__('Store Id'),
                 'index' => 'store_id',
                 'sortable' => false
             )
@@ -69,7 +69,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'errors',
             array(
-                'header' => Mage::helper('mailchimp')->__('Error'),
+                'header' => Mage::helper('squalomail')->__('Error'),
                 'index'  => 'errors',
                 'sortable' => false
             )
@@ -77,7 +77,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'batch_id',
             array(
-                'header' => Mage::helper('mailchimp')->__('Batch ID'),
+                'header' => Mage::helper('squalomail')->__('Batch ID'),
                 'index'  => 'batch_id',
                 'sortable' => false
             )
@@ -85,7 +85,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'action_donwload',
             array(
-                'header'   => $this->helper('mailchimp')->__('Download Response'),
+                'header'   => $this->helper('squalomail')->__('Download Response'),
                 'width'    => 15,
                 'sortable' => false,
                 'filter'   => false,
@@ -94,7 +94,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
                 'actions'  => array(
                     array(
                         'url'     => array('base'=> '*/*/downloadresponse'),
-                        'caption' => $this->helper('mailchimp')->__('Download'),
+                        'caption' => $this->helper('squalomail')->__('Download'),
                         'field'   => 'id'
                     ),
                 )
@@ -103,16 +103,16 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimperrors_Grid extends Mage_Admi
         $this->addColumn(
             'original_id',
             array(
-            'header' => Mage::helper('mailchimp')->__('Original'),
+            'header' => Mage::helper('squalomail')->__('Original'),
             'index' => 'original_id',
             'sortable' => false,
-            'renderer' => 'mailchimp/adminhtml_mailchimperrors_link'
+            'renderer' => 'squalomail/adminhtml_squalomailerrors_link'
             )
         );
         $this->addColumn(
             'created_at',
             array(
-                'header' => Mage::helper('mailchimp')->__('Created At'),
+                'header' => Mage::helper('squalomail')->__('Created At'),
                 'index' => 'created_at',
                 'sortable' => true,
             )

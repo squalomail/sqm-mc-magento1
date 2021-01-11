@@ -1,6 +1,6 @@
 <?php
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -42,8 +42,8 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
 
     public function __construct()
     {
-        $this->_helper = Mage::helper('mailchimp');
-        $this->_dateHelper = Mage::helper('mailchimp/date');
+        $this->_helper = Mage::helper('squalomail');
+        $this->_dateHelper = Mage::helper('squalomail/date');
     }
 
     /**
@@ -214,7 +214,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_InterestGroupHandle
      */
     protected function getInterestGroupModel()
     {
-        return Mage::getModel('mailchimp/interestgroup');
+        return Mage::getModel('squalomail/interestgroup');
     }
 
     /**

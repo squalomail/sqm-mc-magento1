@@ -16,7 +16,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_ResendSubscribers
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('ebizmarts/mailchimp/system/config/resendsubscribers.phtml');
+        $this->setTemplate('ebizmarts/squalomail/system/config/resendsubscribers.phtml');
     }
 
     protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element)
@@ -48,7 +48,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_ResendSubscribers
     {
         $helper = $this->makeHelper();
         $scopeArray = $helper->getCurrentScope();
-        return Mage::helper('adminhtml')->getUrl('adminhtml/mailchimp/resendSubscribers', $scopeArray);
+        return Mage::helper('adminhtml')->getUrl('adminhtml/squalomail/resendSubscribers', $scopeArray);
     }
 
     /**
@@ -56,6 +56,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_ResendSubscribers
      */
     protected function makeHelper()
     {
-        return $this->helper('mailchimp');
+        return $this->helper('squalomail');
     }
 }

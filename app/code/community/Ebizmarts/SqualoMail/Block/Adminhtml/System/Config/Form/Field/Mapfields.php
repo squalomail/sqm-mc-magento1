@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
         $this->_helper = $this->makeHelper();
 
         $this->addColumn(
-            'mailchimp',
+            'squalomail',
             array(
             'label' => $this->_helper->__('Mailchimp'),
             'style' => 'width:120px',
@@ -40,7 +40,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
         );
         $this->_addAfter = false;
         parent::__construct();
-        $this->setTemplate('ebizmarts/mailchimp/system/config/form/field/array_dropdown.phtml');
+        $this->setTemplate('ebizmarts/squalomail/system/config/form/field/array_dropdown.phtml');
 
         $this->_customerAttributes = array();
         $attrSetId = Mage::getResourceModel('eav/entity_attribute_collection')
@@ -137,6 +137,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_Form_Field_Mapfields
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 }

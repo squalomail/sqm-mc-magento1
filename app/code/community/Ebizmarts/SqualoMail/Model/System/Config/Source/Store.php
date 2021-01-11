@@ -92,7 +92,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Store
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**

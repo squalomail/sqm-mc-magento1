@@ -12,10 +12,10 @@ $generalList = $this->getGeneralList();
         var subscribeValue = '';
         var checkedLists = '';
         <?php if (!$force) : ?>
-        if ($('mailchimp-subscribe')) {
-            checkedLists = $('mailchimp-subscribe').getValue();
+        if ($('squalomail-subscribe')) {
+            checkedLists = $('squalomail-subscribe').getValue();
             subscribeValue = checkedLists + ',';
-            $('mailchimp-subscribe').remove();
+            $('squalomail-subscribe').remove();
         }
         <?php endif; ?>
 
@@ -26,8 +26,8 @@ $generalList = $this->getGeneralList();
         //if checked add this element else remove it
         if (element.checked || hidden) {
             var inputer = new Element('input', {
-                name: "mailchimp_subscribe",
-                id: "mailchimp-subscribe",
+                name: "squalomail_subscribe",
+                id: "squalomail-subscribe",
                 value: subscribeValue + element.readAttribute('value'),
                 type: "hidden"
             });
@@ -44,8 +44,8 @@ $generalList = $this->getGeneralList();
                 arrCheckedLists.splice(pos, 1);
                 checkedLists = arrCheckedLists.join(',');
                 var inputer = new Element('input', {
-                    name: "mailchimp_subscribe",
-                    id: "mailchimp-subscribe",
+                    name: "squalomail_subscribe",
+                    id: "squalomail-subscribe",
                     value: checkedLists,
                     type: "hidden"
                 });
@@ -69,17 +69,17 @@ endif; ?>>
         <h1><?php echo $this->escapeQuote($this->__('Newsletter Subscription')); ?></h1>
     </div>
     <?php echo $this->getBlockHtml('formkey'); ?>
-    <div class="mailchimp-multisubscribe">
-        <ul class="mailchimp-general-list">
+    <div class="squalomail-multisubscribe">
+        <ul class="squalomail-general-list">
             <li class="listdata"><input<?php if ($check): ?> checked="checked"<?php
            endif; ?> type="checkbox"
                      onchange="addSubscribeToPost(this);"
                      name="list[<?php echo $this->escapeHtml($generalList); ?>][subscribed]"
-                     id="mailchimp-trigger"
+                     id="squalomail-trigger"
                      value="<?php echo $this->escapeHtml($generalList); ?>"
                      title="<?php echo $this->escapeHtml($generalList); ?>"
-                     class="mailchimp-list-subscriber"/>
-                <label for="mailchimp-trigger">
+                     class="squalomail-list-subscriber"/>
+                <label for="squalomail-trigger">
                     <?php echo $this->escapeQuote($this->__('General Subscription')); ?>
                 </label>
             </li>
@@ -90,6 +90,6 @@ endif; ?>>
 
 <script type="text/javascript">
     //If force subscription or checked by default set the elements as clicked
-    <?php if ($addToPostOnLoad):?>addSubscribeToPost($('mailchimp-trigger'));
+    <?php if ($addToPostOnLoad):?>addSubscribeToPost($('squalomail-trigger'));
     <?php endif; ?>
 </script>

@@ -20,7 +20,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
     public function __construct()
     {
         parent::__construct();
-        $this->_helper = Mage::helper('mailchimp');
+        $this->_helper = Mage::helper('squalomail');
         $this->_storeId = Mage::app()->getStore()->getId();
     }
 
@@ -38,7 +38,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Success_Groups extends Mage_Core_Block_
      */
     public function getSuccessInterestUrl()
     {
-        $url = 'mailchimp/group/index';
+        $url = 'squalomail/group/index';
         return Mage::app()->getStore()->getUrl($url);
     }
 

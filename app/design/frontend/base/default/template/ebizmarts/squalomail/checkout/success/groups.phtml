@@ -6,7 +6,7 @@ $helper = $block->getMailChimpHelper();
 <p>
     <?php if($helper->isInterestGroupEnabled($this->_getStoreId())): ?>
     <?php echo $this->escapeQuote($block->getMessageBefore()) ?>
-<form class="form" action="<?php echo $this->escapeQuote($block->getFormUrl()) ?>" method="get" id="mailchimp-groups">
+<form class="form" action="<?php echo $this->escapeQuote($block->getFormUrl()) ?>" method="get" id="squalomail-groups">
     <fieldset class="fieldset">
         <?php foreach($interest as $i): ?>
             <div class="field">
@@ -16,8 +16,8 @@ $helper = $block->getMailChimpHelper();
                 <div class="control">
                     <div class="fields">
                         <?php echo $this->getLayout()->createBlock(
-                            'mailchimp/group_type',
-                            'mailchimp.group.type',
+                            'squalomail/group_type',
+                            'squalomail.group.type',
                             array('interests' => $i)
                         )->toHtml(); ?>
                     </div>

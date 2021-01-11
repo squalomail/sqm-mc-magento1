@@ -21,6 +21,6 @@ class Ebizmarts_MailChimp_Model_Resource_Synchbatches_Collection extends Mage_Co
     public function _construct()
     {
         parent::_construct();
-        $this->_init('mailchimp/synchbatches');
+        $this->_init('squalomail/synchbatches');
     }
 }

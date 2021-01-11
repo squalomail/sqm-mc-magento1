@@ -63,7 +63,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
      */
     protected function getMailchimpHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -71,7 +71,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
      */
     protected function getMailchimpDateHelper()
     {
-        return Mage::helper('mailchimp/date');
+        return Mage::helper('squalomail/date');
     }
 
     /**
@@ -79,7 +79,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_List extends Mage_Core_Mod
      */
     protected function getMailchimpWebhookHelper()
     {
-        return Mage::helper('mailchimp/webhook');
+        return Mage::helper('squalomail/webhook');
     }
 
     /**

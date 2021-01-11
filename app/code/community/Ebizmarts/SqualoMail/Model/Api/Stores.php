@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -43,7 +43,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
         $helper = $this->makeHelper();
         $dateHelper = $this->makeDateHelper();
         $date = $dateHelper->getDateMicrotime();
-        $mailchimpStoreId = hash('md5', $storeName . '_' . $date);
+        $squalomailStoreId = hash('md5', $storeName . '_' . $date);
 
         try {
             $api = $helper->getApiByKey($apiKey);
@@ -51,7 +51,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             $currencySymbol = $helper->getMageApp()->getLocale()->currency($currencyCode)->getSymbol();
             $response = $this->addStore(
                 $api,
-                $mailchimpStoreId,
+                $squalomailStoreId,
                 $listId,
                 $storeName,
                 $currencyCode,
@@ -66,7 +66,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             );
             $configValues = array(
                 array(
-                    Ebizmarts_MailChimp_Model_Config::ECOMMERCE_MC_JS_URL . "_$mailchimpStoreId",
+                    Ebizmarts_MailChimp_Model_Config::ECOMMERCE_MC_JS_URL . "_$squalomailStoreId",
                     $response['connected_site']['site_script']['url']
                 )
             );
@@ -98,7 +98,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     /**
      * Edit Mailchimp store.
      *
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @param  $apiKey
      * @param  $storeName
      * @param  $currencyCode
@@ -112,7 +112,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
      * @throws Mage_Core_Exception
      */
     public function editMailChimpStore(
-        $mailchimpStoreId,
+        $squalomailStoreId,
         $apiKey,
         $storeName,
         $currencyCode,
@@ -129,7 +129,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
             $api = $helper->getApiByKey($apiKey);
             $currencySymbol = $helper->getMageApp()->getLocale()->currency($currencyCode)->getSymbol();
             $response = $api->getEcommerce()->getStores()->edit(
-                $mailchimpStoreId,
+                $squalomailStoreId,
                 $storeName,
                 'Magento',
                 $storeDomain,
@@ -211,20 +211,20 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     /**
      * Delete MailChimp store.
      *
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @param  $apiKey
      * @return mixed|string
      * @throws Mage_Core_Exception
      * @throws Ebizmarts_MailChimp_Helper_Data_ApiKeyException
      */
-    public function deleteMailChimpStore($mailchimpStoreId, $apiKey)
+    public function deleteMailChimpStore($squalomailStoreId, $apiKey)
     {
         $helper = $this->makeHelper();
 
         try {
             $api = $helper->getApiByKey($apiKey);
-            $response = $api->getEcommerce()->getStores()->delete($mailchimpStoreId);
-            $helper->cancelAllPendingBatches($mailchimpStoreId);
+            $response = $api->getEcommerce()->getStores()->delete($squalomailStoreId);
+            $helper->cancelAllPendingBatches($squalomailStoreId);
             $successMessage = $helper->__("The Mailchimp store was successfully deleted.");
             $adminSession = $this->getAdminSession();
             $adminSession->addSuccess($successMessage);
@@ -251,26 +251,26 @@ class Ebizmarts_MailChimp_Model_Api_Stores
     /**
      * Remove all data associated to the given Mailchimp store id.
      *
-     * @param $mailchimpStoreId
+     * @param $squalomailStoreId
      */
-    protected function deleteLocalMCStoreData($mailchimpStoreId)
+    protected function deleteLocalMCStoreData($squalomailStoreId)
     {
         $helper = $this->makeHelper();
-        $helper->deleteAllMCStoreData($mailchimpStoreId);
+        $helper->deleteAllMCStoreData($squalomailStoreId);
     }
 
     /**
      * Set is_syncing value for the given scope.
      *
-     * @param  $mailchimpApi Ebizmarts_MailChimp
+     * @param  $squalomailApi Ebizmarts_MailChimp
      * @param  $isSincingValue
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @throws MailChimp_Error
      */
-    public function editIsSyncing($mailchimpApi, $isSincingValue, $mailchimpStoreId)
+    public function editIsSyncing($squalomailApi, $isSincingValue, $squalomailStoreId)
     {
-        $mailchimpApi->getEcommerce()->getStores()->edit(
-            $mailchimpStoreId,
+        $squalomailApi->getEcommerce()->getStores()->edit(
+            $squalomailStoreId,
             null,
             null,
             null,
@@ -283,7 +283,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -291,7 +291,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
      */
     protected function makeDateHelper()
     {
-        return Mage::helper('mailchimp/date');
+        return Mage::helper('squalomail/date');
     }
 
     /**
@@ -304,7 +304,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
 
     /**
      * @param $api
-     * @param $mailchimpStoreId
+     * @param $squalomailStoreId
      * @param $listId
      * @param $storeName
      * @param $currencyCode
@@ -320,7 +320,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
      */
     protected function addStore(
         $api,
-        $mailchimpStoreId,
+        $squalomailStoreId,
         $listId,
         $storeName,
         $currencyCode,
@@ -334,7 +334,7 @@ class Ebizmarts_MailChimp_Model_Api_Stores
         $address
     ) {
         return $api->getEcommerce()->getStores()->add(
-            $mailchimpStoreId,
+            $squalomailStoreId,
             $listId,
             $storeName,
             $currencyCode,

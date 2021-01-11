@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Model_Adminhtml_Reseterrors_Comment
      */
     public function setMcHelper()
     {
-        $this->_mcHelper = Mage::helper('mailchimp');
+        $this->_mcHelper = Mage::helper('squalomail');
     }
 
     /**

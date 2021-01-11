@@ -21,6 +21,6 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata extends Mage_Core_Mod
      */
     public function _construct()
     {
-        $this->_init('mailchimp/ecommercesyncdata', 'id');
+        $this->_init('squalomail/ecommercesyncdata', 'id');
     }
 }

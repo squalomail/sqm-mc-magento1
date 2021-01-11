@@ -26,14 +26,14 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
     public function testCreateBatchJson()
     {
         $magentoStoreId = 0;
-        $mailchimpStoreId = 'dasds231231312';
+        $squalomailStoreId = 'dasds231231312';
         $oldStore = $magentoStoreId;
         $products = array();
         $productId = 15;
         $syncDataItemId = 2;
         $productData = array(
             'method' => 'POST',
-            'path' => "/ecommerce/stores/$mailchimpStoreId/products",
+            'path' => "/ecommerce/stores/$squalomailStoreId/products",
             'operation_id' => self::BATCH_ID,
             'body' => '{"id":"906","title":"test Prod","url":"http:\/\/127.0.0.1\/mcmagento-1937'
                 . '\/test-prod.html","published_at_foreign":"","description":"Test",'
@@ -84,13 +84,13 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $productsApiMock->expects($this->once())->method("isProductFlatTableEnabled")->willReturn(false);
         $productsApiMock->expects($this->once())->method("getHelper")->willReturn($helperMock);
 
-        $productsApiMock->expects($this->once())->method("getMailchimpStoreId")->willReturn($mailchimpStoreId);
+        $productsApiMock->expects($this->once())->method("getMailchimpStoreId")->willReturn($squalomailStoreId);
         $productsApiMock->expects($this->once())->method("getMagentoStoreId")->willReturn($magentoStoreId);
         $productsApiMock->expects($this->once())->method("createEcommerceProductsCollection")
             ->willReturn($productCollectionResourceMock);
 
 
-        $productCollectionResourceMock->expects($this->once())->method("setMailchimpStoreId")->with($mailchimpStoreId);
+        $productCollectionResourceMock->expects($this->once())->method("setMailchimpStoreId")->with($squalomailStoreId);
         $productCollectionResourceMock->expects($this->once())->method("setStoreId")->with($magentoStoreId);
 
         $productsApiMock->expects($this->once())->method('_markSpecialPrices');
@@ -113,7 +113,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
 
         $syncDataItemMock->expects($this->once())
             ->method('getEcommerceSyncDataItem')
-            ->with(15, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $mailchimpStoreId)
+            ->with(15, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId)
             ->willReturnSelf();
 
         $productMock
@@ -412,7 +412,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
     public function testSendModifiedProduct()
     {
         $magentoStoreId = 1;
-        $mailchimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
+        $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $groupedProductId = 1;
         $oldProductId = 2;
         $newProductId = 3;
@@ -468,7 +468,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->setMethods(array('getMailchimpSyncModified', 'getMailchimpSyncDelta', 'getEcommerceSyncDataItem'))
             ->getMock();
 
-        $productsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($mailchimpStoreId);
+        $productsApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($squalomailStoreId);
         $productsApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn($magentoStoreId);
         $productsApiMock->expects($this->once())->method('makeBatchId')->with($magentoStoreId)->willReturn($batchId);
 
@@ -519,9 +519,9 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->willReturn($syncDataItemMock);
 
         $syncDataItemMock->expects($this->exactly(3))->method('getEcommerceSyncDataItem')->withConsecutive(
-            array($groupedProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $mailchimpStoreId),
-            array($oldProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $mailchimpStoreId),
-            array($newProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $mailchimpStoreId)
+            array($groupedProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId),
+            array($oldProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId),
+            array($newProductId, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $squalomailStoreId)
         )->willReturnOnConsecutiveCalls(
             $syncDataItemMock,
             $syncDataItemMock,
@@ -666,7 +666,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
     public function testCreateDeletedProductsBatchJson()
     {
         $magentoStoreId = 0;
-        $mailchimpStoreId = 'dasds231231312';
+        $squalomailStoreId = 'dasds231231312';
         $products = array();
         $data = array(456, 789, 123);
 
@@ -697,7 +697,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $productsApiMock
             ->expects($this->once())
             ->method('getMailchimpStoreId')
-            ->willReturn($mailchimpStoreId);
+            ->willReturn($squalomailStoreId);
 
         $productsApiMock
             ->expects($this->once())
@@ -732,7 +732,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $productsApiMock
             ->expects($this->once())
             ->method('_buildDeleteProductRequest')
-            ->with($productMock, self::BATCH_ID, $mailchimpStoreId)
+            ->with($productMock, self::BATCH_ID, $squalomailStoreId)
             ->willReturn($data);
 
         $productsApiMock->createDeletedProductsBatchJson();
@@ -767,7 +767,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
     {
         $parentIdArray = array(282, 283, 284, 510, 511, 878, 880, 881);
         $productId = 877;
-        $mailchimpStoreId = '3ade9d9e52e35e9b18d95bdd4d9e9a44';
+        $squalomailStoreId = '3ade9d9e52e35e9b18d95bdd4d9e9a44';
 
         $productsApiMock = $this->_productsApiMock
             ->setMethods(array('getAllParentIds', 'markSyncDataAsModified'))
@@ -810,8 +810,8 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
         $magentoStoreId = 1;
         $entityId = 145;
         $dateToday = '2019-07-25';
-        $whereCondition = 'm4m.mailchimp_sync_delta IS NOT NULL '
-            . "AND m4m.mailchimp_sync_delta < '$dateToday 00:00:00'";
+        $whereCondition = 'm4m.squalomail_sync_delta IS NOT NULL '
+            . "AND m4m.squalomail_sync_delta < '$dateToday 00:00:00'";
 
         $helperDateMock = $this->getMockBuilder(Ebizmarts_MailChimp_Helper_Date::class)
             ->disableOriginalConstructor()
@@ -889,12 +889,12 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
                 array('special_from_date',
                     array('lteq' => $dateToday . " 23:59:59"),
                     'left'),
-                array('special_from_date', array('gt' => new Zend_Db_Expr('m4m.mailchimp_sync_delta')), 'left'),
+                array('special_from_date', array('gt' => new Zend_Db_Expr('m4m.squalomail_sync_delta')), 'left'),
                 array('special_price', array('gt' => 0), 'left'),
                 array('special_to_date',
                     array('lt' => $dateToday . " 00:00:00"),
                     'left'),
-                array('special_to_date', array('gt' => new Zend_Db_Expr('m4m.mailchimp_sync_delta')), 'left')
+                array('special_to_date', array('gt' => new Zend_Db_Expr('m4m.squalomail_sync_delta')), 'left')
             )->willReturnOnConsecutiveCalls(
                 $productsCollectionMock,
                 $productsCollectionMock,
@@ -918,7 +918,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
             ->expects($this->once())
             ->method("quoteInto")
             ->with(
-                'm4m.mailchimp_sync_delta IS NOT NULL AND m4m.mailchimp_sync_delta < ?',
+                'm4m.squalomail_sync_delta IS NOT NULL AND m4m.squalomail_sync_delta < ?',
                 $dateToday . " 00:00:00"
             )->willReturn($whereCondition);
 
@@ -951,7 +951,7 @@ class Ebizmarts_MailChimp_Model_Api_ProductsTest extends PHPUnit_Framework_TestC
 
     public function testJoinMailchimpSyncData()
     {
-        $joinCondition = "m4m.related_id = e.entity_id AND m4m.type = '%s' AND m4m.mailchimp_store_id = '%s'";
+        $joinCondition = "m4m.related_id = e.entity_id AND m4m.type = '%s' AND m4m.squalomail_store_id = '%s'";
 
         $productsApiMock = $this->_productsApiMock
             ->setMethods(array("buildMailchimpDataJoin", "executeMailchimpDataJoin", "buildMailchimpDataWhere"))

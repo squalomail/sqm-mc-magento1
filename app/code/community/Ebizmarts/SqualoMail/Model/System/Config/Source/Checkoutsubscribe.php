@@ -23,7 +23,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Checkoutsubscribe
      */
     public function toOptionArray()
     {
-        $helper = Mage::helper('mailchimp');
+        $helper = Mage::helper('squalomail');
         return array(
             array('value' => self::CHECKED_BY_DEFAULT, 'label' => $helper->__('Enabled - Checked by default')),
             array('value' => self::NOT_CHECKED_BY_DEFAULT, 'label' => $helper->__('Enabled - Not Checked by default')),

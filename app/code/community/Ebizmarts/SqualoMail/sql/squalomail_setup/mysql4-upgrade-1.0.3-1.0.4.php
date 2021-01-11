@@ -18,9 +18,9 @@ $installer->startSetup();
 try {
     $installer->run(
         "
-  ALTER TABLE `{$this->getTable('sales_flat_order')}` ADD COLUMN `mailchimp_campaign_id` VARCHAR(16) DEFAULT NULL;
-  ALTER TABLE `{$this->getTable('newsletter_subscriber')}` ADD column `mailchimp_sync_delta` datetime NOT NULL;
-  ALTER TABLE `{$this->getTable('newsletter_subscriber')}` ADD column `mailchimp_sync_error` VARCHAR(255) NOT NULL;
+  ALTER TABLE `{$this->getTable('sales_flat_order')}` ADD COLUMN `squalomail_campaign_id` VARCHAR(16) DEFAULT NULL;
+  ALTER TABLE `{$this->getTable('newsletter_subscriber')}` ADD column `squalomail_sync_delta` datetime NOT NULL;
+  ALTER TABLE `{$this->getTable('newsletter_subscriber')}` ADD column `squalomail_sync_error` VARCHAR(255) NOT NULL;
 "
     );
 } catch (Exception $e) {

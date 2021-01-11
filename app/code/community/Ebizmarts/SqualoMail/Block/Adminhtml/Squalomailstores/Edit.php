@@ -14,8 +14,8 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit extends Mage_Admi
     public function __construct()
     {
         $this->_objectId = 'id';
-        $this->_controller = 'adminhtml_mailchimpstores';
-        $this->_blockGroup = 'mailchimp';
+        $this->_controller = 'adminhtml_squalomailstores';
+        $this->_blockGroup = 'squalomail';
 
         parent::__construct();
 
@@ -62,17 +62,17 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit extends Mage_Admi
 
     public function getHeaderText()
     {
-        if (Mage::registry('current_mailchimpstore')->getId()) {
-            return $this->escapeHtml(Mage::registry('current_mailchimpstore')->getName());
+        if (Mage::registry('current_squalomailstore')->getId()) {
+            return $this->escapeHtml(Mage::registry('current_squalomailstore')->getName());
         } else {
-            return Mage::helper('mailchimp')->__('New Store');
+            return Mage::helper('squalomail')->__('New Store');
         }
     }
 
     protected function _prepareLayout()
     {
         $headBlock = Mage::app()->getLayout()->getBlock('head');
-        $headBlock->addJs('ebizmarts/mailchimp/editstores.js');
+        $headBlock->addJs('ebizmarts/squalomail/editstores.js');
         return parent::_prepareLayout();
     }
 
@@ -106,7 +106,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit extends Mage_Admi
     protected function getScopeArrayIfValueExists()
     {
         $helper = $this->makeHelper();
-        $currentMCStoreId = Mage::registry('current_mailchimpstore')->getStoreid();
+        $currentMCStoreId = Mage::registry('current_squalomailstore')->getStoreid();
         $keyIfExist = $helper->getScopeByMailChimpStoreId($currentMCStoreId);
 
         if ($keyIfExist === null) {
@@ -121,6 +121,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit extends Mage_Admi
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 }

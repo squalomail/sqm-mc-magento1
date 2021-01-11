@@ -16,7 +16,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Grid extends Mage_Admi
     public function __construct()
     {
         parent::__construct();
-        $this->setId('mailchimp_stores_grid');
+        $this->setId('squalomail_stores_grid');
         $this->setDefaultSort('id');
         $this->setDefaultDir('DESC');
         $this->setUseAjax(true);
@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Grid extends Mage_Admi
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('mailchimp/stores')->getCollection();
+        $collection = Mage::getModel('squalomail/stores')->getCollection();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -35,7 +35,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Grid extends Mage_Admi
         $this->addColumn(
             'mc_account_name',
             array(
-                'header' => Mage::helper('mailchimp')->__('MC Account name'),
+                'header' => Mage::helper('squalomail')->__('MC Account name'),
                 'index' => 'mc_account_name',
                 'width' => '100px',
                 'sortable' => true
@@ -44,7 +44,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Grid extends Mage_Admi
         $this->addColumn(
             'name',
             array(
-                'header' => Mage::helper('mailchimp')->__('Store Name'),
+                'header' => Mage::helper('squalomail')->__('Store Name'),
                 'index' => 'name',
                 'width' => '100px',
                 'sortable' => true
@@ -53,7 +53,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Grid extends Mage_Admi
         $this->addColumn(
             'list_name',
             array(
-                'header' => Mage::helper('mailchimp')->__('List Name'),
+                'header' => Mage::helper('squalomail')->__('List Name'),
                 'index' => 'list_name',
                 'sortable' => false
             )
@@ -61,7 +61,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Grid extends Mage_Admi
         $this->addColumn(
             'email_address',
             array(
-                'header' => Mage::helper('mailchimp')->__('Email'),
+                'header' => Mage::helper('squalomail')->__('Email'),
                 'index'  => 'email_address',
                 'sortable' => false
             )

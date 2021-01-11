@@ -74,7 +74,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
 
                     $mcStoreId = (empty($params))
                         ? $helper->getMCStoreId($scopeArray['scope_id'], $scopeArray['scope'])
-                        : $params['mailchimp_store_id'];
+                        : $params['squalomail_store_id'];
                     try {
                         $mcStore = (!empty($mcStoreId))
                             ? $api->getEcommerce()->getStores()->get($mcStoreId, 'list_id,name,is_syncing')
@@ -243,7 +243,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -251,18 +251,18 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Account
      */
     protected function makeMigrationHelper()
     {
-        return Mage::helper('mailchimp/migration');
+        return Mage::helper('squalomail/migration');
     }
 
     /**
-     * @param $mailchimpStoreId
+     * @param $squalomailStoreId
      * @return string
      * @throws Mage_Core_Exception
      */
-    protected function getDateSync($mailchimpStoreId)
+    protected function getDateSync($squalomailStoreId)
     {
         $date = $this->makeHelper()->getConfigValueForScope(
-            Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$mailchimpStoreId",
+            Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
             0,
             'default'
         );

@@ -1,6 +1,6 @@
 <?php
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -16,60 +16,60 @@ class MailChimp_HttpError extends MailChimp_Error
     /**
      * @var array
      */
-    protected $_mailchimpErrors;
+    protected $_squalomailErrors;
 
     /**
      * @var string
      */
-    protected $_mailchimpTitleComplete;
+    protected $_squalomailTitleComplete;
 
     /**
      * @var string
      */
-    protected $_mailchimpDetails;
+    protected $_squalomailDetails;
 
     /**
      * @var string
      */
-    protected $_mailchimpTitle;
+    protected $_squalomailTitle;
 
     /**
      * @var string
      */
-    protected $_mailchimpUrl;
+    protected $_squalomailUrl;
 
     /**
      * @var string
      */
-    protected $_mailchimpMethod;
+    protected $_squalomailMethod;
 
     /**
      * @var string
      */
-    protected $_mailchimpParams;
+    protected $_squalomailParams;
 
     public function __construct($url = "", $method = "", $params = "", $title = "", $details = "", $errors = null)
     {
         $titleComplete = $title . " for Api Call: " . $url;
         parent::__construct($titleComplete . " - " . $details);
-        $this->_mailchimpTitleComplete = $titleComplete;
-        $this->_mailchimpDetails = $details;
-        $this->_mailchimpErrors = $errors;
-        $this->_mailchimpUrl = $url;
-        $this->_mailchimpTitle = $title;
-        $this->_mailchimpMethod = $method;
-        $this->_mailchimpParams = $params;
+        $this->_squalomailTitleComplete = $titleComplete;
+        $this->_squalomailDetails = $details;
+        $this->_squalomailErrors = $errors;
+        $this->_squalomailUrl = $url;
+        $this->_squalomailTitle = $title;
+        $this->_squalomailMethod = $method;
+        $this->_squalomailParams = $params;
     }
 
     public function getFriendlyMessage()
     {
-        $friendlyMessage = $this->_mailchimpTitle . " for Api Call: ["
-            . $this->_mailchimpUrl. "] using method ["
-            .$this->_mailchimpMethod."]\n";
-        $friendlyMessage .= "\tDetail: [".$this->_mailchimpDetails."]\n";
-        if (!empty($this->_mailchimpErrors)) {
+        $friendlyMessage = $this->_squalomailTitle . " for Api Call: ["
+            . $this->_squalomailUrl. "] using method ["
+            .$this->_squalomailMethod."]\n";
+        $friendlyMessage .= "\tDetail: [".$this->_squalomailDetails."]\n";
+        if (!empty($this->_squalomailErrors)) {
             $errorDetails = "";
-            foreach ($this->_mailchimpErrors as $error) {
+            foreach ($this->_squalomailErrors as $error) {
                 $field = array_key_exists('field', $error) ? $error['field'] : '';
                 $message = array_key_exists('message', $error) ? $error['message'] : '';
                 $line = "\t\t field [$field] : $message\n";
@@ -79,10 +79,10 @@ class MailChimp_HttpError extends MailChimp_Error
             $friendlyMessage .= "\tErrors:\n".$errorDetails;
         }
 
-        if (!is_array($this->_mailchimpParams)) {
-            $friendlyMessage .= "\tParams:\n\t\t".$this->_mailchimpParams;
-        } elseif (!empty($this->_mailchimpParams)) {
-            $friendlyMessage .= "\tParams:\n\t\t" . json_encode($this->_mailchimpParams) . "\n";
+        if (!is_array($this->_squalomailParams)) {
+            $friendlyMessage .= "\tParams:\n\t\t".$this->_squalomailParams;
+        } elseif (!empty($this->_squalomailParams)) {
+            $friendlyMessage .= "\tParams:\n\t\t" . json_encode($this->_squalomailParams) . "\n";
         }
 
         return $friendlyMessage;
@@ -93,7 +93,7 @@ class MailChimp_HttpError extends MailChimp_Error
      */
     public function getMailchimpTitleComplete()
     {
-        return $this->_mailchimpTitleComplete;
+        return $this->_squalomailTitleComplete;
     }
 
     /**
@@ -101,7 +101,7 @@ class MailChimp_HttpError extends MailChimp_Error
      */
     public function getMailchimpDetails()
     {
-        return $this->_mailchimpDetails;
+        return $this->_squalomailDetails;
     }
 
     /**
@@ -109,7 +109,7 @@ class MailChimp_HttpError extends MailChimp_Error
      */
     public function getMailchimpErrors()
     {
-        return $this->_mailchimpErrors;
+        return $this->_squalomailErrors;
     }
 
     /**
@@ -117,7 +117,7 @@ class MailChimp_HttpError extends MailChimp_Error
      */
     public function getMailchimpTitle()
     {
-        return $this->_mailchimpTitle;
+        return $this->_squalomailTitle;
     }
 
     /**
@@ -125,7 +125,7 @@ class MailChimp_HttpError extends MailChimp_Error
      */
     public function getMailchimpUrl()
     {
-        return $this->_mailchimpUrl;
+        return $this->_squalomailUrl;
     }
 
     /**
@@ -133,7 +133,7 @@ class MailChimp_HttpError extends MailChimp_Error
      */
     public function getMailchimpMethod()
     {
-        return $this->_mailchimpMethod;
+        return $this->_squalomailMethod;
     }
 
     /**
@@ -141,6 +141,6 @@ class MailChimp_HttpError extends MailChimp_Error
      */
     public function getMailchimpParams()
     {
-        return $this->_mailchimpParams;
+        return $this->_squalomailParams;
     }
 }

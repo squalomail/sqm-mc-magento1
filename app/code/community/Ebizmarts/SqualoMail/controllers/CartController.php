@@ -23,12 +23,12 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
             //restore the quote
             $quote = Mage::getModel('sales/quote')->load($params['id']);
             $storeId = $quote->getStoreId();
-            $mailchimpStoreId = Mage::helper('mailchimp')->getMCStoreId($storeId);
+            $squalomailStoreId = Mage::helper('squalomail')->getMCStoreId($storeId);
             $quoteSyncData = $this->getMailchimpEcommerceSyncDataModel()
                 ->getEcommerceSyncDataItem(
                     $params['id'],
                     Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
-                    $mailchimpStoreId
+                    $squalomailStoreId
                 );
             $url = Mage::getUrl(Mage::getStoreConfig(Ebizmarts_MailChimp_Model_Config::ABANDONEDCART_PAGE, $storeId));
 
@@ -82,17 +82,17 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
         $params = $this->getRequest()->getParams();
 
         if (isset($params['coupon_id']) && isset($params['coupon_token'])) {
-            $helper = Mage::helper('mailchimp');
+            $helper = Mage::helper('squalomail');
             $id = $params['coupon_id'];
             $token = $params['coupon_token'];
             $storeId = Mage::app()->getStore()->getId();
-            $mailchimpStoreId = $helper->getMCStoreId($storeId);
+            $squalomailStoreId = $helper->getMCStoreId($storeId);
             $url = Mage::getUrl('checkout/cart');
 
             $promoCodeSyncData = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $id,
                 Ebizmarts_MailChimp_Model_Config::IS_PROMO_CODE,
-                $mailchimpStoreId
+                $squalomailStoreId
             );
             $couponId = $promoCodeSyncData->getRelatedId();
 
@@ -144,6 +144,6 @@ class Ebizmarts_MailChimp_CartController extends Mage_Checkout_CartController
      */
     public function getMailchimpEcommerceSyncDataModel()
     {
-        return Mage::getModel('mailchimp/ecommercesyncdata');
+        return Mage::getModel('squalomail/ecommercesyncdata');
     }
 }

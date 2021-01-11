@@ -1,6 +1,6 @@
 <?php
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -14,7 +14,7 @@ class Ebizmarts_MailChimp_Model_Adminhtml_Includetaxes_Comment
 {
     public function getCommentText()
     {
-        $helper = Mage::helper('mailchimp');
+        $helper = Mage::helper('squalomail');
         return $helper->__(
             'Send product price including tax if '
         )

@@ -19,7 +19,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata_Form
         $fieldset = $form->addFieldset(
             'base_fieldset',
             array(
-                'legend' => Mage::helper('mailchimp')->__('Resend Data')
+                'legend' => Mage::helper('squalomail')->__('Resend Data')
             )
         );
 

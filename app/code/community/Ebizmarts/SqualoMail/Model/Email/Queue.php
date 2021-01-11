@@ -41,7 +41,7 @@ class Ebizmarts_MailChimp_Model_Email_Queue extends Mage_Core_Model_Email_Queue
                     $storeId = Mage::app()->getStore()->getId();
                 }
 
-                if (Mage::helper('mailchimp/mandrill')->isMandrillEnabled($storeId)) {
+                if (Mage::helper('squalomail/mandrill')->isMandrillEnabled($storeId)) {
                     $parameters = new Varien_Object($message->getMessageParameters());
 
                     try {
@@ -81,7 +81,7 @@ class Ebizmarts_MailChimp_Model_Email_Queue extends Mage_Core_Model_Email_Queue
      */
     protected function _saveMessage($message)
     {
-        $mageMCDateHelper = Mage::helper('mailchimp/date');
+        $mageMCDateHelper = Mage::helper('squalomail/date');
 
         $message->setProcessedAt($mageMCDateHelper->formatDate(null, 'Y-m-d H:i:s'));
         $message->save();
@@ -205,12 +205,12 @@ class Ebizmarts_MailChimp_Model_Email_Queue extends Mage_Core_Model_Email_Queue
      */
     public function getMail($storeId)
     {
-        if (!Mage::helper('mailchimp/mandrill')->isMandrillEnabled($storeId)) {
+        if (!Mage::helper('squalomail/mandrill')->isMandrillEnabled($storeId)) {
             return null;
         }
 
-        $apiKey = Mage::helper('mailchimp/mandrill')->getMandrillApiKey($storeId);
-        Mage::helper('mailchimp/mandrill')->log("store: $storeId API: " . $apiKey, $storeId);
+        $apiKey = Mage::helper('squalomail/mandrill')->getMandrillApiKey($storeId);
+        Mage::helper('squalomail/mandrill')->log("store: $storeId API: " . $apiKey, $storeId);
         $mail = new Mandrill_Message($apiKey);
         return $mail;
     }

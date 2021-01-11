@@ -1,6 +1,6 @@
 <?php
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -362,7 +362,7 @@ class Ebizmarts_MailChimp
             'Content-Type: application/json',
         );
         // check for language param to set as browser language
-        // mailchimp uses header/browser detection for the language rather than any profile setting
+        // squalomail uses header/browser detection for the language rather than any profile setting
         if (is_array($paramsOrig) && array_key_exists('language', $paramsOrig) && !empty($paramsOrig['language'])) {
             $headers[] = 'Accept-Language: ' . $paramsOrig['language'];
         }

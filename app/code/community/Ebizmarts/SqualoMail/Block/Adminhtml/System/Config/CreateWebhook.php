@@ -12,7 +12,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateWebhook
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('ebizmarts/mailchimp/system/config/createwebhook.phtml');
+        $this->setTemplate('ebizmarts/squalomail/system/config/createwebhook.phtml');
     }
 
     protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element)
@@ -60,7 +60,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateWebhook
     {
         $helper = $this->makeHelper();
         $scopeArray = $helper->getCurrentScope();
-        return Mage::helper('adminhtml')->getUrl('adminhtml/mailchimp/createWebhook', $scopeArray);
+        return Mage::helper('adminhtml')->getUrl('adminhtml/squalomail/createWebhook', $scopeArray);
     }
 
     /**
@@ -68,6 +68,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_System_Config_CreateWebhook
      */
     protected function makeHelper()
     {
-        return $this->helper('mailchimp');
+        return $this->helper('squalomail');
     }
 }

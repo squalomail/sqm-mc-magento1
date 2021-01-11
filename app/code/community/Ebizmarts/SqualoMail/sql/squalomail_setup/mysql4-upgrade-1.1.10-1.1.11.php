@@ -18,8 +18,8 @@ $installer->startSetup();
 try {
     $installer->run(
         "
- ALTER TABLE `{$this->getTable('mailchimp_ecommerce_sync_data')}`
- ADD column `mailchimp_synced_flag` INT(1) DEFAULT NULL;
+ ALTER TABLE `{$this->getTable('squalomail_ecommerce_sync_data')}`
+ ADD column `squalomail_synced_flag` INT(1) DEFAULT NULL;
  "
     );
 } catch (Exception $e) {
@@ -29,7 +29,7 @@ try {
 try {
     $installer->run(
         "
-ALTER TABLE `{$this->getTable('mailchimp_ecommerce_sync_data')}`
+ALTER TABLE `{$this->getTable('squalomail_ecommerce_sync_data')}`
 ADD INDEX `type` (`type`);
 "
     );

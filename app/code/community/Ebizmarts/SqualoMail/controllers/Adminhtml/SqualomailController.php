@@ -19,8 +19,8 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
 
     public function preDispatch()
     {
-        $this->_helper = Mage::helper('mailchimp');
-        $this->_webhookHelper = Mage::helper('mailchimp/webhook');
+        $this->_helper = Mage::helper('squalomail');
+        $this->_webhookHelper = Mage::helper('squalomail/webhook');
         return parent::preDispatch();
     }
 
@@ -31,8 +31,8 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
         if ($customerId) {
             $block = $this->getLayout()
                 ->createBlock(
-                    'mailchimp/adminhtml_customer_edit_tab_mailchimp',
-                    'admin.customer.mailchimp'
+                    'squalomail/adminhtml_customer_edit_tab_squalomail',
+                    'admin.customer.squalomail'
                 )
                 ->setCustomerId($customerId)
                 ->setUseAjax(true);
@@ -95,7 +95,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
     {
         $helper = $this->getHelper();
         $request = $this->getRequest();
-        $mcStoreId = $request->getParam('mailchimp_store_id');
+        $mcStoreId = $request->getParam('squalomail_store_id');
         $apiKey = $request->getParam('api_key');
 
         if ($helper->isApiKeyObscure($apiKey)) {
@@ -125,7 +125,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
         $helper = $this->getHelper();
         $request = $this->getRequest();
         $apiKey = $request->getParam('api_key');
-        $mcStoreId = $request->getParam('mailchimp_store_id');
+        $mcStoreId = $request->getParam('squalomail_store_id');
 
         if ($helper->isApiKeyObscure($apiKey)) {
             $apiKey = $this->getApiKeyValue();
@@ -159,15 +159,15 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
     }
 
     /**
-     * @param $mailchimpStoreId
+     * @param $squalomailStoreId
      * @return mixed
      * @throws Mage_Core_Exception
      */
-    protected function _getDateSync($mailchimpStoreId)
+    protected function _getDateSync($squalomailStoreId)
     {
         return $this->makeHelper()
             ->getConfigValueForScope(
-                Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$mailchimpStoreId",
+                Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId",
                 0,
                 'default'
             );
@@ -187,7 +187,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
         case 'getList':
         case 'getInfo':
         case 'getInterest':
-            $acl = 'system/config/mailchimp';
+            $acl = 'system/config/squalomail';
             break;
         }
 
@@ -240,7 +240,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
     {
         return Mage::getModel(
             'Ebizmarts_MailChimp_Model_System_Config_Source_Account',
-            array('api_key' => $apiKey, 'mailchimp_store_id' => $mcStoreId)
+            array('api_key' => $apiKey, 'squalomail_store_id' => $mcStoreId)
         )->toOptionArray();
     }
 
@@ -253,7 +253,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimpController extends Mage_Adminhtml_C
     {
         return Mage::getModel(
             'Ebizmarts_MailChimp_Model_System_Config_Source_List',
-            array('api_key' => $apiKey, 'mailchimp_store_id' => $mcStoreId)
+            array('api_key' => $apiKey, 'squalomail_store_id' => $mcStoreId)
         )->toOptionArray();
     }
 

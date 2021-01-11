@@ -5,21 +5,21 @@ require_once BP . DS . 'app/code/community/Ebizmarts/MailChimp/controllers/Admin
 class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController $mailchimperrorsController
+     * @var Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController $squalomailerrorsController
      */
-    protected $_mailchimperrorsController;
+    protected $_squalomailerrorsController;
 
     public function setUp()
     {
         Mage::app('default');
-        $this->_mailchimperrorsController = $this->getMockBuilder(
+        $this->_squalomailerrorsController = $this->getMockBuilder(
             Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController::class
         );
     }
 
     public function tearDown()
     {
-        $this->_mailchimperrorsController = null;
+        $this->_squalomailerrorsController = null;
     }
 
     public function testDownloadresponseAction()
@@ -28,13 +28,13 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
         $errorId = 1;
         $storeId = 1;
         $batchId = 1;
-        $mailchimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
-        $files = array('/magento/var/mailchimp/1f103d0176/c9cf317023.json');
-        $file = '/magento/var/mailchimp/1f103d0176/c9cf317023.json';
+        $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
+        $files = array('/magento/var/squalomail/1f103d0176/c9cf317023.json');
+        $file = '/magento/var/squalomail/1f103d0176/c9cf317023.json';
         $item = array();
         $item['status_code'] = 400;
         $item['operation_id'] = 'storeid-1_CUS_2018-02-06-18-46-06-86970300_64';
-        $item['response'] = '{"type":"http://developer.squalomail.com/documentation/mailchimp/guides/error-glossary/",'
+        $item['response'] = '{"type":"http://developer.squalomail.com/documentation/squalomail/guides/error-glossary/",'
             . '"title":"Invalid Resource","status":400,"detail":"The resource submitted could not be validated. '
             . 'For field-specific details, see the \'errors\' array.","instance":"","errors":'
             . '[{"field":"email_address","message":"This email address looks fake or invalid. '
@@ -42,7 +42,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
         $items = array($item);
         $magentoBaseDir = '/magento/';
 
-        $mailchimperrorsControllerMock = $this->_mailchimperrorsController
+        $squalomailerrorsControllerMock = $this->_squalomailerrorsController
             ->disableOriginalConstructor()
             ->setMethods(
                 array('makeHelper', 'getRequest', 'getResponse', 'getMailchimperrorsModel', 'getApiBatches',
@@ -70,32 +70,32 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
             ->setMethods(array('getBatchResponse', 'getMagentoBaseDir', 'batchDirExists', 'removeBatchDir'))
             ->getMock();
 
-        $mailchimperrorsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Mailchimperrors::class)
+        $squalomailerrorsMock = $this->getMockBuilder(Ebizmarts_MailChimp_Model_Mailchimperrors::class)
             ->disableOriginalConstructor()
             ->setMethods(array('load', 'getBatchId', 'getStoreId', 'getMailchimpStoreId'))
             ->getMock();
 
-        $mailchimperrorsControllerMock->expects($this->once())->method('makeHelper')->willReturn($helperMock);
+        $squalomailerrorsControllerMock->expects($this->once())->method('makeHelper')->willReturn($helperMock);
 
-        $mailchimperrorsControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
+        $squalomailerrorsControllerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
 
         $requestMock->expects($this->once())->method('getParam')->with($paramId)->willReturn($errorId);
 
-        $mailchimperrorsControllerMock
+        $squalomailerrorsControllerMock
             ->expects($this->once())
             ->method('getMailchimperrorsModel')
-            ->willReturn($mailchimperrorsMock);
+            ->willReturn($squalomailerrorsMock);
 
-        $mailchimperrorsControllerMock->expects($this->once())->method('getApiBatches')->willReturn($apiBatchesMock);
+        $squalomailerrorsControllerMock->expects($this->once())->method('getApiBatches')->willReturn($apiBatchesMock);
 
-        $mailchimperrorsMock->expects($this->once())->method('load')->with($errorId)->willReturnSelf();
-        $mailchimperrorsMock->expects($this->once())->method('getBatchId')->willReturn($batchId);
-        $mailchimperrorsMock->expects($this->once())->method('getStoreId')->willReturn($storeId);
-        $mailchimperrorsMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($mailchimpStoreId);
+        $squalomailerrorsMock->expects($this->once())->method('load')->with($errorId)->willReturnSelf();
+        $squalomailerrorsMock->expects($this->once())->method('getBatchId')->willReturn($batchId);
+        $squalomailerrorsMock->expects($this->once())->method('getStoreId')->willReturn($storeId);
+        $squalomailerrorsMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($squalomailStoreId);
 
         $helperMock->expects($this->once())->method('isEcomSyncDataEnabled')->with($storeId)->willReturn(true);
 
-        $mailchimperrorsControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
+        $squalomailerrorsControllerMock->expects($this->once())->method('getResponse')->willReturn($responseMock);
 
         $responseMock->expects($this->exactly(2))->method('setHeader')->withConsecutive(
             array('Content-disposition', 'attachment; filename=' . $batchId . '.json'),
@@ -108,12 +108,12 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
             ->with($batchId, $storeId)
             ->willReturn($files);
 
-        $mailchimperrorsControllerMock
+        $squalomailerrorsControllerMock
             ->expects($this->once())
             ->method('getFileContent')
             ->with($file)
             ->willReturn($items);
-        $mailchimperrorsControllerMock->expects($this->once())->method('unlink')->with($file);
+        $squalomailerrorsControllerMock->expects($this->once())->method('unlink')->with($file);
 
         $apiBatchesMock->expects($this->once())->method('getMagentoBaseDir')->willReturn($magentoBaseDir);
         $apiBatchesMock
@@ -125,6 +125,6 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsControllerTest extends PHPUni
 
         $responseMock->expects($this->once())->method('setBody');
 
-        $mailchimperrorsControllerMock->downloadresponseAction();
+        $squalomailerrorsControllerMock->downloadresponseAction();
     }
 }

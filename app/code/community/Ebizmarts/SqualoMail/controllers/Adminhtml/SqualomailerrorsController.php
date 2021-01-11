@@ -21,7 +21,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
             ->_title($this->__('MailChimp'));
 
         $this->loadLayout();
-        $this->_setActiveMenu('newsletter/mailchimp');
+        $this->_setActiveMenu('newsletter/squalomail');
         $this->renderLayout();
     }
 
@@ -39,9 +39,9 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
         $apiBatches = $this->getApiBatches();
         $batchId = $error->getBatchId();
         $storeId = $error->getStoreId();
-        $mailchimpStoreId = $error->getMailchimpStoreId();
+        $squalomailStoreId = $error->getMailchimpStoreId();
 
-        if ($mailchimpStoreId) {
+        if ($squalomailStoreId) {
             $enabled = $helper->isEcomSyncDataEnabled($storeId);
         } else {
             $enabled = $helper->isSubscriptionEnabled($storeId);
@@ -95,7 +95,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
         case 'index':
         case 'grid':
         case 'downloadresponse':
-            $acl = 'newsletter/mailchimp/mailchimperrors';
+            $acl = 'newsletter/squalomail/squalomailerrors';
             break;
         }
 
@@ -107,7 +107,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -115,7 +115,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
      */
     protected function getMailchimperrorsModel()
     {
-        return Mage::getModel('mailchimp/mailchimperrors');
+        return Mage::getModel('squalomail/squalomailerrors');
     }
 
     /**
@@ -123,7 +123,7 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
      */
     protected function getApiBatches()
     {
-        return Mage::getModel('mailchimp/api_batches');
+        return Mage::getModel('squalomail/api_batches');
     }
 
     /**
@@ -150,6 +150,6 @@ class Ebizmarts_MailChimp_Adminhtml_MailchimperrorsController extends Mage_Admin
      */
     protected function getFileHelper()
     {
-        return Mage::helper('mailchimp/file');
+        return Mage::helper('squalomail/file');
     }
 }

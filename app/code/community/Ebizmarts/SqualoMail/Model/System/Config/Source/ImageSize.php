@@ -22,7 +22,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_ImageSize
      */
     public function toOptionArray()
     {
-        $helper = Mage::helper('mailchimp');
+        $helper = Mage::helper('squalomail');
         return array(
             array('value' => self::BASE, 'label' => $helper->__('Base')),
             array('value' => self::SMALL, 'label' => $helper->__('Small')),

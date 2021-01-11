@@ -23,14 +23,14 @@ class Ebizmarts_MailChimp_Model_Cron
 
     public function __construct()
     {
-        $this->_mailChimpHelper = Mage::helper('mailchimp');
-        $this->_mailChimpMigrationHelper = Mage::helper('mailchimp/migration');
+        $this->_mailChimpHelper = Mage::helper('squalomail');
+        $this->_mailChimpMigrationHelper = Mage::helper('squalomail/migration');
     }
 
     public function syncEcommerceBatchData()
     {
         if ($this->getMigrationHelper()->migrationFinished()) {
-            Mage::getModel('mailchimp/api_batches')->handleEcommerceBatches();
+            Mage::getModel('squalomail/api_batches')->handleEcommerceBatches();
         } else {
             $this->getMigrationHelper()->handleMigrationUpdates();
         }
@@ -38,22 +38,22 @@ class Ebizmarts_MailChimp_Model_Cron
 
     public function syncSubscriberBatchData()
     {
-        Mage::getModel('mailchimp/api_batches')->handleSubscriberBatches();
+        Mage::getModel('squalomail/api_batches')->handleSubscriberBatches();
     }
 
     public function processWebhookData()
     {
-        Mage::getModel('mailchimp/processWebhook')->processWebhookData();
+        Mage::getModel('squalomail/processWebhook')->processWebhookData();
     }
 
     public function deleteWebhookRequests()
     {
-        Mage::getModel('mailchimp/processWebhook')->deleteProcessed();
+        Mage::getModel('squalomail/processWebhook')->deleteProcessed();
     }
 
     public function clearEcommerceData()
     {
-        Mage::getModel('mailchimp/clearEcommerce')->clearEcommerceData();
+        Mage::getModel('squalomail/clearEcommerce')->clearEcommerceData();
     }
 
     protected function getHelper()

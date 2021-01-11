@@ -23,7 +23,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Source_Log
      */
     public function toOptionArray()
     {
-        $helper = Mage::helper('mailchimp');
+        $helper = Mage::helper('squalomail');
         return array(
             array('value' => self::NONE, 'label' => $helper->__('None')),
             array('value' => self::ERROR_LOG, 'label' => $helper->__('Error logs')),

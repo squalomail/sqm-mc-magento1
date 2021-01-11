@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -19,7 +19,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
     protected $_locale;
     protected $_directoryRegionModel;
     protected $_magentoStoreId;
-    protected $_mailchimpStoreId;
+    protected $_squalomailStoreId;
     protected $_batchId;
 
     /**
@@ -49,7 +49,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
         $collection->addAttributeToFilter(
             array(
                 array('attribute' => 'store_id', 'eq' => $this->getBatchMagentoStoreId()),
-                array('attribute' => 'mailchimp_store_view', 'eq' => $this->getBatchMagentoStoreId()),
+                array('attribute' => 'squalomail_store_view', 'eq' => $this->getBatchMagentoStoreId()),
             ),
             null,
             'left'
@@ -84,14 +84,14 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      */
     public function createBatchJson()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommerceCustomersCollection = $this->createEcommerceCustomersCollection();
-        $this->_ecommerceCustomersCollection->setMailchimpStoreId($mailchimpStoreId);
+        $this->_ecommerceCustomersCollection->setMailchimpStoreId($squalomailStoreId);
         $this->_ecommerceCustomersCollection->setStoreId($magentoStoreId);
 
-        $this->setMailchimpStoreId($mailchimpStoreId);
+        $this->setMailchimpStoreId($squalomailStoreId);
         $this->setMagentoStoreId($magentoStoreId);
         $helper = $this->getHelper();
 
@@ -119,7 +119,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
                     $dataCustomer = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $customer->getId(),
                         Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
-                        $mailchimpStoreId
+                        $squalomailStoreId
                     );
 
                     $this->incrementCounterSentPerBatch($dataCustomer, $helper);
@@ -174,7 +174,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
      */
     protected function _buildMailchimpTags($subscriber, $storeId)
     {
-        $mailChimpTags = Mage::getModel('mailchimp/api_subscribers_MailchimpTags');
+        $mailChimpTags = Mage::getModel('squalomail/api_subscribers_MailchimpTags');
         $mailChimpTags->setStoreId($storeId);
         $mailChimpTags->setSubscriber($subscriber);
         $mailChimpTags->setCustomer(
@@ -215,7 +215,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
 
         $batchData = array();
         $batchData['method'] = "PUT";
-        $batchData['path'] = "/ecommerce/stores/{$this->_mailchimpStoreId}/customers/{$customerHash}";
+        $batchData['path'] = "/ecommerce/stores/{$this->_squalomailStoreId}/customers/{$customerHash}";
         $batchData['operation_id'] = "{$this->_batchId}_{$customerId}";
         $batchData['body'] = $customerJson;
 
@@ -456,9 +456,9 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
 
     /**
      * @param $customer
-     * @param $mailchimpTags
+     * @param $squalomailTags
      */
-    protected function logCouldNotEncodeMailchimpTags($customer, $mailchimpTags)
+    protected function logCouldNotEncodeMailchimpTags($customer, $squalomailTags)
     {
         $jsonErrorMessage = json_last_error_msg();
 
@@ -673,7 +673,7 @@ class Ebizmarts_MailChimp_Model_Api_Customers extends Ebizmarts_MailChimp_Model_
         /**
          * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Customers_Collection
          */
-        $collection = Mage::getResourceModel('mailchimp/ecommercesyncdata_customers_collection');
+        $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_customers_collection');
 
         return $collection;
     }

@@ -7,7 +7,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata
     public function __construct()
     {
         $this->_controller = 'adminhtml_ecommerce';
-        $this->_blockGroup = 'mailchimp';
+        $this->_blockGroup = 'squalomail';
 
         parent::__construct();
         $this->_removeButton("delete");
@@ -17,6 +17,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Ecommerce_Resendecommercedata
 
     public function getHeaderText()
     {
-        return Mage::helper('mailchimp')->__('Data to send');
+        return Mage::helper('squalomail')->__('Data to send');
     }
 }

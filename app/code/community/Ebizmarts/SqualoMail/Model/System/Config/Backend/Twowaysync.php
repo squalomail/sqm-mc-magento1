@@ -34,6 +34,6 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Twowaysync extends Mage_Co
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 }

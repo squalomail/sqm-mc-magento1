@@ -131,7 +131,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
         $idsArray = array(1, 3, 4);
         $ids = implode($idsArray, ', ');
         $where = array("related_id IN ($ids)", "type = '" . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT . "'");
-        $tableName = 'mailchimp_ecommerce_sync_data';
+        $tableName = 'squalomail_ecommerce_sync_data';
 
         $clearEcommerce = $this->getMockBuilder(Ebizmarts_MailChimp_Model_ClearEcommerce::class)
             ->disableOriginalConstructor()
@@ -160,7 +160,7 @@ class Ebizmarts_MailChimp_Model_ClearEcommerceTest extends PHPUnit_Framework_Tes
         $coreResourceMock
             ->expects($this->once())
             ->method('getTableName')
-            ->with('mailchimp/ecommercesyncdata')
+            ->with('squalomail/ecommercesyncdata')
             ->willReturn($tableName);
 
         $writeAdapterMock

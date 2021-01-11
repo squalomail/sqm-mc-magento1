@@ -5,12 +5,12 @@ $installer = $this;
 try {
     $installer->run(
         "
- ALTER TABLE `{$this->getTable('mailchimp_ecommerce_sync_data')}`
+ ALTER TABLE `{$this->getTable('squalomail_ecommerce_sync_data')}`
  ADD column `batch_id` VARCHAR (10) DEFAULT NULL;
 "
     );
 
-    Mage::helper('mailchimp')
+    Mage::helper('squalomail')
         ->saveMailChimpConfig(
             array(
                 array(

@@ -21,6 +21,6 @@ class Ebizmarts_MailChimp_Model_Resource_Mailchimperrors extends Mage_Core_Model
      */
     public function _construct()
     {
-        $this->_init('mailchimp/mailchimperrors', 'id');
+        $this->_init('squalomail/squalomailerrors', 'id');
     }
 }

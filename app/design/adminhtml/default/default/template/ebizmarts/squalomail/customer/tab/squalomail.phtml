@@ -30,7 +30,7 @@ $interest = $this->getInterest();
                                                         data-form-part="customer_form"
                                                         value="<?php echo $this->escapeHtml($c['id']) ?>"
                                                         id="<?php
-                                                            echo $this->escapeHtml('mailchimp_group_'.$c['id'])
+                                                            echo $this->escapeHtml('squalomail_group_'.$c['id'])
                                                         ?>"
                                                         title="<?php echo $this->escapeHtml($c['name']) ?>"
                                                     <?php if ($c['checked']) {
@@ -51,7 +51,7 @@ $interest = $this->getInterest();
                                                 name="customer[interestgroup]
                                                     [<?php echo $this->escapeHtml($i['interest']['id']) ?>]"
                                                 id="<?php
-                                                    echo $this->escapeHtml('mailchimp_group_'.$i['interest']['id'])
+                                                    echo $this->escapeHtml('squalomail_group_'.$i['interest']['id'])
                                                 ?>"
                                                 title="<?php echo $this->escapeHtml($i['interest']['title']) ?>">
                                             <option value=""></option>
@@ -75,7 +75,7 @@ $interest = $this->getInterest();
                                                        type="radio"
                                                        data-form-part="customer_form"
                                                        value="<?php echo $this->escapeHtml($c['id']) ?>"
-                                                       id="<?php echo $this->escapeHtml('mailchimp_group_'.$c['id']) ?>"
+                                                       id="<?php echo $this->escapeHtml('squalomail_group_'.$c['id']) ?>"
                                                        title="<?php echo $this->escapeHtml($c['name']) ?>"
                                                     <?php if ($c['checked']) {
                                                         echo 'checked';

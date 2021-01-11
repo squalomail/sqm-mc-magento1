@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -40,11 +40,11 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     public function createBatchJson()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommerceOrdersCollection = $this->createEcommerceOrdersCollection();
-        $this->_ecommerceOrdersCollection->setMailchimpStoreId($mailchimpStoreId);
+        $this->_ecommerceOrdersCollection->setMailchimpStoreId($squalomailStoreId);
         $this->_ecommerceOrdersCollection->setStoreId($magentoStoreId);
 
         $helper = $this->getHelper();
@@ -78,7 +78,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     protected function _getModifiedOrders()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $helper = $this->getHelper();
@@ -87,12 +87,12 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         $modifiedOrders = $this->getResourceModelOrderCollection();
         // select orders for the current Magento store id
         $modifiedOrders->addFieldToFilter('store_id', array('eq' => $magentoStoreId));
-        //join with mailchimp_ecommerce_sync_data table to filter by sync data.
+        //join with squalomail_ecommerce_sync_data table to filter by sync data.
         $this->_ecommerceOrdersCollection->joinLeftEcommerceSyncData($modifiedOrders);
-        // be sure that the order are already in mailchimp and not deleted
+        // be sure that the order are already in squalomail and not deleted
         $this->_ecommerceOrdersCollection->addWhere(
             $modifiedOrders,
-            "m4m.mailchimp_sync_modified = 1",
+            "m4m.squalomail_sync_modified = 1",
             $this->getBatchLimitFromConfig()
         );
 
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                         $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::ORD_MOD);
 
                         $batchArray[$this->_counter]['method'] = "PATCH";
-                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId
+                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $squalomailStoreId
                             . '/orders/' . $incrementId;
                         $batchArray[$this->_counter]['operation_id'] = $this->_batchId . '_' . $orderId;
                         $batchArray[$this->_counter]['body'] = $orderJson;
@@ -175,7 +175,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     protected function _getNewOrders()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $helper = $this->getHelper();
@@ -194,7 +194,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         $this->_ecommerceOrdersCollection->joinLeftEcommerceSyncData($newOrders);
         $this->_ecommerceOrdersCollection->addWhere(
             $newOrders,
-            "m4m.mailchimp_sync_delta IS NULL",
+            "m4m.squalomail_sync_delta IS NULL",
             $this->getBatchLimitFromConfig()
         );
 
@@ -212,7 +212,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                         $helper->modifyCounterSentPerBatch(Ebizmarts_MailChimp_Helper_Data::ORD_NEW);
 
                         $batchArray[$this->_counter]['method'] = "POST";
-                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/orders';
+                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $squalomailStoreId . '/orders';
                         $batchArray[$this->_counter]['operation_id'] = $this->_batchId . '_' . $orderId;
                         $batchArray[$this->_counter]['body'] = $orderJson;
                         //update order delta
@@ -362,10 +362,10 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         $data = array();
         $data['id'] = $order->getIncrementId();
         $dataPromo = $this->getPromoData($order);
-        $mailchimpCampaignId = $order->getMailchimpCampaignId();
+        $squalomailCampaignId = $order->getMailchimpCampaignId();
 
-        if ($this->shouldSendCampaignId($mailchimpCampaignId, $order->getEntityId())) {
-            $data['campaign_id'] = $mailchimpCampaignId;
+        if ($this->shouldSendCampaignId($squalomailCampaignId, $order->getEntityId())) {
+            $data['campaign_id'] = $squalomailCampaignId;
         }
 
         if ($order->getMailchimpLandingPage()) {
@@ -412,11 +412,11 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     protected function _getPayloadDataLines($order)
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $apiProduct = $this->getApiProduct();
-        $apiProduct->setMailchimpStoreId($mailchimpStoreId);
+        $apiProduct->setMailchimpStoreId($squalomailStoreId);
         $apiProduct->setMagentoStoreId($magentoStoreId);
 
         $lines = array();
@@ -427,7 +427,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
             $productId = $item->getProductId();
             $isTypeProduct = $this->isTypeProduct();
             $productSyncData = $this->getMailchimpEcommerceSyncDataModel()
-                ->getEcommerceSyncDataItem($productId, $isTypeProduct, $mailchimpStoreId);
+                ->getEcommerceSyncDataItem($productId, $isTypeProduct, $squalomailStoreId);
 
             if ($this->isItemConfigurable($item)) {
                 $options = $item->getProductOptions();
@@ -460,7 +460,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                 );
 
                 if (!$isProductEnabled) {
-                    // update disabled products to remove the product from mailchimp after sending the order
+                    // update disabled products to remove the product from squalomail after sending the order
                     $apiProduct->updateDisabledProducts($productId);
                 }
             }
@@ -664,7 +664,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
             'invoicedItemAmount' => 0,
             'refundedItemAmount' => 0
         );
-        $mailchimpStatus = array(
+        $squalomailStatus = array(
             'financialStatus' => null,
             'fulfillmentStatus' => null
         );
@@ -677,17 +677,17 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
 
         if ($items['shippedItemAmount'] > 0) {
             if ($totalItemsOrdered > $items['shippedItemAmount']) {
-                $mailchimpStatus['fulfillmentStatus'] = self::PARTIALLY_SHIPPED;
+                $squalomailStatus['fulfillmentStatus'] = self::PARTIALLY_SHIPPED;
             } else {
-                $mailchimpStatus['fulfillmentStatus'] = self::SHIPPED;
+                $squalomailStatus['fulfillmentStatus'] = self::SHIPPED;
             }
         }
 
         if ($items['refundedItemAmount'] > 0) {
-            if ($mailchimpStatus > $items['refundedItemAmount']) {
+            if ($squalomailStatus > $items['refundedItemAmount']) {
                 $mailchimStatus['financialStatus'] = self::PARTIALLY_REFUNDED;
             } else {
-                $mailchimpStatus['financialStatus'] = self::REFUNDED;
+                $squalomailStatus['financialStatus'] = self::REFUNDED;
             }
         }
 
@@ -696,14 +696,14 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                 || $items['refundedItemAmount'] != $items['invoicedItemAmount']
             ) {
                 if ($totalItemsOrdered > $items['invoicedItemAmount']) {
-                    $mailchimpStatus['financialStatus'] = self::PARTIALLY_PAID;
+                    $squalomailStatus['financialStatus'] = self::PARTIALLY_PAID;
                 } else {
-                    $mailchimpStatus['financialStatus'] = self::PAID;
+                    $squalomailStatus['financialStatus'] = self::PAID;
                 }
             }
         }
 
-        return $mailchimpStatus;
+        return $squalomailStatus;
     }
 
     /**
@@ -723,11 +723,11 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      * Replace all orders with old id with the increment id on MailChimp.
      *
      * @param  $initialTime
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @param  $magentoStoreId
      * @return array
      */
-    public function replaceAllOrdersBatch($initialTime, $mailchimpStoreId, $magentoStoreId)
+    public function replaceAllOrdersBatch($initialTime, $squalomailStoreId, $magentoStoreId)
     {
         $helper = $this->getHelper();
         $dateHelper = $this->getDateHelper();
@@ -753,16 +753,16 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
 
         if(empty($this->_ecommerceOrdersCollection)){
             $this->_ecommerceOrdersCollection = $this->createEcommerceOrdersCollection();
-            $this->_ecommerceOrdersCollection->setMailchimpStoreId($mailchimpStoreId);
+            $this->_ecommerceOrdersCollection->setMailchimpStoreId($squalomailStoreId);
             $this->_ecommerceOrdersCollection->setStoreId($magentoStoreId);
         }
 
         $this->_ecommerceOrdersCollection->joinLeftEcommerceSyncData($orderCollection);
 
-        // be sure that the orders are not in mailchimp
+        // be sure that the orders are not in squalomail
         $this->_ecommerceOrdersCollection->addWhere(
             $orderCollection,
-            "m4m.mailchimp_sync_delta IS NOT NULL AND m4m.mailchimp_sync_error = ''",
+            "m4m.squalomail_sync_delta IS NOT NULL AND m4m.squalomail_sync_error = ''",
             self::BATCH_LIMIT_ONLY_ORDERS
         );
 
@@ -773,7 +773,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
 
             if (!$dateHelper->timePassed($initialTime)) {
                 $batchArray[$this->_counter]['method'] = "DELETE";
-                $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/orders/' . $orderId;
+                $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $squalomailStoreId . '/orders/' . $orderId;
                 $batchArray[$this->_counter]['operation_id'] = $this->_batchId . '_' . $orderId;
                 $batchArray[$this->_counter]['body'] = '';
                 $this->_counter += 1;
@@ -784,7 +784,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                 if ($orderJson !== false) {
                     if (!empty($orderJson)) {
                         $batchArray[$this->_counter]['method'] = "POST";
-                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/orders';
+                        $batchArray[$this->_counter]['path'] = '/ecommerce/stores/' . $squalomailStoreId . '/orders';
                         $batchArray[$this->_counter]['operation_id'] = $this->_batchId . '_' . $orderId;
                         $batchArray[$this->_counter]['body'] = $orderJson;
                         $this->_counter += 1;
@@ -834,12 +834,12 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     public function addProductNotSentData($order, $batchArray)
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $helper = $this->getHelper();
         $apiProduct = $this->getApiProduct();
-        $apiProduct->setMailchimpStoreId($mailchimpStoreId);
+        $apiProduct->setMailchimpStoreId($squalomailStoreId);
         $apiProduct->setMagentoStoreId($magentoStoreId);
         $productData = $apiProduct->sendModifiedProduct($order);
 
@@ -915,21 +915,21 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
 
     /**
      * @param $orderId
-     * @param $mailchimpStoreId
+     * @param $squalomailStoreId
      * @return array
      */
-    public function getSyncedOrder($orderId, $mailchimpStoreId)
+    public function getSyncedOrder($orderId, $squalomailStoreId)
     {
         $result = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
             $orderId,
             Ebizmarts_MailChimp_Model_Config::IS_ORDER,
-            $mailchimpStoreId
+            $squalomailStoreId
         );
 
-        $mailchimpSyncedFlag = $result->getMailchimpSyncedFlag();
-        $mailchimpOrderId = $result->getId();
+        $squalomailSyncedFlag = $result->getMailchimpSyncedFlag();
+        $squalomailOrderId = $result->getId();
 
-        return array('synced_status' => $mailchimpSyncedFlag, 'order_id' => $mailchimpOrderId);
+        return array('synced_status' => $squalomailSyncedFlag, 'order_id' => $squalomailOrderId);
     }
 
     /**
@@ -989,7 +989,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     protected function getCustomerModel()
     {
-        return Mage::getModel('mailchimp/api_customers');
+        return Mage::getModel('squalomail/api_customers');
     }
 
     /**
@@ -1028,17 +1028,17 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
     }
 
     /**
-     * @param $mailchimpCampaignId
+     * @param $squalomailCampaignId
      * @param $orderId
      * @return bool return true if the campaign is from the current list.
      * @throws Mage_Core_Exception
      */
-    public function shouldSendCampaignId($mailchimpCampaignId, $orderId)
+    public function shouldSendCampaignId($squalomailCampaignId, $orderId)
     {
         $magentoStoreId = $this->getMagentoStoreId();
         $isCampaingFromCurrentList = false;
 
-        if ($mailchimpCampaignId) {
+        if ($squalomailCampaignId) {
             $helper = $this->getHelper();
             $listId = $helper->getGeneralList($magentoStoreId);
 
@@ -1046,25 +1046,25 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                 $apiKey = $helper->getApiKey($magentoStoreId);
 
                 if ($apiKey) {
-                    if (isset($this->_listsCampaignIds[$apiKey][$listId][$mailchimpCampaignId])) {
-                        $isCampaingFromCurrentList = $this->_listsCampaignIds[$apiKey][$listId][$mailchimpCampaignId];
+                    if (isset($this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId])) {
+                        $isCampaingFromCurrentList = $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId];
                     } else {
                         $api = $helper->getApi($magentoStoreId);
-                        $campaignData = $api->getCampaign()->get($mailchimpCampaignId, 'recipients');
+                        $campaignData = $api->getCampaign()->get($squalomailCampaignId, 'recipients');
 
                         if (isset($campaignData['recipients']['list_id'])
                             && $campaignData['recipients']['list_id'] == $listId
                         ) {
-                            $this->_listsCampaignIds[$apiKey][$listId][$mailchimpCampaignId] =
+                            $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] =
                             $isCampaingFromCurrentList = true;
                         } else {
-                            $this->_listsCampaignIds[$apiKey][$listId][$mailchimpCampaignId] =
+                            $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] =
                             $isCampaingFromCurrentList = false;
                         }
                     }
                 }
             } catch (Ebizmarts_MailChimp_Helper_Data_ApiKeyException $e) {
-                $this->_listsCampaignIds[$apiKey][$listId][$mailchimpCampaignId] = $isCampaingFromCurrentList = true;
+                $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] = $isCampaingFromCurrentList = true;
                 $this->logSyncError(
                     $e->getMessage(),
                     Ebizmarts_MailChimp_Model_Config::IS_ORDER,
@@ -1076,7 +1076,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                     0
                 );
             } catch (MailChimp_Error $e) {
-                $this->_listsCampaignIds[$apiKey][$listId][$mailchimpCampaignId] = $isCampaingFromCurrentList = false;
+                $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] = $isCampaingFromCurrentList = false;
                 $this->logSyncError(
                     $e->getFriendlyMessage(),
                     Ebizmarts_MailChimp_Model_Config::IS_ORDER,
@@ -1088,7 +1088,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
                     0
                 );
             } catch (Exception $e) {
-                $this->_listsCampaignIds[$apiKey][$listId][$mailchimpCampaignId] = $isCampaingFromCurrentList = true;
+                $this->_listsCampaignIds[$apiKey][$listId][$squalomailCampaignId] = $isCampaingFromCurrentList = true;
                 $this->logSyncError(
                     $e->getMessage(),
                     Ebizmarts_MailChimp_Model_Config::IS_ORDER,
@@ -1110,7 +1110,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
      */
     protected function getApiProduct()
     {
-        return Mage::getModel('mailchimp/api_products');
+        return Mage::getModel('squalomail/api_products');
     }
 
     /**
@@ -1145,7 +1145,7 @@ class Ebizmarts_MailChimp_Model_Api_Orders extends Ebizmarts_MailChimp_Model_Api
         /**
          * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Orders_Collection
          */
-        $collection = Mage::getResourceModel('mailchimp/ecommercesyncdata_orders_collection');
+        $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_orders_collection');
 
         return $collection;
     }

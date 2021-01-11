@@ -74,7 +74,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
                 'path' => '/ecommerce/stores/ef3bf57fb9bd695a02b7f7c7fb0d2db5/promo-rules/44/promo-codes',
                 'operation_id' => 'storeid-1_PCD_2018-01-16-14-28-03-31075100_49',
                 'body' => '{"id":"49","code":"testcoupon","redemption_url":"http:\/\/127.0.0.1\/mcmagento-1937'
-                    . '\/mailchimp\/cart\/loadcoupon?coupon_id=49&coupon_token=9e0c002f6d4b39039bff794a6f294341"}'
+                    . '\/squalomail\/cart\/loadcoupon?coupon_id=49&coupon_token=9e0c002f6d4b39039bff794a6f294341"}'
             )
         );
     }
@@ -136,7 +136,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
                 'operation_id' => 'storeid-1_QUO_2018-01-16-14-28-01-40953100_681',
                 'body' => '{"id":"681","customer":{"id":"137","email_address":"santiago+testtest@ebizmarts.com",'
                     . '"opt_in_status":false,"first_name":"Santiago","last_name":"Paragarino"},'
-                    . '"checkout_url":"http:\/\/127.0.0.1\/mcmagento-1937\/mailchimp\/cart\/loadquote?'
+                    . '"checkout_url":"http:\/\/127.0.0.1\/mcmagento-1937\/squalomail\/cart\/loadquote?'
                     . 'id=681&token=0eaf8c240502056a62b9194dd2ed0859","currency_code":"USD","order_total":"10.0000",'
                     . '"tax_total":0,"lines":[{"id":"1","product_id":"906","product_variant_id":"906","quantity":1,'
                     . '"price":"10.0000"}]}'
@@ -239,7 +239,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
 
     public function testHandleEcommerceBatches($data)
     {
-        $apiStatus = $data['mailchimp_api_status'];
+        $apiStatus = $data['squalomail_api_status'];
         $ecomEnabled = $data['isEcomSyncDataEnabled'];
         $getResults = $data['_getResults'];
         $sendEcommerceBatch = $data['_sendEcommerceBatch'];
@@ -315,7 +315,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         return array(
             array(
                 array(
-                    'mailchimp_api_status' => true,
+                    'squalomail_api_status' => true,
                     'isEcomSyncDataEnabled' => 1,
                     '_getResults' => 1, '_sendEcommerceBatch' => 1,
                     'handleResendDataAfter' => 1,
@@ -326,7 +326,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             ),
             array(
                 array(
-                    'mailchimp_api_status' => false,
+                    'squalomail_api_status' => false,
                     'isEcomSyncDataEnabled' => 1,
                     '_getResults' => 0,
                     '_sendEcommerceBatch' => 0,
@@ -345,7 +345,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
 
     public function testSendEcommerceBatch($data)
     {
-        $mailchimpStoreId = 'ef3bf57fb9bd695a02b7f7c7fb0d2db5';
+        $squalomailStoreId = 'ef3bf57fb9bd695a02b7f7c7fb0d2db5';
         $magentoStoreId = 1;
         $syncingFlag = null;
         $sendPromo = $data['sendPromo'];
@@ -425,7 +425,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             ->expects($this->once())
             ->method('getMCStoreId')
             ->with($magentoStoreId)
-            ->willReturn($mailchimpStoreId);
+            ->willReturn($squalomailStoreId);
 
         $apiBatchesMock->expects($this->once())->method('deleteUnsentItems');
 
@@ -489,13 +489,13 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         $helperMock
             ->expects($this->exactly(1))
             ->method('getMCIsSyncing')
-            ->with($mailchimpStoreId)
+            ->with($squalomailStoreId)
             ->willReturn($syncingFlag);
 
         $apiBatchesMock
             ->expects($this->once())
             ->method('_processBatchOperations')
-            ->with($batchArray, $mailchimpStoreId, $magentoStoreId);
+            ->with($batchArray, $squalomailStoreId, $magentoStoreId);
 
         $apiBatchesMock->_sendEcommerceBatch($magentoStoreId);
     }
@@ -558,11 +558,11 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
 
     public function testGetResults()
     {
-        $mailchimpStoreId = 'ef3bf57fb9bd695a02b7f7c7fb0d2db5';
+        $squalomailStoreId = 'ef3bf57fb9bd695a02b7f7c7fb0d2db5';
         $magentoStoreId = 1;
         $isEcommerceData = true;
         $batchId = 'a1s2d3f4';
-        $files = array('/magento/var/mailchimp/1f103d0176/c9cf317023.json');
+        $files = array('/magento/var/squalomail/1f103d0176/c9cf317023.json');
         $status = 'completed';
         $magentoBaseDir = '/magento/';
 
@@ -607,7 +607,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
             ->expects($this->once())
             ->method('getMCStoreId')
             ->with($magentoStoreId)
-            ->willReturn($mailchimpStoreId);
+            ->willReturn($squalomailStoreId);
 
         $apiBatchesMock
             ->expects($this->once())
@@ -631,7 +631,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         $syncBatchesCollectionMock
             ->expects($this->at(1))
             ->method('addFieldToFilter')
-            ->with('store_id', array('eq' => $mailchimpStoreId))
+            ->with('store_id', array('eq' => $squalomailStoreId))
             ->willReturnSelf();
 
         $syncBatchesTwoMock
@@ -658,7 +658,7 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         $apiBatchesMock
             ->expects($this->once())
             ->method('processEachResponseFile')
-            ->with($files, $batchId, $mailchimpStoreId);
+            ->with($files, $batchId, $squalomailStoreId);
 
         $syncBatchesCollectionMock
             ->expects($this->once())
@@ -768,10 +768,10 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
     public function testHandleSyncingValue()
     {
         $magentoStoreId = 1;
-        $mailchimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
+        $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $date = '2018-02-02 00:00:00';
-        $syncedDateArray = array($mailchimpStoreId => array($magentoStoreId => $date));
-        $config = array(array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$mailchimpStoreId", $date));
+        $syncedDateArray = array($squalomailStoreId => array($magentoStoreId => $date));
+        $config = array(array(Ebizmarts_MailChimp_Model_Config::ECOMMERCE_SYNC_DATE . "_$squalomailStoreId", $date));
 
         $apiBatchesMock = $this->_apiBatchesMock
             ->disableOriginalConstructor()
@@ -801,11 +801,11 @@ class Ebizmarts_MailChimp_Model_Api_BatchesTest extends PHPUnit_Framework_TestCa
         $helperMock
             ->expects($this->once())
             ->method('getDateSyncFinishByMailChimpStoreId')
-            ->with($mailchimpStoreId)->willReturn(null);
+            ->with($squalomailStoreId)->willReturn(null);
 
         $apiBatchesMock->expects($this->once())->method('getApiStores')->willReturn($apiStoresMock);
 
-        $apiStoresMock->expects($this->once())->method('editIsSyncing')->with($apiMock, false, $mailchimpStoreId);
+        $apiStoresMock->expects($this->once())->method('editIsSyncing')->with($apiMock, false, $squalomailStoreId);
 
         $helperMock->expects($this->once())->method('saveMailchimpConfig')->with($config, 0, 'default');
 

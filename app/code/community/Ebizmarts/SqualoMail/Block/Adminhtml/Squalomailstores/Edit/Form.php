@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit_Form extends Mage
             )
         );
 
-        $store = Mage::registry('current_mailchimpstore');
+        $store = Mage::registry('current_squalomailstore');
 
         if ($store->getStoreid()) {
             $form->addField(
@@ -78,7 +78,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit_Form extends Mage
                 )
             );
 
-            $getStoresUrl = Mage::helper('adminhtml')->getUrl('adminhtml/mailchimpstores/getstores');
+            $getStoresUrl = Mage::helper('adminhtml')->getUrl('adminhtml/squalomailstores/getstores');
             $apikeyField->setAfterElementHtml("<script>var GET_STORES_URL = '".$getStoresUrl."';</script>");
 
             $fieldset->addField(
@@ -231,6 +231,6 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores_Edit_Form extends Mage
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 }

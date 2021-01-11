@@ -4,7 +4,7 @@ $installer = $this;
 
 $installer->run(
     "
-	CREATE TABLE IF NOT EXISTS `{$this->getTable('mailchimp_interest_group')}` (
+	CREATE TABLE IF NOT EXISTS `{$this->getTable('squalomail_interest_group')}` (
 	  `id` INT(10) unsigned NOT NULL auto_increment,
 	  `customer_id` INT(10) DEFAULT NULL,
 	  `subscriber_id` INT(10) DEFAULT NULL,

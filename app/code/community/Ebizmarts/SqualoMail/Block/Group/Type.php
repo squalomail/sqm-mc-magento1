@@ -15,12 +15,12 @@ class Ebizmarts_MailChimp_Block_Group_Type extends Mage_Core_Block_Template
 
     public function __construct(array $args = array())
     {
-        $this->_helper = Mage::helper('mailchimp');
+        $this->_helper = Mage::helper('squalomail');
 
         if (isset($args['interests'])) {
             $this->_currentInterest = $interests = $args['interests'];
             $type = $interests['interest']['type'];
-            $this->setTemplate("ebizmarts/mailchimp/group/type/$type.phtml");
+            $this->setTemplate("ebizmarts/squalomail/group/type/$type.phtml");
         }
 
         parent::__construct($args);

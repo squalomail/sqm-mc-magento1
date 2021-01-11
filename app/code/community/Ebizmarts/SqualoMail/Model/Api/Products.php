@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -53,11 +53,11 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     public function createBatchJson()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommerceProductsCollection = $this->createEcommerceProductsCollection();
-        $this->_ecommerceProductsCollection->setMailchimpStoreId($mailchimpStoreId);
+        $this->_ecommerceProductsCollection->setMailchimpStoreId($squalomailStoreId);
         $this->_ecommerceProductsCollection->setStoreId($magentoStoreId);
 
         $helper = $this->getHelper();
@@ -109,7 +109,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                     $dataProduct = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                         $productId,
                         Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
-                        $mailchimpStoreId
+                        $squalomailStoreId
                     );
 
                     if ($dataProduct->getId()) {
@@ -151,7 +151,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     public function createDeletedProductsBatchJson()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $deletedProducts = $this->getProductResourceCollection();
@@ -163,7 +163,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
         $counter = 0;
 
         foreach ($deletedProducts as $product) {
-            $data = $this->_buildDeleteProductRequest($product, $batchId, $mailchimpStoreId);
+            $data = $this->_buildDeleteProductRequest($product, $batchId, $squalomailStoreId);
 
             if (!empty($data)) {
                 $batchArray[$counter] = $data;
@@ -172,7 +172,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
             $this->addSyncDataError(
                 $product->getId(),
-                $mailchimpStoreId,
+                $squalomailStoreId,
                 self::PRODUCT_DISABLED_IN_MAGENTO
             );
         }
@@ -183,17 +183,17 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
     /**
      * @param $product
      * @param $batchId
-     * @param $mailchimpStoreId
+     * @param $squalomailStoreId
      * @return array
      */
-    protected function _buildDeleteProductRequest($product, $batchId, $mailchimpStoreId)
+    protected function _buildDeleteProductRequest($product, $batchId, $squalomailStoreId)
     {
         if ($this->isBundleProduct($product)) {
             return array();
         } else {
             $data = array();
             $data['method'] = "DELETE";
-            $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products/" . $product->getId();
+            $data['path'] = "/ecommerce/stores/" . $squalomailStoreId . "/products/" . $product->getId();
             $data['operation_id'] = $batchId . '_' . $product->getId();
         }
 
@@ -207,7 +207,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function _buildNewProductRequest($product, $batchId)
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $variantProducts = array();
@@ -252,7 +252,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
         $data = array();
         $data['method'] = "POST";
-        $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products";
+        $data['path'] = "/ecommerce/stores/" . $squalomailStoreId . "/products";
         $data['operation_id'] = $batchId . '_' . $product->getId();
         $data['body'] = $body;
 
@@ -268,7 +268,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function _buildUpdateProductRequest($product, $batchId)
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
         $variantProducts = array();
         $operations = array();
@@ -284,7 +284,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                 $productSyncDataItem = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                     $parentId,
                     Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
-                    $mailchimpStoreId
+                    $squalomailStoreId
                 );
 
                 if ($productSyncDataItem->getMailchimpSyncDelta()) {
@@ -322,7 +322,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
                     $data = array();
                     $data['method'] = "PATCH";
-                    $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products/" . $parent->getId();
+                    $data['path'] = "/ecommerce/stores/" . $squalomailStoreId . "/products/" . $parent->getId();
                     $data['operation_id'] = $batchId . '_' . $parent->getId();
                     $data['body'] = $body;
                     $operations[] = $data;
@@ -380,7 +380,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
         $data = array();
         $data['method'] = "PATCH";
-        $data['path'] = "/ecommerce/stores/" . $mailchimpStoreId . "/products/" . $product->getId();
+        $data['path'] = "/ecommerce/stores/" . $squalomailStoreId . "/products/" . $product->getId();
         $data['operation_id'] = $batchId . '_' . $product->getId();
         $data['body'] = $body;
         $operations[] = $data;
@@ -449,7 +449,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
                 $data["description"] = $description;
             }
 
-            //mailchimp product type and vendor (magento category)
+            //squalomail product type and vendor (magento category)
             $categoryName = $this->getProductCategories($product, $magentoStoreId);
 
             if ($categoryName) {
@@ -544,7 +544,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     public function sendModifiedProduct($order)
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $data = array();
@@ -560,7 +560,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             $productSyncData = $this->getMailchimpEcommerceSyncDataModel()->getEcommerceSyncDataItem(
                 $productId,
                 Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
-                $mailchimpStoreId
+                $squalomailStoreId
             );
 
             if ($productId != $itemProductId
@@ -824,8 +824,8 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
 
     /**
      * This function will perform the join of the collection with the table
-     * mailchimp_ecommerce_sync_data when the programcreates the batch json
-     * to send the product data to mailchimp
+     * squalomail_ecommerce_sync_data when the programcreates the batch json
+     * to send the product data to squalomail
      *
      * @param $collection
      */
@@ -841,12 +841,12 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function buildMailchimpDataJoin()
     {
-        $joinCondition = "m4m.related_id = e.entity_id AND m4m.type = '%s' AND m4m.mailchimp_store_id = '%s'";
+        $joinCondition = "m4m.related_id = e.entity_id AND m4m.type = '%s' AND m4m.squalomail_store_id = '%s'";
         return $joinCondition;
     }
 
     /**
-     * This function will perform the join of the collection with the table mailchimp_ecommerce_sync_data
+     * This function will perform the join of the collection with the table squalomail_ecommerce_sync_data
      * to mark products as modified when special price starts/ends
      *
      * @param $collection
@@ -863,7 +863,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function builMailchimpDataJoinForSpecialPrices()
     {
-        $joinCondition = $this->buildMailchimpDataJoin() . " AND m4m.mailchimp_sync_modified = 0";
+        $joinCondition = $this->buildMailchimpDataJoin() . " AND m4m.squalomail_sync_modified = 0";
         return $joinCondition;
     }
 
@@ -872,7 +872,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
      */
     protected function buildMailchimpDataWhere($collection)
     {
-        $whereCreateBatchJson = "m4m.mailchimp_sync_delta IS null OR m4m.mailchimp_sync_modified = 1";
+        $whereCreateBatchJson = "m4m.squalomail_sync_delta IS null OR m4m.squalomail_sync_modified = 1";
         $this->_ecommerceProductsCollection->addWhere($collection, $whereCreateBatchJson);
     }
 
@@ -1182,7 +1182,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
     }
 
     /**
-     * Sync to mailchimp the special price of the products
+     * Sync to squalomail the special price of the products
      *
      */
     public function _markSpecialPrices()
@@ -1209,13 +1209,13 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             'left'
         )->addAttributeToFilter(
             'special_from_date',
-            array('gt' => new Zend_Db_Expr('m4m.mailchimp_sync_delta')),
+            array('gt' => new Zend_Db_Expr('m4m.squalomail_sync_delta')),
             'left'
         );
 
         $whereCondition = $connection->quoteInto(
-            'm4m.mailchimp_sync_delta IS NOT NULL '
-            . 'AND m4m.mailchimp_sync_delta < ?',
+            'm4m.squalomail_sync_delta IS NOT NULL '
+            . 'AND m4m.squalomail_sync_delta < ?',
             $this->getDateHelper()->formatDate() . " 00:00:00"
         );
 
@@ -1243,7 +1243,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
             'left'
         )->addAttributeToFilter(
             'special_to_date',
-            array('gt' => new Zend_Db_Expr('m4m.mailchimp_sync_delta')),
+            array('gt' => new Zend_Db_Expr('m4m.squalomail_sync_delta')),
             'left'
         );
 
@@ -1302,7 +1302,7 @@ class Ebizmarts_MailChimp_Model_Api_Products extends Ebizmarts_MailChimp_Model_A
         /**
          * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection
          */
-        $collection = Mage::getResourceModel('mailchimp/ecommercesyncdata_product_collection');
+        $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_product_collection');
 
         return $collection;
     }

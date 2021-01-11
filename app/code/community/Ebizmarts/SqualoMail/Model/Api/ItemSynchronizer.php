@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -14,30 +14,30 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     /**
      * @var Ebizmarts_MailChimp_Helper_Data
      */
-    protected $_mailchimpHelper;
+    protected $_squalomailHelper;
 
     /**
      * @var Ebizmarts_MailChimp_Helper_Date
      */
-    protected $_mailchimpDateHelper;
+    protected $_squalomailDateHelper;
 
     /**
      * @return mixed
      */
     public function getMailchimpStoreId()
     {
-        return $this->_mailchimpStoreId;
+        return $this->_squalomailStoreId;
     }
 
     /**
-     * @param mixed $mailchimpStoreId
+     * @param mixed $squalomailStoreId
      */
-    public function setMailchimpStoreId($mailchimpStoreId)
+    public function setMailchimpStoreId($squalomailStoreId)
     {
-        $this->_mailchimpStoreId = $mailchimpStoreId;
+        $this->_squalomailStoreId = $squalomailStoreId;
     }
 
-    protected $_mailchimpStoreId;
+    protected $_squalomailStoreId;
 
     protected $_magentoStoreId;
 
@@ -59,8 +59,8 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
 
     public function __construct()
     {
-        $this->_mailchimpHelper = Mage::helper('mailchimp');
-        $this->_mailchimpDateHelper = Mage::helper('mailchimp/date');
+        $this->_squalomailHelper = Mage::helper('squalomail');
+        $this->_squalomailDateHelper = Mage::helper('squalomail/date');
     }
 
     /**
@@ -246,19 +246,19 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
         $storeId,
         $regType
     ) {
-        $mailchimpErrors = Mage::getModel('mailchimp/mailchimperrors');
+        $squalomailErrors = Mage::getModel('squalomail/squalomailerrors');
 
-        $mailchimpErrors->setType($type);
-        $mailchimpErrors->setTitle($title);
-        $mailchimpErrors->setStatus($status);
-        $mailchimpErrors->setErrors($error);
-        $mailchimpErrors->setRegtype($regType);
-        $mailchimpErrors->setOriginalId($originalId);
-        $mailchimpErrors->setBatchId($batchId);
-        $mailchimpErrors->setStoreId($storeId);
-        $mailchimpErrors->setMailchimpStoreId($this->getMailchimpStoreId());
+        $squalomailErrors->setType($type);
+        $squalomailErrors->setTitle($title);
+        $squalomailErrors->setStatus($status);
+        $squalomailErrors->setErrors($error);
+        $squalomailErrors->setRegtype($regType);
+        $squalomailErrors->setOriginalId($originalId);
+        $squalomailErrors->setBatchId($batchId);
+        $squalomailErrors->setStoreId($storeId);
+        $squalomailErrors->setMailchimpStoreId($this->getMailchimpStoreId());
 
-        $mailchimpErrors->save();
+        $squalomailErrors->save();
     }
 
     /**
@@ -266,7 +266,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
      */
     protected function getHelper()
     {
-        return $this->_mailchimpHelper;
+        return $this->_squalomailHelper;
     }
 
     /**
@@ -274,7 +274,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
      */
     protected function getDateHelper()
     {
-        return $this->_mailchimpDateHelper;
+        return $this->_squalomailDateHelper;
     }
 
     /**
@@ -283,7 +283,7 @@ class Ebizmarts_MailChimp_Model_Api_ItemSynchronizer
     public function getMailchimpEcommerceDataTableName()
     {
         return $this->getCoreResource()
-            ->getTableName('mailchimp/ecommercesyncdata');
+            ->getTableName('squalomail/ecommercesyncdata');
     }
 
     /**

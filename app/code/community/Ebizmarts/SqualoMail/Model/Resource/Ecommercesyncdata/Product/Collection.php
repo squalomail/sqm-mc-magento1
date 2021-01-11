@@ -29,11 +29,11 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection ex
      */
     public function joinLeftEcommerceSyncData($preFilteredProductsCollection)
     {
-        $mailchimpTableName = $this->getMailchimpEcommerceDataTableName();
+        $squalomailTableName = $this->getMailchimpEcommerceDataTableName();
         $preFilteredProductsCollection->getSelect()->joinLeft(
-            array('m4m' => $mailchimpTableName),
+            array('m4m' => $squalomailTableName),
             "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT
-            . "' AND m4m.mailchimp_store_id = '" . $this->getMailchimpStoreId() . "'",
+            . "' AND m4m.squalomail_store_id = '" . $this->getMailchimpStoreId() . "'",
             array('m4m.*')
         );
     }
@@ -44,17 +44,17 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection ex
      */
     public function executeMailchimpDataJoin($collection, $joinCondition)
     {
-        $mailchimpTableName = $this->getMailchimpEcommerceDataTableName();
+        $squalomailTableName = $this->getMailchimpEcommerceDataTableName();
         $collection->getSelect()->joinLeft(
-            array("m4m" => $mailchimpTableName),
+            array("m4m" => $squalomailTableName),
             sprintf($joinCondition, Ebizmarts_MailChimp_Model_Config::IS_PRODUCT, $this->getMailchimpStoreId()),
             array(
                 "m4m.related_id",
                 "m4m.type",
-                "m4m.mailchimp_store_id",
-                "m4m.mailchimp_sync_delta",
-                "m4m.mailchimp_sync_modified",
-                "m4m.mailchimp_synced_flag"
+                "m4m.squalomail_store_id",
+                "m4m.squalomail_sync_delta",
+                "m4m.squalomail_sync_modified",
+                "m4m.squalomail_synced_flag"
             )
         );
     }
@@ -65,7 +65,7 @@ class Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Product_Collection ex
     public function joinMailchimpSyncDataDeleted($deletedProducts, $limit = null)
     {
         $this->joinLeftEcommerceSyncData($deletedProducts);
-        $deletedProducts->getSelect()->where("m4m.mailchimp_sync_deleted = 1 AND m4m.mailchimp_sync_error = ''");
+        $deletedProducts->getSelect()->where("m4m.squalomail_sync_deleted = 1 AND m4m.squalomail_sync_error = ''");
 
         if (isset($limit)) {
             $deletedProducts->getSelect()->limit($limit);

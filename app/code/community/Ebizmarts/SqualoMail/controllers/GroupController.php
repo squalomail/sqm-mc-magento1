@@ -66,7 +66,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
      */
     protected function getHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -74,7 +74,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
      */
     protected function getDateHelper()
     {
-        return Mage::helper('mailchimp/date');
+        return Mage::helper('squalomail/date');
     }
 
     /**
@@ -82,7 +82,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
      */
     protected function getApiSubscriber()
     {
-        return Mage::getModel('mailchimp/api_subscribers');
+        return Mage::getModel('squalomail/api_subscribers');
     }
 
     /**
@@ -106,7 +106,7 @@ class Ebizmarts_MailChimp_GroupController extends Mage_Core_Controller_Front_Act
      */
     protected function getInterestGroupModel()
     {
-        return Mage::getModel('mailchimp/interestgroup');
+        return Mage::getModel('squalomail/interestgroup');
     }
 
     /**

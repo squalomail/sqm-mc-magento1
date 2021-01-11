@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -27,9 +27,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
 
     public function __construct()
     {
-        $mageMCHelper = Mage::helper('mailchimp');
+        $mageMCHelper = Mage::helper('squalomail');
         $this->setMailchimpHelper($mageMCHelper);
-        $mageMCDateHelper = Mage::helper('mailchimp/date');
+        $mageMCDateHelper = Mage::helper('squalomail/date');
         $this->setMailchimpDateHelper($mageMCDateHelper);
     }
 
@@ -98,10 +98,10 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
             ->addFieldToFilter('store_id', array('eq' => $this->getStoreId()))
             ->addFieldToFilter(
                 array(
-                    'mailchimp_sync_delta',
-                    'mailchimp_sync_delta',
-                    'mailchimp_sync_delta',
-                    'mailchimp_sync_modified'
+                    'squalomail_sync_delta',
+                    'squalomail_sync_delta',
+                    'squalomail_sync_delta',
+                    'squalomail_sync_modified'
                 ),
                 array(
                     array('null' => true),
@@ -111,7 +111,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
                 )
             );
 
-        $collection->addFieldToFilter('mailchimp_sync_error', array('eq' => ''));
+        $collection->addFieldToFilter('squalomail_sync_error', array('eq' => ''));
         $this->_ecommerceSubscribersCollection->limitCollection($collection, $limit);
         $date = $dateHelper->getDateMicrotime();
         $batchId = 'storeid-' . $this->getStoreId() . '_'
@@ -173,9 +173,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
             $subscriber->setSubscriberSource(Ebizmarts_MailChimp_Model_Subscriber::MAILCHIMP_SUBSCRIBE);
         }
 
-        $subscriber->setData("mailchimp_sync_delta", $syncDelta);
-        $subscriber->setData("mailchimp_sync_error", $error);
-        $subscriber->setData("mailchimp_sync_modified", 0);
+        $subscriber->setData("squalomail_sync_delta", $syncDelta);
+        $subscriber->setData("squalomail_sync_error", $error);
+        $subscriber->setData("squalomail_sync_modified", 0);
         $subscriber->save();
     }
 
@@ -281,9 +281,9 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
                     null,
                     null
                 );
-                $subscriber->setData("mailchimp_sync_delta", $this->_mcDateHelper->formatDate(null, 'Y-m-d H:i:s'));
-                $subscriber->setData("mailchimp_sync_error", "");
-                $subscriber->setData("mailchimp_sync_modified", 0);
+                $subscriber->setData("squalomail_sync_delta", $this->_mcDateHelper->formatDate(null, 'Y-m-d H:i:s'));
+                $subscriber->setData("squalomail_sync_error", "");
+                $subscriber->setData("squalomail_sync_modified", 0);
                 $saveSubscriber = true;
             } catch (MailChimp_Error $e) {
                 if ($this->isSubscribed($newStatus) && $subscriber->getIsStatusChanged()
@@ -610,7 +610,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
      */
     protected function _buildMailchimpTags($subscriber, $storeId)
     {
-        $mailChimpTags = Mage::getModel('mailchimp/api_subscribers_MailchimpTags');
+        $mailChimpTags = Mage::getModel('squalomail/api_subscribers_MailchimpTags');
         $mailChimpTags->setStoreId($storeId);
         $mailChimpTags->setSubscriber($subscriber);
         $mailChimpTags->setCustomer(
@@ -631,7 +631,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers
         /**
          * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_Subscribers_Collection
          */
-        $collection = Mage::getResourceModel('mailchimp/ecommercesyncdata_subscribers_collection');
+        $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_subscribers_collection');
 
         return $collection;
     }

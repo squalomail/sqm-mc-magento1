@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -32,7 +32,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
     public function __construct()
     {
         parent::__construct();
-        $this->_promoCodes = Mage::getModel('mailchimp/api_promoCodes');
+        $this->_promoCodes = Mage::getModel('squalomail/api_promoCodes');
     }
 
     /**
@@ -40,11 +40,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     public function createBatchJson()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
         $this->_ecommercePromoRulesCollection = $this->createEcommercePromoRulesCollection();
-        $this->_ecommercePromoRulesCollection->setMailchimpStoreId($mailchimpStoreId);
+        $this->_ecommercePromoRulesCollection->setMailchimpStoreId($squalomailStoreId);
         $this->_ecommercePromoRulesCollection->setStoreId($magentoStoreId);
 
         $batchArray = array();
@@ -62,7 +62,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
      */
     protected function _getModifiedAndDeletedPromoRules()
     {
-        $mailchimpStoreId = $this->getMailchimpStoreId();
+        $squalomailStoreId = $this->getMailchimpStoreId();
         $batchArray = array();
         $deletedPromoRules = $this->makeModifiedAndDeletedPromoRulesCollection();
         $counter = 0;
@@ -70,7 +70,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
         foreach ($deletedPromoRules as $promoRule) {
             $ruleId = $promoRule->getRelatedId();
             $batchArray[$counter]['method'] = "DELETE";
-            $batchArray[$counter]['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/promo-rules/' . $ruleId;
+            $batchArray[$counter]['path'] = '/ecommerce/stores/' . $squalomailStoreId . '/promo-rules/' . $ruleId;
             $batchArray[$counter]['operation_id'] = $this->_batchId . '_' . $ruleId;
             $batchArray[$counter]['body'] = '';
             $this->getPromoCodes()->deletePromoCodesSyncDataByRule($promoRule);
@@ -83,11 +83,11 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
 
     /**
      * @param $ruleId
-     * @param $mailchimpStoreId
+     * @param $squalomailStoreId
      * @param $magentoStoreId
      * @return array
      */
-    public function getNewPromoRule($ruleId, $mailchimpStoreId, $magentoStoreId)
+    public function getNewPromoRule($ruleId, $squalomailStoreId, $magentoStoreId)
     {
         $promoData = array();
         $promoRule = $this->getPromoRule($ruleId);
@@ -101,7 +101,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
             if ($promoRuleJson !== false) {
                 if (!empty($ruleData)) {
                     $promoData['method'] = "POST";
-                    $promoData['path'] = '/ecommerce/stores/' . $mailchimpStoreId . '/promo-rules';
+                    $promoData['path'] = '/ecommerce/stores/' . $squalomailStoreId . '/promo-rules';
                     $promoData['operation_id'] = 'storeid-'
                         . $magentoStoreId . '_'
                         . Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE . '_'
@@ -213,9 +213,9 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
 
         $this->_ecommercePromoRulesCollection->addWhere(
             $deletedPromoRules,
-            "mailchimp_store_id = '" . $this->getMailchimpStoreId()
+            "squalomail_store_id = '" . $this->getMailchimpStoreId()
             . "' AND type = '" . Ebizmarts_MailChimp_Model_Config::IS_PROMO_RULE
-            . "' AND (mailchimp_sync_modified = 1 OR mailchimp_sync_deleted = 1)",
+            . "' AND (squalomail_sync_modified = 1 OR squalomail_sync_deleted = 1)",
             $this->getBatchLimitFromConfig()
         );
 
@@ -343,8 +343,8 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
         );
 
         foreach ($promoRules as $promoRule) {
-            $mailchimpStoreId = $promoRule->getMailchimpStoreId();
-            $this->setMailchimpStoreId($mailchimpStoreId);
+            $squalomailStoreId = $promoRule->getMailchimpStoreId();
+            $this->setMailchimpStoreId($squalomailStoreId);
             $this->markSyncDataAsModified($ruleId);
         }
     }
@@ -455,7 +455,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRules extends Ebizmarts_MailChimp_Model
         /**
          * @var $collection Ebizmarts_MailChimp_Model_Resource_Ecommercesyncdata_PromoRules_Collection
          */
-        $collection = Mage::getResourceModel('mailchimp/ecommercesyncdata_promoRules_collection');
+        $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_promoRules_collection');
 
         return $collection;
     }

@@ -8,12 +8,12 @@ try {
     /* Check if webhook is created */
     $configDataCollection = Mage::getModel('core/config_data')
         ->getCollection()
-        ->addFieldToFilter('path', 'mailchimp/general/webhook_id');
+        ->addFieldToFilter('path', 'squalomail/general/webhook_id');
 
     /* If webhook is created, edites it and place the new "event" variable */
     if ($configDataCollection->getSize()) {
         // Sets the migration flag to edit webhooks.
-        Mage::helper('mailchimp')
+        Mage::helper('squalomail')
             ->saveMailChimpConfig(
                 array(
                     array(

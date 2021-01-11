@@ -1,6 +1,6 @@
 <?php
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -58,7 +58,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
         $this->setMailChimpDateHelper();
         $this->setMailChimpWebhookHelper();
 
-        $this->_interestGroupHandle = Mage::getModel('mailchimp/api_subscribers_InterestGroupHandle');
+        $this->_interestGroupHandle = Mage::getModel('squalomail/api_subscribers_InterestGroupHandle');
     }
 
     /**
@@ -146,13 +146,13 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     public function getMailChimpTagValue($key)
     {
-        $mailchimpTagValue = null;
+        $squalomailTagValue = null;
 
         if (isset($this->_mailChimpTags[$key])) {
-            $mailchimpTagValue = $this->_mailChimpTags[$key];
+            $squalomailTagValue = $this->_mailChimpTags[$key];
         }
 
-        return $mailchimpTagValue;
+        return $squalomailTagValue;
     }
 
     /**
@@ -188,7 +188,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
 
         foreach ($maps as $map) {
             $customAtt = $map['magento'];
-            $chimpTag = $map['mailchimp'];
+            $chimpTag = $map['squalomail'];
             if ($chimpTag && $customAtt) {
                 $key = strtoupper($chimpTag);
 
@@ -239,7 +239,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
             } else {
                 /**
                  * Mailchimp subscriber not currently in magento newsletter subscribers.
-                 * Get mailchimp subscriber status and add missing newsletter subscriber.
+                 * Get squalomail subscriber status and add missing newsletter subscriber.
                  */
                 $this->_addSubscriberData($subscriber, $fname, $lname, $email, $listId);
 
@@ -400,7 +400,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     protected function dispatchMergeVarBefore($attributeCode, &$eventValue)
     {
         Mage::dispatchEvent(
-            'mailchimp_merge_field_send_before',
+            'squalomail_merge_field_send_before',
             array(
                 'customer_id' => $this->getCustomer()->getId(),
                 'subscriber_email' => $this->getSubscriber()->getSubscriberEmail(),
@@ -418,7 +418,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     protected function dispatchEventMergeVarAfter( &$newVars)
     {
         Mage::dispatchEvent(
-            'mailchimp_merge_field_send_after',
+            'squalomail_merge_field_send_after',
             array(
                 'subscriber' => $this->getSubscriber(),
                 'vars' => $this->getMailChimpTags(),
@@ -436,13 +436,13 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     }
 
     /**
-     * @param $mailchimpTags
+     * @param $squalomailTags
      * @return bool
      */
-    protected function mergeMailchimpTags($mailchimpTags)
+    protected function mergeMailchimpTags($squalomailTags)
     {
-        if (is_array($mailchimpTags)) {
-            $this->_mailChimpTags = array_merge($this->_mailChimpTags, $mailchimpTags);
+        if (is_array($squalomailTags)) {
+            $this->_mailChimpTags = array_merge($this->_mailChimpTags, $squalomailTags);
             return true;
         } else {
             return false;
@@ -771,7 +771,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     protected function setMailChimpHelper()
     {
-        $this->_mcHelper = Mage::helper('mailchimp');
+        $this->_mcHelper = Mage::helper('squalomail');
     }
 
     /**
@@ -787,7 +787,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     protected function setMailChimpDateHelper()
     {
-        $this->_mcDateHelper = Mage::helper('mailchimp/date');
+        $this->_mcDateHelper = Mage::helper('squalomail/date');
     }
 
     /**
@@ -803,7 +803,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
      */
     protected function setMailChimpWebhookHelper()
     {
-        $this->_mcWebhookHelper = Mage::helper('mailchimp/webhook');
+        $this->_mcWebhookHelper = Mage::helper('squalomail/webhook');
     }
 
     /**
@@ -1058,7 +1058,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     }
 
     /**
-     * Iterates the mailchimp tags.
+     * Iterates the squalomail tags.
      *
      * @param $data
      * @param $listId
@@ -1082,7 +1082,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
     }
 
     /**
-     * Sets the mailchimp tag value for tue customer.
+     * Sets the squalomail tag value for tue customer.
      *
      * @param $key
      * @param $value
@@ -1097,7 +1097,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
             'dop', 'store_code');
 
         foreach ($mapFields as $map) {
-            if ($map['mailchimp'] == $key) {
+            if ($map['squalomail'] == $key) {
                 if (!in_array($map['magento'], $ignore) && !$this->_isAddress($map['magento'])) {
                     if ($key != 'GENDER') {
                         $customer->setData($map['magento'], $value);
@@ -1164,7 +1164,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
 
         foreach ($this->_mailChimpTags as $tag) {
             if ($tag['magento'] == $attrId) {
-                $magentoTag = $tag['mailchimp'];
+                $magentoTag = $tag['squalomail'];
                 break;
             }
         }
@@ -1183,7 +1183,7 @@ class Ebizmarts_MailChimp_Model_Api_Subscribers_MailchimpTags
 
         foreach ($this->_mailChimpTags as $tag) {
             if ($tag['magento'] == $attrId) {
-                $magentoTag = $tag['mailchimp'];
+                $magentoTag = $tag['squalomail'];
                 break;
             }
         }

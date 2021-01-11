@@ -25,7 +25,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
 
     public function testCreateBatchJson()
     {
-        $mailchimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
+        $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $magentoStoreId = 1;
         $promoRulesArray = array(
             array(
@@ -51,12 +51,12 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             ->disableOriginalConstructor()
             ->setMethods(array('getDateMicrotime'))->disableOriginalConstructor()->getMock();
 
-        $promoRulesApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($mailchimpStoreId);
+        $promoRulesApiMock->expects($this->once())->method('getMailchimpStoreId')->willReturn($squalomailStoreId);
         $promoRulesApiMock->expects($this->once())->method('getMagentoStoreId')->willReturn($magentoStoreId);
         $promoRulesApiMock->expects($this->once())->method('createEcommercePromoRulesCollection')
             ->willReturn($promoCollectionResourceMock);
 
-        $promoCollectionResourceMock->expects($this->once())->method('setMailchimpStoreId')->with($mailchimpStoreId);
+        $promoCollectionResourceMock->expects($this->once())->method('setMailchimpStoreId')->with($squalomailStoreId);
         $promoCollectionResourceMock->expects($this->once())->method('setStoreId')->with($magentoStoreId);
 
         $promoRulesApiMock->expects($this->once())->method('getDateHelper')->willReturn($mailChimpDateHelperMock);
@@ -77,7 +77,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
 
     public function testGetNewPromoRuleWithOutError($promoRuleData)
     {
-        $mailchimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
+        $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $magentoStoreId = 1;
         $ruleName = $promoRuleData['title'];
         $ruleSimpleAction = 'by_percent';
@@ -153,7 +153,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
 
         $return = $promoRulesApiMock->getNewPromoRule(
             self::PROMORULE_ID,
-            $mailchimpStoreId,
+            $squalomailStoreId,
             $magentoStoreId
         );
         $this->assertEquals(4, count($return));
@@ -224,7 +224,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
 
     public function testGetNewPromoRuleWithError($promoRuleData)
     {
-        $mailchimpStoreId = 'a1s2d3f4g5h6j7k8l9n0';
+        $squalomailStoreId = 'a1s2d3f4g5h6j7k8l9n0';
         $magentoStoreId = 1;
         $date = '2020-01-21 09:00:00';
         $ruleName = $promoRuleData['title'];
@@ -319,7 +319,7 @@ class Ebizmarts_MailChimp_Model_Api_PromoRulesTest extends PHPUnit_Framework_Tes
             ->with($promoRuleData['id'], $promoRuleData['error'], null, false, $date);
 
 
-        $return = $promoRulesApiMock->getNewPromoRule(self::PROMORULE_ID, $mailchimpStoreId, $magentoStoreId);
+        $return = $promoRulesApiMock->getNewPromoRule(self::PROMORULE_ID, $squalomailStoreId, $magentoStoreId);
 
         $this->assertEquals(0, count($return));
     }

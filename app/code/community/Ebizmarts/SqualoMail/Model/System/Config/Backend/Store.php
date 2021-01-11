@@ -49,7 +49,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Store extends Mage_Core_Mo
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -57,7 +57,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Store extends Mage_Core_Mo
      */
     protected function makeDateHelper()
     {
-        return Mage::helper('mailchimp/date');
+        return Mage::helper('squalomail/date');
     }
 
     /**

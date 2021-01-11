@@ -18,7 +18,7 @@ $installer->getConnection()->addColumn(
 
 $installer->run(
     "
-    CREATE TABLE IF NOT EXISTS `{$this->getTable('mailchimp_sync_batches')}` (
+    CREATE TABLE IF NOT EXISTS `{$this->getTable('squalomail_sync_batches')}` (
         `id` int(10) unsigned NOT NULL auto_increment,
         `store_id` int(11) NOT NULL,
         `batch_id` varchar(24) NOT NULL,
@@ -34,8 +34,8 @@ try {
     /**
      * @var $fileHelper Ebizmarts_MailChimp_Helper_File
      */
-    $fileHelper = Mage::helper('mailchimp/file');
-    $fileHelper->mkDir($baseDir . DS . 'var' . DS . 'mailchimp');
+    $fileHelper = Mage::helper('squalomail/file');
+    $fileHelper->mkDir($baseDir . DS . 'var' . DS . 'squalomail');
 } catch (Exception $e) {
     Mage::log($e->getMessage(), null, 'MailChimp_Errors.log', true);
 }

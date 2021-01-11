@@ -1,6 +1,6 @@
 <?php
 /**
- * mailchimp-lib Magento Component
+ * squalomail-lib Magento Component
  *
  * @category  Ebizmarts
  * @package   #PAC4#
@@ -17,17 +17,17 @@ class MailChimp_Error extends Exception
     /**
      * @var string
      */
-    protected $_mailchimpMessage;
+    protected $_squalomailMessage;
 
     public function __construct($message = "")
     {
-        $this->_mailchimpMessage = $message;
+        $this->_squalomailMessage = $message;
         parent::__construct($message);
     }
 
     public function getFriendlyMessage()
     {
-        $friendlyMessage = "Mailchimp error with the next message: " . $this->_mailchimpMessage;
+        $friendlyMessage = "Mailchimp error with the next message: " . $this->_squalomailMessage;
 
         return $friendlyMessage;
     }

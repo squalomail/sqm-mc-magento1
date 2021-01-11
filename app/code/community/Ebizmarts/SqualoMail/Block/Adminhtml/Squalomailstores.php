@@ -15,8 +15,8 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Mailchimpstores extends Mage_Adminhtml
 {
     public function __construct()
     {
-        $this->_blockGroup = 'mailchimp';
-        $this->_controller = 'adminhtml_mailchimpstores';
+        $this->_blockGroup = 'squalomail';
+        $this->_controller = 'adminhtml_squalomailstores';
         $this->_headerText = $this->__('Mailchimp stores');
 
         parent::__construct();

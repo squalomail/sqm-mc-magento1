@@ -48,7 +48,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Active extends Mage_Core_M
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**
@@ -56,7 +56,7 @@ class Ebizmarts_MailChimp_Model_System_Config_Backend_Active extends Mage_Core_M
      */
     protected function makeWebhookHelper()
     {
-        return Mage::helper('mailchimp/webhook');
+        return Mage::helper('squalomail/webhook');
     }
 
     /**

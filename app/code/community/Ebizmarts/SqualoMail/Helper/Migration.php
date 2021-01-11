@@ -29,9 +29,9 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
 
     public function __construct()
     {
-        $this->_helper = Mage::helper('mailchimp');
-        $this->_dateHelper = Mage::helper('mailchimp/date');
-        $this->_webhookHelper = Mage::helper('mailchimp/webhook');
+        $this->_helper = Mage::helper('squalomail');
+        $this->_dateHelper = Mage::helper('squalomail/date');
+        $this->_webhookHelper = Mage::helper('squalomail/webhook');
     }
 
     /**
@@ -76,7 +76,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Migrate data from version 1.1.5 to the mailchimp_ecommerce_sync_data table.
+     * Migrate data from version 1.1.5 to the squalomail_ecommerce_sync_data table.
      *
      * @param  $initialTime
      * @throws Mage_Core_Exception
@@ -88,22 +88,22 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         $arrayMigrationConfigData = array('115' => true, '116' => false, '1164' => false);
         //migrate data from older version to the new schemma
         if ($helper->isEcommerceEnabled(0)) {
-            $mailchimpStoreId = $this->getMCStoreId(0);
+            $squalomailStoreId = $this->getMCStoreId(0);
 
             //migrate customers
-            $this->_migrateCustomersFrom115($mailchimpStoreId, $initialTime);
+            $this->_migrateCustomersFrom115($squalomailStoreId, $initialTime);
 
             if (!$dateHelper->timePassed($initialTime)) {
                 //migrate products
-                $this->_migrateProductsFrom115($mailchimpStoreId, $initialTime);
+                $this->_migrateProductsFrom115($squalomailStoreId, $initialTime);
 
                 if (!$dateHelper->timePassed($initialTime)) {
                     //migrate orders
-                    $this->_migrateOrdersFrom115($mailchimpStoreId, $initialTime);
+                    $this->_migrateOrdersFrom115($squalomailStoreId, $initialTime);
 
                     if (!$dateHelper->timePassed($initialTime)) {
                         //migrate carts
-                        $finished = $this->_migrateCartsFrom115($mailchimpStoreId, $initialTime);
+                        $finished = $this->_migrateCartsFrom115($squalomailStoreId, $initialTime);
 
                         if ($finished) {
                             $this->_migrateFrom115dropColumn($arrayMigrationConfigData);
@@ -120,12 +120,12 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
      * Helper function for data migration from version 1.1.5.
      *
      * @param           $collection
-     * @param           $mailchimpStoreId
+     * @param           $squalomailStoreId
      * @param           $initialTime
      * @param Closure   $callback
      * @return bool
      */
-    protected function _makeForCollectionItem($collection, $mailchimpStoreId, $initialTime, Closure $callback)
+    protected function _makeForCollectionItem($collection, $squalomailStoreId, $initialTime, Closure $callback)
     {
         $dateHelper = $this->getDateHelper();
         $finished = false;
@@ -144,7 +144,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
             $this->_loadItemCollection($collection);
 
             foreach ($collection as $collectionItem) {
-                $callback($collectionItem, $mailchimpStoreId);
+                $callback($collectionItem, $squalomailStoreId);
             }
 
             $currentPage++;
@@ -182,12 +182,12 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         $setup = Mage::getResourceModel('catalog/setup', 'catalog_setup');
 
         try {
-            $setup->removeAttribute('catalog_product', 'mailchimp_sync_delta');
-            $setup->removeAttribute('catalog_product', 'mailchimp_sync_error');
-            $setup->removeAttribute('catalog_product', 'mailchimp_sync_modified');
-            $setup->removeAttribute('customer', 'mailchimp_sync_delta');
-            $setup->removeAttribute('customer', 'mailchimp_sync_error');
-            $setup->removeAttribute('customer', 'mailchimp_sync_modified');
+            $setup->removeAttribute('catalog_product', 'squalomail_sync_delta');
+            $setup->removeAttribute('catalog_product', 'squalomail_sync_error');
+            $setup->removeAttribute('catalog_product', 'squalomail_sync_modified');
+            $setup->removeAttribute('customer', 'squalomail_sync_delta');
+            $setup->removeAttribute('customer', 'squalomail_sync_error');
+            $setup->removeAttribute('customer', 'squalomail_sync_modified');
         } catch (Exception $e) {
             $helper->logError($e->getMessage());
         }
@@ -197,10 +197,10 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         try {
             $quoteTable = $coreResource->getTableName('sales/quote');
             $connectionQuote = $setup->getConnection();
-            $connectionQuote->dropColumn($quoteTable, 'mailchimp_sync_delta');
-            $connectionQuote->dropColumn($quoteTable, 'mailchimp_sync_error');
-            $connectionQuote->dropColumn($quoteTable, 'mailchimp_deleted');
-            $connectionQuote->dropColumn($quoteTable, 'mailchimp_token');
+            $connectionQuote->dropColumn($quoteTable, 'squalomail_sync_delta');
+            $connectionQuote->dropColumn($quoteTable, 'squalomail_sync_error');
+            $connectionQuote->dropColumn($quoteTable, 'squalomail_deleted');
+            $connectionQuote->dropColumn($quoteTable, 'squalomail_token');
         } catch (Exception $e) {
             $helper->logError($e->getMessage());
         }
@@ -208,9 +208,9 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
         try {
             $orderTable = $coreResource->getTableName('sales/order');
             $connectionOrder = $setup->getConnection();
-            $connectionOrder->dropColumn($orderTable, 'mailchimp_sync_delta');
-            $connectionOrder->dropColumn($orderTable, 'mailchimp_sync_error');
-            $connectionOrder->dropColumn($orderTable, 'mailchimp_sync_modified');
+            $connectionOrder->dropColumn($orderTable, 'squalomail_sync_delta');
+            $connectionOrder->dropColumn($orderTable, 'squalomail_sync_error');
+            $connectionOrder->dropColumn($orderTable, 'squalomail_sync_modified');
         } catch (Exception $e) {
             $helper->logError($e->getMessage());
         }
@@ -221,42 +221,42 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
      */
     protected function getMailchimpEcommerceSyncDataModel()
     {
-        return Mage::getModel('mailchimp/ecommercesyncdata');
+        return Mage::getModel('squalomail/ecommercesyncdata');
     }
 
     /**
-     * Migrate Customers from version 1.1.5 to the mailchimp_ecommerce_sync_data table.
+     * Migrate Customers from version 1.1.5 to the squalomail_ecommerce_sync_data table.
      *
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @param  $initialTime
      * @throws Mage_Core_Exception
      */
-    protected function _migrateCustomersFrom115($mailchimpStoreId, $initialTime)
+    protected function _migrateCustomersFrom115($squalomailStoreId, $initialTime)
     {
         $helper = $this->getHelper();
 
         try {
             $entityType = Mage::getSingleton('eav/config')->getEntityType('customer');
-            $attribute = Mage::getModel('customer/attribute')->loadByCode($entityType, 'mailchimp_sync_delta');
+            $attribute = Mage::getModel('customer/attribute')->loadByCode($entityType, 'squalomail_sync_delta');
 
             if ($attribute->getId()) {
-                $mailchimpTableName = $helper->getCoreResource()->getTableName('mailchimp/ecommercesyncdata');
+                $squalomailTableName = $helper->getCoreResource()->getTableName('squalomail/ecommercesyncdata');
                 $customerCollection = Mage::getResourceModel('customer/customer_collection');
-                $customerCollection->addAttributeToFilter('mailchimp_sync_delta', array('gt' => '0000-00-00 00:00:00'));
+                $customerCollection->addAttributeToFilter('squalomail_sync_delta', array('gt' => '0000-00-00 00:00:00'));
                 $customerCollection->getSelect()->joinLeft(
-                    array('m4m' => $mailchimpTableName),
+                    array('m4m' => $squalomailTableName),
                     "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER
-                    . "' AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+                    . "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
                 $customerCollection->getSelect()->where(
-                    "m4m.mailchimp_sync_delta IS null"
+                    "m4m.squalomail_sync_delta IS null"
                 );
                 $this->_makeForCollectionItem(
                     $customerCollection,
-                    $mailchimpStoreId,
+                    $squalomailStoreId,
                     $initialTime,
-                    function ($customer, $mailchimpStoreId) {
+                    function ($customer, $squalomailStoreId) {
                         $customerId = $customer->getEntityId();
                         $customerObject = Mage::getModel('customer/customer')->load($customerId);
                         $syncError = null;
@@ -275,7 +275,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $customerId,
                             Ebizmarts_MailChimp_Model_Config::IS_CUSTOMER,
-                            $mailchimpStoreId,
+                            $squalomailStoreId,
                             $syncDelta,
                             $syncError,
                             $syncModified
@@ -289,42 +289,42 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Migrate Products from version 1.1.5 to the mailchimp_ecommerce_sync_data table.
+     * Migrate Products from version 1.1.5 to the squalomail_ecommerce_sync_data table.
      *
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @param  $initialTime
      * @throws Mage_Core_Exception
      */
-    protected function _migrateProductsFrom115($mailchimpStoreId, $initialTime)
+    protected function _migrateProductsFrom115($squalomailStoreId, $initialTime)
     {
         $helper = $this->getHelper();
 
         try {
             $entityType = Mage_Catalog_Model_Product::ENTITY;
-            $attributeCode = 'mailchimp_sync_delta';
+            $attributeCode = 'squalomail_sync_delta';
             $attribute = Mage::getModel('eav/entity_attribute')->loadByCode($entityType, $attributeCode);
 
             if ($attribute->getId()) {
-                $mailchimpTableName = $helper->getCoreResource()->getTableName('mailchimp/ecommercesyncdata');
+                $squalomailTableName = $helper->getCoreResource()->getTableName('squalomail/ecommercesyncdata');
                 $productCollection = Mage::getResourceModel('catalog/product_collection');
-                $productCollection->addAttributeToFilter('mailchimp_sync_delta', array('gt' => '0000-00-00 00:00:00'));
+                $productCollection->addAttributeToFilter('squalomail_sync_delta', array('gt' => '0000-00-00 00:00:00'));
                 $productCollection->getSelect()->joinLeft(
-                    array('m4m' => $mailchimpTableName),
+                    array('m4m' => $squalomailTableName),
                     "m4m.related_id = e.entity_id AND m4m.type = '" . Ebizmarts_MailChimp_Model_Config::IS_PRODUCT
-                    . "' AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+                    . "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
-                $productCollection->getSelect()->where("m4m.mailchimp_sync_delta IS null");
+                $productCollection->getSelect()->where("m4m.squalomail_sync_delta IS null");
                 $this->_makeForCollectionItem(
                     $productCollection,
-                    $mailchimpStoreId,
+                    $squalomailStoreId,
                     $initialTime,
-                    function ($product, $mailchimpStoreId) {
+                    function ($product, $squalomailStoreId) {
                         $productId = $product->getEntityId();
                         $_resource = Mage::getResourceSingleton('catalog/product');
                         $syncDelta = $_resource->getAttributeRawValue(
                             $productId,
-                            'mailchimp_sync_delta',
+                            'squalomail_sync_delta',
                             $helper->getMageApp()->getStore()
                         );
                         $syncError = null;
@@ -342,7 +342,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $productId,
                             Ebizmarts_MailChimp_Model_Config::IS_PRODUCT,
-                            $mailchimpStoreId,
+                            $squalomailStoreId,
                             $syncDelta,
                             $syncError,
                             $syncModified
@@ -364,13 +364,13 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Migrate Orders from version 1.1.5 to the mailchimp_ecommerce_sync_data table.
+     * Migrate Orders from version 1.1.5 to the squalomail_ecommerce_sync_data table.
      *
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @param  $initialTime
      * @throws Mage_Core_Exception
      */
-    protected function _migrateOrdersFrom115($mailchimpStoreId, $initialTime)
+    protected function _migrateOrdersFrom115($squalomailStoreId, $initialTime)
     {
         $helper = $this->getHelper();
 
@@ -380,26 +380,26 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
             $tableName = $resource->getTableName('sales/order');
             $orderFields = $readConnection->describeTable($tableName);
 
-            if (isset($orderFields['mailchimp_sync_delta'])) {
-                $mailchimpTableName = $resource->getTableName('mailchimp/ecommercesyncdata');
+            if (isset($orderFields['squalomail_sync_delta'])) {
+                $squalomailTableName = $resource->getTableName('squalomail/ecommercesyncdata');
                 $orderCollection = Mage::getResourceModel('sales/order_collection');
 
                 $orderCollection->getSelect()->joinLeft(
-                    array('m4m' => $mailchimpTableName),
+                    array('m4m' => $squalomailTableName),
                     "m4m.related_id = main_table.entity_id AND m4m.type = '"
                     . Ebizmarts_MailChimp_Model_Config::IS_ORDER .
-                    "' AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+                    "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
                 $orderCollection->getSelect()
                     ->where(
-                        "m4m.mailchimp_sync_delta IS NULL AND main_table.mailchimp_sync_delta > '0000-00-00 00:00:00'"
+                        "m4m.squalomail_sync_delta IS NULL AND main_table.squalomail_sync_delta > '0000-00-00 00:00:00'"
                     );
                 $this->_makeForCollectionItem(
                     $orderCollection,
-                    $mailchimpStoreId,
+                    $squalomailStoreId,
                     $initialTime,
-                    function ($order, $mailchimpStoreId) {
+                    function ($order, $squalomailStoreId) {
                         $orderId = $order->getEntityId();
                         $syncError = null;
                         $syncModified = null;
@@ -418,7 +418,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $orderId,
                             Ebizmarts_MailChimp_Model_Config::IS_ORDER,
-                            $mailchimpStoreId,
+                            $squalomailStoreId,
                             $syncDelta,
                             $syncError,
                             $syncModified
@@ -432,14 +432,14 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Migrate Carts from version 1.1.5 to the mailchimp_ecommerce_sync_data table.
+     * Migrate Carts from version 1.1.5 to the squalomail_ecommerce_sync_data table.
      *
-     * @param  $mailchimpStoreId
+     * @param  $squalomailStoreId
      * @param  $initialTime
      * @return bool
      * @throws Mage_Core_Exception
      */
-    protected function _migrateCartsFrom115($mailchimpStoreId, $initialTime)
+    protected function _migrateCartsFrom115($squalomailStoreId, $initialTime)
     {
         $helper = $this->getHelper();
 
@@ -449,26 +449,26 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
             $tableName = $resource->getTableName('sales/quote');
             $quoteFields = $readConnection->describeTable($tableName);
 
-            if (isset($quoteFields['mailchimp_sync_delta'])) {
-                $mailchimpTableName = $resource->getTableName('mailchimp/ecommercesyncdata');
+            if (isset($quoteFields['squalomail_sync_delta'])) {
+                $squalomailTableName = $resource->getTableName('squalomail/ecommercesyncdata');
                 $quoteCollection = Mage::getResourceModel('sales/quote_collection');
                 $quoteCollection->getSelect()->joinLeft(
-                    array('m4m' => $mailchimpTableName),
+                    array('m4m' => $squalomailTableName),
                     "m4m.related_id = main_table.entity_id AND m4m.type = '"
                     . Ebizmarts_MailChimp_Model_Config::IS_QUOTE
-                    . "' AND m4m.mailchimp_store_id = '" . $mailchimpStoreId . "'",
+                    . "' AND m4m.squalomail_store_id = '" . $squalomailStoreId . "'",
                     array('m4m.*')
                 );
-                // be sure that the quotes are already in mailchimp and not deleted
+                // be sure that the quotes are already in squalomail and not deleted
                 $quoteCollection->getSelect()
                     ->where(
-                        "m4m.mailchimp_sync_delta IS NULL AND main_table.mailchimp_sync_delta > '0000-00-00 00:00:00'"
+                        "m4m.squalomail_sync_delta IS NULL AND main_table.squalomail_sync_delta > '0000-00-00 00:00:00'"
                     );
                 $finished = $this->_makeForCollectionItem(
                     $quoteCollection,
-                    $mailchimpStoreId,
+                    $squalomailStoreId,
                     $initialTime,
-                    function ($quote, $mailchimpStoreId) {
+                    function ($quote, $squalomailStoreId) {
                         $quoteId = $quote->getEntityId();
                         $syncError = null;
                         $syncDeleted = null;
@@ -492,7 +492,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                         $ecommerceSyncData->saveEcommerceSyncData(
                             $quoteId,
                             Ebizmarts_MailChimp_Model_Config::IS_QUOTE,
-                            $mailchimpStoreId,
+                            $squalomailStoreId,
                             $syncDelta,
                             $syncError,
                             null,
@@ -511,7 +511,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
                 $helper->__(
                     'Unexpected error happened during migration from version 1.1.5 to 1.1.6.'
                     . 'Please contact our support at '
-                ) . 'mailchimp@ebizmarts-desk.zendesk.com'
+                ) . 'squalomail@ebizmarts-desk.zendesk.com'
                 . $helper->__(' See error details below.')
             );
             $helper->logError($e->getMessage());
@@ -586,7 +586,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
 
             foreach ($stores as $storeId => $store) {
                 if ($helper->isEcomSyncDataEnabled($storeId)) {
-                    Mage::getModel('mailchimp/api_batches')->replaceAllOrders($initialTime, $storeId);
+                    Mage::getModel('squalomail/api_batches')->replaceAllOrders($initialTime, $storeId);
                 }
 
                 if ($dateHelper->timePassed($initialTime)) {
@@ -675,7 +675,7 @@ class Ebizmarts_MailChimp_Helper_Migration extends Mage_Core_Helper_Abstract
 
         if (!$dateHelper->timePassed($initialTime)) {
             $writeConnection = $helper->getCoreResource()->getConnection('core_write');
-            $resource = Mage::getResourceModel('mailchimp/ecommercesyncdata');
+            $resource = Mage::getResourceModel('squalomail/ecommercesyncdata');
             $writeConnection->update($resource->getMainTable(), array('batch_id' => '1'), "batch_id = 0");
             $arrayMigrationConfigData = array('115' => false, '116' => false, '1164' => true);
             $this->handleDeleteMigrationConfigData($arrayMigrationConfigData);

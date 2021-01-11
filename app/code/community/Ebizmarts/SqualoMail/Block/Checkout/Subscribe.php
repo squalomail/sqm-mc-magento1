@@ -26,7 +26,7 @@ class Ebizmarts_MailChimp_Block_Checkout_Subscribe extends Mage_Core_Block_Templ
     public function __construct()
     {
         parent::__construct();
-        $this->_helper = Mage::helper('mailchimp');
+        $this->_helper = Mage::helper('squalomail');
         $this->_storeId = Mage::app()->getStore()->getId();
     }
 

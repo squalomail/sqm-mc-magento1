@@ -29,7 +29,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Mailchimp extends Ma
     public function __construct()
     {
         parent::__construct();
-        $this->setTemplate('ebizmarts/mailchimp/customer/tab/mailchimp.phtml');
+        $this->setTemplate('ebizmarts/squalomail/customer/tab/squalomail.phtml');
         $this->_helper = $this->makeHelper();
         $customerId = (int) $this->getRequest()->getParam('id');
         if ($customerId) {
@@ -81,7 +81,7 @@ class Ebizmarts_MailChimp_Block_Adminhtml_Customer_Edit_Tab_Mailchimp extends Ma
      */
     protected function makeHelper()
     {
-        return Mage::helper('mailchimp');
+        return Mage::helper('squalomail');
     }
 
     /**

@@ -4,7 +4,7 @@ $installer = $this;
 
 $installer->run(
     "
-	CREATE TABLE IF NOT EXISTS `{$this->getTable('mailchimp_stores')}` (
+	CREATE TABLE IF NOT EXISTS `{$this->getTable('squalomail_stores')}` (
 	  `id`     INT(10) unsigned NOT NULL auto_increment,
 	  `apikey` VARCHAR(50) NOT NULL,
 	  `storeid` VARCHAR(50) NOT NULL,
