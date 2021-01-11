@@ -4,7 +4,7 @@
 
 
 /**
- * #REPO_NAME# Magento Component
+ * sqm-mc-magento1 Magento Component
  *
  * @category  Ebizmarts
  * @package   mc-magento

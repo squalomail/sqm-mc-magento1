@@ -20,7 +20,7 @@ To get a copy of the project up and running on your local machine for developmen
 
 Alternatively, use modman to install this module.
 
-``modman clone https://github.com/squalomail/#REPO_NAME#.git -b 'master'``
+``modman clone https://github.com/squalomail/sqm-mc-magento1.git -b 'master'``
 
 ## Module Configuration
 
