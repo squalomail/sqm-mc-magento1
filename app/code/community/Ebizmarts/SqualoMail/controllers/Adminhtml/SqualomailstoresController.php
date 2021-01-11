@@ -219,7 +219,7 @@ class Ebizmarts_SqualoMail_Adminhtml_SqualomailstoresController extends Mage_Adm
             ->setAddressCountry($store['address']['country'])
             ->setAddressCountryCode($store['address']['country_code'])
             ->setDomain($store['domain'])
-            ->setMcAccountName($root['account_name'])
+            ->setSqmAccountName($root['account_name'])
             ->setListName(key_exists('name', $list) ? $list['name'] : '')
             ->save();
     }

@@ -9,13 +9,13 @@ class Ebizmarts_SqualoMail_Model_Adminhtml_Resendsubscribers_Comment
 
     public function __construct()
     {
-        $this->setMcHelper();
+        $this->setSqmHelper();
     }
 
     /**
      * @return Ebizmarts_SqualoMail_Helper_Data
      */
-    public function getMcHelper()
+    public function getSqmHelper()
     {
         return $this->_sqmHelper;
     }
@@ -23,7 +23,7 @@ class Ebizmarts_SqualoMail_Model_Adminhtml_Resendsubscribers_Comment
     /**
      * @param Ebizmarts_SqualoMail_Helper_Data $sqmHelper
      */
-    public function setMcHelper()
+    public function setSqmHelper()
     {
         $this->_sqmHelper = Mage::helper('squalomail');
     }
@@ -33,7 +33,7 @@ class Ebizmarts_SqualoMail_Model_Adminhtml_Resendsubscribers_Comment
      */
     public function getCommentText()
     {
-        $helper = $this->getMcHelper();
+        $helper = $this->getSqmHelper();
         $scopeArray = $helper->getCurrentScope();
         $scope = $scopeArray['scope'];
 

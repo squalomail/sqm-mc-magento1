@@ -15,12 +15,12 @@ class Ebizmarts_SqualoMail_Model_Adminhtml_Resendecommercedata_CommentTest exten
 
         $commentMock = $this->getMockBuilder(Ebizmarts_SqualoMail_Model_Adminhtml_Resendecommercedata_Comment::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMcHelper'))
+            ->setMethods(array('getSqmHelper'))
             ->getMock();
 
         $commentMock
             ->expects($this->once())
-            ->method('getMcHelper')
+            ->method('getSqmHelper')
             ->willReturn($helperMock);
 
         $helperMock

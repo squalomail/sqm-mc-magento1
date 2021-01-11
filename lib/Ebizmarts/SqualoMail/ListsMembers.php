@@ -350,7 +350,7 @@ class SqualoMail_ListsMembers extends SqualoMail_Abstract
      * @throws SqualoMail_Error
      * @throws SqualoMail_HttpError
      */
-    public function getEmailByMcEid($listId, $sqmEidCookie)
+    public function getEmailBySqmEid($listId, $sqmEidCookie)
     {
         return $this->_master->call(
             'lists/' . $listId . '/members?unique_email_id=' . $sqmEidCookie, null, Ebizmarts_SqualoMail::GET
