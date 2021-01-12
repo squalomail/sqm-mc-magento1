@@ -52,17 +52,8 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment><![CDATA[Please click the button below to get your API key.]]></comment>
+                            <comment><![CDATA[Paste your SqualoMail API key here.]]></comment>
                         </apikey>
-                        <oauth_wizard translate="button_label">
-                            <label></label>
-                            <button_label>Get API credentials</button_label>
-                            <frontend_model>squalomail/adminhtml_system_config_oauthWizard</frontend_model>
-                            <sort_order>30</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </oauth_wizard>
                         <storeid translate="label comment">
                             <label>Squalomail Store</label>
                             <frontend_type>select</frontend_type>
