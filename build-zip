@@ -1,0 +1,2 @@
+#!/bin/bash
+zip -r SqualoMail4Magento-1.1.2.zip app js lib shell skin composer.json modman
