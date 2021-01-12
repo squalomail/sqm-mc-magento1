@@ -19,7 +19,6 @@ ul.tabs a.squalomail-section.active, ul.tabs a.squalomail-section.active:hover {
 h3.squalomail-header {
     height: 22px;
     overflow: hidden;
-    padding-left: 20px;;
     background-size: contain;
 }
 
@@ -77,10 +76,7 @@ tr#row_squalomail_general_account_details ul {
 */
 
 div.squalomail-notice {
-    background: #EAF0EE;
-    border: 1px solid #CCCCCC;
-    margin-bottom: 10px;
-    padding: 11px 0 0 10px;
+    display: none;
 }
 
 .squalomail-image {
