@@ -34,10 +34,7 @@ small {
 }
 
 div.mandrill-notice {
-    background: none repeat scroll 0 0 #EAF0EE;
-    border: 1px solid #CCCCCC;
-    margin-bottom: 10px;
-    padding: 11px 0 0 10px;
+    display: none;
 }
 
 h3.mandrill-header {
