@@ -55,9 +55,6 @@
                                     <squalomail translate="title" module="squalomail">
                                         <title>Squalomail Configuration</title>
                                     </squalomail>
-                                    <mandrill transtale="title" module="squalomail">
-                                        <title>Mandrill Configuration</title>
-                                    </mandrill>
                                 </children>
                             </config>
                         </children>
