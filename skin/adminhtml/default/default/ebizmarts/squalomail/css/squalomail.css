@@ -3,21 +3,8 @@ ul.tabs a.squalomail-section:hover {
     background-image: url(../../../images/tabs_link_over_bg.gif);
 }
 
-ul.tabs a.squalomail-section {
-    border-bottom: 1px;
-    border-bottom-style: dotted;
-    text-indent: -9999px;
-}
-
-ul.tabs a.squalomail-section:hover {
-    border-bottom: 1px;
-    border-bottom-style: dotted;
-    text-indent: -9999px;
-}
-
 ul.tabs a.squalomail-section span,
 ul.tabs a.squalomail-section:hover span {
-    background: url(../images/squalomail-tab.png) no-repeat 18px;
     overflow: hidden;
     padding-left: 20px;
     background-size: contain;
@@ -30,12 +17,9 @@ ul.tabs a.squalomail-section.active, ul.tabs a.squalomail-section.active:hover {
 }
 
 h3.squalomail-header {
-    background: url(../images/squalomail-tab.png) no-repeat 0 0;
     height: 22px;
     overflow: hidden;
     padding-left: 20px;;
-    width: 120px;
-    text-indent: -9999px;
     background-size: contain;
 }
 
