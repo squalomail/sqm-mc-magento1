@@ -540,7 +540,8 @@ class Ebizmarts_SqualoMail_Helper_Migration extends Mage_Core_Helper_Abstract
      */
     protected function _setIsSyncingIfFinishedInAllStores($syncValue)
     {
-        $stores = $this->getMageApp()->getStores();
+        $helper = $this->getHelper();
+        $stores = $helper->getMageApp()->getStores();
 
         foreach ($stores as $storeId => $store) {
             $ecommEnabled = $this->isEcomSyncDataEnabled($storeId);
