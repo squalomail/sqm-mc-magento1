@@ -21,7 +21,7 @@ $installer->run(
     CREATE TABLE IF NOT EXISTS `{$this->getTable('squalomail_sync_batches')}` (
         `id` int(10) unsigned NOT NULL auto_increment,
         `store_id` int(11) NOT NULL,
-        `batch_id` varchar(24) NOT NULL,
+        `batch_id` varchar(100) NOT NULL,
         `status` varchar(10) NOT NULL,
         PRIMARY KEY  (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
