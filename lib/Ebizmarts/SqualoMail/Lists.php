@@ -130,7 +130,7 @@ class SqualoMail_Lists extends SqualoMail_Abstract
         $id = null,
         $fields = null,
         $excludeFields = null,
-        $count = 100,
+        $count = 10000,
         $offset = null,
         $beforeDateCreated = null,
         $sinceDateCreated = null,
