@@ -547,7 +547,7 @@ class Ebizmarts_SqualoMail_Helper_Migration extends Mage_Core_Helper_Abstract
             $ecommEnabled = $helper->isEcomSyncDataEnabled($storeId);
 
             if ($ecommEnabled) {
-                $this->setIsSyncingIfFinishedPerScope($syncValue, $storeId);
+                $helper->setIsSyncingIfFinishedPerScope($syncValue, $storeId);
             }
         }
     }
