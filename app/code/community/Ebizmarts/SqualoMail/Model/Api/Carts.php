@@ -13,6 +13,9 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
 {
     const BATCH_LIMIT = 100;
 
+    // EnSplet Custom: Skip error check for product already exist error in table squalomail_ecommerce_sync_data (default: false)
+    const SKIP_ERROR_CHECK = true;
+
     protected $_firstDate;
     protected $_counter;
     protected $_batchId;
@@ -461,6 +464,11 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
             //id can not be 0 so we add 1 to $itemCount before setting the id.
             $productSyncError = $productSyncData->getSqualomailSyncError();
             $isProductEnabled = $apiProduct->isProductEnabled($productId, $magentoStoreId);
+
+            // EnSplet Custom: Skip error check for product already exist error in table squalomail_ecommerce_sync_data (default: false)
+            if (self::SKIP_ERROR_CHECK) {
+                $productSyncError = '';
+            }
 
             if (!$isProductEnabled || ($productSyncData->getSqualomailSyncDelta() && $productSyncError == '')) {
                 $itemCount++;
