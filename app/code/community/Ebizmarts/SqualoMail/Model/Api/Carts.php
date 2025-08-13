@@ -13,6 +13,9 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
 {
     const BATCH_LIMIT = 100;
 
+    // EnSplet Custom: Skip error check for product already exist error in table squalomail_ecommerce_sync_data (default: false)
+    const SKIP_ERROR_CHECK = true;
+
     protected $_firstDate;
     protected $_counter;
     protected $_batchId;
@@ -34,7 +37,7 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
         $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
-        $this->_ecommerceQuotesCollection = $this->createEcommerceQuoteCollection();
+        $this->_ecommerceQuotesCollection = $this->initializeEcommerceResourceCollection();
         $this->_ecommerceQuotesCollection->setStoreId($magentoStoreId);
         $this->_ecommerceQuotesCollection->setSqualomailStoreId($squalomailStoreId);
 
@@ -86,15 +89,11 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
 
         $batchId = $this->getBatchId();
         $allCarts = array();
-        $convertedCarts = $this->getQuoteCollection();
-        // get only the converted quotes
-        $convertedCarts->addFieldToFilter('store_id', array('eq' => $magentoStoreId));
-        $convertedCarts->addFieldToFilter('is_active', array('eq' => 0));
-        //join with squalomail_ecommerce_sync_data table to filter by sync data.
-        $this->joinLeftEcommerceSyncData($convertedCarts);
-        // be sure that the quotes are already in squalomail and not deleted limit the collection
-        $this->getEcommerceQuoteCollection()->addWhere(
-            $convertedCarts, "m4m.squalomail_sync_deleted = 0", $this->getBatchLimitFromConfig()
+
+        $convertedCarts = $this->buildEcommerceCollectionToSync(
+            Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
+            "m4m.squalomail_sync_deleted = 0",
+            "converted"
         );
 
         foreach ($convertedCarts as $cart) {
@@ -143,20 +142,14 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
 
         $helper = $this->getHelper();
         $batchId = $this->getBatchId();
-        $allCarts = array();
-        $modifiedCarts = $this->getQuoteCollection();
-        // select carts with no orders
-        $modifiedCarts->addFieldToFilter('is_active', array('eq' => 1));
-        // select carts for the current Magento store id
-        $modifiedCarts->addFieldToFilter('store_id', array('eq' => $magentoStoreId));
-        //join with squalomail_ecommerce_sync_data table to filter by sync data.
-        $this->joinLeftEcommerceSyncData($modifiedCarts);
-        // be sure that the quotes are already in squalomail and not deleted limited
-        $this->getEcommerceQuoteCollection()->addWhere(
-            $modifiedCarts, "m4m.squalomail_sync_deleted = 0 AND m4m.squalomail_sync_delta < updated_at",
-            $this->getBatchLimitFromConfig()
+
+        $modifiedCarts = $this->buildEcommerceCollectionToSync(
+            Ebizmarts_SqualoMail_Model_Config::IS_QUOTE,
+            "m4m.squalomail_sync_deleted = 0 AND m4m.squalomail_sync_delta < updated_at",
+            false
         );
 
+        $allCarts = array();
         foreach ($modifiedCarts as $cart) {
             $cartId = $cart->getEntityId();
             /**
@@ -253,26 +246,9 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
         $helper = $this->getHelper();
         $dateHelper = $this->getDateHelper();
         $batchId = $this->getBatchId();
+        $newCarts = $this->buildEcommerceCollectionToSync(Ebizmarts_SqualoMail_Model_Config::IS_QUOTE);
+
         $allCarts = array();
-        $newCarts = $this->getQuoteCollection();
-        $newCarts->addFieldToFilter('is_active', array('eq' => 1));
-        $newCarts->addFieldToFilter('customer_email', array('notnull' => true));
-        $newCarts->addFieldToFilter('items_count', array('gt' => 0));
-        // select carts for the current Magento store id
-        $newCarts->addFieldToFilter('store_id', array('eq' => $magentoStoreId));
-        $helper->addResendFilter($newCarts, $magentoStoreId, Ebizmarts_SqualoMail_Model_Config::IS_QUOTE);
-        // filter by first date if exists.
-        if ($this->getFirstDate()) {
-            $newCarts->addFieldToFilter('updated_at', array('gt' => $this->getFirstDate()));
-        }
-
-        //join with squalomail_ecommerce_sync_data table to filter by sync data.
-        $this->joinLeftEcommerceSyncData($newCarts);
-        // be sure that the quotes are already in squalomail and not deleted
-        $this->getEcommerceQuoteCollection()->addWhere(
-            $newCarts, "m4m.squalomail_sync_delta IS NULL", $this->getBatchLimitFromConfig()
-        );
-
         foreach ($newCarts as $cart) {
             $cartId = $cart->getEntityId();
             $orderCollection = $this->getOrderCollection();
@@ -386,7 +362,7 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
      */
     public function getAllCartsByEmail($email)
     {
-        $allCartsForEmail = $this->getQuoteCollection();
+        $allCartsForEmail = $this->getItemResourceModelCollection();
         $allCartsForEmail->addFieldToFilter('is_active', array('eq' => 1));
         $allCartsForEmail->addFieldToFilter('store_id', array('eq' => $this->getMagentoStoreId()));
         $allCartsForEmail->addFieldToFilter('customer_email', array('eq' => $email));
@@ -395,7 +371,7 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
         $where = "m4m.squalomail_sync_deleted = 0 "
             . "AND m4m.squalomail_store_id = '"
             . $this->getSqualomailStoreId() . "'";
-        $this->getEcommerceQuoteCollection()->addWhere($allCartsForEmail, $where);
+        $this->getEcommerceResourceCollection()->addWhere($allCartsForEmail, $where);
 
         return $allCartsForEmail;
     }
@@ -488,6 +464,11 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
             //id can not be 0 so we add 1 to $itemCount before setting the id.
             $productSyncError = $productSyncData->getSqualomailSyncError();
             $isProductEnabled = $apiProduct->isProductEnabled($productId, $magentoStoreId);
+
+            // EnSplet Custom: Skip error check for product already exist error in table squalomail_ecommerce_sync_data (default: false)
+            if (self::SKIP_ERROR_CHECK) {
+                $productSyncError = '';
+            }
 
             if (!$isProductEnabled || ($productSyncData->getSqualomailSyncDelta() && $productSyncError == '')) {
                 $itemCount++;
@@ -662,7 +643,7 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
     /**
      * @return Mage_Sales_Model_Resource_Quote_Collection
      */
-    public function getQuoteCollection()
+    public function getItemResourceModelCollection()
     {
         return Mage::getResourceModel('sales/quote_collection');
     }
@@ -809,7 +790,7 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
     /**
      * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Quote_Collection
      */
-    public function createEcommerceQuoteCollection()
+    public function initializeEcommerceResourceCollection()
     {
         /**
          * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Quote_Collection
@@ -822,8 +803,38 @@ class Ebizmarts_SqualoMail_Model_Api_Carts extends Ebizmarts_SqualoMail_Model_Ap
     /**
      * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Quote_Collection
      */
-    public function getEcommerceQuoteCollection()
+    public function getEcommerceResourceCollection()
     {
         return $this->_ecommerceQuotesCollection;
+    }
+
+    /**
+     * @param Mage_Sales_Model_Resource_Quote_Collection $collectionToSync
+     * @param string $isNewItem
+     */
+    protected function addFilters(
+        Mage_Sales_Model_Resource_Quote_Collection $collectionToSync,
+        $isNewItem = "new"
+    ){
+        $magentoStoreId = $this->getMagentoStoreId();
+        $collectionToSync->addFieldToFilter('store_id', array('eq' => $magentoStoreId));
+
+        if ($isNewItem == "new") {
+            $collectionToSync->addFieldToFilter('is_active', array('eq' => 1));
+            $collectionToSync->addFieldToFilter('customer_email', array('notnull' => true));
+            $collectionToSync->addFieldToFilter('items_count', array('gt' => 0));
+
+            $this->getHelper()->addResendFilter(
+                $collectionToSync, $magentoStoreId, Ebizmarts_SqualoMail_Model_Config::IS_QUOTE
+            );
+
+            if ($this->getFirstDate()) {
+                $collectionToSync->addFieldToFilter('updated_at', array('gt' => $this->getFirstDate()));
+            }
+        } elseif ($isNewItem == "modified") {
+            $collectionToSync->addFieldToFilter('is_active', array('eq' => 1));
+        } elseif ($isNewItem == "converted") {
+            $collectionToSync->addFieldToFilter('is_active', array('eq' => 0));
+        }
     }
 }

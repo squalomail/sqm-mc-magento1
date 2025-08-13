@@ -45,7 +45,7 @@ class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Mode
      */
     protected function getCustomersToSync()
     {
-        $collection = $this->getCustomerResourceCollection();
+        $collection = $this->getItemResourceModelCollection();
         $collection->addAttributeToFilter(
             array(
                 array('attribute' => 'store_id', 'eq' => $this->getBatchMagentoStoreId()),
@@ -69,7 +69,7 @@ class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Mode
          * @var Mage_Customer_Model_Resource_Customer_Collection $collection
          */
 
-        $collection = $this->getCustomerResourceCollection();
+        $collection = $this->getItemResourceModelCollection();
         $collection->addFieldToFilter('entity_id', array('in' => $customerIdsToSync));
         $collection->addNameToSelect();
         $this->joinDefaultBillingAddress($collection);
@@ -87,7 +87,7 @@ class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Mode
         $squalomailStoreId = $this->getSqualomailStoreId();
         $magentoStoreId = $this->getMagentoStoreId();
 
-        $this->_ecommerceCustomersCollection = $this->createEcommerceCustomersCollection();
+        $this->_ecommerceCustomersCollection = $this->initializeEcommerceResourceCollection();
         $this->_ecommerceCustomersCollection->setSqualomailStoreId($squalomailStoreId);
         $this->_ecommerceCustomersCollection->setStoreId($magentoStoreId);
 
@@ -96,7 +96,12 @@ class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Mode
         $helper = $this->getHelper();
 
         $customersCollection = array();
-        $customerIds = $this->getCustomersToSync();
+
+        //******************
+        $customersCollection = array();
+        $collection = $this->buildEcommerceCollectionToSync(Ebizmarts_SqualoMail_Model_Config::IS_CUSTOMER);
+        $customerIds = $collection->getAllIds($this->getBatchLimitFromConfig());
+        //******************
 
         if (!empty($customerIds)) {
             $customersCollection = $this->makeCustomersNotSentCollection($customerIds);
@@ -477,7 +482,7 @@ class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Mode
     /**
      * @return Mage_Customer_Model_Resource_Customer_Collection
      */
-    protected function getCustomerResourceCollection()
+    protected function getItemResourceModelCollection()
     {
         /**
          * @var $collection Mage_Customer_Model_Resource_Customer_Collection
@@ -660,15 +665,7 @@ class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Mode
     /**
      * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
      */
-    public function getEcommerceCustomersCollection()
-    {
-        return $this->getEcommerceCustomersCollection();
-    }
-
-    /**
-     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
-     */
-    public function createEcommerceCustomersCollection()
+    public function initializeEcommerceResourceCollection()
     {
         /**
          * @var $collection Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
@@ -676,6 +673,29 @@ class Ebizmarts_SqualoMail_Model_Api_Customers extends Ebizmarts_SqualoMail_Mode
         $collection = Mage::getResourceModel('squalomail/ecommercesyncdata_customers_collection');
 
         return $collection;
+    }
+
+    /**
+     * @return Ebizmarts_SqualoMail_Model_Resource_Ecommercesyncdata_Customers_Collection
+     */
+    public function getEcommerceResourceCollection()
+    {
+        return $this->_ecommerceCustomersCollection;
+    }
+
+//    /**
+//     * @param Mage_Customer_Model_Resource_Customer_Collection $collection
+//     */
+    protected function addFilters($collection, $isNewItem = "new")
+    {
+        $collection->addAttributeToFilter(
+            array(
+                array('attribute' => 'store_id', 'eq' => $this->getBatchMagentoStoreId()),
+                array('attribute' => 'squalomail_store_view', 'eq' => $this->getBatchMagentoStoreId()),
+            ),
+            null,
+            'left'
+        );
     }
 
 }
